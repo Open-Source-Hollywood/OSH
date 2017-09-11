@@ -1,0 +1,19 @@
+{
+  "name": "produsus",
+  "version": "1.0.0",
+  "description": "open source Hollywood",
+  "main": "mobile-config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.7.27",
+    "base64-img": "^1.0.3",
+    "fiber": "^1.0.4",
+    "meteor-node-stubs": "^0.2.3",
+    "stripe": "^4.6.0",
+    "uuid": "^3.0.1"
+  }
+}

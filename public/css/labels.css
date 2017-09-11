@@ -1,0 +1,247 @@
+.card-label {
+  background-color: #b3b3b3;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-weight: 700;
+  margin-right: 3px;
+  padding: 3px 6px;
+  position: relative;
+  text-shadow: 0 0 5px rgba(0,0,0,0.2), 0 0 2px #000;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.card-label-green {
+  background-color: #3cb500;
+}
+.card-label-yellow {
+  background-color: #fad900;
+}
+.card-label-orange {
+  background-color: #ff9f19;
+}
+.card-label-red {
+  background-color: #eb4646;
+}
+.card-label-purple {
+  background-color: #a632db;
+}
+.card-label-blue {
+  background-color: #0079bf;
+}
+.card-label-pink {
+  background-color: #ff78cb;
+}
+.card-label-sky {
+  background-color: #00c2e0;
+}
+.card-label-black {
+  background-color: #4d4d4d;
+}
+.card-label-lime {
+  background-color: #51e898;
+}
+.color-blind-mode-enabled .card-label-lime,
+.color-blind-mode-enabled .card-label-purple {
+  background-image: -webkit-linear-gradient(top left, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(top left, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(top left, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  background-image: -ms-linear-gradient(top left, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(to bottom right, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  -webkit-background-size: 16px 16px;
+  -moz-background-size: 16px 16px;
+  background-size: 16px 16px;
+}
+.color-blind-mode-enabled .card-label-orange,
+.color-blind-mode-enabled .card-label-mocha,
+.color-blind-mode-enabled .card-label-black {
+  background-image: -webkit-linear-gradient(left, rgba(255,255,255,0.5) 50%, transparent 50%, transparent);
+  background-image: -moz-linear-gradient(left, rgba(255,255,255,0.5) 50%, transparent 50%, transparent);
+  background-image: -o-linear-gradient(left, rgba(255,255,255,0.5) 50%, transparent 50%, transparent);
+  background-image: -ms-linear-gradient(left, rgba(255,255,255,0.5) 50%, transparent 50%, transparent);
+  background-image: linear-gradient(to right, rgba(255,255,255,0.5) 50%, transparent 50%, transparent);
+  -webkit-background-size: 8px 8px;
+  -moz-background-size: 8px 8px;
+  background-size: 8px 8px;
+}
+.color-blind-mode-enabled .card-label-green,
+.color-blind-mode-enabled .card-label-pink {
+  background-image: -webkit-linear-gradient(top right, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(top right, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(top right, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  background-image: -ms-linear-gradient(top right, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(to bottom left, rgba(255,255,255,0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 75%, transparent 75%, transparent);
+  -webkit-background-size: 16px 16px;
+  -moz-background-size: 16px 16px;
+  background-size: 16px 16px;
+}
+.color-blind-mode-enabled .card-label-yellow,
+.color-blind-mode-enabled .card-label-red {
+  background-image: -webkit-linear-gradient(315deg, rgba(255,255,255,0.5) 25%, transparent 25%), -webkit-linear-gradient(225deg, rgba(255,255,255,0.5) 25%, transparent 25%), -webkit-linear-gradient(135deg, rgba(255,255,255,0.5) 25%, transparent 25%), -webkit-linear-gradient(45deg, rgba(255,255,255,0.5) 25%, transparent 25%);
+  background-image: -moz-linear-gradient(315deg, rgba(255,255,255,0.5) 25%, transparent 25%), -moz-linear-gradient(225deg, rgba(255,255,255,0.5) 25%, transparent 25%), -moz-linear-gradient(135deg, rgba(255,255,255,0.5) 25%, transparent 25%), -moz-linear-gradient(45deg, rgba(255,255,255,0.5) 25%, transparent 25%);
+  background-image: -o-linear-gradient(315deg, rgba(255,255,255,0.5) 25%, transparent 25%), -o-linear-gradient(225deg, rgba(255,255,255,0.5) 25%, transparent 25%), -o-linear-gradient(135deg, rgba(255,255,255,0.5) 25%, transparent 25%), -o-linear-gradient(45deg, rgba(255,255,255,0.5) 25%, transparent 25%);
+  background-image: -ms-linear-gradient(315deg, rgba(255,255,255,0.5) 25%, transparent 25%), -ms-linear-gradient(225deg, rgba(255,255,255,0.5) 25%, transparent 25%), -ms-linear-gradient(135deg, rgba(255,255,255,0.5) 25%, transparent 25%), -ms-linear-gradient(45deg, rgba(255,255,255,0.5) 25%, transparent 25%);
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.5) 25%, transparent 25%), linear-gradient(225deg, rgba(255,255,255,0.5) 25%, transparent 25%), linear-gradient(315deg, rgba(255,255,255,0.5) 25%, transparent 25%), linear-gradient(45deg, rgba(255,255,255,0.5) 25%, transparent 25%);
+  -webkit-background-size: 12px 12px;
+  -moz-background-size: 12px 12px;
+  background-size: 12px 12px;
+}
+.card-label--selectable:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.edit-label .card-label,
+.create-label .card-label {
+  float: left;
+  height: 30px;
+  margin: 0 10px 10px 0;
+  width: 34px;
+}
+.edit-labels input[type="text"] {
+  margin: 4px 0 6px 38px;
+  width: 243px;
+}
+.edit-labels .card-label {
+  height: 30px;
+  left: 0;
+  padding: 1px 5px;
+  position: absolute;
+  top: 0;
+  width: 24px;
+}
+.edit-labels .labels-static .card-label {
+  line-height: 30px;
+  margin-bottom: 4px;
+  position: relative;
+  top: auto;
+  left: 0;
+  width: 260px;
+}
+.board-widgets .edit-labels input[type="text"] {
+  width: 190px;
+}
+.list-card-labels {
+  position: relative;
+  z-index: 30;
+  top: -6px;
+}
+.list-card-labels .card-label {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  float: left;
+  height: 4px;
+  margin-bottom: 1px;
+  padding: 0;
+  width: 40px;
+  line-height: 100px;
+}
+.card-detail-item-labels .card-label {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  display: block;
+  float: left;
+  height: 20px;
+  line-height: 20px;
+  margin: 0 4px 4px 0;
+  min-width: 30px;
+  padding: 5px 10px;
+  width: auto;
+}
+.editable-labels .card-label:hover {
+  cursor: pointer;
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
+}
+.edit-labels-pop-over {
+  margin-bottom: 8px;
+}
+.edit-labels-pop-over .shortcut {
+  display: inline-block;
+}
+.card-label-selectable {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 0 50px 4px 0;
+  min-height: 18px;
+  padding: 8px;
+  position: relative;
+  -webkit-transition: margin-right 0.1s;
+  -moz-transition: margin-right 0.1s;
+  -o-transition: margin-right 0.1s;
+  -ms-transition: margin-right 0.1s;
+  transition: margin-right 0.1s;
+}
+.card-label-selectable .card-label-selectable-icon {
+  position: absolute;
+  top: 8px;
+  right: -20px;
+}
+.card-label-selectable.active:hover,
+.card-label-selectable.active,
+.card-label-selectable.active.selected:hover,
+.card-label-selectable.active.selected {
+  margin-right: 38px;
+  padding-right: 32px;
+}
+.card-label-selectable.active:hover .card-label-selectable-icon,
+.card-label-selectable.active .card-label-selectable-icon,
+.card-label-selectable.active.selected:hover .card-label-selectable-icon,
+.card-label-selectable.active.selected .card-label-selectable-icon {
+  right: 6px;
+}
+.card-label-selectable.active:hover:hover,
+.card-label-selectable.active:hover,
+.card-label-selectable.active.selected:hover:hover,
+.card-label-selectable.active.selected:hover {
+  margin-right: 38px;
+}
+.card-label-selectable.selected,
+.card-label-selectable:hover {
+  margin-right: 38px;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.active .card-label-selectable,
+.active .card-label-selectable:hover {
+  margin-right: 0;
+}
+.active .card-label-selectable .card-label-selectable-icon {
+  right: 8px;
+}
+.card-label-edit-button {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  float: right;
+  padding: 8px;
+}
+.card-label-edit-button:hover {
+  background: #dbdbdb;
+}
+.card-label-color-select-icon {
+  left: 14px;
+  position: absolute;
+  top: 9px;
+}
+.phenom .card-label {
+  display: inline-block;
+  font-size: 12px;
+  height: 14px;
+  line-height: 13px;
+  padding: 0 4px;
+  min-width: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.board-widget .phenom .card-label {
+  max-width: 130px;
+}
