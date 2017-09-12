@@ -24,11 +24,12 @@ Router.route('/privacy', function(){
 });
 
 Router.route('/', {
-  name: 'Splash',
+  name: 'Home',
   layoutTemplate: 'SplashLayout',
   onBeforeAction: function() {
-    if (Meteor.user()!==null) {
-      Router.go('Home');
+    if (Meteor.user()) {
+      Router.go('Projects');
+      window.location.assign('/projects');
       return;
     }
     this.next();
@@ -37,7 +38,8 @@ Router.route('/', {
 
 Router.route('/login', function(){
   if (Meteor.user()) {
-    Router.go('Home');
+    Router.go('Projects');
+    window.location.assign('/projects');
     return;
   };
   this.layout('StaticLayout');
@@ -46,27 +48,7 @@ Router.route('/login', function(){
   document.title = "Login";
 });
 
-Router.route('/home', {
-  name: 'Home',
-  template: 'projectTabs',
-  layoutTemplate: 'StaticLayout',
-  waitOn: function() {
-    return [
-      Meteor.subscribe('projectsList'), 
-      Meteor.subscribe('usersList'),
-      Meteor.subscribe('connectUser')
-    ];
-  },
-  onBeforeAction: function() {
-    if (Meteor.user()===null) {
-      Router.go('Splash');
-      return;
-    }
-    this.render('loadingNonBoard');
-    this.next();
-  }
-});
-
 Router.route('/.', function() {
-  Router.go('Home');
+  Router.go('Projects');
+  window.location.assign('/projects');
 });

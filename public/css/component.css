@@ -1,3 +1,6 @@
+#mainnavmenu {
+  visibility: hidden
+}
 .burger {
   position: absolute;
   z-index: 10;
