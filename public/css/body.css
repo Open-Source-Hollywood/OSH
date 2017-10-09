@@ -5,7 +5,7 @@
   overflow: hidden;
 }
 .body-board-view #header {
-  background: rgba(0,0,0,0.15);
+  background: transparent;
 }
 .body-board-view.body-custom-board-background-tiled {
   -webkit-background-size: auto;

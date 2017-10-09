@@ -1551,7 +1551,7 @@
 /* Basic */
 
   html, body {
-    background: #1c1d26;
+    background: #1c1d26!important;
   }
 
   body.is-loading *, body.is-loading *:before, body.is-loading *:after {
@@ -3331,6 +3331,7 @@
 /* Banner */
 
   #banner {
+    filter: invert(100%);
     background-color: #fff;
     background-attachment: fixed;
     background-image: url("../../img/banner.jpg");
