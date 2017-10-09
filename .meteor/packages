@@ -5,55 +5,38 @@
 # but you can also edit it by hand.
 
 meteor-base             # Packages every Meteor app needs to have
-mobile-experience       # Packages for a great mobile UX
 mongo                   # The database Meteor supports right now
 blaze-html-templates    # Compile .html files into Meteor Blaze views
 session                 # Client-side reactive dictionary for your app
-jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
-
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
-
 iron:router
-matteodem:easy-search
 chuangbo:marked
 mizzao:bootboxjs
 twbs:bootstrap
-logging
-reload
-random
-ejson
-spacebars
 check
-email
 cunneen:mailgun
-service-configuration
-http
 percolate:synced-cron
 audit-argument-checks
 markdown
 reactive-dict
 dburles:collection-helpers
 fortawesome:fontawesome
-linto:jquery-ui
 matb33:collection-hooks
 mquandalle:moment
-ongoworks:speakingurl
 reywood:publish-composite
 seriousm:emoji-continued
+linto:jquery-ui
 tap:i18n
 aldeed:collection2
 idmontie:migrations
 cfs:standard-packages
 cfs:gridfs
-dsyko:jquery-ui-touch-punch
 accounts-base
-pcel:loading
 tsega:bootstrap3-datetimepicker
 auth0:lock
 mrgalaxy:stripe
-
-
 standard-minifier-js
 chart:chart
+random
