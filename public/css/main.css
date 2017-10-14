@@ -3979,3 +3979,16 @@
           }
 
   }
+
+
+  .dropzone {
+      background: transparent;
+      border-radius: 5px;
+      border: 2px dashed #e44c65;
+      border-image: none;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      min-height: 120px;
+  }
