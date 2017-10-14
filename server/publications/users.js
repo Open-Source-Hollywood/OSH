@@ -36,6 +36,13 @@ Meteor.publish('profile', function(_id) {
 });
 
 Meteor.publish('getUsers', function() {
-    return Users.find({ 
-    });
+    return Users.find({ });
+});
+
+Meteor.publish('getMe', function() {
+    if (this.userId) {
+        return Users.find({ _id: this.userId });
+    } else {
+        this.ready();
+    }
 });
