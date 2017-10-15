@@ -46,7 +46,7 @@ Users.before.insert(function (userId, doc) {
       doc.firstName = doc.services && doc.services.auth0 && doc.services.auth0.given_name || '';
       doc.lastName = doc.services && doc.services.auth0 && doc.services.auth0.family_name || '';
       doc.avatar = doc.services && doc.services.auth0 && doc.services.auth0.picture_large || doc.services && doc.services.auth0 && doc.services.auth0.picture || 'https://s3-us-west-2.amazonaws.com/producehour/avatar.png';
-      doc.influenceScore = 10;
+      doc.influenceScore = 1000;
       doc.rating = 0;
       doc.didSetProfile = false;
       doc.privacy = false

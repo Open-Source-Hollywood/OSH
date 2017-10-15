@@ -3992,3 +3992,7 @@
       text-align: center;
       min-height: 120px;
   }
+
+  .bootbox {
+    color: #333;
+  }
