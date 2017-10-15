@@ -112,7 +112,7 @@ Meteor.publishComposite('board', function(boardId, slug) {
             {
                 find: function(board) {
                     return Users.find({
-                        'profile.meetupId': { $in: _.pluck(board.members, 'userId') }
+                        '_id': { $in: _.pluck(board.members, 'userId') }
                     });
                 }
             },

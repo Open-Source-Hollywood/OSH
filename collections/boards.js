@@ -264,7 +264,7 @@ isServer(function() {
                 sort:2
             });
             switch (doc.purpose) {
-                case "Motion Pictures/Theatrical": {
+                case "Motion Pictures": {
 
                     Cards.insert({
                         createdAt: new Date,
@@ -444,7 +444,7 @@ isServer(function() {
                     break;
                 }
 
-                case "Writing/Novel": {
+                case "Writing": {
                     Lists.insert({
                         title: "Writing Assets",
                         boardId:doc._id,

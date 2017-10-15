@@ -4,8 +4,8 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-(function($) {
 
+function init() {
 	skel.breakpoints({
 		xlarge: '(max-width: 1680px)',
 		large: '(max-width: 1280px)',
@@ -302,5 +302,16 @@
 				._parallax();
 
 	});
+}
 
-})(jQuery);
+function _call() {
+	if (!skel) {
+		setTimeout(function() {
+			_call();
+		}, 300);
+	} else {
+		init();
+	}
+}
+
+_call();
