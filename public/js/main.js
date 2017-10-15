@@ -32,8 +32,6 @@ function init() {
 			if (skel.vars.mobile)
 				$body.addClass('is-touch');
 
-		// Fix: Placeholder polyfill.
-			$('form').placeholder();
 
 		// Prioritize "important" elements on medium.
 			skel.on('+medium -medium', function() {
