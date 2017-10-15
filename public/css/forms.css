@@ -533,12 +533,7 @@ textarea::-moz-placeholder {
   width: 100%;
 }
 .button-link:hover {
-  background: #318ec4;
-  background: -webkit-linear-gradient(#318ec4, #2b7cab);
-  background: -moz-linear-gradient(#318ec4, #2b7cab);
-  background: -o-linear-gradient(#318ec4, #2b7cab);
-  background: -ms-linear-gradient(#318ec4, #2b7cab);
-  background: linear-gradient(#318ec4, #2b7cab);
+  background: #0b0b31;
   border-color: #2e85b8;
   color: #fff;
 }

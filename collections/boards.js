@@ -170,7 +170,8 @@ isServer(function() {
     // Genesis: the first activity of the newly created board
     Boards.after.insert(function(userId, doc) {
 
-        var project = Projects.findOne({slug: doc.slug})
+        var project = doc
+        console.log(doc)
 
         Activities.insert({
             type: 'board',
@@ -206,373 +207,334 @@ isServer(function() {
         }
         */
 
-        /*
-
-            needs: [ { need: 'foo bla bla', tags: [Object] } ],
-
-        */
-
-        var needs = project.needs;
-        var tagsHolder = [], needsTitleHolder = [];
-        needs.forEach(function(n) {
-            needsTitleHolder.push(n.need);
-            n.tags.forEach(function(t) {
-                t = t.toLowerCase();
-                if (tagsHolder.indexOf(t) === -1) {
-                    tagsHolder.push(t);
-                };
-            });
+        // generic board template
+        var listPreplanId = Lists.insert({
+            title: "Baseline",
+            boardId: doc._id,
+            createdAt: new Date,
+            archived: false,
+            userId: userId
         });
+        Cards.insert({
+            createdAt: new Date,
+            dateLastActivity: new Date,
+            archived: false,
+            userId: userId,
+            title: "build team",
+            listId: listPreplanId,
+            boardId: doc._id,
+            sort:0
+        });
+        Cards.insert({
+            createdAt: new Date,
+            dateLastActivity: new Date,
+            archived: false,
+            userId: userId,
+            title: "finalize member agreements and commitments",
+            listId: listPreplanId,
+            boardId: doc._id,
+            sort:1
+        });
+        Cards.insert({
+            createdAt: new Date,
+            dateLastActivity: new Date,
+            archived: false,
+            userId: userId,
+            title: "brainstorm/team meeting",
+            listId: listPreplanId,
+            boardId: doc._id,
+            sort:2
+        });
+        switch (doc.purpose) {
+            case "Motion Picture": {
 
-        if (tagsHolder.length < 3 && needsTitleHolder.length < 3) {
-            // generic board template
-            var listPreplanId = Lists.insert({
-                title: "Baseline",
-                boardId: doc._id,
-                createdAt: new Date,
-                archived: false,
-                userId: userId
-            });
-            Cards.insert({
-                createdAt: new Date,
-                dateLastActivity: new Date,
-                archived: false,
-                userId: userId,
-                title: "build team",
-                listId: listPreplanId,
-                boardId: doc._id,
-                sort:0
-            });
-            Cards.insert({
-                createdAt: new Date,
-                dateLastActivity: new Date,
-                archived: false,
-                userId: userId,
-                title: "finalize member agreements and commitments",
-                listId: listPreplanId,
-                boardId: doc._id,
-                sort:1
-            });
-            Cards.insert({
-                createdAt: new Date,
-                dateLastActivity: new Date,
-                archived: false,
-                userId: userId,
-                title: "brainstorm/team meeting",
-                listId: listPreplanId,
-                boardId: doc._id,
-                sort:2
-            });
-            switch (doc.purpose) {
-                case "Motion Pictures": {
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "script readthrough",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:3
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "framing, videography discussion",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:4
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "audio/score discussion",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:5
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "secure locations",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:6
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "secure props",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:7
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "discussion with support teams",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:8
-                    });
-
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "finalize storyboarding",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:9
-                    });
-
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "finalize scheduling",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:10
-                    });
-
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "finalize legal documents, permits, and waivers",
-                        listId: listPreplanId,
-                        boardId: doc._id,
-                        sort:11
-                    });
-
-                    Lists.insert({
-                        title: "Video Assets",
-                        boardId:doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId 
-                    });
-
-                    Lists.insert({
-                        title: "Audio Assets",
-                        boardId:doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId 
-                    });
-
-                    Lists.insert({
-                        title: "SFX Assets",
-                        boardId:doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId 
-                    });
-
-                    Lists.insert({
-                        title: "Writing Assets",
-                        boardId:doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId 
-                    });
-
-                    var listPostId = Lists.insert({
-                        title: "Post",
-                        boardId: doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "screenings",
-                        listId: listPostId,
-                        boardId: doc._id,
-                        sort:0
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "post edits",
-                        listId: listPostId,
-                        boardId: doc._id,
-                        sort:1
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "conference submissions",
-                        listId: listPostId,
-                        boardId: doc._id,
-                        sort:2
-                    });
-
-                    break;
-                }
-
-                case "Writing": {
-                    Lists.insert({
-                        title: "Writing Assets",
-                        boardId:doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId 
-                    });
-
-                    var listPostId = Lists.insert({
-                        title: "Post",
-                        boardId: doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "editing, polish, finish",
-                        listId: listPostId,
-                        boardId: doc._id,
-                        sort:0
-                    });
-
-                    break;
-                }
-
-                case "Music/Score": {
-                    Lists.insert({
-                        title: "Audio Assets",
-                        boardId:doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId 
-                    });
-
-                    var listPostId = Lists.insert({
-                        title: "Post",
-                        boardId: doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId
-                    });
-
-                    Cards.insert({
-                        createdAt: new Date,
-                        dateLastActivity: new Date,
-                        archived: false,
-                        userId: userId,
-                        title: "final master",
-                        listId: listPostId,
-                        boardId: doc._id,
-                        sort:0
-                    });
-
-                    break;
-                }
-            }
-        } else if (tagsHolder.length < 3 && needsTitleHolder.length > 3) {
-            // define cards by needs
-            needsTitleHolder.forEach(function(n) {
-                var _list = Lists.insert({
-                    title: n,
-                    boardId:doc._id,
-                    createdAt: new Date,
-                    archived: false,
-                    userId: userId 
-                });
                 Cards.insert({
                     createdAt: new Date,
                     dateLastActivity: new Date,
                     archived: false,
                     userId: userId,
-                    title: "Define task.",
-                    listId: _list,
+                    title: "script readthrough",
+                    listId: listPreplanId,
                     boardId: doc._id,
-                    sort:0
+                    sort:3
                 });
-            });
-        } else {
-            // production, resource, location, finance, general labor, legal, marketing, distribution, other
-            var productionNeeds = ['Interviews, casting, and auditions.', 'Compliance and paperwork.', 'Introductory team meeting.', 'Pre-production goals defined in a document and shared with the team.', 'Team evaluation.', 'Post-production goals defined in a document and shared with the team.'];
-            var resourceNeeds = ['Schedule resource agreement.', 'Sign resource sharing agreement.', 'Define resource state, condition, and flaws.', 'Return resource and sign waiver.'];
-            var locationNeeds = ['Location evaluations and decision.', 'Visit location and dry run.', 'Permits, waivers, and agreements.', 'Setup location.', 'Breakdown and cleanup.'];
-            var financeNeeds = ['Write business plan.', 'Write marketing, sales, and distribution plan.','Meet investors and pitch.','Accounting and paperwork.'];
-            var laborNeeds = ['Define labor tasks.', 'Arrange transportation, food, and materials.', 'Insurance, waivers, and compliance.'];
-            var legalNeeds = ['Initial consultation.', 'Agreement and retainer.', 'Define issues.'];
-            var marketingNeeds = ['Marketing media.', 'Marketing technologies.', 'Marketing subscriptions.', 'Payment and accounting.'];
-            var distributionNeeds = ['Define markets.', 'Define target audience persona.', 'Analysis and evaluation.'];
-            var genericNeeds = ['Define tasks.']
-            var tagsMapped = {
-                production: ['Production Goals', productionNeeds],
-                resource: ['Resource Allocation', resourceNeeds],
-                location: ['Locations, Venues, and Scenes', locationNeeds],
-                finance: ['Financial Needs', financeNeeds],
-                'general labor': ['Labor & General Work', laborNeeds],
-                legal: ['Intellectual Property & Compliance', legalNeeds],
-                marketing: ['Social Media, Marketing, and Technology', marketingNeeds],
-                distribution: ['Sales, Distribution, and Markets', distributionNeeds]
-            }
-            // define cards by tags
-            tagsHolder.forEach(function(t) {
-                if (Object.keys(tagsMapped).indexOf(t) === -1) return;
-                var _title = tagsMapped[t][0];
-                var targetArr = tagsMapped[t][1];
-                var _list = Lists.insert({
-                    title: _title,
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "framing, videography discussion",
+                    listId: listPreplanId,
+                    boardId: doc._id,
+                    sort:4
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "audio/score discussion",
+                    listId: listPreplanId,
+                    boardId: doc._id,
+                    sort:5
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "secure locations",
+                    listId: listPreplanId,
+                    boardId: doc._id,
+                    sort:6
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "secure props",
+                    listId: listPreplanId,
+                    boardId: doc._id,
+                    sort:7
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "discussion with support teams",
+                    listId: listPreplanId,
+                    boardId: doc._id,
+                    sort:8
+                });
+
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "finalize storyboarding",
+                    listId: listPreplanId,
+                    boardId: doc._id,
+                    sort:9
+                });
+
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "finalize scheduling",
+                    listId: listPreplanId,
+                    boardId: doc._id,
+                    sort:10
+                });
+
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "finalize legal documents, permits, and waivers",
+                    listId: listPreplanId,
+                    boardId: doc._id,
+                    sort:11
+                });
+
+                Lists.insert({
+                    title: "Video Assets",
                     boardId:doc._id,
                     createdAt: new Date,
                     archived: false,
                     userId: userId 
                 });
-                targetArr.forEach(function(_t, idx) {
-                    Cards.insert({
+
+                Lists.insert({
+                    title: "Audio Assets",
+                    boardId:doc._id,
+                    createdAt: new Date,
+                    archived: false,
+                    userId: userId 
+                });
+
+                Lists.insert({
+                    title: "SFX Assets",
+                    boardId:doc._id,
+                    createdAt: new Date,
+                    archived: false,
+                    userId: userId 
+                });
+
+                Lists.insert({
+                    title: "Writing Assets",
+                    boardId:doc._id,
+                    createdAt: new Date,
+                    archived: false,
+                    userId: userId 
+                });
+
+                var listPostId = Lists.insert({
+                    title: "Post",
+                    boardId: doc._id,
+                    createdAt: new Date,
+                    archived: false,
+                    userId: userId
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "screenings",
+                    listId: listPostId,
+                    boardId: doc._id,
+                    sort:0
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "post edits",
+                    listId: listPostId,
+                    boardId: doc._id,
+                    sort:1
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "conference submissions",
+                    listId: listPostId,
+                    boardId: doc._id,
+                    sort:2
+                });
+
+                break;
+            }
+
+            case "Print Media": {
+                Lists.insert({
+                    title: "Writing Assets",
+                    boardId:doc._id,
+                    createdAt: new Date,
+                    archived: false,
+                    userId: userId 
+                });
+
+                var listPostId = Lists.insert({
+                    title: "Post",
+                    boardId: doc._id,
+                    createdAt: new Date,
+                    archived: false,
+                    userId: userId
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "editing, polish, finish",
+                    listId: listPostId,
+                    boardId: doc._id,
+                    sort:0
+                });
+
+                break;
+            }
+
+            case "Performance": {
+                Lists.insert({
+                    title: "Audio Assets",
+                    boardId:doc._id,
+                    createdAt: new Date,
+                    archived: false,
+                    userId: userId 
+                });
+
+                var listPostId = Lists.insert({
+                    title: "Post",
+                    boardId: doc._id,
+                    createdAt: new Date,
+                    archived: false,
+                    userId: userId
+                });
+
+                Cards.insert({
+                    createdAt: new Date,
+                    dateLastActivity: new Date,
+                    archived: false,
+                    userId: userId,
+                    title: "final master",
+                    listId: listPostId,
+                    boardId: doc._id,
+                    sort:0
+                });
+
+                break;
+            }
+
+            default: {
+                // production, resource, location, finance, general labor, legal, marketing, distribution, other
+                var productionNeeds = ['Interviews, casting, and auditions.', 'Compliance and paperwork.', 'Introductory team meeting.', 'Pre-production goals defined in a document and shared with the team.', 'Team evaluation.', 'Post-production goals defined in a document and shared with the team.'];
+                var resourceNeeds = ['Schedule resource agreement.', 'Sign resource sharing agreement.', 'Define resource state, condition, and flaws.', 'Return resource and sign waiver.'];
+                var locationNeeds = ['Location evaluations and decision.', 'Visit location and dry run.', 'Permits, waivers, and agreements.', 'Setup location.', 'Breakdown and cleanup.'];
+                var financeNeeds = ['Write business plan.', 'Write marketing, sales, and distribution plan.','Meet investors and pitch.','Accounting and paperwork.'];
+                var laborNeeds = ['Define labor tasks.', 'Arrange transportation, food, and materials.', 'Insurance, waivers, and compliance.'];
+                var legalNeeds = ['Initial consultation.', 'Agreement and retainer.', 'Define issues.'];
+                var marketingNeeds = ['Marketing media.', 'Marketing technologies.', 'Marketing subscriptions.', 'Payment and accounting.'];
+                var distributionNeeds = ['Define markets.', 'Define target audience persona.', 'Analysis and evaluation.'];
+                var genericNeeds = ['Define tasks.']
+                var tagsMapped = {
+                    production: ['Production Goals', productionNeeds],
+                    resource: ['Resource Allocation', resourceNeeds],
+                    location: ['Locations, Venues, and Scenes', locationNeeds],
+                    finance: ['Financial Needs', financeNeeds],
+                    'general labor': ['Labor & General Work', laborNeeds],
+                    legal: ['Intellectual Property & Compliance', legalNeeds],
+                    marketing: ['Social Media, Marketing, and Technology', marketingNeeds],
+                    distribution: ['Sales, Distribution, and Markets', distributionNeeds]
+                }
+                // define cards by tags
+                tagsHolder.forEach(function(t) {
+                    if (Object.keys(tagsMapped).indexOf(t) === -1) return;
+                    var _title = tagsMapped[t][0];
+                    var targetArr = tagsMapped[t][1];
+                    var _list = Lists.insert({
+                        title: _title,
+                        boardId:doc._id,
                         createdAt: new Date,
-                        dateLastActivity: new Date,
                         archived: false,
-                        userId: userId,
-                        title: _t,
-                        listId: _list,
-                        boardId: doc._id,
-                        sort:idx
+                        userId: userId 
+                    });
+                    targetArr.forEach(function(_t, idx) {
+                        Cards.insert({
+                            createdAt: new Date,
+                            dateLastActivity: new Date,
+                            archived: false,
+                            userId: userId,
+                            title: _t,
+                            listId: _list,
+                            boardId: doc._id,
+                            sort:idx
+                        });
                     });
                 });
-            });
+            }
         }
     });
 
