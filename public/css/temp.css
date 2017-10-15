@@ -1,6 +1,10 @@
 /**
  * We should merge these declarations in the appropriate stylus files.
  */
+.window-wrapper {
+  background: #0b0b31;
+}
+
 .dn {
   display: none;
 }
@@ -22,6 +26,7 @@
 .header-member {
   min-width: 105px !important;
   text-align: center;
+  background-color: #ffffff;
 }
 .primarys {
   font-size: 20px;
