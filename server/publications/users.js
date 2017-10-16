@@ -35,6 +35,11 @@ Meteor.publish('profile', function(_id) {
     return Users.find({ '_id': _id });
 });
 
+Meteor.publish('stringId', function(_id) {
+    check(_id, String);
+    return Users.find({ '_id': _id });
+});
+
 Meteor.publish('getUsers', function() {
     return Users.find({ });
 });
