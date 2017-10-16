@@ -876,3 +876,11 @@ $(function() {
 		$banner
 			._parallax();
 });
+$(document).ready(function() {
+$(window).load(function(){
+  $('#preloader').fadeOut('slow',function(){$(this).remove();});
+});
+  setTimeout(function() {
+    $('#page-wrapper-o').fadeIn();
+  }, 800);
+});
