@@ -87,10 +87,6 @@ Meteor.publish('paidForProjects', function() {
   return Projects.find({live: true, usersApproved: {$elemMatch: {id: this.userId}}});
 });
 
-Meteor.publish('projectsHousekeeping', function() {
-  console.log('do projectsHousekeeping here')
-});
-
 /*  WITH FIELDS ON
 
   Meteor.publish('getUser', function(meetupId) {

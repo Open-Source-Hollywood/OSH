@@ -1,5 +1,6 @@
 Projects = new Mongo.Collection('projects');
 Comments = new Mongo.Collection('comments');
+Notifications = new Mongo.Collection('notifications');
 
 function allowedUser(userId) {
   var allowedUser = Meteor.users.findOne({username:"admin"});
@@ -19,4 +20,17 @@ Projects.allow({
     // only allow posting if you are logged in
     return !! userId;
   }
+});
+
+Notifications.allow({
+    insert: function(userId, doc) {
+        return true;//allowedUser(userId);
+    },
+    update: function(userId, doc) {
+        return true;//allowedUser(userId);
+    },
+    remove: function(userId, doc) {
+      // only allow posting if you are logged in
+      return true;
+    }
 });

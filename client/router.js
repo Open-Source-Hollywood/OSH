@@ -32,6 +32,7 @@ Router.route('/', {
       window.location.assign('/projects');
       return;
     }
+    document.title = "Open Source Hollywood";
     this.next();
   }
 });
@@ -46,9 +47,4 @@ Router.route('/login', function(){
   this.render('signin');
   this.name('Login');
   document.title = "Login";
-});
-
-Router.route('/.', function() {
-  Router.go('Projects');
-  window.location.assign('/projects');
 });
