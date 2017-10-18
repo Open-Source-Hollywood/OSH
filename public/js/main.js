@@ -845,4 +845,4 @@ setTimeout(function() {
 			$banner
 				._parallax();
 	});
-}, 800);
+}, 0);
