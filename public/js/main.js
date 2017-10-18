@@ -610,105 +610,173 @@ skel.breakpoints({
 	xsmall: '(max-width: 480px)'
 });
 
-$(function() {
 
-	var	$window = $(window),
-		$body = $('body');
+setTimeout(function() {
+	$('#page-wrapper-o').fadeIn();
+}, 500);
 
-	// Disable animations/transitions until the page has loaded.
-		$body.addClass('is-loading');
+setTimeout(function() {
+    $(function() {
+		var	$window = $(window),
+			$body = $('body');
+		// Disable animations/transitions until the page has loaded.
+			$body.addClass('is-loading');
+			$window.on('load', function() {
+				window.setTimeout(function() {
+					$body.removeClass('is-loading');
+				}, 0);
+			});
+		// Touch mode.
+			if (skel.vars.mobile)
+				$body.addClass('is-touch');
+		// Prioritize "important" elements on medium.
+			skel.on('+medium -medium', function() {
+				$.prioritize(
+					'.important\\28 medium\\29',
+					skel.breakpoint('medium').active
+				);
+			});
+		// Scrolly links.
+			$('.scrolly').scrolly({
+				speed: 2000
+			});
+		// Dropdowns.
+			$('#nav > ul').dropotron({
+				alignment: 'right',
+				hideDelay: 350
+			});
+		// Off-Canvas Navigation.
+			// Title Bar.
+				$(
+					'<div id="titleBar">' +
+						'<a href="#navPanel" class="toggle"></a>' +
+						'<span class="title">' + $('#logo').html() + '</span>' +
+					'</div>'
+				)
+					.appendTo($body);
+			// Fix: Remove navPanel transitions on WP<10 (poor/buggy performance).
+				if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
+					$('#titleBar, #navPanel, #page-wrapper')
+						.css('transition', 'none');
+		// Parallax.
+		// Disabled on IE (choppy scrolling) and mobile platforms (poor performance).
+			if (skel.vars.browser == 'ie'
+			||	skel.vars.mobile) {
+				$.fn._parallax = function() {
+					return $(this);
+				};
+			}
+			else {
+				$.fn._parallax = function() {
+					$(this).each(function() {
+						var $this = $(this),
+							on, off;
+						on = function() {
+							$this
+								.css('background-position', 'center 0px');
+							$window
+								.on('scroll._parallax', function() {
+									var pos = parseInt($window.scrollTop()) - parseInt($this.position().top);
+									$this.css('background-position', 'center ' + (pos * -0.15) + 'px');
+								});
+						};
 
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-loading');
-			}, 0);
-		});
+						off = function() {
+							$this
+								.css('background-position', '');
 
-	// Touch mode.
-		if (skel.vars.mobile)
-			$body.addClass('is-touch');
+							$window
+								.off('scroll._parallax');
 
+						};
+						skel.on('change', function() {
+							if (skel.breakpoint('medium').active)
+								(off)();
+							else
+								(on)();
+						});
+					});
+					return $(this);
+				};
+				$window
+					.on('load resize', function() {
+						$window.trigger('scroll');
+					});
+			}
 
-	// Prioritize "important" elements on medium.
-		skel.on('+medium -medium', function() {
-			$.prioritize(
-				'.important\\28 medium\\29',
-				skel.breakpoint('medium').active
-			);
-		});
-
-	// Scrolly links.
-		$('.scrolly').scrolly({
-			speed: 2000
-		});
-
-	// Dropdowns.
-		$('#nav > ul').dropotron({
-			alignment: 'right',
-			hideDelay: 350
-		});
-
-	// Off-Canvas Navigation.
-
-		// Title Bar.
-			$(
-				'<div id="titleBar">' +
-					'<a href="#navPanel" class="toggle"></a>' +
-					'<span class="title">' + $('#logo').html() + '</span>' +
-				'</div>'
-			)
-				.appendTo($body);
-
-
-		// Fix: Remove navPanel transitions on WP<10 (poor/buggy performance).
-			if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
-				$('#titleBar, #navPanel, #page-wrapper')
-					.css('transition', 'none');
-
-	// Parallax.
-	// Disabled on IE (choppy scrolling) and mobile platforms (poor performance).
-		if (skel.vars.browser == 'ie'
-		||	skel.vars.mobile) {
-
-			$.fn._parallax = function() {
-
-				return $(this);
-
-			};
-
-		}
-		else {
-
-			$.fn._parallax = function() {
-
-				$(this).each(function() {
+		// Spotlights.
+			var $spotlights = $('.spotlight');
+			$spotlights
+				._parallax()
+				.each(function() {
 
 					var $this = $(this),
 						on, off;
 
 					on = function() {
 
-						$this
-							.css('background-position', 'center 0px');
+						// Use main <img>'s src as this spotlight's background.
+							$this.css('background-image', 'url("' + $this.find('.image.main > img').attr('src') + '")');
 
-						$window
-							.on('scroll._parallax', function() {
+						// Enable transitions (if supported).
+							if (skel.canUse('transition')) {
 
-								var pos = parseInt($window.scrollTop()) - parseInt($this.position().top);
+								var top, bottom, mode;
 
-								$this.css('background-position', 'center ' + (pos * -0.15) + 'px');
+								// Side-specific scrollex tweaks.
+									if ($this.hasClass('top')) {
 
-							});
+										mode = 'top';
+										top = '-20%';
+										bottom = 0;
+
+									}
+									else if ($this.hasClass('bottom')) {
+
+										mode = 'bottom-only';
+										top = 0;
+										bottom = '20%';
+
+									}
+									else {
+
+										mode = 'middle';
+										top = 0;
+										bottom = 0;
+
+									}
+
+								// Add scrollex.
+									$this.scrollex({
+										mode:		mode,
+										top:		top,
+										bottom:		bottom,
+										initialize:	function(t) { $this.addClass('inactive'); },
+										terminate:	function(t) { $this.removeClass('inactive'); },
+										enter:		function(t) { $this.removeClass('inactive'); },
+
+										// Uncomment the line below to "rewind" when this spotlight scrolls out of view.
+
+										//leave:	function(t) { $this.addClass('inactive'); },
+
+									});
+
+							}
 
 					};
 
 					off = function() {
 
-						$this
-							.css('background-position', '');
+						// Clear spotlight's background.
+							$this.css('background-image', '');
 
-						$window
-							.off('scroll._parallax');
+						// Disable transitions (if supported).
+							if (skel.canUse('transition')) {
+
+								// Remove scrollex.
+									$this.unscrollex();
+
+							}
 
 					};
 
@@ -723,164 +791,58 @@ $(function() {
 
 				});
 
-				return $(this);
+		// Wrappers.
+			var $wrappers = $('.wrapper');
 
-			};
+			$wrappers
+				.each(function() {
 
-			$window
-				.on('load resize', function() {
-					$window.trigger('scroll');
-				});
+					var $this = $(this),
+						on, off;
 
-		}
+					on = function() {
 
-	// Spotlights.
-		var $spotlights = $('.spotlight');
-
-		$spotlights
-			._parallax()
-			.each(function() {
-
-				var $this = $(this),
-					on, off;
-
-				on = function() {
-
-					// Use main <img>'s src as this spotlight's background.
-						$this.css('background-image', 'url("' + $this.find('.image.main > img').attr('src') + '")');
-
-					// Enable transitions (if supported).
 						if (skel.canUse('transition')) {
 
-							var top, bottom, mode;
+							$this.scrollex({
+								top:		250,
+								bottom:		0,
+								initialize:	function(t) { $this.addClass('inactive'); },
+								terminate:	function(t) { $this.removeClass('inactive'); },
+								enter:		function(t) { $this.removeClass('inactive'); },
 
-							// Side-specific scrollex tweaks.
-								if ($this.hasClass('top')) {
+								// Uncomment the line below to "rewind" when this wrapper scrolls out of view.
 
-									mode = 'top';
-									top = '-20%';
-									bottom = 0;
+								//leave:	function(t) { $this.addClass('inactive'); },
 
-								}
-								else if ($this.hasClass('bottom')) {
-
-									mode = 'bottom-only';
-									top = 0;
-									bottom = '20%';
-
-								}
-								else {
-
-									mode = 'middle';
-									top = 0;
-									bottom = 0;
-
-								}
-
-							// Add scrollex.
-								$this.scrollex({
-									mode:		mode,
-									top:		top,
-									bottom:		bottom,
-									initialize:	function(t) { $this.addClass('inactive'); },
-									terminate:	function(t) { $this.removeClass('inactive'); },
-									enter:		function(t) { $this.removeClass('inactive'); },
-
-									// Uncomment the line below to "rewind" when this spotlight scrolls out of view.
-
-									//leave:	function(t) { $this.addClass('inactive'); },
-
-								});
+							});
 
 						}
 
-				};
+					};
 
-				off = function() {
+					off = function() {
 
-					// Clear spotlight's background.
-						$this.css('background-image', '');
+						if (skel.canUse('transition'))
+							$this.unscrollex();
 
-					// Disable transitions (if supported).
-						if (skel.canUse('transition')) {
+					};
 
-							// Remove scrollex.
-								$this.unscrollex();
+					skel.on('change', function() {
 
-						}
+						if (skel.breakpoint('medium').active)
+							(off)();
+						else
+							(on)();
 
-				};
-
-				skel.on('change', function() {
-
-					if (skel.breakpoint('medium').active)
-						(off)();
-					else
-						(on)();
+					});
 
 				});
 
-			});
+		// Banner.
+			var $banner = $('#banner');
 
-	// Wrappers.
-		var $wrappers = $('.wrapper');
-
-		$wrappers
-			.each(function() {
-
-				var $this = $(this),
-					on, off;
-
-				on = function() {
-
-					if (skel.canUse('transition')) {
-
-						$this.scrollex({
-							top:		250,
-							bottom:		0,
-							initialize:	function(t) { $this.addClass('inactive'); },
-							terminate:	function(t) { $this.removeClass('inactive'); },
-							enter:		function(t) { $this.removeClass('inactive'); },
-
-							// Uncomment the line below to "rewind" when this wrapper scrolls out of view.
-
-							//leave:	function(t) { $this.addClass('inactive'); },
-
-						});
-
-					}
-
-				};
-
-				off = function() {
-
-					if (skel.canUse('transition'))
-						$this.unscrollex();
-
-				};
-
-				skel.on('change', function() {
-
-					if (skel.breakpoint('medium').active)
-						(off)();
-					else
-						(on)();
-
-				});
-
-			});
-
-	// Banner.
-		var $banner = $('#banner');
-
-		$banner
-			._parallax();
-});
-$(document).ready(function() {
-$(window).load(function(){
-  $('#preloader').fadeOut('slow',function(){$(this).remove();});
-});
-  setTimeout(function() {
-    $('#page-wrapper-o').fadeIn();
-  }, 800);
-});
+			$banner
+				._parallax();
+	});
+}, 800);
