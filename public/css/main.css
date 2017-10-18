@@ -4566,3 +4566,7 @@ html { color: white; }
 .sm_li {
     font-size: 16px;
 }
+
+#sortBar {
+    margin-left: 20px
+}
