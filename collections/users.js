@@ -36,20 +36,27 @@ Users.before.insert(function (userId, doc) {
     // connect profile.status default =
     /** create Stripe managed account */
       doc.status = 'online';
-      doc.socialLinks = [];
-      doc.starredBoards = [];
-      doc.receiptsHistory = [];
-      doc.specialties = [];
-      doc.onlineWorks = [];
-      doc.headshots = [];
-      doc.resources = [];
+      doc.assets = [];
+      doc.reels = [];
+      doc.iam = [];
+      doc.social = [];
       doc.firstName = doc.services && doc.services.auth0 && doc.services.auth0.given_name || '';
       doc.lastName = doc.services && doc.services.auth0 && doc.services.auth0.family_name || '';
       doc.avatar = doc.services && doc.services.auth0 && doc.services.auth0.picture_large || doc.services && doc.services.auth0 && doc.services.auth0.picture || 'https://s3-us-west-2.amazonaws.com/producehour/avatar.png';
       doc.influenceScore = 1000;
-      doc.rating = 0;
+      doc.rating = 5;
       doc.didSetProfile = false;
-      doc.privacy = false
+      doc.privacy = false;
+      var stripe = require("stripe")(
+        'sk_test_ZINoK7ZfA5Axdr06AewQzZuh'
+      );
+      stripe.accounts.create({
+        country: 'US',
+        managed: true
+      }, Meteor.bindEnvironment(function(err, account) {
+        if (err) console.log(err);
+        doc.account = account;
+      }));
 });
 
 

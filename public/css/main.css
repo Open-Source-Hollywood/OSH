@@ -4586,3 +4586,7 @@ html { color: white; }
   text-align: center;
   margin: 0 0 0 0!important;
 }
+
+.bootbox_img {
+  max-width: 40%
+}
