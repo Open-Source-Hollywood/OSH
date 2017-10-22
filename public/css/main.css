@@ -4590,3 +4590,7 @@ html { color: white; }
 .bootbox_img {
   max-width: 40%
 }
+
+.go {
+  background: #108249!important;
+}

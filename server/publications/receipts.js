@@ -9,13 +9,5 @@ Meteor.publish('getReceipts', function() {
 Meteor.publish('getComms', function() {
     check(this.userId, String);
     return Notifications.find({
-        // $or: [
-        // 	{
-        // 		user: this.userId
-        // 	},
-        // 	{
-        // 		from: this.userId
-        // 	}
-        // ]
     });
 });
