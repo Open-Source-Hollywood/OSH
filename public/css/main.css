@@ -4594,3 +4594,8 @@ html { color: white; }
 .go {
   background: #108249!important;
 }
+
+.table_hul {
+  display: table;
+  margin: 0 auto;
+}
