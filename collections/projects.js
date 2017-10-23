@@ -1,6 +1,7 @@
 Projects = new Mongo.Collection('projects');
 Comments = new Mongo.Collection('comments');
 Notifications = new Mongo.Collection('notifications');
+ProjectMessages = new Mongo.Collection('projectMessages');
 Offers = new Mongo.Collection('offers');
 
 function allowedUser(userId) {
