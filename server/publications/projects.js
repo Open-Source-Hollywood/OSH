@@ -40,9 +40,10 @@ Meteor.publish('activeProjectsApplied', function(_id) {
   // Ensure that the user is connected
     check(_id, String);
     return Projects.find({
-        $and: [
-          {archived: false},
-          {usersApplied: {$elemMatch: {id: _id}}}
+        archived: false,
+        $or: [
+          {crewApplicants: {$elemMatch: {'user.id': _id}}},
+          {roleApplicants: {$elemMatch: {'user.id': _id}}}
         ]
     });
 });
