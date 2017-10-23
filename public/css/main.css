@@ -1578,7 +1578,6 @@
     -webkit-transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
     -ms-transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
     transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    border-bottom: dotted 1px;
     color: #e44c65;
     text-decoration: none;
   }
@@ -4598,4 +4597,8 @@ html { color: white; }
 .table_hul {
   display: table;
   margin: 0 auto;
+}
+
+.alert-danger strong {
+  color: #e44c65;
 }

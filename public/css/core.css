@@ -5846,3 +5846,6 @@ input[type="text"].header-search-input.focus:hover {
   background: #1a1a1a;
   border-radius: 50%;
 }
+.fc-left h2 {
+  color: #333
+}
