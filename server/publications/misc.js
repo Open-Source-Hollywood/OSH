@@ -5,13 +5,6 @@ Meteor.publish('getComms', function() {
     });
 });
 
-//Receipts
-Meteor.publish('getReceipts', function() {
-    check(this.userId, String);
-    return Receipts.find({
-    });
-});
-
 //ProjectMessages
 Meteor.publish('getProjectMessages', function() {
     check(this.userId, String);
@@ -19,7 +12,7 @@ Meteor.publish('getProjectMessages', function() {
     });
 });
 
-//ProjectMessages
+//Offers
 Meteor.publish('offers', function() {
     check(this.userId, String);
     return Offers.find({
