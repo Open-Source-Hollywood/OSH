@@ -18,3 +18,10 @@ Meteor.publish('getProjectMessages', function() {
     return ProjectMessages.find({
     });
 });
+
+//ProjectMessages
+Meteor.publish('offers', function() {
+    check(this.userId, String);
+    return Offers.find({
+    });
+});
