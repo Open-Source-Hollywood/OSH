@@ -18,11 +18,3 @@ Meteor.publish('offers', function() {
     return Offers.find({
     });
 });
-
-//Offers
-Meteor.publish('accounts', function() {
-    check(this.userId, String);
-    return BankAccounts.find({
-    	user: this.userId
-    });
-});

@@ -3,7 +3,6 @@ Comments = new Mongo.Collection('comments');
 Notifications = new Mongo.Collection('notifications');
 ProjectMessages = new Mongo.Collection('projectMessages');
 Offers = new Mongo.Collection('offers');
-BankAccounts = new Mongo.Collection('bankAccounts');
 
 function allowedUser(userId) {
   var allowedUser = Meteor.users.findOne({username:"admin"});
@@ -39,19 +38,6 @@ Notifications.allow({
 });
 
 Offers.allow({
-    insert: function(userId, doc) {
-        return true;//allowedUser(userId);
-    },
-    update: function(userId, doc) {
-        return true;//allowedUser(userId);
-    },
-    remove: function(userId, doc) {
-      // only allow posting if you are logged in
-      return true;
-    }
-});
-
-BankAccounts.allow({
     insert: function(userId, doc) {
         return true;//allowedUser(userId);
     },
