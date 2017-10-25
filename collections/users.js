@@ -47,16 +47,6 @@ Users.before.insert(function (userId, doc) {
       doc.rating = 5;
       doc.didSetProfile = false;
       doc.privacy = false;
-      var stripe = require("stripe")(
-        'sk_test_ZINoK7ZfA5Axdr06AewQzZuh'
-      );
-      stripe.accounts.create({
-        country: 'US',
-        managed: true
-      }, Meteor.bindEnvironment(function(err, account) {
-        if (err) console.log(err);
-        doc.account = account;
-      }));
 });
 
 

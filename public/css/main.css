@@ -4600,6 +4600,10 @@ html { color: white; }
   background: #108249!important;
 }
 
+.reset_transfer {
+  background: #000!important;
+}
+
 .table_hul {
   display: table;
   margin: 0 auto;
@@ -4607,4 +4611,8 @@ html { color: white; }
 
 .alert-danger strong {
   color: #e44c65;
+}
+
+.form-control .small {
+  height: 30px;
 }
