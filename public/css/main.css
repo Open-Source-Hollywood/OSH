@@ -4616,3 +4616,23 @@ html { color: white; }
 .form-control .small {
   height: 30px;
 }
+
+.dark_placeholder::-webkit-input-placeholder {
+  color: #333 !important;
+}
+ 
+.dark_placeholder:-moz-placeholder { /* Firefox 18- */
+  color: #333 !important;  
+}
+ 
+.dark_placeholder::-moz-placeholder {  /* Firefox 19+ */
+  color: #333 !important;  
+}
+ 
+.dark_placeholder:-ms-input-placeholder {  
+  color: #333 !important;  
+}
+.dark_placeholder {
+  color: #333 ! important;
+  border: 1px solid #aeaeae ! important;
+}
