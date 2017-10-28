@@ -3340,7 +3340,7 @@
 /* Banner */
 
   #banner {
-    filter: invert(100%);
+    /*filter: invert(100%);*/
     background-color: #fff;
     background-attachment: fixed;
     background-image: url("../../img/banner.jpg");
@@ -3353,15 +3353,23 @@
     z-index: 21;
   }
 
+  #banner .text {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 50%;
+  -webkit-transform: translate(-50%);
+  -moz-transform: translate(-50%);
+  transform: translate(-50%)
+}
+
 
     #banner .content {
-      display: inline-block;
-      margin-right: 1%;
-      max-width: 95%;
-      padding: 6em;
-      position: relative;
-      text-align: right;
-      vertical-align: middle;
+      display: grid;
+      /* margin-right: 109px; */
+      max-width: 100%;
+      /* padding: 6em; */
+      /* text-align: right; */
+      /* vertical-align: middle; */
       z-index: 1;
     }
 
