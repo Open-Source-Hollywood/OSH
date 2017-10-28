@@ -3511,9 +3511,9 @@
 
     /* Banner */
 
-      #banner .content {
+     /* #banner .content {
         padding: 4.5em;
-      }
+      }*/
 
     /* Footer */
 
@@ -3573,7 +3573,7 @@
 
     /* Banner */
 
-      #banner {
+/*      #banner {
         background-attachment: scroll;
       }
 
@@ -3594,7 +3594,7 @@
 
           #banner .content .image {
             margin: 0;
-          }
+          }*/
 
     /* Footer */
 
@@ -3695,7 +3695,7 @@
 
     /* Banner */
 
-      #banner {
+      /*#banner {
         box-shadow: 0 0.125em 0.5em 0 rgba(0, 0, 0, 0.25);
         min-height: calc(100vh - 44px);
       }
@@ -3715,6 +3715,10 @@
           #banner .content .image {
             height: 9em;
             width: 9em;
+          }*/
+
+          #banner {
+            display: none;
           }
 
     /* Off-Canvas Navigation */
