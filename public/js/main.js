@@ -651,7 +651,7 @@ setTimeout(function() {
 				$(
 					'<div id="titleBar">' +
 						'<a href="#navPanel" class="toggle"></a>' +
-						'<span class="title">' + $('#logo').html() + '</span>' +
+						'<span class="title">Open Source Hollywood</span>' +
 					'</div>'
 				)
 					.appendTo($body);
