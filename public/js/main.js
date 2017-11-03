@@ -616,7 +616,7 @@ setTimeout(function() {
 	$('#page-wrapper-o').fadeIn();
 }, 500);
 
-setTimeout(function() {
+
     $(function() {
 		var	$window = $(window),
 			$body = $('body');
@@ -642,23 +642,23 @@ setTimeout(function() {
 				speed: 2000
 			});
 		// Dropdowns.
-			$('#nav > ul').dropotron({
-				alignment: 'right',
-				hideDelay: 350
-			});
+			// $('#nav > ul').dropotron({
+			// 	alignment: 'right',
+			// 	hideDelay: 350
+			// });
 		// Off-Canvas Navigation.
 			// Title Bar.
-				$(
-					'<div id="titleBar">' +
-						'<a href="#navPanel" class="toggle"></a>' +
-						'<span class="title">Open Source Hollywood</span>' +
-					'</div>'
-				)
-					.appendTo($body);
-			// Fix: Remove navPanel transitions on WP<10 (poor/buggy performance).
-				if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
-					$('#titleBar, #navPanel, #page-wrapper')
-						.css('transition', 'none');
+			// 	$(
+			// 		'<div id="titleBar">' +
+			// 			'<a href="#navPanel" class="toggle"></a>' +
+			// 			'<span class="title">Open Source Hollywood</span>' +
+			// 		'</div>'
+			// 	)
+			// 		.appendTo($body);
+			// // Fix: Remove navPanel transitions on WP<10 (poor/buggy performance).
+			// 	if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
+			// 		$('#titleBar, #navPanel, #page-wrapper')
+			// 			.css('transition', 'none');
 		// Parallax.
 		// Disabled on IE (choppy scrolling) and mobile platforms (poor performance).
 			if (skel.vars.browser == 'ie'
@@ -846,5 +846,5 @@ setTimeout(function() {
 			$banner
 				._parallax();
 	});
-}, 0);
+
 } catch(e) {}
