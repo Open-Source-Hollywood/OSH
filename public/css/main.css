@@ -3298,6 +3298,8 @@
   list-style: none;
   margin: 0px;
   padding: 0px;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 #nav ul li a {
   display: block;
