@@ -1294,7 +1294,8 @@ dd {
   margin: 48px 0 80px;
   overflow: hidden;
   position: relative;
-  width: 730px;
+  width: 75%;
+  min-width: 320px;
   z-index: 25;
 }
 .small-window .window {
@@ -1334,7 +1335,7 @@ dd {
   min-height: 20px;
   padding: 8px 12px 12px;
   position: relative;
-  width: 546px;
+  width: 65%;
   z-index: 0;
 }
 .window-main-col img {
@@ -1349,13 +1350,13 @@ dd {
 .window-sidebar {
   float: right;
   padding: 8px 12px 12px 0;
-  width: 140px;
+  width: 35%;
   overflow: hidden;
   z-index: 10;
 }
 .window-sidebar input[type="text"] {
   padding: 4px;
-  width: 160px;
+  width: 40%;
 }
 .window-sidebar hr {
   margin: 6px 0;

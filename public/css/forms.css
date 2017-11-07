@@ -414,7 +414,6 @@ textarea::-moz-placeholder {
   font-weight: 700;
   height: 34px;
   margin-top: 6px;
-  max-width: 300px;
   padding: 7px;
   position: relative;
   text-decoration: none;
