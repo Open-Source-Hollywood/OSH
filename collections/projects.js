@@ -5,7 +5,7 @@ ProjectMessages = new Mongo.Collection('projectMessages');
 Offers = new Mongo.Collection('offers');
 
 function allowedUser(userId) {
-  var allowedUser = Meteor.users.findOne({username:"admin"});
+  var allowedUser = Meteor.users.findOne(userId);
   return (userId && allowedUser && userId === allowedUser._id);
 }
 
