@@ -29,7 +29,6 @@ Router.route('/', {
   onBeforeAction: function() {
     if (Meteor.user()) {
       Router.go('Projects');
-      window.location.assign('/projects');
       return;
     }
     document.title = "Open Source Hollywood";
@@ -40,7 +39,6 @@ Router.route('/', {
 Router.route('/login', function(){
   if (Meteor.user()) {
     Router.go('Projects');
-    window.location.assign('/projects');
     return;
   };
   this.layout('StaticLayout');
