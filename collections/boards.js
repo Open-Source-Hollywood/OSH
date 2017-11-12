@@ -457,7 +457,7 @@ isServer(function() {
                 break;
             }
 
-            case "Performance": {
+            default: {
                 Lists.insert({
                     title: "Audio Assets",
                     boardId:doc._id,
@@ -486,54 +486,6 @@ isServer(function() {
                 });
 
                 break;
-            }
-
-            default: {
-                // production, resource, location, finance, general labor, legal, marketing, distribution, other
-                var productionNeeds = ['Interviews, casting, and auditions.', 'Compliance and paperwork.', 'Introductory team meeting.', 'Pre-production goals defined in a document and shared with the team.', 'Team evaluation.', 'Post-production goals defined in a document and shared with the team.'];
-                var resourceNeeds = ['Schedule resource agreement.', 'Sign resource sharing agreement.', 'Define resource state, condition, and flaws.', 'Return resource and sign waiver.'];
-                var locationNeeds = ['Location evaluations and decision.', 'Visit location and dry run.', 'Permits, waivers, and agreements.', 'Setup location.', 'Breakdown and cleanup.'];
-                var financeNeeds = ['Write business plan.', 'Write marketing, sales, and distribution plan.','Meet investors and pitch.','Accounting and paperwork.'];
-                var laborNeeds = ['Define labor tasks.', 'Arrange transportation, food, and materials.', 'Insurance, waivers, and compliance.'];
-                var legalNeeds = ['Initial consultation.', 'Agreement and retainer.', 'Define issues.'];
-                var marketingNeeds = ['Marketing media.', 'Marketing technologies.', 'Marketing subscriptions.', 'Payment and accounting.'];
-                var distributionNeeds = ['Define markets.', 'Define target audience persona.', 'Analysis and evaluation.'];
-                var genericNeeds = ['Define tasks.']
-                var tagsMapped = {
-                    production: ['Production Goals', productionNeeds],
-                    resource: ['Resource Allocation', resourceNeeds],
-                    location: ['Locations, Venues, and Scenes', locationNeeds],
-                    finance: ['Financial Needs', financeNeeds],
-                    'general labor': ['Labor & General Work', laborNeeds],
-                    legal: ['Intellectual Property & Compliance', legalNeeds],
-                    marketing: ['Social Media, Marketing, and Technology', marketingNeeds],
-                    distribution: ['Sales, Distribution, and Markets', distributionNeeds]
-                }
-                // define cards by tags
-                tagsHolder.forEach(function(t) {
-                    if (Object.keys(tagsMapped).indexOf(t) === -1) return;
-                    var _title = tagsMapped[t][0];
-                    var targetArr = tagsMapped[t][1];
-                    var _list = Lists.insert({
-                        title: _title,
-                        boardId:doc._id,
-                        createdAt: new Date,
-                        archived: false,
-                        userId: userId 
-                    });
-                    targetArr.forEach(function(_t, idx) {
-                        Cards.insert({
-                            createdAt: new Date,
-                            dateLastActivity: new Date,
-                            archived: false,
-                            userId: userId,
-                            title: _t,
-                            listId: _list,
-                            boardId: doc._id,
-                            sort:idx
-                        });
-                    });
-                });
             }
         }
     });
