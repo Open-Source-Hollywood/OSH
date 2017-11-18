@@ -72,7 +72,9 @@ iron:location@1.0.11
 iron:middleware-stack@1.1.0
 iron:router@1.0.12
 iron:url@1.0.11
+joshowens:shareit@1.0.2
 jquery@1.11.8
+less@2.6.0
 linto:jquery-ui@1.11.2
 livedata@1.0.18
 localstorage@1.0.9
@@ -114,6 +116,7 @@ service-configuration@1.0.9
 session@1.1.5
 spacebars@1.0.11
 spacebars-compiler@1.0.11
+spiderable@1.0.13
 standard-minifier-js@1.0.6
 tap:i18n@1.8.0
 templating@1.1.9

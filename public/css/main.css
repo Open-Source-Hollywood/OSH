@@ -4579,3 +4579,7 @@ html { color: white; }
 #navlabel:before {
   display: none;
 };
+
+.share-buttons {
+  text-align: center!important;
+}
