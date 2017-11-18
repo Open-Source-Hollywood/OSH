@@ -4583,3 +4583,7 @@ html { color: white; }
 .share-buttons {
   text-align: center!important;
 }
+
+.googleplus-share {
+  background: white;
+}
