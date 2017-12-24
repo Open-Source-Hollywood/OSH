@@ -12,6 +12,7 @@
     "aws-sdk": "^2.7.27",
     "base64-img": "^1.0.3",
     "fiber": "^1.0.4",
+    "request": "2.1.1",
     "meteor-node-stubs": "^0.2.3",
     "stripe": "^4.6.0",
     "uuid": "^3.0.1"
