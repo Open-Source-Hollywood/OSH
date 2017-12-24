@@ -25,13 +25,17 @@ Router.route('/privacy', function(){
 
 Router.route('/', {
   name: 'Home',
-  layoutTemplate: 'SplashLayout',
+  template: 'projectTabs',
+  layoutTemplate: 'StaticLayout',
+  waitOn: function() {
+    return [
+      Meteor.subscribe('projectsList'), 
+      Meteor.subscribe('connectUser'),
+      Meteor.subscribe('getMe')
+    ];
+  },
   onBeforeAction: function() {
-    if (Meteor.user()) {
-      Router.go('Projects');
-      return;
-    }
-    document.title = "Open Source Hollywood";
+    document.title = "Campaigns";
     this.next();
   }
 });

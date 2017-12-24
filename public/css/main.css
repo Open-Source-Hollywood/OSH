@@ -4510,10 +4510,11 @@ html { color: white; }
 }
 
 .h10 {
-  top: 13px;
+  top: 5px;
     line-height: 0em!important;
     margin: 0 0 0 0 !important;
-    position: relative;;
+    position: relative;
+    display: inline-block;
 }
 
 .tabs_projs {
@@ -4625,11 +4626,6 @@ html {
   height: 155px
 }
 
-.p5 {
-  display: inline-block;
-  padding-top: 5px;
-}
-
 .defaultQ {
   height: 60px!important;
 }
@@ -4641,4 +4637,6 @@ html {
   white-space: nowrap;
   margin:0px auto;
   border:1px red solid;
+  height: 60px;
+  font-size: 1.1em!important;
 }
