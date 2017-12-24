@@ -1,8 +1,8 @@
 
-Router.route('/aboutUs', function() {
+Router.route('/about', function() {
   this.layout('StaticLayout');
-  this.render('aboutUs');
-  document.title = "About Us";
+  this.render('about');
+  document.title = "About Open Source Hollywood";
 });
 
 Router.route('/help', function() {
@@ -14,7 +14,7 @@ Router.route('/help', function() {
 Router.route('/terms', function(){
   this.layout('StaticLayout');
   this.render('terms');
-  document.title = "Terms";
+  document.title = "Terms for Open Source Hollywood";
 });
 
 Router.route('/privacy', function(){
@@ -25,7 +25,7 @@ Router.route('/privacy', function(){
 
 Router.route('/', {
   name: 'Home',
-  template: 'projectTabs',
+  template: 'projectHome',
   layoutTemplate: 'StaticLayout',
   waitOn: function() {
     return [
@@ -35,7 +35,7 @@ Router.route('/', {
     ];
   },
   onBeforeAction: function() {
-    document.title = "Campaigns";
+    document.title = "Open Source Hollywood";
     this.next();
   }
 });
