@@ -44,13 +44,3 @@ Router.route('/', {
   }
 });
 
-Router.route('/login', function(){
-  if (Meteor.user()) {
-    Router.go('Projects');
-    return;
-  };
-  this.layout('StaticLayout');
-  this.render('signin');
-  this.name('Login');
-  document.title = "Login";
-});
