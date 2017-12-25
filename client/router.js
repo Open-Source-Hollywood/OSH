@@ -35,6 +35,10 @@ Router.route('/', {
     ];
   },
   onBeforeAction: function() {
+    if (Meteor.user()) {
+      Router.go('Projects');
+      return
+    }
     document.title = "Open Source Hollywood";
     this.next();
   }
