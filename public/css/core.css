@@ -247,6 +247,7 @@ h3,
 h4,
 h5,
 h6 {
+  color: #333;
   font-size: 16px;
   line-height: 1.25em;
   margin: 0 0 6px;
@@ -5849,4 +5850,23 @@ input[type="text"].header-search-input.focus:hover {
 }
 .fc-left h2 {
   color: #333
+}
+.color333 {
+  color: #333!important;
+}
+
+.placeholder333::-webkit-input-placeholder {
+color: #333 !important;
+}
+ 
+.placeholder333:-moz-placeholder { /* Firefox 18- */
+color: #333 !important;  
+}
+ 
+.placeholder333::-moz-placeholder {  /* Firefox 19+ */
+color: #333 !important;  
+}
+ 
+.placeholder333:-ms-input-placeholder {  
+color: #333 !important;  
 }

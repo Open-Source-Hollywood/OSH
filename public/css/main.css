@@ -4596,7 +4596,7 @@ html {
 
 .projtab {
   width: 210px;
-  height: 270px;
+  height: 320px;
 }
 
 .projtabimg {
@@ -4609,7 +4609,7 @@ html {
 }
 
 .proj__supplier {
-  height: 155px
+  height: 205px
 }
 
 .defaultQ {
@@ -4638,4 +4638,24 @@ html {
   position: relative;
   text-align: center;
   z-index: 21;
+}
+
+.color333 {
+  color: #333!important;
+}
+
+.placeholder333::-webkit-input-placeholder {
+color: #333 !important;
+}
+ 
+.placeholder333:-moz-placeholder { /* Firefox 18- */
+color: #333 !important;  
+}
+ 
+.placeholder333::-moz-placeholder {  /* Firefox 19+ */
+color: #333 !important;  
+}
+ 
+.placeholder333:-ms-input-placeholder {  
+color: #333 !important;  
 }
