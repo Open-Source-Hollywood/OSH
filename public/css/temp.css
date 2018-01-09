@@ -2,7 +2,7 @@
  * We should merge these declarations in the appropriate stylus files.
  */
 .window-wrapper {
-  background: #0d002d;
+  background: #eaeaea;
 }
 .dn {
   display: none;
@@ -110,4 +110,28 @@
 }
 #header-search input[type="submit"] {
   display: none;
+}
+
+.color333 {
+  color: #333!important;
+}
+
+.placeholder333::-webkit-input-placeholder {
+color: #333 !important;
+}
+ 
+.placeholder333:-moz-placeholder { /* Firefox 18- */
+color: #333 !important;  
+}
+ 
+.placeholder333::-moz-placeholder {  /* Firefox 19+ */
+color: #333 !important;  
+}
+ 
+.placeholder333:-ms-input-placeholder {  
+color: #333 !important;  
+}
+
+.card-label {
+  min-height: 30px;
 }
