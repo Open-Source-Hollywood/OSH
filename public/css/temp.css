@@ -23,9 +23,12 @@
   text-decoration: none;
 }
 .header-member {
-  min-width: 105px !important;
-  text-align: center;
-  background-color: #ffffff;
+    min-width: 100% !important;
+    padding-bottom: 10px;
+    text-align: left;
+    background-color: #ffffff;
+    border: solid;
+    height: 44px;
 }
 .primarys {
   font-size: 20px;
@@ -135,3 +138,10 @@ color: #333 !important;
 .card-label {
   min-height: 30px;
 }
+
+#page-wrapper-board {
+  background: transparent;
+  zoom: 1.2;
+  position: relative;
+  top: -20px!important;
+}  

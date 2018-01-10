@@ -35,18 +35,22 @@ Users.helpers({
 Users.before.insert(function (userId, doc) {
     // connect profile.status default =
     /** create Stripe managed account */
-      doc.status = 'online';
-      doc.assets = [];
-      doc.reels = [];
-      doc.iam = [];
-      doc.social = [];
-      doc.firstName = doc.services && doc.services.auth0 && doc.services.auth0.given_name || '';
-      doc.lastName = doc.services && doc.services.auth0 && doc.services.auth0.family_name || '';
-      doc.avatar = doc.services && doc.services.auth0 && doc.services.auth0.picture_large || doc.services && doc.services.auth0 && doc.services.auth0.picture || 'https://s3-us-west-2.amazonaws.com/producehour/avatar.png';
-      doc.influenceScore = 1000;
-      doc.rating = 5;
-      doc.didSetProfile = false;
-      doc.privacy = false;
+    // if user is not social media
+    if (doc.services&&doc.services.auth0&&doc.services.auth0.identities&&doc.services.auth0.identities.isSocial===false) {
+      doc.services.auth0.name = doc.services.auth0.nickname;
+    };
+    doc.status = 'online';
+    doc.assets = [];
+    doc.reels = [];
+    doc.iam = [];
+    doc.social = [];
+    doc.firstName = doc.services && doc.services.auth0 && doc.services.auth0.given_name || '';
+    doc.lastName = doc.services && doc.services.auth0 && doc.services.auth0.family_name || '';
+    doc.avatar = doc.services && doc.services.auth0 && doc.services.auth0.picture_large || doc.services && doc.services.auth0 && doc.services.auth0.picture || 'https://s3-us-west-2.amazonaws.com/producehour/avatar.png';
+    doc.influenceScore = 1000;
+    doc.rating = 5;
+    doc.didSetProfile = false;
+    doc.privacy = false;
 });
 
 
