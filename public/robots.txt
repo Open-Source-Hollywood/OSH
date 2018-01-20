@@ -1,2 +1,3 @@
 User-agent: *
 Disallow:
+Sitemap: https://opensourcehollywood.org/sitemap.xml
