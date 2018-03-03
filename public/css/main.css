@@ -2792,6 +2792,7 @@
       background-color: #e44c65;
       box-shadow: none;
       color: #ffffff !important;
+      min-width: 40px;
     }
 
       input[type="submit"].special:hover,
