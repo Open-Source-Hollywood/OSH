@@ -105,6 +105,9 @@ div::selection {
 }
 #content {
   position: relative;
+  top: 30px;
+  transform: scale(0.9);
+  transform-origin: center top 0px;
 }
 body.pinned-drawer.extra-large-window #surface,
 body.pinned-drawer.large-window #surface {

@@ -4298,11 +4298,11 @@
 }
 .c-amount__control {
   cursor: pointer;
-  background: transparent;
+  background: green;
   border: 1px solid #fff;
   color: #fff;
   font-size: 20px;
-  width: 50px;
+  width: 120px;
   height: 40px;
   text-align: center;
 }
@@ -4361,11 +4361,19 @@
   display: flex;
   flex-direction: column;
 }
+
+.c-related__div {
+    max-width: 240px;
+    height: auto;
+    border: 1px black solid;
+}
+
 .c-related__title {
   padding: 5px 10px;
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
+  font-size: 0.9rem;
 }
 .c-related__figure {
   overflow: hidden;
@@ -4588,13 +4596,6 @@ html { color: white; }
   background: white;
 }
 
-html {
-    zoom: 0.9; /* Old IE only */
-    -moz-transform: scale(0.9);
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-}
-
 .projtab {
   width: 210px;
   height: 320px;
@@ -4663,4 +4664,14 @@ color: #333 !important;
 
 .modal-backdrop.in {
   opacity: 0!important;
+}
+
+.major_proj_action_buttons {
+  height: 60px;
+  font-size: 2rem;
+  width: 80%;
+  left: 13%;
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
 }
