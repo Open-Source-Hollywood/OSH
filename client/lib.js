@@ -4,5 +4,8 @@ Meteor.startup(function(){
 		// script has loaded
 		lock = new Auth0Lock('KC97k4Aq9IbWuNuC8YKzC4IxSPaJWtzB', 'aug2uag.auth0.com');
 		Session.set('connectReady', true);
+		document.addEventListener('keypress', function(e) {
+		  if (e.keyCode == 27) lock.hide();
+		}, false);
  	});
 });

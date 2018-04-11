@@ -1,8 +1,8 @@
 
-Router.route('/about', function() {
+Router.route('/about-us', function() {
   this.layout('StaticLayout');
-  this.render('about');
-  document.title = "About Open Source Hollywood";
+  this.render('aboutus');
+  document.title = "About Us";
 });
 
 Router.route('/help', function() {
@@ -14,7 +14,7 @@ Router.route('/help', function() {
 Router.route('/terms', function(){
   this.layout('StaticLayout');
   this.render('terms');
-  document.title = "Terms for Open Source Hollywood";
+  document.title = "Terms";
 });
 
 Router.route('/privacy', function(){
@@ -23,24 +23,56 @@ Router.route('/privacy', function(){
   document.title = "Privacy";
 });
 
-Router.route('/', {
-  name: 'Home',
-  template: 'projectHome',
-  layoutTemplate: 'StaticLayout',
-  waitOn: function() {
-    return [
-      Meteor.subscribe('projectsList'), 
-      Meteor.subscribe('connectUser'),
-      Meteor.subscribe('getMe')
-    ];
-  },
-  onBeforeAction: function() {
-    if (Meteor.user()) {
-      Router.go('Projects');
-      return
-    }
-    document.title = "Open Source Hollywood";
-    this.next();
-  }
+Router.route('/contact', function(){
+  this.layout('StaticLayout');
+  this.render('contactus');
+  document.title = "Contact Us";
 });
 
+Router.route('/', {
+  name: 'Home',
+  template: 'splashPage',
+  layoutTemplate: 'StaticLayout',
+  onBeforeAction: function() {
+    if (Meteor.user()) {
+      var x = localStorage.getItem('create');
+      if (x===true) {
+        Router.go('Create Project');  
+        localStorage.setItem('create', false);
+      } else {
+        Router.go('Projects');  
+      }
+    };
+    this.next();
+  },
+  waitOn: function() {
+      return [
+        Meteor.subscribe('projectsList')
+      ];
+    }
+});
+
+Router.route('/login', {
+  name: 'Login',
+  template: 'splashPage',
+  layoutTemplate: 'StaticLayout',
+  onBeforeAction: function() {
+    setTimeout(function() {
+      lock.show();
+    }, 800);
+    this.next();
+  },
+});
+
+Router.route('/login/create', {
+  name: 'LoginCreate',
+  template: 'splashPage',
+  layoutTemplate: 'StaticLayout',
+  onBeforeAction: function() {
+    setTimeout(function() {
+      localStorage.setItem('redirectURL', '/create');
+      lock.show();
+    }, 800);
+    this.next();
+  },
+});

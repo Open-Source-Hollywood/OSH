@@ -1,17 +1,29 @@
 //Notifications
-Meteor.publish('getComms', function(z) {
+Meteor.publish('getComms', function() {
+    check(this.userId, String);
     return Notifications.find({
     });
 });
 
 //ProjectMessages
-Meteor.publish('getProjectMessages', function(z) {
+Meteor.publish('getProjectMessages', function() {
+    check(this.userId, String);
     return ProjectMessages.find({
+        user: this.userId
     });
 });
 
 //Offers
-Meteor.publish('offers', function(z) {
+Meteor.publish('offers', function() {
+    check(this.userId, String);
     return Offers.find({
+    });
+});
+
+//Offers
+Meteor.publish('accounts', function() {
+    check(this.userId, String);
+    return BankAccounts.find({
+    	user: this.userId
     });
 });

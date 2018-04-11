@@ -13,10 +13,7 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 iron:router
 chuangbo:marked
-mizzao:bootboxjs
-twbs:bootstrap
 check
-cunneen:mailgun
 percolate:synced-cron
 audit-argument-checks
 markdown
@@ -27,19 +24,17 @@ matb33:collection-hooks
 mquandalle:moment
 reywood:publish-composite
 seriousm:emoji-continued
-linto:jquery-ui
 tap:i18n
 aldeed:collection2
 idmontie:migrations
 cfs:standard-packages
 cfs:gridfs
-accounts-base
-tsega:bootstrap3-datetimepicker
 auth0:lock
 mrgalaxy:stripe
 standard-minifier-js
 chart:chart
 random
 reactive-var
+linto:jquery-ui
+twbs:bootstrap
 joshowens:shareit
-manuelschoebel:ms-seo

@@ -25,7 +25,6 @@
   opacity: 0;
 }
 .list.add-list .list-name-input {
-  background: #3a3d51;
   border-color: #aaa;
   box-shadow: inset 0 1px 8px rgba(0,0,0,0.15);
   display: block;
@@ -46,9 +45,7 @@
   margin: 4px 0 0;
 }
 .list.add-list .edit-controls input[type=submit] {
-  margin-top: 0;
-  min-height: 30px;
-  height: 30px;
+  margin-top: -10px;
 }
 .list.add-list.idle {
   background: rgba(0,0,0,0.12);
@@ -233,6 +230,7 @@
   padding: 6px 8px 4px;
   position: relative;
   z-index: 10;
+  width: 100%;
 }
 .list-card-details:hover {
   background: #f2f2f2;

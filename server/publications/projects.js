@@ -2,8 +2,7 @@ Meteor.publish('projectsList', function() {
   // Ensure that the user is connected
     //check(this.userId, String);
     return Projects.find({
-        archived: false,
-        isApproved: true
+        archived: false
     });
 });
 
@@ -13,7 +12,6 @@ Meteor.publish('activeProjects', function() {
     return Projects.find({
         $and: [
           {archived: false},
-          {isApproved: true},
           {$or: [
             {ownerId: this.userId},
             {usersApproved: {$elemMatch: {id: this.userId}}}
@@ -33,7 +31,6 @@ Meteor.publish('userActiveProjects', function(_id) {
     return Projects.find({
         $and: [
           {archived: false},
-          {isApproved: true},
           {ownerId: _id}
         ]
     });
@@ -44,7 +41,6 @@ Meteor.publish('activeProjectsApplied', function(_id) {
     check(_id, String);
     return Projects.find({
         archived: false,
-        isApproved: true,
         $or: [
           {crewApplicants: {$elemMatch: {'user.id': _id}}},
           {roleApplicants: {$elemMatch: {'user.id': _id}}}
@@ -58,7 +54,6 @@ Meteor.publish('activeProjectsApproved', function(_id) {
     return Projects.find({
         $and: [
           {archived: false},
-          {isApproved: true},
           {usersApproved: {$elemMatch: {id: _id}}}
         ]
     });
@@ -66,7 +61,7 @@ Meteor.publish('activeProjectsApproved', function(_id) {
 
 Meteor.publish('getProject', function(slug) {
     check(slug, String)
-    return Projects.find({slug: slug, isApproved: true});
+    return Projects.find({slug: slug});
 });
 
 Meteor.publish('commentsList', function(slug) {

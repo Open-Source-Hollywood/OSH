@@ -11,10 +11,9 @@
   "dependencies": {
     "aws-sdk": "^2.7.27",
     "base64-img": "^1.0.3",
-    "bitly": "^5.0.12",
     "fiber": "^1.0.4",
     "meteor-node-stubs": "^0.2.3",
-    "request": "2.1.1",
+    "request": "^2.1.1",
     "stripe": "^4.6.0",
     "uuid": "^3.0.1"
   }

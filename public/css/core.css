@@ -104,10 +104,8 @@ div::selection {
   -webkit-text-size-adjust: none;
 }
 #content {
+  background: #f8f8f8;
   position: relative;
-  top: 30px;
-  transform: scale(0.9);
-  transform-origin: center top 0px;
 }
 body.pinned-drawer.extra-large-window #surface,
 body.pinned-drawer.large-window #surface {
@@ -237,13 +235,11 @@ body.small-window.single-column #content {
   background-color: #3da440;
 }
 h1 {
-  color: #333;
   font-size: 22px;
   line-height: 1.2em;
   margin: 0 0 10px;
 }
 h2 {
-  color: #333;
   font-size: 18px;
   line-height: 1.2em;
   margin: 0 0 9px;
@@ -252,7 +248,6 @@ h3,
 h4,
 h5,
 h6 {
-  color: #333;
   font-size: 16px;
   line-height: 1.25em;
   margin: 0 0 6px;
@@ -937,8 +932,8 @@ dd {
   height: 30px;
 }
 #header {
-/*  background: #138871;*/
-  height: 30px;
+  min-height: 44px;
+  height: 44px;
   overflow: hidden;
   padding: 5px;
   position: relative;
@@ -1254,6 +1249,7 @@ dd {
   color: #fff;
 }
 .window-overlay {
+  background-color: rgba(0,0,0,0.6);
   display: none;
   height: 100%;
   -webkit-box-pack: center;
@@ -1295,12 +1291,11 @@ dd {
   background: #f0f0f0;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  border: solid 5px;
   display: none;
+  margin: 48px 0 80px;
   overflow: hidden;
   position: relative;
-  width: 75%;
-  min-width: 320px;
+  width: 730px;
   z-index: 25;
 }
 .small-window .window {
@@ -1340,7 +1335,7 @@ dd {
   min-height: 20px;
   padding: 8px 12px 12px;
   position: relative;
-  width: 65%;
+  width: 546px;
   z-index: 0;
 }
 .window-main-col img {
@@ -1355,13 +1350,13 @@ dd {
 .window-sidebar {
   float: right;
   padding: 8px 12px 12px 0;
-  width: 35%;
+  width: 140px;
   overflow: hidden;
   z-index: 10;
 }
 .window-sidebar input[type="text"] {
   padding: 4px;
-  width: 40%;
+  width: 160px;
 }
 .window-sidebar hr {
   margin: 6px 0;
@@ -2847,6 +2842,7 @@ a .sidebar-section-header-title {
   overflow: hidden;
   padding: 0;
   position: relative;
+  width: 100%;
 }
 .board-widget-nav .toggle-widget-nav {
   -webkit-border-radius: 3px;
@@ -5854,23 +5850,4 @@ input[type="text"].header-search-input.focus:hover {
 }
 .fc-left h2 {
   color: #333
-}
-.color333 {
-  color: #333!important;
-}
-
-.placeholder333::-webkit-input-placeholder {
-color: #333 !important;
-}
- 
-.placeholder333:-moz-placeholder { /* Firefox 18- */
-color: #333 !important;  
-}
- 
-.placeholder333::-moz-placeholder {  /* Firefox 19+ */
-color: #333 !important;  
-}
- 
-.placeholder333:-ms-input-placeholder {  
-color: #333 !important;  
 }

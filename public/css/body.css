@@ -4,9 +4,7 @@
   background-size: cover;
   overflow: hidden;
 }
-.body-board-view #header {
-  background: transparent;
-}
+
 .body-board-view.body-custom-board-background-tiled {
   -webkit-background-size: auto;
   -moz-background-size: auto;
