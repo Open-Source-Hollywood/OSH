@@ -2475,7 +2475,7 @@ a.post-title:hover h2, a.post-title:hover h1 {
 	padding-left: 140px;
 }
 .comment-avatar {
-	position: absolute !important;
+	/*position: absolute !important;*/
 	width: 65px;
 	height: 65px;
 }
