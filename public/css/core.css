@@ -234,20 +234,20 @@ body.small-window.single-column #content {
 #notification > div.confirm {
   background-color: #3da440;
 }
-h1 {
+.h1b {
   font-size: 22px;
   line-height: 1.2em;
   margin: 0 0 10px;
 }
-h2 {
+.h2b {
   font-size: 18px;
   line-height: 1.2em;
   margin: 0 0 9px;
 }
-h3,
-h4,
-h5,
-h6 {
+.h3b,
+.h4b,
+.h5b,
+.h6b {
   font-size: 16px;
   line-height: 1.25em;
   margin: 0 0 6px;
