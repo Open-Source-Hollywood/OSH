@@ -322,11 +322,11 @@ th {
 }
 thead {
   background: #fff;
-  background: -webkit-linear-gradient(top, #fff 0, #f0f0f0 100%);
-  background: -moz-linear-gradient(top, #fff 0, #f0f0f0 100%);
-  background: -o-linear-gradient(top, #fff 0, #f0f0f0 100%);
-  background: -ms-linear-gradient(top, #fff 0, #f0f0f0 100%);
-  background: linear-gradient(to bottom, #fff 0, #f0f0f0 100%);
+  background: -webkit-linear-gradient(top, #fff 0, #f7f3fb 100%);
+  background: -moz-linear-gradient(top, #fff 0, #f7f3fb 100%);
+  background: -o-linear-gradient(top, #fff 0, #f7f3fb 100%);
+  background: -ms-linear-gradient(top, #fff 0, #f7f3fb 100%);
+  background: linear-gradient(to bottom, #fff 0, #f7f3fb 100%);
 }
 tbody {
   background-color: #fff;
