@@ -5955,3 +5955,6 @@ input[type="file"] {
   }
 
 
+.a0-mode form {
+	width: 100%!important;
+}
