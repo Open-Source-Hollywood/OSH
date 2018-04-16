@@ -3876,11 +3876,12 @@ img.aligncenter {
 }
 
 .krown-twitter img {
-	width: 48px;
-	height: 48px;
-	position: absolute;
-	top: 0;
-	left: 0;
+	width: 100px;
+    height: 100px;
+    top: 0;
+    left: 30px;
+    margin-bottom: 40px;
+    position: relative;
 }
 .krown-twitter > a, .krown-twitter > iframe {
 	float: left;
