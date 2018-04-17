@@ -5948,14 +5948,24 @@ input[type="file"] {
   }
   .body-text {color:white;}
 
-  @media screen and (max-width: 480px;){
+
+.a0-mode form {
+	width: 100%!important;
+}
+
+.fundstatus {
+    background: #158b63!important;
+    color: #fff3f3!important;
+    height: 33px;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    bottom: 0;
+}
+
+@media screen and (max-width: 480px;){
   .main{
     width:100%;
        margin:30px auto;
     }
   }
-
-
-.a0-mode form {
-	width: 100%!important;
-}
