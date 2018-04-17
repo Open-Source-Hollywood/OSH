@@ -5956,7 +5956,8 @@ input[type="file"] {
 .fundstatus {
     background: #158b63!important;
     color: #fff3f3!important;
-    height: 33px;
+    max-height: 33px!important;
+    height: 33px!important;
     position: absolute;
     width: 100%;
     z-index: 999;
