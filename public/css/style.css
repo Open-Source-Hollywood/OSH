@@ -86,7 +86,7 @@ iframe {
 }
 #content {
 	margin: 0 auto;
-	padding: 60px 0 120px;
+	padding: 60px 0 0px;
 }
 #content > div > *:first-child {
 	margin-top: 0;
