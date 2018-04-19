@@ -4993,7 +4993,7 @@ html.ie8 .rev_slider .krown-button {
 @media all and (max-width: 579px) {
 
 	.tabs-select select {
-    	background: red;
+    	background: transparent;
 	}
 
 	.wrapper, .single-ignition_product #page-title, .single-ignition_product .normal-content, .rtitle, #project-sidebar .id-widget-wrap {
