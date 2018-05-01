@@ -1052,7 +1052,7 @@ html.ie8 .sub-menu {
 	max-width: none;
 }
 #project-container .project-content {
-	padding: 50px 50px 0;
+	padding: 10px 50px 0;
 }
 #project-container .project-content > *:first-child {
 	margin-top: 0;
