@@ -5972,6 +5972,19 @@ input[type="file"] {
   }
 
 
-  .splash100 {
-	    margin-top: 120px;  	
-  }
+.splash100 {
+    margin-top: 120px;  	
+}
+
+
+.glow-offer {
+    -webkit-transition: text-shadow 1s linear;
+    -moz-transition: text-shadow 1s linear;
+    -ms-transition: text-shadow 1s linear;
+    -o-transition: text-shadow 1s linear;
+    transition: text-shadow 1s linear;
+}
+.glow-offer:hover,
+.glow-offer.glow {
+    text-shadow: 0 0 10px red;
+}

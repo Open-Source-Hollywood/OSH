@@ -5,12 +5,10 @@ Meteor.publish('getComms', function() {
     });
 });
 
-//ProjectMessages
+
 Meteor.publish('getProjectMessages', function() {
     check(this.userId, String);
-    return ProjectMessages.find({
-        user: this.userId
-    });
+    return ProjectMessages.find();
 });
 
 //Offers
