@@ -6491,9 +6491,6 @@ textarea.list-card-composer-textarea,textarea.list-card-composer-textarea:focus{
     position:relative;
     text-decoration:none
 }
-.avatar-option:hover{
-    background:#dcdcdc
-}
 .avatar-option .pic{
     border:1px solid #ccc;
     border-radius:3px;

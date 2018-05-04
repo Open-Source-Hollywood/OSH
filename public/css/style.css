@@ -5998,3 +5998,10 @@ figure.snip1165 figcaption {
   background-color: #ffffff;
   padding: 20px 25px 50px;
 }
+.purchase_gift:hover, .purchase_gift:focus {
+    text-decoration: none!important;
+}
+a.c-related__a.button.special:hover, a.c-related__a.button.special:focus {
+    text-decoration: none;
+    color: white;
+}
