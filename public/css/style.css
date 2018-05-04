@@ -5987,3 +5987,14 @@ input[type="file"] {
 .glow-offer.glow {
     text-shadow: 0 0 10px red;
 }
+
+figure.snip1165 img {
+  max-width: 100%;
+  width: 100%;
+  vertical-align: top;
+}
+figure.snip1165 figcaption {
+  position: relative;
+  background-color: #ffffff;
+  padding: 20px 25px 50px;
+}
