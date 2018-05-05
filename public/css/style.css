@@ -6034,3 +6034,15 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
   content: '\e013';
   color: #89b814;
 }
+
+.note-editor.note-frame.panel {
+	padding: 0px 0px 0px!important;
+}
+
+.note-group-select-from-files {
+  display: none;
+}
+
+.note-editor.note-frame {
+    border: 0px!important;
+}
