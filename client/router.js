@@ -52,8 +52,27 @@ Router.route('/', {
       }
     };
     $('meta[name=description]').remove();
-    $('head').append( '<meta name="description" content="Open Source Hollywood is for media producers to build teams, raise funds, and manage projects.">' );
+    $('head').append( '<meta name="description" content="The Premiere Platform for Story Development and Production Optimization">' );
     document.title = 'Open Source Hollywood';
+    this.next();
+  },
+  waitOn: function() {
+      return [
+        Meteor.subscribe('projectsList')
+      ];
+    }
+});
+
+Router.route('/bob', {
+  name: 'Bob',
+  template: 'newBlog',
+  layoutTemplate: 'StaticLayout',
+  onBeforeAction: function() {
+    if (!Meteor.user()||Meteor.user()._id !== 'bob') {
+      Router.go('Home');
+      return;
+    };
+    document.title = 'Hi Bob!';
     this.next();
   },
   waitOn: function() {

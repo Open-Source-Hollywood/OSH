@@ -1,5 +1,7 @@
 Subscribers = new Mongo.Collection('subscribers');
 
+Blogs = new Mongo.Collection('blogs');
+
 Receipts = new Mongo.Collection('receipts');
 
 // XXX To improve pub/sub performances a card document should included a
@@ -66,6 +68,12 @@ Receipts.allow({
 });
 
 Subscribers.allow({
+    insert: function(userId, doc) {
+        return true;//allowedUser(userId);
+    }
+});
+
+Blogs.allow({
     insert: function(userId, doc) {
         return true;//allowedUser(userId);
     }
