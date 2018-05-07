@@ -6049,7 +6049,7 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
 
 #thumbsup {
   position: absolute;
-  top: 0;
+  top: -25px;
   right: 0;
   margin: auto;
   width: 90px;
