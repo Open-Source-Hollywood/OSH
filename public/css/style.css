@@ -4938,7 +4938,7 @@ html.ie8 .rev_slider .krown-button {
 		padding: 16px !important;
 	}
 	.id-full #project-p-author, .id-full .separator, .id-full .clearing {
-		margin-left: 13%;
+		margin-left: 8%;
 	}
 	.id-full {
 		padding-bottom: 25px;
@@ -5092,6 +5092,11 @@ html.ie8 .rev_slider .krown-button {
 	.id-widget .level-binding {
 		position: relative;
 		left: -30px;
+	}
+	a.level-binding.purchase_gift {
+		position: relative;
+		text-align: center;
+		left: 0px;
 	}
 	#project-sidebar .id-widget-wrap:after {
 		left: -40%;

@@ -25,3 +25,8 @@ Meteor.publish('accounts', function() {
     	user: this.userId
     });
 });
+
+Meteor.publish('blogs', function() {
+    check(true, Boolean);
+    return Blogs.find({});
+})

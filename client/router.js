@@ -58,26 +58,52 @@ Router.route('/', {
   },
   waitOn: function() {
       return [
-        Meteor.subscribe('projectsList')
+        Meteor.subscribe('projectsList'),
+        Meteor.subscribe('blogs')
       ];
     }
 });
 
-Router.route('/bob', {
-  name: 'Bob',
+Router.route('/write', {
+  name: 'Write',
   template: 'newBlog',
   layoutTemplate: 'StaticLayout',
   onBeforeAction: function() {
-    if (!Meteor.user()||Meteor.user()._id !== 'bob') {
-      Router.go('Home');
-      return;
-    };
-    document.title = 'Hi Bob!';
+    // if (!Meteor.user()||Meteor.user()._id === 'bob') {
+    //   Router.go('Home');
+    //   return;
+    // };
+    document.title = 'Creative Writing';
+    this.next();
+  }
+});
+
+Router.route('/blogs', {
+  name: 'Blogs',
+  template: 'bloglist',
+  layoutTemplate: 'StaticLayout',
+  onBeforeAction: function() {
+    document.title = 'O . S. H. Blogs';
     this.next();
   },
   waitOn: function() {
       return [
-        Meteor.subscribe('projectsList')
+        Meteor.subscribe('blogs')
+      ];
+    }
+});
+
+Router.route('/blog/:bid', {
+  name: 'Blog',
+  template: 'blog',
+  layoutTemplate: 'StaticLayout',
+  onBeforeAction: function() {
+    document.title = 'O . S. H. Blogs';
+    this.next();
+  },
+  waitOn: function() {
+      return [
+        Meteor.subscribe('blogs')
       ];
     }
 });
