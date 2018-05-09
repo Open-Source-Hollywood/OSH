@@ -69,16 +69,16 @@ Router.route('/write', {
   template: 'newBlog',
   layoutTemplate: 'StaticLayout',
   onBeforeAction: function() {
-    // if (!Meteor.user()||Meteor.user()._id === 'bob') {
-    //   Router.go('Home');
-    //   return;
-    // };
+    if (!Meteor.user()||Meteor.user()._id!=='NtwHRpqPZCRiMkbsK'|| Meteor.user()._id!=='RKgbrBSd9gEfm4cJP' || Meteor.user()._id!=='h6hMjCTqgvju6S6ES' || Meteor.user()._id!=='Kf4kzSmLze9jYPYh3') {
+      Router.go('Home');
+      return;
+    };
     document.title = 'Creative Writing';
     this.next();
   }
 });
 
-Router.route('/blogs', {
+Router.route('/blog', {
   name: 'Blogs',
   template: 'bloglist',
   layoutTemplate: 'StaticLayout',
