@@ -102,8 +102,14 @@ Router.route('/blog/:bid', {
     this.next();
   },
   waitOn: function() {
-      return [
-        Meteor.subscribe('blogs')
-      ];
-    }
+    return [
+      Meteor.subscribe('blogs')
+    ];
+  },
+  data: function() {
+    var blog = Boards.findOne({_id: this.params.bid});
+    console.log('foolala')
+    console.log(blog)
+    return blog;
+  }
 });

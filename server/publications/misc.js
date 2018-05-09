@@ -30,3 +30,8 @@ Meteor.publish('blogs', function() {
     check(true, Boolean);
     return Blogs.find({});
 })
+
+Meteor.publish('blog', function(_id) {
+    check(_id, String);
+    return Blogs.find({_id: _id});
+})
