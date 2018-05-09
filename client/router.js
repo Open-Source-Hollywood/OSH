@@ -87,10 +87,14 @@ Router.route('/blogs', {
     this.next();
   },
   waitOn: function() {
-      return [
-        Meteor.subscribe('blogs')
-      ];
-    }
+    return [
+      Meteor.subscribe('blogs')
+    ];
+  },
+  data: function() {
+    var blogs = Blogs.find({});
+    return {blogs: blogs};
+  }
 });
 
 Router.route('/blog/:bid', {
@@ -107,9 +111,6 @@ Router.route('/blog/:bid', {
     ];
   },
   data: function() {
-    var blog = Boards.findOne({_id: this.params.bid});
-    console.log('foolala')
-    console.log(blog)
-    return blog;
+    return Blogs.findOne({_id: this.params.bid});
   }
 });
