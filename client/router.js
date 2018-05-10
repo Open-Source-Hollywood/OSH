@@ -101,16 +101,18 @@ Router.route('/blog/:bid', {
   name: 'Blog',
   template: 'blog',
   layoutTemplate: 'StaticLayout',
-  onBeforeAction: function() {
-    document.title = 'O . S. H. Blogs';
-    this.next();
-  },
   waitOn: function() {
     return [
       Meteor.subscribe('blogs')
     ];
   },
   data: function() {
-    return Blogs.findOne({_id: this.params.bid});
+    var b = Blogs.findOne({_id: this.params.bid});
+    if (b) {
+      $('meta[name=description]').remove();
+      $('head').append( '<meta name="description" content="'+b.teaser+' (https://opensourcehollywood.org)">' );
+      document.title = b.title;
+    };
+    return b;
   }
 });
