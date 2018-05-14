@@ -54,7 +54,7 @@ Meteor.publish('activeProjectsApproved', function(_id) {
     return Projects.find({
         $and: [
           {archived: false},
-          {usersApproved: {$elemMatch: {id: _id}}}
+          {usersApproved: _id}
         ]
     });
 });
