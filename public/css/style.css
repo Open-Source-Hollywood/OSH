@@ -87,6 +87,7 @@ iframe {
 #content {
 	margin: 0 auto;
 	padding: 60px 0 120px;
+	background-color: #fff!important;
 }
 #content > div > *:first-child {
 	margin-top: 0;
@@ -6108,4 +6109,7 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
     text-transform: uppercase;
     letter-spacing: 1px;
     content: "Describe your grievances";
+}
+.teamprof {
+	border: none;
 }
