@@ -6113,3 +6113,7 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
 .teamprof {
 	border: none;
 }
+
+.bidgetform {
+	    border: 1px solid black!important;
+}
