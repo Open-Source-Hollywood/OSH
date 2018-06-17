@@ -30,6 +30,14 @@ Shares.attachSchema(new SimpleSchema({
     },
     projectOwner: {
         type: Object
+    },
+    earningsToDate: {
+        type: Number,
+        default: 0
+    },
+    earnings: {
+        type: Array,
+        default: []
     }
 }));
 
