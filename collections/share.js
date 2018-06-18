@@ -8,7 +8,7 @@ Shares.attachSchema(new SimpleSchema({
         type: Number
     },
     currentOwner: {
-        type: String
+        type: Object
     },
     ownerHistory: {
         type: [String]
@@ -32,12 +32,10 @@ Shares.attachSchema(new SimpleSchema({
         type: Object
     },
     earningsToDate: {
-        type: Number,
-        default: 0
+        type: Number
     },
     earnings: {
-        type: Array,
-        default: []
+        type: [Object]
     }
 }));
 
