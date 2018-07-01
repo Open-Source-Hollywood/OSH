@@ -1,25 +1,107 @@
-# LibreBoard [![Build Status][travis-status]][travis-link]
+# Open Source Hollywood
 
-LibreBoard is an open-source *kanban* board that let you organize things in
-cards, and cards in lists. You can use it alone, or with your team and family
-thanks to our real-time synchronisation feature. Libreboard is a land of liberty
-and you can implement all sort of workflows on it using tags, comments, member
-assignation, and many more.
+* AUTHOR UPDATES 
+> author adds public updates relating to a campaign
 
-[![Our roadmap is self-hosted on LibreBoard][thumbnail]][roadmap]
+* FILTER 
+> users can filter campaigns based on type and location
 
-Since it is a free software, you don’t have to trust us with your data and can
-install LibreBoard on your own computer or server. In fact we encourage you to
-do that by providing one-click installation for the
-[Sandstorm](https://sandstorm.io) platform and verified
-[Docker](https://www.docker.com) images.
+* DELETE NOTIFICATION 
+> remove phone and/or email notification settings
 
-LibreBoard is released under the very permissive [MIT license](LICENSE), and
-made with [Meteor](https://www.meteor.com).
+* VERIFY PHONE SOURCE 
+> 2-way authentication for phone notifications 
 
-[Our roadmap is self-hosted on LibreBoard][roadmap]
+* VERIFY EMAIL SOURCE 
+> 2-way authentication for email notifications 
 
-[travis-status]: https://travis-ci.org/libreboard/libreboard.svg
-[travis-link]: https://travis-ci.org/libreboard/libreboard.svg
-[thumbnail]: http://i.imgur.com/IIdHUmW.png
-[roadmap]: http://libreboard.com/boards/MeSsFJaSqeuo9M6bs/libreboard-roadmap
+* RE-VERIFY NOTIFICATION SOURCE 
+> re-send verification for phone and/or email notification settings
+
+* REAL-TIME NOTIFICATIONS 
+> set phone and/or email notification settings
+### notifies user when important events occur in real-time
+
+* EDIT PROFILE 
+> update personal information
+
+* DEFAULT VIRTUAL ACCOUNT 
+> users get assigned a virtual bank account by default
+
+* ADD BANK INFO 
+> user connects their real bank accounts to their virtual accounts
+
+* REMOVE BANK INFO 
+> remove link to real bank account
+
+* CREATE CAMPAIGN
+> author creates new campaign
+
+* EDIT CAMPAIGN
+> update campaign merchandise, roles, and settings
+
+* VOTE UP 
+> vote a campaign up, defines user behaviorally
+
+* REMOVE VOTE UP
+> remove a previous vote up to a campaign
+
+* DONATION 
+> campaign receives donations from the public
+
+* LEND OFFER ASSET 
+> offer from one user to a campaign to lend resources
+
+* APPLY CREW & CAST 
+> offer from one user to apply for a role on campaign
+
+* BUY GIFT 
+> merch sales
+
+* ACCEPT USER TO PROJECT 
+> author accepts user to a campaign
+
+* REJECT USER FROM PROJECT 
+> author declines user's offer to a campaign
+
+* FINISH PROJECT 
+> author marks campaign as ready for distribution
+
+* ADD COMMENT 
+> add comments to a campaign's page
+
+* NEGOTIATION MESSAGE 
+> adds a message from one user to another during negotiations of their role in a campaign
+
+* TRANSFER FUNDS 
+> on-demand transfer of any available funds to a user's real bank account
+
+* FLAG MATERIAL 
+> user determines the material should be removed or reviewed
+
+* REVENUE SHARING - INITIAL PURCHASE 
+> public sales of a portion of future earnings for a campaign
+
+* ENTER NEGOTIATIONS WITH APPLICANT 
+> author invites applicant to negotiate for role
+
+* TOGGLE OFFER DURING NEGOTIATION 
+> author can approve or deny individual role offers during negotiations
+
+* ADD AUDITION URL 
+> applicant shares audition materials with author
+
+* UPDATE OFFER AGREEMENT 
+> author changes terms of negotiated agreement
+
+* LOCK AGREEMENT AND OFFER TO APPLICANT 
+> author sends an agreement to applicant for review
+
+* APPLICANT FORMAL OFFER 
+> applicant agrees to offer, and makes formal offer with same terms to author
+
+* APPLICANT COUNTER OFFER 
+> applicant rejects offer, author is able to update terms
+
+* AUTHOR ACCEPTS AGREEMENT 
+> author makes final acceptance during negotiations
