@@ -38,3 +38,4 @@ reactive-var
 linto:jquery-ui
 twbs:bootstrap
 joshowens:shareit
+dferber:prerender
