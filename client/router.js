@@ -37,6 +37,14 @@ Router.route('/contact', function(){
     $('head').append( '<meta name="description" content="Contact Open Source Hollywood by email and phone.">' );
 });
 
+Router.route('/join', function(){
+  this.layout('StaticLayout');
+  this.render('join');
+  document.title = "Join Our Team";
+  $('meta[name=description]').remove();
+    $('head').append( '<meta name="description" content="Join our team.">' );
+});
+
 Router.route('/', {
   name: 'Home',
   template: 'splashPage',
