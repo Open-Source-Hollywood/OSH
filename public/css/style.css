@@ -6117,3 +6117,31 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
 .bidgetform {
 	    border: 1px solid black!important;
 }
+
+.home-content {
+    padding-left: 15%!important;
+    margin-bottom: 8rem!important;
+}
+
+.home-content__buttons {
+    padding-top: 2rem;
+    text-align: left;
+}
+
+.home-content__buttons .btn {
+    border-color: #333;
+    color: #333;
+    margin: 1.5rem 1.5rem 0 0;
+    letter-spacing: .25rem;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.home-content__buttons .btn:hover {
+    border-color: #49a2de;
+    color: #49a2de;
+}
+
+.awesomeness {
+	color: #b446f7
+}
