@@ -30,7 +30,6 @@ idmontie:migrations
 cfs:standard-packages
 cfs:gridfs
 auth0:lock
-mrgalaxy:stripe
 standard-minifier-js
 chart:chart
 random
@@ -40,3 +39,4 @@ twbs:bootstrap
 joshowens:shareit
 dferber:prerender
 service-configuration
+mrgalaxy:stripe
