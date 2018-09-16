@@ -5974,13 +5974,12 @@ input[type="file"] {
 }
 
 .fundstatus {
-    background: #158b63!important;
+    background: #4a158b!important;
     color: #fff3f3!important;
     max-height: 33px!important;
     height: 33px!important;
     position: absolute;
     width: 100%;
-    z-index: 999;
     bottom: 0;
 }
 
@@ -6289,4 +6288,8 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
   .hingebox, .flipbox {
      display: none; 
   }
+}
+
+.oshproject {
+	min-height: 400px
 }
