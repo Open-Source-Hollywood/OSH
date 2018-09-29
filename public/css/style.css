@@ -6153,6 +6153,7 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
     top: -21px;
     position: relative;
     background: #fbf7ff;
+    display: block;
 }
 
 .animated {
@@ -6288,8 +6289,21 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
   .hingebox, .flipbox {
      display: none; 
   }
+
+  #createyourownbutton {
+  	display: none
+  }
 }
 
 .oshproject {
 	min-height: 400px
+}
+
+.expandnewprojecttext {
+    font-weight: 300!important;
+    color: lightslategrey!important;
+}
+
+.extremeboldtext {
+	font-weight: 700!important
 }
