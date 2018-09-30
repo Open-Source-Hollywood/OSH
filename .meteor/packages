@@ -19,7 +19,6 @@ audit-argument-checks
 markdown
 reactive-dict
 dburles:collection-helpers
-fortawesome:fontawesome
 matb33:collection-hooks
 mquandalle:moment
 reywood:publish-composite
@@ -40,3 +39,4 @@ joshowens:shareit
 dferber:prerender
 service-configuration
 mrgalaxy:stripe
+fortawesome:fontawesome

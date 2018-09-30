@@ -1031,6 +1031,7 @@ html.ie8 .sub-menu {
 	border-bottom-color: #f8f8f8;
 	border-top-color: #000;
 	cursor: default;
+	background: goldenrod;
 }
 .krown-tabs .titles li.opened h5, #content .memberdeck .dashboardmenu li.active a {
 	border-top-color: #000;
@@ -6306,4 +6307,8 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
 
 .extremeboldtext {
 	font-weight: 700!important
+}
+
+#createpagelogin:hover; {
+	color: #fff
 }
