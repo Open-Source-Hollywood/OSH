@@ -36,6 +36,7 @@ Users.before.insert(function (userId, doc) {
     // connect profile.status default =
     /** create Stripe managed account */
       doc.status = 'online';
+      doc.didOnboard = false;
       doc.assets = [];
       doc.reels = [];
       doc.iam = [];
@@ -46,8 +47,5 @@ Users.before.insert(function (userId, doc) {
       doc.influenceScore = 1000;
       doc.rating = 5;
       doc.didSetProfile = false;
-      doc.privacy = false;
+      doc.privacy = false;    
 });
-
-
-

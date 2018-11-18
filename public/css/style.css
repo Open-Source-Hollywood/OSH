@@ -107,6 +107,18 @@ iframe {
     top: 15px;
 }
 
+.t20 {
+	margin-top: 20px
+}
+
+.t40 {
+	margin-top: 40px
+}
+
+.w100 {
+	width: 100%!important
+}
+
 /* ------------------------
 -----   Sidebars  -----
 ------------------------------*/
@@ -1910,71 +1922,6 @@ input.terms-checkbox-input {
 .memberdeck form .form-row.half.left {
 	clear: left;
 }
-
-/* My account (form elements) 
-
-
-.memberdeck form .form-row, .ignitiondeck form .form-row {
-	margin: 15px 0 0 0;
-	clear: left;
-	padding: 0 !important;
-}
-
-.memberdeck form .form-row.half {
-	width: 47.5%;
-}
-.memberdeck form .form-row.quarter {
-	width: 21.5%;
-}
-.memberdeck form .form-row.half, .memberdeck form .form-row.quarter {
-	margin-left: 4%;
-}
-.memberdeck form .form-row.half.first, .memberdeck form .form-row.quarter.first {
-	margin-left: 0;
-}
-.memberdeck form .form-row textarea.description {
-	height: 242px;
-}
-
-/* Submit project (form details) 
-
-.ignitiondeck form .form-row {
-	width: 100%;
-}
-.ignitiondeck form .form-row.half, .ignitiondeck form .half {
-	width: 48%;
-}
-.ignitiondeck form .form-row.twothird, .ignitiondeck form .twothird {
-	width: 65.2%;
-	margin-left: 4% !important;
-}
-.ignitiondeck form .form-row.third, .ignitiondeck form .third {
-	width: 30.3%;
-	margin-left: 4% !important;
-}
-.ignitiondeck form .form-row.left {
-	margin: 0 !important;
-}
-.ignitiondeck form .form-row.half.left, .ignitiondeck form .half.left {
-	margin-right: 4% !important;
-}
-.ignitiondeck form input, .ignitiondeck form textarea, .ignitiondeck form .wp-editor-container, .memberdeck form input, .memberdeck form textarea, .ignitiondeck form select {
-	margin-bottom: 20px !important;
-}
-.ignitiondeck form .fes_section {
-	margin: 0;
-	padding: 0;
-	background: transparent;
-}
-
-.ignitiondeck form#fes .form-row.left, .ignitiondeck form .form-row.left {
-	padding-right: 20px !important;
-}
-.memberdeck form .form-row.left {
-	float: none !important;
-}
-
-*/
 
 .wrap-md .memberdeck, .memberdeck .checkout-header, .memberdeck form .finaldesc, .memberdeck form .finaldesc p {
 	text-align: left !important;

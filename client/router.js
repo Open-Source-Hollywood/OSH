@@ -1,4 +1,3 @@
-
 Router.route('/about-us', function() {
   this.layout('StaticLayout');
   this.render('aboutus');
