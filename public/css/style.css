@@ -119,6 +119,10 @@ iframe {
 	width: 100%!important
 }
 
+.w50 {
+	width: 45%!important
+}
+
 /* ------------------------
 -----   Sidebars  -----
 ------------------------------*/
@@ -4544,6 +4548,10 @@ html.ie8 .rev_slider .krown-button {
 }
 
 @media all and (max-width: 879px) {
+
+	.w50 {
+		width: 80%!important
+	}
 
 	.wrapper {
 		width: 740px;
