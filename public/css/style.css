@@ -1,35 +1,35 @@
-   @charset "UTF-8";
+@charset "UTF-8";
 
-   /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
 
-   html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,canvas{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}a{text-decoration:none}*:focus{outline:none}
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,canvas{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}a{text-decoration:none}*:focus{outline:none}
 
-   .clearfix:after, form:after, .row-fluid:after, .payment_methods li:after {
-   	content: ".";
-   	display: block;
-   	clear: both;
-   	visibility: hidden;
-   	line-height: 0;
-   	height: 0;
-   }
-   .clearfix, form, .payment_methods li {
-   	display: inline-block;
-   }
-   html[xmlns] .clearfix, .row-fluid {
-   	display: block;
-   }
-   * html .clearfix {
-   	height: 1%;
-   }
-   .hidden {
-   	display: none;
-   }
-   #oldie {
-   	display: none;
-   }
-   .clear {
-   	clear: both;
-   }
+.clearfix:after, form:after, .row-fluid:after, .payment_methods li:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+.clearfix, form, .payment_methods li {
+	display: inline-block;
+}
+html[xmlns] .clearfix, .row-fluid {
+	display: block;
+}
+* html .clearfix {
+	height: 1%;
+}
+.hidden {
+	display: none;
+}
+#oldie {
+	display: none;
+}
+.clear {
+	clear: both;
+}
 
 /* ---------------------------------------------------------------------------------
 ------------------------------   GENERAL RULES   ----------------------------------
@@ -64,7 +64,7 @@ html:not(.ie8) body {
 	float:right;
 }
 
-* {
+*, *:before, *:after {
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
@@ -108,11 +108,15 @@ iframe {
 }
 
 .t20 {
-	margin-top: 20px
+	margin-top: 21px
 }
 
 .t40 {
 	margin-top: 40px
+}
+
+.t60 {
+	margin-top: 60px
 }
 
 .w100 {
@@ -121,6 +125,22 @@ iframe {
 
 .w50 {
 	width: 45%!important
+}
+
+.mb0 {
+	margin-bottom: 0px!important
+}
+
+.b5 {
+	margin-bottom: 5px!important
+}
+
+.b20 {
+	margin-bottom: 21px!important
+}
+
+.b40 {
+	margin-bottom: 40px!important
 }
 
 /* ------------------------
@@ -1057,7 +1077,6 @@ html.ie8 .sub-menu {
 }
 #project-container.krown-tabs .contents {
 	margin: 40px 0 0;
-	padding: 0 0 80px;
 	width: 74.1%;
 	background: #fff;
 	float: left;
@@ -2493,7 +2512,7 @@ a.post-title:hover h2, a.post-title:hover h1 {
 	margin-bottom: 15px;
 }
 .await {
-	color: #f00;
+	color: #000bbd;
 	display: block;
 	margin-top: 15px;
 }
@@ -4444,6 +4463,11 @@ html.ie8 .rev_slider .krown-button {
     box-shadow: none;
 }
 
+.apparelsize {
+    top: -10px;
+    position: relative;
+}
+
 }
 
 /* Smaller screens & really big devices (landscape mode) */
@@ -6266,4 +6290,99 @@ label.with-square-checkbox input[type="checkbox"]:checked + span::before {
 
 #createpagelogin:hover; {
 	color: #fff
+}
+
+legend {
+  font-size: 16px;
+  font-family: monospace;
+}
+
+fieldset {
+  padding: 15px;
+}
+
+input[type=checkbox] {
+  opacity: 0;
+  float:left;
+}
+
+input[type=checkbox] + label {
+  margin: 0 0 0 20px;
+  position: relative;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: monospace;
+  float: left;
+}
+
+input[type=checkbox] + label ~ label {
+  margin: 0 0 0 40px;
+}
+
+input[type=checkbox] + label::before {
+  content: ' ';
+  position: absolute;
+  left: -35px;
+  top: -3px;
+  width: 25px;
+  height: 25px;
+  display: block;
+  background: white;
+  border: 1px solid #A9A9A9;
+}
+
+input[type=checkbox] + label::after {
+  content: ' ';
+  position: absolute;
+  left: -35px;
+  top: -3px;
+  width: 23px;
+  height: 23px;
+  display: block;
+  z-index: 99;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjE4MS4yIDI3MyAxNyAxNiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAxODEuMiAyNzMgMTcgMTYiPjxwYXRoIGQ9Ik0tMzA2LjMgNTEuMmwtMTEzLTExM2MtOC42LTguNi0yNC04LjYtMzQuMyAwbC01MDYuOSA1MDYuOS0yMTIuNC0yMTIuNGMtOC42LTguNi0yNC04LjYtMzQuMyAwbC0xMTMgMTEzYy04LjYgOC42LTguNiAyNCAwIDM0LjNsMjMxLjIgMjMxLjIgMTEzIDExM2M4LjYgOC42IDI0IDguNiAzNC4zIDBsMTEzLTExMyA1MjQtNTI0YzctMTAuMyA3LTI1LjctMS42LTM2eiIvPjxwYXRoIGZpbGw9IiMzNzM3MzciIGQ9Ik0xOTcuNiAyNzcuMmwtMS42LTEuNmMtLjEtLjEtLjMtLjEtLjUgMGwtNy40IDcuNC0zLjEtMy4xYy0uMS0uMS0uMy0uMS0uNSAwbC0xLjYgMS42Yy0uMS4xLS4xLjMgMCAuNWwzLjMgMy4zIDEuNiAxLjZjLjEuMS4zLjEuNSAwbDEuNi0xLjYgNy42LTcuNmMuMy0uMS4zLS4zLjEtLjV6Ii8+PHBhdGggZD0iTTExODcuMSAxNDMuN2wtNTYuNS01Ni41Yy01LjEtNS4xLTEyLTUuMS0xNy4xIDBsLTI1My41IDI1My41LTEwNi4yLTEwNi4yYy01LjEtNS4xLTEyLTUuMS0xNy4xIDBsLTU2LjUgNTYuNWMtNS4xIDUuMS01LjEgMTIgMCAxNy4xbDExNC43IDExNC43IDU2LjUgNTYuNWM1LjEgNS4xIDEyIDUuMSAxNy4xIDBsNTYuNS01Ni41IDI2Mi0yNjJjNS4yLTMuNCA1LjItMTIgLjEtMTcuMXpNMTYzNC4xIDE2OS40bC0zNy43LTM3LjdjLTMuNC0zLjQtOC42LTMuNC0xMiAwbC0xNjkuNSAxNjkuNS03MC4yLTcxLjljLTMuNC0zLjQtOC42LTMuNC0xMiAwbC0zNy43IDM3LjdjLTMuNCAzLjQtMy40IDguNiAwIDEybDc3LjEgNzcuMSAzNy43IDM3LjdjMy40IDMuNCA4LjYgMy40IDEyIDBsMzcuNy0zNy43IDE3NC43LTE3Ni40YzEuNi0xLjcgMS42LTYuOS0uMS0xMC4zeiIvPjwvc3ZnPg==') no-repeat center center;
+  -ms-transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+  transition: all .3s ease;
+  -ms-transform: scale(0);
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  opacity: 0;
+}
+
+input[type=checkbox]:checked + label::after {
+  -ms-transform: scale(1);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+
+.merchpad {
+	padding: 5px 10px!important;
+}
+
+.merchbottomborder {
+    border-bottom: 1px solid gray;
+    margin-bottom: 55px!important;
+}
+
+.alice_back {
+	background-color: aliceblue;
+}
+
+.h46 {
+	height: 46px!important
+}
+
+.needs-p {
+	font-weight: 300!important;
+	text-align: end;
+}
+
+.contents {
+	display: contents!important
+}
+
+.tar {
+	text-align: right;
 }
