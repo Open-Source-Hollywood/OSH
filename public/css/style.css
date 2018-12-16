@@ -6395,3 +6395,12 @@ input[type=checkbox]:checked + label::after {
 .navbar-default .navbar-nav > li > a {
     color: #a9a7a7
 }
+
+.c333 {
+	color: #333!important
+}
+
+.c999 {
+	color: #a9a7a7!important
+	font-weight: normal;
+}
