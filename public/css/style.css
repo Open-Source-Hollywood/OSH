@@ -703,6 +703,7 @@ body.sticky-header #footer1 {
 
 .special {
 	background-color: #af504c!important;
+	color: #fff;
 }
 
 #main-menu {
@@ -6385,4 +6386,12 @@ input[type=checkbox]:checked + label::after {
 
 .tar {
 	text-align: right;
+}
+
+.f200 {
+	font-weight: 200
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #a9a7a7
 }
