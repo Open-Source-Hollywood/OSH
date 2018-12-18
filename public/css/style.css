@@ -6393,7 +6393,7 @@ input[type=checkbox]:checked + label::after {
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: #a9a7a7
+    color: #333
 }
 
 .c333 {
@@ -6427,17 +6427,32 @@ input[type=checkbox]:checked + label::after {
 }
 
 
+.mh300 {
+	min-height: 300px;
+}
+
 .well {
-    min-height: 300px;
     width: 100%;
     background-color: transparent!important;
-    border: none!important;
+    /*border: none!important;*/
     box-shadow: none!important;
     -webkit-box-shadow: none!important;
 }
 
 .projviewsexn {
-	border-top: 2px solid #333
-	padding-top: 8px;
-	position: relative;
+    border-top: 2px solid #333;
+    padding-top: 21px;
+    position: relative;
+}
+
+.aquamarineB {
+	background-color: aquamarine;
+}
+
+.lemonB {
+	background-color: lemonchiffon
+}
+
+.f08 {
+	font-size: 0.8rem
 }

@@ -20,6 +20,20 @@ Meteor.publish('activeProjects', function() {
     });
 });
 
+Meteor.publish('archivedProjects', function() {
+  // Ensure that the user is connected
+    check(this.userId, String);
+    return Projects.find({
+        $and: [
+          {archived: true},
+          {$or: [
+            {ownerId: this.userId},
+            {usersApproved: {$elemMatch: {id: this.userId}}}
+          ]}
+        ]
+    });
+});
+
 Meteor.publish('receiptsHistory', function() {
   check(this.userId, String);
   return Users.find({_id: this.userId});
@@ -31,6 +45,17 @@ Meteor.publish('userActiveProjects', function(_id) {
     return Projects.find({
         $and: [
           {archived: false},
+          {ownerId: _id}
+        ]
+    });
+});
+
+Meteor.publish('userArchivedProjects', function(_id) {
+  // Ensure that the user is connected
+    check(_id, String);
+    return Projects.find({
+        $and: [
+          {archived: true},
           {ownerId: _id}
         ]
     });
