@@ -6456,3 +6456,39 @@ input[type=checkbox]:checked + label::after {
 .f08 {
 	font-size: 0.8rem
 }
+
+.fw700 {
+	font-weight: 700
+	font-size: 1.4rem;
+}
+
+.hero-cont_H {
+	position: absolute;
+}
+
+.hero-text_H {
+  position: relative;
+  bottom: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 70px;
+}
+
+.heading-hero_H {
+  display: inline-block;
+  font-size: 1em;
+  font-weight: 300;
+  marign: 0;
+  line-height: 1;
+}
+
+.noclick {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999; /* or maybe higher */
+
+    background-color: transparent;
+}
