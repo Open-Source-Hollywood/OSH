@@ -5,12 +5,10 @@ Meteor.publish('getReceipts', function() {
     });
 });
 
-Meteor.publish('projReceipts', function(slug, owner) {
+Meteor.publish('projReceipts', function(slug) {
     check(slug, String);
-    check(owner, String);
     return Receipts.find({
-        slug: slug,
-        owner: owner
+        slug: slug
     });
 });
 

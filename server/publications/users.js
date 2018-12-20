@@ -17,6 +17,11 @@ Meteor.publish('getUsers', function() {
     return Users.find({ });
 });
 
+Meteor.publish('projBackers', function(arr) {
+    check(arr, Array)
+    return Users.find({ _id: { $in: arr } });
+});
+
 Meteor.publish('getMe', function() {
     if (this.userId) {
         return Users.find({ _id: this.userId });
