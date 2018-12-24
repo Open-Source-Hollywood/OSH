@@ -9,6 +9,7 @@ Meteor.publish('projectSubscriptions', function(slug) {
 });
 
 Meteor.publish('allSubscribers', function() {
+    if (!this.userId) return this.ready();
     check(this.userId, String)
     return Subscriptions.find({ 
     	$or: [
