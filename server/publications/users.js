@@ -29,3 +29,12 @@ Meteor.publish('getMe', function() {
         this.ready();
     }
 });
+
+Meteor.publish('usersList', function() {
+  return Users.find({});
+});
+
+Meteor.publish('getUser', function(_id) {
+  check(_id, String);
+  return Users.find({'_id': _id});
+});

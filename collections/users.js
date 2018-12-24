@@ -35,6 +35,14 @@ Users.helpers({
 Users.before.insert(function (userId, doc) {
     // connect profile.status default =
     /** create Stripe managed account */
+      if (doc.services&&doc.services.auth0&&doc.services.auth0.email) {
+        doc.notification_preferences = {
+          email: {
+            verification: true,
+            email: doc.services.auth0.email
+          }
+        }
+      };
       doc.status = 'online';
       doc.didOnboard = false;
       doc.assets = [];

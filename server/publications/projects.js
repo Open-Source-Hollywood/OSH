@@ -98,15 +98,6 @@ Meteor.publish('tagsList', function() {
   return Tags.find();
 });
 
-Meteor.publish('usersList', function() {
-  return Meteor.users.find({});
-});
-
-Meteor.publish('getUser', function(_id) {
-  check(_id, String);
-  return Meteor.users.find({'_id': _id});
-});
-
 Meteor.publish('paidForProjects', function() {
   check(this.userId, String);
   // get projects live with accepted user = this.userId

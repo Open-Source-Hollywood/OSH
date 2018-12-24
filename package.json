@@ -14,7 +14,7 @@
     "fiber": "^1.0.4",
     "meteor-node-stubs": "^0.2.3",
     "request": "^2.1.1",
-    "stripe": "^4.6.0",
+    "stripe": "^5.6.0",
     "uuid": "^3.0.1"
   }
 }

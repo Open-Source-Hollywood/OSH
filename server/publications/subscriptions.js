@@ -1,0 +1,19 @@
+Meteor.publish('mySubscriptions', function() {
+    check(this.userId, String)
+    return Subscriptions.find({ owner: this.userId })
+});
+
+Meteor.publish('projectSubscriptions', function(slug) {
+    check(slug, String)
+    return Subscriptions.find({ slug: slug })
+});
+
+Meteor.publish('allSubscribers', function() {
+    check(this.userId, String)
+    return Subscriptions.find({ 
+    	$or: [
+    		{ user: this.userId },
+    		{ projectOwnerId: this.userId }
+    	]
+    })
+});
