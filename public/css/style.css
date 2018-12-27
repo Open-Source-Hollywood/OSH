@@ -6652,20 +6652,20 @@ input[type=checkbox]:checked + label::after {
   }
 }
 
-#yes-button:checked + .button-label {
+.yes-button:checked + .button-label {
   background: #2ECC71;
   color: #efefef;
 }
-#yes-button:checked + .button-label:hover {
+.yes-button:checked + .button-label:hover {
   background: #29b765;
   color: #e2e2e2;
 }
 
-#no-button:checked + .button-label {
+.no-button:checked + .button-label {
   background: #D91E18;
   color: #efefef;
 }
-#no-button:checked + .button-label:hover {
+.no-button:checked + .button-label:hover {
   background: #c21b15;
   color: #e2e2e2;
 }
