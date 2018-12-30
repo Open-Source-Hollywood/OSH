@@ -12,7 +12,11 @@ Meteor.publish('myCurrentOffers', function() {
             { offeree: this.userId },
             { offeror: this.userId }
         ],
-        pending: {$ne: false}
+        $and:[
+          { pending: {$ne: false} },
+          { rejected: {$ne: true} },
+          { accepted: {$ne: true} }
+        ]
     });
 });
 
@@ -24,7 +28,7 @@ Meteor.publish('myCompletedOffers', function() {
             { offeror: this.userId }
         ],
         pending: false,
-        rejected: {$ne: true}
+        accepted: true
     });
 });
 

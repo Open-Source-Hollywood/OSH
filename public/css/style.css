@@ -6688,3 +6688,7 @@ input[type=checkbox]:checked + label::after {
 	top: -8px;
 	position: relative;
 }
+
+ul.clearfix {
+	display: flex!important;
+};
