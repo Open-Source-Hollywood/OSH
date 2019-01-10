@@ -45,6 +45,7 @@ Users.before.insert(function (userId, doc) {
       };
       doc.status = 'online';
       doc.didOnboard = false;
+      doc.iamRoles = [];
       doc.assets = [];
       doc.reels = [];
       doc.iam = [];
