@@ -49,15 +49,6 @@ Router.route('/', {
   template: 'splashPage',
   layoutTemplate: 'StaticLayout',
   onBeforeAction: function() {
-    if (Meteor.user()) {
-      var x = localStorage.getItem('create');
-      if (x===true) {
-        Router.go('Create Project');  
-        localStorage.setItem('create', false);
-      } else {
-        Router.go('Projects');  
-      }
-    };
     $('meta[name=description]').remove();
     $('head').append( '<meta name="description" content="The Premiere Platform for Story Development and Production Optimization">' );
     document.title = 'Open Source Hollywood';
@@ -68,7 +59,50 @@ Router.route('/', {
         Meteor.subscribe('projectsList'),
         Meteor.subscribe('blogs')
       ];
-    }
+  },
+  onAfterAction: function() {
+    var user = Meteor.user();
+    if (user) {
+      var x = localStorage.getItem('create');
+      if (x===true) {
+        localStorage.removeItem('create');
+        Router.go('Create Project');
+      } else {
+        if (!user.iamRoles||!user.iamRoles.length) {
+          Router.go('Config')
+        };
+
+        if (user.iamRoles.indexOf('producer')>-1) {
+          Router.go('Dashboard')
+        } else {
+          Router.go('Projects');
+        }  
+      }
+    };
+  }
+});
+
+
+Router.route('/receipts', {
+  name: 'Receipts',
+  template: 'main_receipts',
+  layoutTemplate: 'StaticLayout',
+  onBeforeAction: function() {
+    var user = Meteor.user();
+    if (!user) {
+      Router.go('Home')
+    };
+    $('meta[name=description]').remove();
+    $('head').append( '<meta name="description" content="The Premiere Platform for Story Development and Production Optimization">' );
+    document.title = 'Open Source Hollywood';
+    this.next();
+  },
+  waitOn: function() {
+      return [
+        Meteor.subscribe('getMe'),
+        Meteor.subscribe('getReceipts'),
+      ];
+  }
 });
 
 Router.route('/write', {
