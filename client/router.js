@@ -72,7 +72,7 @@ Router.route('/', {
           Router.go('Config')
         };
 
-        if (user.iamRoles.indexOf('producer')>-1) {
+        if (user.iamRoles&&user.iamRoles.indexOf('producer')>-1) {
           Router.go('Dashboard')
         } else {
           Router.go('Projects');
