@@ -5,6 +5,15 @@ Meteor.publish('getReceipts', function() {
     });
 });
 
+Meteor.publish('getReceipt', function(id) {
+    check(id, String);
+    check(this.userId, String);
+    return Receipts.find({
+        _id: id,
+        parties: this.userId
+    });
+});
+
 Meteor.publish('projReceipts', function(slug) {
     check(slug, String);
     return Receipts.find({

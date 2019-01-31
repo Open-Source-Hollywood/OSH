@@ -44,7 +44,9 @@ Meteor.publish('projAssetOffers', function(slug, owner) {
 
 Meteor.publish('offerById', function(id) {
     check(id, String);
+    check(this.userId, String)
     return Offers.find({
-        _id: id
+        _id: id,
+        parties: this.userId
     });
 });
