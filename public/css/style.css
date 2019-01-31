@@ -6992,3 +6992,7 @@ circle:nth-of-type(4) {
     background-color: rgba(500,500,500,0.5);
     margin-top: 10%;
 }
+
+.note-toolbar {
+	z-index: 999!important
+}
