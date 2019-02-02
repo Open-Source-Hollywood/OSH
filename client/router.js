@@ -83,7 +83,7 @@ Router.route('/', {
 });
 
 
-Router.route('/receipts', {
+Router.route('/contracts', {
   name: 'Receipts',
   template: 'main_receipts',
   layoutTemplate: 'StaticLayout',
