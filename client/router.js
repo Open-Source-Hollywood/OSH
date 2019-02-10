@@ -85,7 +85,7 @@ Router.route('/', {
 
 Router.route('/contracts', {
   name: 'Receipts',
-  template: 'main_receipts',
+  template: 'applicantsMain',
   layoutTemplate: 'StaticLayout',
   onBeforeAction: function() {
     var user = Meteor.user();
@@ -101,20 +101,39 @@ Router.route('/contracts', {
     return [
       Meteor.subscribe('getMe'),
       Meteor.subscribe('getReceipts'),
+      Meteor.subscribe('myCurrentOffers')
     ];
   },
   data: function() {
-    console.log(Meteor.user())
+    // console.log(Meteor.user())
     var uid = typeof Meteor.user() === 'string' ? Meteor.user() : Meteor.user()&&Meteor.user()._id||null
+
+
     if (uid) {
+
+      var offers = Offers.find({
+          $or:[
+              { offeree: uid },
+              { offeror: uid }
+          ],
+          $and:[
+            { pending: {$ne: false} },
+            { rejected: {$ne: true} },
+            { accepted: {$ne: true} }
+          ]
+      });
+
+
       var rs = Receipts.find({
         user: uid
       }).fetch()
       console.log(rs.length)
       return {
-        receipts: rs,
-        ln: rs.length
+        receipts: offers,
+        ln: offers.length
       }
+
+
     }
   }
 });
