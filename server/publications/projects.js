@@ -34,6 +34,19 @@ Meteor.publish('archivedProjects', function() {
     });
 });
 
+Meteor.publish('projectsWithSomething', function() {
+  // Ensure that the user is connected
+    check(this.userId, String);
+    return Projects.find({
+        ownerId: this.userId,
+        $or: [
+          { soldGifts: { $exists: true, $ne: [] }},
+          { castApplicants: { $exists: true, $ne: [] }},
+          { crewApplicants: { $exists: true, $ne: [] }}
+        ]
+    });
+});
+
 Meteor.publish('receiptsHistory', function() {
   check(this.userId, String);
   return Users.find({_id: this.userId});

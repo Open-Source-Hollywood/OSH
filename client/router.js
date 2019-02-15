@@ -100,6 +100,7 @@ Router.route('/contracts', {
   waitOn: function() {
     return [
       Meteor.subscribe('getMe'),
+      Meteor.subscribe('projectsWithSomething'),
       Meteor.subscribe('getReceipts'),
       Meteor.subscribe('myCurrentOffers')
     ];
@@ -107,10 +108,7 @@ Router.route('/contracts', {
   data: function() {
     // console.log(Meteor.user())
     var uid = typeof Meteor.user() === 'string' ? Meteor.user() : Meteor.user()&&Meteor.user()._id||null
-
-
     if (uid) {
-
       var offers = Offers.find({
           $or:[
               { offeree: uid },
@@ -123,17 +121,33 @@ Router.route('/contracts', {
           ]
       });
 
-
       var rs = Receipts.find({
         user: uid
       }).fetch()
-      console.log(rs.length)
+        
+      var projects = Projects.find({
+        ownerId: Meteor.user()._id,
+        $or: [
+          { soldGifts: { $exists: true, $ne: [] }},
+          { castApplicants: { $exists: true, $ne: [] }},
+          { crewApplicants: { $exists: true, $ne: [] }}
+        ]
+      }).fetch();
+
       return {
         receipts: offers,
-        ln: offers.length
+        ln: offers.length,
+        projects: projects.map(function(p) {
+          return {
+            slug: p.slug,
+            id: p._id,
+            title: p.title,
+            crewApplicants: p.crewApplicants,
+            castApplicants: p.castApplicants,
+            soldGifts: p.soldGifts
+          }
+        })
       }
-
-
     }
   }
 });
