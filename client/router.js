@@ -135,7 +135,7 @@ Router.route('/contracts', {
       }).fetch();
 
       return {
-        receipts: offers,
+        offers: offers,
         ln: offers.length,
         projects: projects.map(function(p) {
           return {
