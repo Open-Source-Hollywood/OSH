@@ -1,0 +1,51 @@
+<template name="newevent">
+	<div id="content" class="clearfix layout-fixed-width">
+
+	    <div class="clearfix wrapper">
+
+	        <header id="page-title">
+	            <h1 class="title">Create Event</h1>
+	            <h2 class="subtitle">Set a time and location, if approved it will be displayed on the Open Source HOLLYWOOD Meetup page!<br>Abuse it or lose it.</h2></header>
+
+	        <div class="normal-content no-boxed">
+	            <div class="krown-column-row clearfix">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="title">title</label>
+                            <input type="text" name="title" id="title" placeholder="what's this meeting about?" />
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="address">address</label>
+                            <input type="text" name="address" id="address" placeholder="enter the street address, city, and zip code here" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="directions">directions&nbsp;<small><strong>( how should people find you )</strong></small></label>
+                            <input type="text" name="directions" id="directions" placeholder="write your instructions here" />
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contact">contact</label>
+                            <input type="text" name="contact" id="contact" placeholder="your email or phone number" />
+                        </div>
+                    </div>
+	            </div>
+	        </div>
+            <div class="container">
+                <section>
+                    <div class="row">
+                      <div class="col-sm-6" style="margin-top:89px;">
+                        <a href="/discover" class="button krown-box" style="display: block;background-color: #f75146;">CANCEL</a>
+                      </div>
+
+                      <div class="col-sm-6" style="margin-top:89px;">
+                        <a id="create_event" class="button krown-box" style="display: block;background-color: cornflowerblue">CREATE EVENT</a>
+                      </div>
+                    </div>
+                </section>
+            </div>
+	        <!-- Inner Wrapper End -->
+	    </div>
+	    <!-- Main Wrapper End -->
+	</div>
+</template>
