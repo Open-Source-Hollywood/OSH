@@ -44,7 +44,7 @@ Router.route('/join', function(){
     $('head').append( '<meta name="description" content="Join our team.">' );
 });
 
-Router.route('/', {
+Router.route('/hollywood', {
   name: 'Home',
   template: 'splashPage',
   layoutTemplate: 'StaticLayout',

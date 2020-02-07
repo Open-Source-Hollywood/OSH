@@ -14,7 +14,11 @@ Meteor.publish('stringId', function(_id) {
 });
 
 Meteor.publish('getUsers', function() {
-    return Users.find({ });
+    return Users.find({ 
+        avatar: {
+            '$ne': 'https://s3-us-west-2.amazonaws.com/producehour/avatar.png'
+        }
+    });
 });
 
 Meteor.publish('projBackers', function(arr) {
