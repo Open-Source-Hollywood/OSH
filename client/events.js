@@ -15,6 +15,10 @@ Template.newevent.events({
 			directions: directions,
 			contact: contact,
 		}, function(err, msg) {
+			$('#title').val('')
+			$('#address').val('')
+			$('#directions').val('')
+			$('#contact').val('')
   			vex.dialog.alert(err||msg);
   		});
 	}
