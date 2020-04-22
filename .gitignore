@@ -4,5 +4,5 @@ settings.json
 .DS_Store
 */.DS_Store
 produsus.tar.gz
-.secrets.json
+secrets.js
 NOTES.md
