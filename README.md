@@ -1,6 +1,11 @@
 # Open Source Hollywood
 
-Description
+* Build teams
+* Manage projects
+* Lease and donate assets
+* Sell merch
+* Tokenize projects
+* Smart contracts
 
 ### How to use
 
@@ -53,6 +58,12 @@ However, this settings file is still used for PrerenderIO services, and remains 
 	}
 }
 ```
+
+#### Localhost
+
+To run the application, follow instructions from Meteor and make sure you're running the correct version
+
+`$ meteor run --settings settings.json`
 
 #### Deployment
 
