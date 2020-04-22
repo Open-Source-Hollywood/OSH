@@ -1,5 +1,47 @@
 # Open Source Hollywood
 
+Description
+
+### How to use
+
+#### Dependencies
+
+- Meteor 1.3.2.4
+
+see https://github.com/meteor/meteor/issues/4526
+
+If you have Meteor already installed you can use the `update` option of Meteor:
+
+`meteor update --release 1.3.2.4`
+
+#### Configuration
+
+You will need credentials for:
+- Auth0
+- AWS SES and S3 (r+w)
+- Google Reverse Geolocation
+- Stripe test credentials
+- Twilio test credentials
+
+#### Structure
+
+<i>Models</i>
+- find these in the `collections` directory
+
+<i>Frontend + Templating + custom JS events / scripts</i>
+- find these in the `client` directory
+
+<i>Core Logic</i>
+- find these in the `lib` directory
+
+<i>Authentication + Permissions</i>
+- find these in the `server` directory
+
+<i>Core Logic</i>
+- find these in the `lib` directory
+
+
+
 * AUTHOR UPDATES 
 > author adds public updates relating to a campaign
 
