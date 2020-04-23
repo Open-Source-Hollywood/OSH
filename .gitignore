@@ -1,8 +1,7 @@
 .meteor/local
+node_modules
 settings.json
 *.sh
-.DS_Store
-*/.DS_Store
-produsus.tar.gz
+**/.DS_Store
 secrets.js
 NOTES.md
