@@ -1,0 +1,85 @@
+<template name="StaticLayout">
+  <!--[if lt IE 8]> <html lang="en-US" class="ie7 ie" xmlns="https://www.w3.org/1999/xhtml"> <![endif]-->
+  <!--[if IE 8]> <html lang="en-US" class="ie8 ie" xmlns="https://www.w3.org/1999/xhtml"> <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <html lang="en-US" xmlns="https://www.w3.org/1999/xhtml" class="">
+  <!--<![endif]-->
+    <body id="body" class="home page-template page-template-template-slider page-template-template-slider-php page page-id-835 regular-header no-touch fixed-width">
+    <div id="preloader" class="nodisplay">
+    
+        <svg class="center-block loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+             <circle cx="170" cy="170" r="160" stroke="#E2007C"/>
+             <circle cx="170" cy="170" r="135" stroke="#404041"/>
+             <circle cx="170" cy="170" r="110" stroke="#E2007C"/>
+             <circle cx="170" cy="170" r="85" stroke="#404041"/>
+        </svg>
+        
+    </div>
+      <div class="noclick" style="display:none"></div>
+      {{ > nav}}
+      
+      <div style="position:relative;margin-top:50px">
+      
+        <div class="krown-alert info betatest" style="margin-bottom:0px!important">
+          Open Source Hollywood is not funded, and there are no employees. It's a community project that runs on your feedback alone. To improve the software send your bug reports, demands, and suggestions to  <a href="mailto:hello@opensourcehollywood.org">hello@opensourcehollywood.org</a>.
+        </div>
+      
+      </div>
+      
+      {{ > yield }}
+      
+      {{#unless isUser}}
+        {{ > footer }}
+      {{/unless}}
+
+      <!-- Footer #2 Wrapper Start -->
+      <footer id="footer2" class="footer clearfix">
+          <div class="wrapper clearfix">
+
+              <div class="left clearfix">
+                  <div id="text-11" class="widget left widget_text">
+                      <div class="textwidget">Open Source Hollywood © {{year}}</div>
+                  </div>
+              </div>
+
+              <div class="right clearfix">
+                  <div id="text-12" class="widget right widget_text">
+                      <div class="textwidget">
+                          <div class="krown-social clearfix">
+                              <ul>
+                                  <!-- <li class="fa fa-twitter"><a target="_self" href="#">#</a></li>
+                                  <li class="fa fa-facebook"><a target="_self" href="#">#</a></li> -->
+                                  <li class="fa fa-meetup"><a target="_self" href="https://www.meetup.com/Open-Source-Hollywood/">#</a></li>
+                                  <!-- <li class="fa fa-google-plus-g"><a target="_self" href="#">#</a></li> -->
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </footer>
+      <!-- Footer End -->
+
+      <!-- IE7 Message Start -->
+      <div id="oldie">
+          <p>This is a unique website which will require a more modern browser to work!
+              <br>
+              <br>
+              <a href="https://www.google.com/chrome/" target="_blank">Please upgrade today!</a>
+          </p>
+      </div>
+      <!-- IE7 Message End -->
+
+
+
+      <div id="responsive-test">
+          <div id="p780"></div>
+          <div id="p580"></div>
+          <div></div>
+      </div>
+      <div id='osh_loader' style="position: fixed; left: 50%; top: 50%; display: none;">
+          <img src="img/preloader.gif" />
+      </div>
+    </body>
+  </html>
+</template>

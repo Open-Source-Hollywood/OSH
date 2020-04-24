@@ -1,0 +1,10 @@
+<template name="minePopup">
+    <br/><br/>
+    {{#each mine}}
+        <div class="list-group">
+            <a style="color:#333" class="list-group-item-info list-card-details clearfix show" href="{{ this.href }}">
+                {{this.title}}
+            </a>
+        </div>
+    {{/each}}
+</template>

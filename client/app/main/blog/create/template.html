@@ -1,0 +1,83 @@
+<template name="newBlog">
+  <!-- IMAGE UPLOAD, TITLE SET, WYSIWYG -->
+  <div id="content" class="clearfix layout-fixed-width">
+        <div class="clearfix wrapper">
+            <header id="page-title">
+                <h1 class="title">Creative Writing</h1>
+                <h2 class="subtitle">Where our great articles happen</h2>
+            </header>
+            <div class="container">
+                <section>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="title">title</label>
+                            <input type="text" name="title" id="title" placeholder="your great title here" />
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label for="excerpt">excerpt</label>
+                            <input type="text" name="excerpt" id="excerpt" placeholder="max 150 character teaser text" maxlength="151" />
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label for="summary">summary</label>
+                            <input type="text" name="summary" id="summary" placeholder="max 500 character summary" maxlength="500" />
+                        </div>
+                        
+
+                        <div class="form-group">
+                          <label for="category">Select Category</label>
+                          <select name="category" id="category" class="form-control">
+                            <option>- Article Applies to -</option>
+                            <option>Feature</option>
+                            <option>Indie</option>
+                            <option>Series</option>
+                            <option>Sketch</option>
+                            <option>Animations</option>
+                            <option>Theater</option>
+                            <option>Ensemble</option>
+                            <option>Performance</option>
+                            <option>Music Video</option>
+                            <option>Podcast</option>
+                            <option>Other</option>
+                          </select>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label for="website">article</label>
+                            <div id="summernote"></div>
+                            <div id="inner_summer" style="display:none"></div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 margin_bottom40">
+                            <label for="tags">tags</label>
+                            <input type="text" name="tags" id="tags" placeholder="comma separated tags" />
+                        </div>
+
+                       <!--  <div class="col-sm-12 col-md-4 margin_bottom40">
+                            <label for="banner image">banner image (1140x450 px for best resolution)</label>
+                            <label for="banner_file" class="custom-file-upload">
+                                <i class="fa fa-cloud-upload"></i> Upload Image
+                            </label>
+                            <input class="noshow-file-upload" id="banner_file" type="file"/>
+                            <br>
+                            <div id="hidden_banner_name" class="hidden-filename" style="display:none"><i class="fa fa-check"></i>&nbsp;<span id="banner_file_name">This is the name of the file uploaded</span></div>
+                        </div> -->
+                        <div class="col-sm-12 col-md-4 margin_bottom40">
+                            <label for="banner image">main image</label>
+                            <label for="image_file" class="custom-file-upload">
+                                <i class="fa fa-cloud-upload"></i> Upload Image
+                            </label>
+                            <input class="noshow-file-upload" id="image_file" type="file"/>
+                            <br>
+                            <div id="hidden_image_name" class="hidden-filename"><i class="fa fa-check"></i>&nbsp;<span id="image_file_name">This is the name of the file uploaded</span></div>
+                        </div>
+                        <div class="col-sm-12">
+                          <a id="create_article" class="button" style="display: block;">CREATE ARTICLE !</a>
+                        </div>
+                    </div>
+                </section>
+            </div>     
+        </div>
+    </div>
+</template>

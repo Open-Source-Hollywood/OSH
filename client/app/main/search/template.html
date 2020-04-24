@@ -1,0 +1,10 @@
+<template name="search">
+    <div id="header-search">
+        <label for="search-text">{{_ "global-search"}}</label>
+        <input id="search-text" type="text" autocomplete="off" autocorrect="off" spellcheck="false">
+        <input id="search-submit" type="submit" value="{{ _ 'search'}}">
+        <a class="header-btn header-search js-search-submit" href="#" title="{{ _ 'search-title'}}">
+            <span class="header-btn-icon icon-lg fa fa-search light"></span>
+        </a>
+    </div>
+</template>

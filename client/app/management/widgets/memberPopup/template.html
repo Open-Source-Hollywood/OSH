@@ -1,0 +1,30 @@
+<template name="memberPopup">
+    <div class="board-member-menu">
+        <div class="mini-profile-info">
+            {{> userAvatar user=user}}
+            <div class="info">
+                <h3 class="bottom h3b" style="margin-right: 40px;">
+                    <a class="js-profile" href="{{ pathFor route='Profile' username=user.services.auth0.nickname }}">{{ user.firstName }} {{ user.lastName }}</a>
+                </h3>
+                <p class="quiet bottom">@{{ user.services.auth0.nickname }}</p>
+            </div>
+        </div>
+        {{# if currentUser.isBoardMember }}
+            <ul class="pop-over-list">
+                {{# if currentUser.isBoardAdmin }}
+                    <li>
+                        <a class="js-change-role" href="#">
+                            {{_ 'change-permissions'}} <span class="quiet" style="font-weight: normal;">({{ memberType }})</span>
+                        </a>
+                    </li>
+                {{/ if }}
+
+                <li>
+                    {{# if currentUser.isBoardAdmin }}
+                        <a class="js-remove-member">{{_ 'remove-from-board'}}</a>
+                    {{/ if }}
+                </li>
+            </ul>
+        {{/ if }}
+    </div>
+</template>

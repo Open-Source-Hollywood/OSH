@@ -1,0 +1,17 @@
+<template name="activityWidget">
+    {{# if board.activities.count }}
+        <hr>
+        <div class="board-widget board-widget-activity bottom clearfix">
+            <div class="board-widget-title">
+                <h3 class="h3b" style="color:#333">{{_ 'activity'}}</h3>
+            </div>
+            <div class="board-widget-content">
+                <div class="activity-gradient-t"></div>
+                <div class="activity-gradient-b"></div>
+                <div class="board-actions-list fancy-scrollbar">
+                    {{ > activities }}
+                </div>
+            </div>
+        </div>
+    {{/if}}
+</template>

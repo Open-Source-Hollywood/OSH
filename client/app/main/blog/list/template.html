@@ -1,0 +1,43 @@
+<template name="bloglist">
+  <div id="content" class="clearfix layout-right-sidebar">
+    <div class="clearfix wrapper">
+        <header id="page-title">
+            <h1 class="title">Our Blog</h1>
+            <h2 class="subtitle">Useful stuff &amp; other stuff</h2></header>
+        <div>
+          {{#each blogs}}
+            <article class="article clearfix post-619 post type-post status-publish format-standard has-post-thumbnail hentry category-pictures tag-image tag-landscape tag-words-2">
+                <figure class="post-image">
+                    <img src="{{this.banner}}" width="845" height="453" alt="{{this.title}}" style="width: 100%;overflow: hidden;">
+                </figure>
+                <div class="post-body">
+                    <header class="post-header">
+                        <a href="/blog/{{this._id}}" class="post-title">
+                            <h2>{{this.title}}</h2>
+                        </a>
+                        <aside class="post-meta">
+                            <ul>
+                                <li class="date">
+                                    {{moment}}
+                                </li>
+                                <!-- <li class="comments"><a href="http://backer-demo.krownthemes.com/pictures/first-ultra-awesome-post/#comments">Comments 4</a></li> -->
+                            </ul>
+                        </aside>
+                    </header>
+                    <section class="post-content clearfix">
+                        <p class="post-excerpt">
+                          {{this.summary}}
+                        </p>
+                        <p>&nbsp;</p>
+                        <a class="krown-button small light post-more" href="/blog/{{this._id}}">Read More</a>
+                    </section>
+                </div>
+            </article>
+            {{else}}
+            <h4 class="h2">COMING SOON!</h4>
+            {{/each}}
+        </div>
+    </div>
+    <!-- Main Wrapper End -->
+  </div>
+</template>

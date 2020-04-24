@@ -1,0 +1,17 @@
+<template name="addCardForm">
+    <div class="card-composer hide">
+        <form id="AddCardForm">
+            <div class="list-card js-composer">
+                <div class="list-card-labels js-list-card-composer-labels"></div>
+                <div class="list-card-details clearfix">
+                    <textarea class="list-card-composer-textarea js-card-title" style="overflow: hidden; word-wrap: break-word; height: 36px;">{{ inputCache "addCard" listId }}</textarea>
+                    <div class="list-card-members js-list-card-composer-members"></div>
+                </div>
+            </div>
+            <div class="cc-controls clearfix">
+                <input type="submit" class="primary confirm js-add-card" value="{{_ 'add'}}">
+                <a class="icon-lg fa fa-times dark-hover js-cancel" href="#"></a>
+            </div>
+        </form>
+    </div>
+</template>

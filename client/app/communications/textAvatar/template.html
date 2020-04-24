@@ -1,0 +1,19 @@
+<template name="comm_text">
+		 <div class="animated fadeIn row col-xs-offset-1" style="padding-bottom:5px;">
+			<div class="col-sm-1" style="padding-left:0px !important">
+				<center>
+					<a href="/profile/{{ownerId}}"><img class="user-photo" src="{{ownerAvatar}}" style="width:50px"></a>
+				</center>
+			</div>
+			<div class="col-sm-9" style="padding-right:0px !important" >
+				<div class="panel panel-default">
+					<div class="panel-heading">
+			  			<a href="/profile/{{ownerId}}"><strong>{{ownerName}} </strong></a><span class="text-muted">messaged on {{createdAt}}</span>
+					</div>
+					<div class="panel-body">
+			  			{{#markdown}}{{text}}{{/markdown}}
+					</div>
+				</div>
+			</div>
+		</div>
+</template>

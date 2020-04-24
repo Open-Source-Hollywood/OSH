@@ -1,0 +1,9 @@
+<template name="editLabelPopup">
+    <form class="edit-label">
+        {{> formLabel}}
+        <input type="submit" class="primary wide left" value="{{_ 'save'}}">
+        <span class="right">
+            <input type="submit" value="{{_ 'delete'}}" class="negate js-delete-label">
+        </span>
+    </form>
+</template>

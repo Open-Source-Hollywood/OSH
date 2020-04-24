@@ -1,0 +1,27 @@
+<template name="boardWidgets">
+    <a href="#" class="sidebar-show-btn dark-hover js-show-sidebar">
+        <span class="icon-sm fa fa-chevron-left" style="color:#9a9a9c"></span>
+        <span class="text" style="color:#9a9a9c">{{_ 'show-sidebar'}}</span>
+    </a>
+    <div class="board-widgets {{#if session 'sidebarIsOpen'}}show{{else}}hide{{/if}}">
+        <div>
+            <a href="#" class="sidebar-hide-btn dark-hover js-hide-sidebar" title="{{_ 'close-sidebar-title'}}">
+                <span class="icon-sm fa fa-chevron-right"></span>
+            </a>
+            {{#unless isTrue currentWidget "homeWidget"}}
+                <div class="board-widgets-title clearfix">
+                    <a href="#" class="board-sidebar-back-btn js-pop-widget-view">
+                        <span class="left-arrow"></span>{{_ 'back'}}
+                    </a>
+                    <h3 class="text h3b">{{currentWidgetTitle}}</h3>
+                    <hr>
+                </div>
+            {{/unless}}
+            <div class="board-widgets-content-wrapper">
+                <div class="board-widgets-content default fancy-scrollbar short{{#unless session 'menuWidgetIsOpen'}} short{{/unless}}">
+                    {{> UI.dynamic template=currentWidget data=this }}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

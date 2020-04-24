@@ -1,0 +1,44 @@
+<template name="WindowAttachmentsModule">
+    <div class="window-module js-attachments-section clearfix">
+        <div class="window-module-title window-module-title-no-divider">
+            <span class="window-module-title-icon icon-lg fa fa-paperclip"></span>
+            <h3 class="inline-block h3b">{{_ 'attachments'}}</h3>
+        </div>
+        <div class="gutter">
+            <div class="clearfix js-attachment-list">
+                {{# each card.attachments }}
+                    <div class="attachment-thumbnail">
+                        {{# if isUploaded }}
+                            <a href="{{ url download=true }}" class="attachment-thumbnail-preview js-open-viewer attachment-thumbnail-preview-is-cover">
+                                <span class="attachment-thumbnail-preview-ext">{{ extension }}</span>
+                            </a>
+                            <p class="attachment-thumbnail-details js-open-viewer">
+                                <a href="" class="attachment-thumbnail-details-title js-attachment-thumbnail-details">
+                                    {{ name }}
+                                    <span class="block quiet">
+                                    {{_ 'added'}} <span class="date">{{ moment uploadedAt }}</span>
+                                    </span>
+                                </a>
+                                <span class="quiet attachment-thumbnail-details-options">
+                                    <a href="{{ url download=true }}" class="attachment-thumbnail-details-options-item dark-hover js-download">
+                                        <span class="icon-sm fa fa-download"></span>
+                                        <span class="attachment-thumbnail-details-options-item-text">{{_ 'download'}}</span>
+                                    </a>
+                                    <a href="#" class="attachment-thumbnail-details-options-item attachment-thumbnail-details-options-item-delete dark-hover js-confirm-delete">
+                                        <span class="icon-sm fa fa-close"></span>
+                                        <span class="attachment-thumbnail-details-options-item-text">{{_ 'delete'}}</span>
+                                    </a>
+                                </span>
+                            </p>
+                        {{ else }}
+                            <span class="spinner small"></span>
+                        {{/ if }}
+                    </div>
+                {{/each}}
+            </div>
+            <p>
+                <a href="#" class="quiet-button js-attach">{{_ 'add-attachment' }}</a>
+            </p>
+        </div>
+    </div>
+</template>

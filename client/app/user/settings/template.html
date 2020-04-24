@@ -1,0 +1,1461 @@
+<template name="settings">
+	<div id="content" class="clearfix ">
+    <div class="clearfix wrapper">
+
+        <header id="page-title">
+            <h1 class="title">Settings</h1>
+            <h2 class="subtitle">Update personal and account information. Notifications &amp; messages.</h2>
+        </header>
+
+        <div class="normal-content ">
+
+            <div class="krown-tabs responsive-on clearfix">
+
+                <ul class="titles clearfix" id="settings_menu">
+
+                    <li class="switch_personal">
+                        <h5>MERCH FOR SALE</h5></li>
+
+                    {{#if assets}}
+                    <li class="switch_assets">
+                        <h5>ASSETS FOR LEASE</h5></li>
+                    {{/if}}
+                    
+                    <li class="switch_not">
+                        <h5>REAL-TIME NOTIFICATIONS</h5></li>
+                    <li class="">
+                        <h5>MESSAGES LIST</h5></li>
+
+                    <div class="tabs-select"><span class="tabs-select-cover" style="display: inline-block; position: relative; top: 0px; left: 0px; z-index: 0; vertical-align: middle; text-align: left; width: 198px;">
+                      <select style="opagomaincity: 0; visibility: visible; position: absolute; top: 0px; left: 0px; display: inline; z-index: 1;">
+                        <option class="switch_personal opened">MERCH FOR SALE</option>
+                        {{#if assets}}
+                        <option class="switch_assets">ASSETS FOR LEASE</option>
+                        {{/if}}
+                        
+                        <option class="switch_not">REAL-TIME NOTIFICATIONS</option>
+                        <option>MESSAGES LIST</option>
+                      </select>
+                      <span class="tabs-select-inner" style="display: block; white-space: nowrap;">SELECT</span></span>
+                    </div>
+                </ul>
+
+                <div class="contents clearfix" style="width: 100%;">
+
+                    <div id="personalmerch" style="display: none;">
+                        <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;"> YOUR PERSONAL MERCH FOR SALE </h3>
+                        <hr>
+                        <form id="editProjForm" class="krown-pricing-column">
+                            <div class="krown-column-row clearfix">
+                                <div class="krown-column-container clearfix first last span12 clearfix">
+                                    {{#if noUserEmail}}
+                                    <h5><a href="#" onclick="simulateClick(document.getElementsByClassName('switch_not')[0])">YOU MUST CONFIGURE EMAIL NOTIFICATIONS TO ACCESS THIS FEATURE</a></h5>
+                                    {{else}}
+                                    <div class="accordion large clearfix" id="newProjGiftAccord">
+                                        <section>
+                                            <h5 class="expandnewprojecttext">Enter to upload your personal merchandise for sale to the public.</h5>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-5">
+                                                        <label for="title">name</label>
+                                                        <input type="text" name="title" id="gift-title" placeholder="product or service name" />
+                                                    </div>
+                                                    <div class="col-xs-12 col-md-5">
+                                                        <label for="description">description</label>
+                                                        <input type="text" name="description" id="gift-description" placeholder="enter description here" />
+                                                    </div>
+                                                    <div class="col-xs-12 col-md-2">
+                                                        <label for="merchtype">select merch type</label>
+                                                        <select name="merchtype" id="merchtype" class="form-control">
+                                                            <option selected disabled>- Select -</option>
+                                                            <option value="Apparel">Apparel</option>
+                                                            <option value="Perishable">Perishable</option>
+                                                            <option value="Non-Perishable">Non-Perishable</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="merchtypehidden" hidden>
+
+                                                    <div id="apparelsizes" class="col-xs-12 col-sm-5" hidden>
+                                                            <p class="b20"><small><strong>enter size &amp; unit info</strong></small></p>
+                                                            <div class="row merchbottomborder">
+                                                                <div class="col-sm-12 col-md-5">
+                                                                    <div class="checkbox">
+                                                                      <input class="apparelsize" type="text" val="XS" value="XS" id="XSs" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-7">
+                                                                    <input ctx="size" class="merch_quantity input-sm" id="XS" type="number" min="0" placeholder="quantity">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row merchbottomborder">
+                                                                <div class="col-sm-12 col-md-5">
+                                                                    <div class="checkbox">
+                                                                      <input class="apparelsize" type="text" value="S" val="S" id="Ss" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-7">
+                                                                    <input ctx="size" class="merch_quantity input-sm" id="S" type="number" min="0" placeholder="quantity">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row merchbottomborder">
+                                                                <div class="col-sm-12 col-md-5">
+                                                                    <div class="checkbox">
+                                                                      <input class="apparelsize" type="text" value="M" val="M" id="Ms" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-7">
+                                                                    <input ctx="size" class="merch_quantity input-sm" id="M" type="number" min="0" placeholder="quantity">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row merchbottomborder">
+                                                                <div class="col-sm-12 col-md-5">
+                                                                    <div class="checkbox">
+                                                                      <input class="apparelsize" type="text" value="L" val="L" id="Ls" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-7">
+                                                                    <input ctx="size" class="merch_quantity input-sm" id="L" type="number" min="0" placeholder="quantity">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row merchbottomborder">
+                                                                <div class="col-sm-12 col-md-5">
+                                                                    <div class="checkbox">
+                                                                      <input class="apparelsize" type="text" value="XL" val="XL" id="XLs" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-7">
+                                                                    <input ctx="size" class="merch_quantity input-sm" id="XL" type="number" min="0" placeholder="quantity">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row merchbottomborder">
+                                                                <div class="col-sm-12 col-md-5">
+                                                                    <div class="checkbox">
+                                                                      <input class="apparelsize" type="text" value="XXL" val="XXL" id="XXLs" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-7">
+                                                                    <input ctx="size" class="merch_quantity input-sm" id="XXL" type="number" min="0" placeholder="quantity">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    <div class="col-xs-12 col-sm-5" id="perishabledetails" hidden>
+                                                        <textarea name="merch_handling" id="merch_handling" placeholder="" rows="6"></textarea>
+                                                        <input id="oneoff" type="number" min="0" placeholder="number of units">
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-sm-7">
+                                                        <textarea name="merch_disclaimer" id="merch_disclaimer" placeholder="Return Policy and Disclaimers" rows="6"></textarea>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <!-- <div class="col-xs-4">
+                                                        <label for="quantity">quantity</label>
+                                                        <input type="text" name="quantity" id="gift-quantity" placeholder="" />
+                                                    </div> -->
+                                                    <div class="col-xs-7">
+                                                        <label for="msrp">price</label>
+                                                        <input type="text" name="msrp" id="gift-msrp" placeholder="enter merch price here" />
+                                                    </div>
+                                                    <div class="col-xs-5" style="margin-top:  25px;">
+                                                        <label for="file-upload" class="custom-file-upload margin_bottom20" id="file_gift">
+                                                            <i class="fa fa-cloud-upload"></i> Upload Image
+                                                        </label>
+                                                        <input class="noshow-file-upload" id="gift_file" type="file"/>
+                                                        <div id="hidden_gift_name" class="hidden-filename"><i class="fa fa-check"></i>&nbsp;<span id="gift_file_name"></span></div>
+                                                    </div>
+                                                </div>
+                                                <button id="add-gift" val="casttabletoggle" class="btn button disabled special w100 t60" style="font-size:1.3rem">Add Personal Merch</button>
+                                                <br>
+                                                <br />
+                                                <div class="table-responsive" style="display:none" id="merchtabletoggle">
+                                                    <table class="table">
+                                                        <thead>
+                                                          <tr>
+                                                              <th>Name</th>
+                                                              <th>Type</th>
+                                                              <th>Description</th>
+                                                              <th>Info</th>
+                                                              <th>Price</th>
+                                                              <th>DELETE</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody id="gift-table">
+
+                                                          {{#each gifts}}
+
+                                                              <tr class="gift-val">
+                                                                  <td>{{name}}</td>
+                                                                  <td>{{type}}</td>
+                                                                  <td>{{description}}</td>
+                                                                  <td>
+                                                                    <strong><small>DATA:</small></strong>&nbsp;{{secondaryData}}<br><strong><small>DISCLAIMER:</small></strong>&nbsp;{{disclaimer}}
+                                                                  </td>
+                                                                  <td>{{msrp}}</td>
+                                                                  <td><button class="removeGift button special" val="gift">X</button></td>
+                                                                </tr>
+
+                                                          {{/each}}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <!-- <div class="col-sm-12 t20" id="personal_merch_save" style="display:none">
+                                      <button class="btn btn-lg btn-block btn-success submit save_settings" type="submit">SAVE CHANGES</button>
+                                    </div> -->
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    {{#if assets}}
+                    <div id="assets" style="display: none;">
+                          <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;"> LIST YOUR ASSETS FOR LEASE</h3>
+                          <hr />
+
+                          <p><small>Create or View Assets:</small></p>
+                          <ol class="breadcrumb">
+                            <li><a href="#!" class="button bg-aqua fs-title res_show_opt" val="lease1">New Resource</a></li>
+                            <li><a href="#!" class="button bg-lime fs-title res_show_opt" val="lease2">View &amp; Edit</a></li>
+                            <!-- <li><a href="#!" class="res_show_opt" val="lease3">Lease History</a></li> -->
+                          </ol>
+                          <p>&nbsp;</p>
+
+
+                          <div class="res_opt_set krown-column-container" id="lease1">
+                            <form id="reset_res_add">
+                              <div class="row w100">
+                                <div class="krown-alert">
+                                  <label for="category">Select Category</label>
+                                  <select class="form-control" name="category" id="needs-category">
+                                    <option value="">- Category -</option>
+                                    <option value="Equipment">Equipment</option>
+                                    <option value="Service">Service</option>
+                                    <option value="Location">Location</option>
+                                    <option value="Construction">Construction</option>
+                                    <option value="Legal">Legal</option>
+                                    <option value="Sales">Sales / Marketing</option>
+                                    <option value="Miscellaneous">Miscellaneous</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="row w100">
+                                <div class="col-xs-6">
+                                    <label for="needs-description">name of this item</label>
+                                    <input type="text" name="title" id="needs-title" placeholder="Name" />
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <label for="needs-description">postal code of this item</label>
+                                    <input type="text" name="title" id="needs-location" value="" placeholder="Postal Code" />
+                                </div>
+                              
+                                <div class="col-sm-12">
+                                    <label for="needs-description">describe your item</label>
+                                    <input type="text" name="title" id="needs-description" value="" placeholder="Description" />
+                                </div>
+
+                                <div class="col-sm-12 b20">
+                                    <label for="needs-description">define pricing (in US Dollars)</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="number" min="0" name="title" id="needs-offer-fixed" value="" placeholder="enter fixed price" />
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <p class="b5"><small><strong>Fixed Price</strong></small></p>
+                                    <p class="f200"><small>leave empty if not offered</small></p>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="number" min="0" name="title" id="needs-offer-hour" value="" placeholder="enter hourly price" />
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <p class="b5"><small>Price per <strong>hour</strong></small></p>
+                                    <p class="f200"><small>leave empty if not offered</small></p>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="number" min="0" name="title" id="needs-offer-day" value="" placeholder="enter daily price" />
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <p class="b5"><small>Price per <strong>day</strong></small></p>
+                                    <p class="f200"><small>leave empty if not offered</small></p>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="number" min="0" name="title" id="needs-offer-week" value="" placeholder="enter weekly price" />
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <p class="b5"><small>Price per <strong>week</strong></small></p>
+                                    <p class="f200"><small>leave empty if not offered</small></p>
+                                </div>
+
+
+                                <div class="b40 krown-alert">
+                                  <div class="col-xs-12 b20">
+                                      <label for="needs-description">define offer options</label>
+                                  </div>
+                                  <div class="col-xs-12 col-md-6">
+
+                                    <div class="row">
+                                      <div class="col-xs-8 checkbox">
+                                        <input class="need-payopt" type="checkbox" id="checkbox-need-none" value="none" name="needpayopts" checked>
+                                        <label for="checkbox-need-none" val="none">None</label>
+                                        <p class="needs-p"><small>handle negotiations offline</small></p>
+                                      </div>
+
+                                      <div class="col-xs-12 col-sm-8 checkbox">
+                                        <input class="need-payopt" type="checkbox" id="checkbox-need-full" name="needpayopts" value="full" checked>
+                                        <label for="checkbox-need-full" val="full">Pay in Full</label>
+                                        <p class="needs-p"><small>full amount in escrow</small></p>
+                                      </div>
+
+                                      <div class="col-xs-12 col-sm-8 checkbox">
+                                        <input class="need-payopt" type="checkbox" id="checkbox-need-deposit" name="needpayopts" value="deposit">
+                                        <label for="checkbox-need-deposit" val="deposit"><span id="percent_deposit_val">10</span><span id="percent_deposit_sign">%</span> Deposit</label>
+                                        <p class="needs-p"><small>deposit in escrow</small></p>
+                                      </div>
+
+                                      <div class="col-xs-6 checkbox b20 t20 percent_deposit" style="display:none">
+                                        <input class="user-role b20" type="number" min="0" max="100" id="input-percent-need" value="10" name="needpayopts_b">
+                                        <label for="input-percent-need"><i>change deposit percent here</i></label>
+                                      </div>
+
+                                      <div class="col-xs-6 checkbox b20 t20 percent_deposit" style="display:none">
+                                        <input class="user-role b20" type="number" min="0" id="input-fixed-need" placeholder="input overrides percent fee" name="needpayopts_b">
+                                        <label for="input-fixed-need"><i>enter fixed price of deposit</i></label>
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-xs-12 b20">
+                                          <label for="needs-description">general availability (check all that apply)</label>
+                                      </div>
+                                      <div class="col-xs-8 checkbox">
+                                        <input class="need-sched" type="checkbox" id="checkbox-need-sched-any" value="any" name="needschedopts" checked>
+                                        <label for="checkbox-need-sched-any">Available Anytime</label>
+                                      </div>
+                                      <div class="col-xs-8 checkbox">
+                                        <input class="need-sched" type="checkbox" id="checkbox-need-sched-any-weekdays" value="any-weekdays" name="needschedopts">
+                                        <label for="checkbox-need-sched-any-weekdays">Available Anytime (M - F)</label>
+                                      </div>
+                                      <div class="col-xs-8 checkbox">
+                                        <input class="need-sched" type="checkbox" id="checkbox-need-sched-am" value="am" name="needschedopts">
+                                        <label for="checkbox-need-sched-am">Available Mornings (M - F)</label>
+                                      </div>
+                                      <div class="col-xs-8 checkbox">
+                                        <input class="need-sched" type="checkbox" id="checkbox-need-sched-pm" value="pm" name="needschedopts">
+                                        <label for="checkbox-need-sched-pm">Available Evenings (M - F)</label>
+                                      </div>
+                                      <div class="col-xs-8 checkbox">
+                                        <input class="need-sched" type="checkbox" id="checkbox-need-sched-any-weekends" value="any-weekends" name="needschedopts">
+                                        <label for="checkbox-need-sched-any-weekends">Available Anytime (weekends)</label>
+                                      </div>
+                                      <div class="col-xs-8 checkbox">
+                                        <input class="need-sched" type="checkbox" id="checkbox-need-sched-am-wk" value="am-wk" name="needschedopts">
+                                        <label for="checkbox-need-sched-am-wk">Available Mornings (weekends)</label>
+                                      </div>
+                                      <div class="col-xs-8 checkbox">
+                                        <input class="need-sched" type="checkbox" id="checkbox-need-sched-pm-wk" value="pm-wk" name="needschedopts">
+                                        <label for="checkbox-need-sched-pm-wk">Available Evenings (weekends)</label>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-xs-12 col-md-6">
+                                    <label for="needs-terms">Additional Terms</label>
+                                    <textarea id="needs-terms" placeholder="&nbsp;&nbsp;&nbsp;Write any additional details, terms, and conditions here."></textarea>       
+                                  </div>
+                                </div>
+                              </div>
+                              <button id="add-needs" class="btn btn-lg button disabled special w100 h46">Add Resource</button>
+                              <br>
+                              <br />
+                              <!-- <div class="table-responsive b40" id="assets-table-toggle" style="display:none">
+                                  <table class="table table-sm">
+                                      <thead>
+                                          <tr>
+                                              <th>Category</th>
+                                              <th>Name</th>
+                                              <th>Description</th>
+                                              <th class="right">DELETE</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody id="needs-table"></tbody>
+                                  </table>
+                              </div> -->
+                            </form>
+                          </div>
+
+
+                          <div class="res_opt_set span12" style="display:none" id="lease2">
+                            <!-- SHOW RESOURCES IN TABLE, SELECT TO VIEW DETAILS AND EDIT -->
+                            <div class="table-responsive b40" id="assets-table-toggle">
+                                <table class="table table-sm" id="lease-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                      {{#each resources}}
+                                      <tr class="cust_resource" val='{{r_foo}}' idx="{{@index}}">
+                                        <td>{{category}}</td>
+                                        <td>{{name}}</td>
+                                        <td>{{description}}</td>
+                                        <td><a href=""><i class="fa fa-info"></i></a></td>
+                                      </tr>
+                                      {{else}}
+                                      <tr colspan="3">There are no resources, create one.</tr>
+                                      {{/each}}
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                          </div>
+
+
+
+                          <div class="res_opt_set span12" style="display:none" id="lease3">
+                            <h5>doo</h5>
+                          </div>
+                    </div>
+                    {{/if}}
+
+                    
+
+                    <div id="notifications" style="display: none;">
+
+                        <div class="project-header">
+                          <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Configure Email &amp; Phone Notifications</h3>
+                          <hr />
+                        </div>
+                        <div class="project-content">
+                          <p>Configuring notifications is needed to sell merch and some other money related transactions.</p>
+                          <hr class="margin_bottom40">
+                          <div class="row" style="width:100%">
+                            <div class="col-xs-3">
+                              <span style="position:relative;top:-10px">Email</span>
+                            </div>
+                            <div class="col-xs-6">
+                              <input type="text" name="email_notify" id="email_notify" value="{{emailValue}}" placeholder="enter email" />
+                            </div>
+                            <div class="col-xs-3">
+                              <p id="email_verified" style="position:relative;top:-10px;text-align:center;margin-bottom:0px!important">{{ emailConfigStatus }}</p>
+                              {{#if emailConfig}}
+                                <a id="remove_email_notify" class="btn btn-sm btn-danger margin_bottom40" style="display: inherit;">DELETE</a>
+                              {{/if}}
+                            </div>
+                            <div class="col-xs-12">
+                              {{#if emailReverify}}   
+                                <a id="resend_email_notify" class="btn btn-block btn-warning margin_bottom40">Resend Email Verification</a>    
+                              {{/if}}
+                            </div>
+                          </div>
+
+
+                          <div class="row" style="width:100%">
+                            <div class="col-xs-3">
+                              <span style="position:relative;top:-10px">Phone</span>
+                            </div>
+                            <div class="col-xs-6">
+                              <input type="text" name="phone_notify" id="phone_notify" value="{{phoneValue}}" placeholder="enter phone" />
+                            </div>
+                            <div class="col-xs-3">
+                              <p id="phone_verified" style="position:relative;top:-10px;text-align:center;margin-bottom:0px!important">{{ phoneConfigStatus }}
+                              </p>
+                              {{#if phoneConfig}}
+                                <a id="remove_phone_notify" class="btn btn-sm btn-danger margin_bottom40" style="display: inherit;">DELETE</a>
+                              {{/if}}
+                            </div>
+                            <div class="col-xs-12">
+                              {{#if phoneReverify}}
+                                <a id="resend_phone_notify" class="btn btn-block btn-warning margin_bottom40">Resend Phone Verification</a>    
+                              {{/if}}
+                            </div>
+                          </div>
+                          <div class="row" style="width:100%">
+                            <div class="col-xs-12">
+                              <button class="btn btn-lg btn-block btn-info submit" type="submit" id="set-notifications">Update Notification Settings</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div id="messages" style="display: none;">
+                      <div class="project-header">
+                        <h3 id="comments-title00-messages" class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Recent Messages</h3>
+                        <hr />
+                      </div>
+                      <div class="project-content">
+                        <div id="comments-list" class="row">
+
+                          {{#each messages}}
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="comment-avatar"><img alt="avatar" src="{{this.ownerAvatar}}" srcset="{{this.ownerAvatar}}" class="avatar avatar-65 photo avatar-default" height="65" width="65"></div>
+
+                                <div class="comment-content row">
+
+                                    <div class="comment-meta clearfix col-xs-3 contents">
+
+                                        <h6 class="comment-title">{{this.ownerName}}</h6>
+                                        <span class="comment-date">{{this.createdAt}}</span>
+                                        <span class="comment-date" style="margin-top:10px;word-break:break-word;width:100px;">campaign:<br>{{this.title}}</span>
+                                        {{textify}}
+
+                                    </div>
+
+                                    <a href="/message/project/{{ this.slug }}/{{ this.user }}" class="button special" style="margin-top:30px;display:table-caption;">NEGOTIATE</a>
+                                </div>
+                              </div>
+                          {{else}}
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <h5>NO MESSAGES TO SHOW</h5>
+                          {{/each}}
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Inner Wrapper End -->
+    </div>
+    {{init}}
+    <!-- Main Wrapper End -->
+  </div>
+  <script type="text/javascript" src="/js/scripts.min.js"></script>
+</template>
+
+<template name="config">
+  <div id="content" class="clearfix ">
+    <div class="clearfix wrapper">
+
+        <header id="page-title">
+            <h1 class="title">Welcome to Open Source Hollywood!</h1>
+            <h2 class="subtitle">Please make your basic configurations here to continue.</h2></header>
+
+        <div class="normal-content ">
+
+            <div class="krown-tabs responsive-on clearfix">
+                <div class="contents clearfix" style="width: 100%;">
+
+                    <!-- MultiStep Form -->
+                    <div class="row" id="config_form">
+                        <div class="col-md-6 col-md-offset-3">
+                            <form id="msform">
+                                <!-- progressbar -->
+                                <!-- <ul id="progressbar">
+                                    <li class="active">Roles</li>
+                                    <li>Your Info</li>
+                                </ul> -->
+                                <!-- fieldsets -->
+                                <fieldset>
+                                    <h2 class="fs-title">Choose Your Roles</h2>
+                                    <h3 class="fs-subtitle">You can update this in your settings anytime after.</h3>
+                                    <section title=".roundedTwo">
+                                      <!-- .roundedTwo -->
+                                      <div class="roundedTwo">
+                                        <input type="checkbox" value="producer" id="roundedTwo1" class="user_roles" name="check11" checked />
+                                        <label for="roundedTwo1"></label>
+                                      </div>
+                                      <!-- end .roundedTwo -->
+                                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am a Producer</label>
+                                    </section>
+                                    <br>
+                                    <section title=".roundedTwo">
+                                      <!-- .roundedTwo -->
+                                      <div class="roundedTwo">
+                                        <input type="checkbox" value="roles" id="roundedTwo2" class="user_roles" name="check22" checked />
+                                        <label for="roundedTwo2"></label>
+                                      </div>
+                                      <!-- end .roundedTwo -->
+                                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I want to apply for Cast or Crew positions</label>
+                                    </section>
+                                    <br>
+                                      <section title=".roundedTwo">
+                                      <!-- .roundedTwo -->
+                                      <div class="roundedTwo">
+                                        <input type="checkbox" value="view" id="roundedTwo3" class="user_roles" name="check33" checked />
+                                        <label for="roundedTwo3"></label>
+                                      </div>
+                                      <!-- end .roundedTwo -->
+                                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I want to View and Support projects</label>
+                                    </section>
+                                    <br>
+                                    <input type="button" name="next" class="next action-button" value="Next"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Agree to Terms and Conditions</h2>
+
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="" checked><a href="/terms" target="_blank">I agree to the terms and conditions</a></label>
+                                    </div>
+
+
+                                    {{#if needsEmail}}
+                                    <h3 class="fs-subtitle">Enter your email.</h3>
+                                    <input type="text" name="email" placeholder="Email"/>
+                                    {{/if}}
+
+                                    <!-- <input type="text" name="phone" placeholder="Phone"/> -->
+                                    <input id="submit" type="submit" name="submit" class="submit action-button" value="I Agree"/>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.MultiStep Form -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Inner Wrapper End -->
+    </div>
+
+    <!-- Main Wrapper End -->
+  </div>
+  <script type="text/javascript" src="/js/scripts.min.js"></script>
+  <script type="text/javascript">
+
+    //jQuery time
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
+
+    $(".next").click(function(){
+      if(animating) return false;
+      animating = true;
+      
+      current_fs = $(this).parent();
+      next_fs = $(this).parent().next();
+      
+      //activate next step on progressbar using the index of next_fs
+      $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+      
+      //show the next fieldset
+      next_fs.show(); 
+      //hide the current fieldset with style
+      current_fs.animate({opacity: 0}, {
+        step: function(now, mx) {
+          //as the opacity of current_fs reduces to 0 - stored in "now"
+          //1. scale current_fs down to 80%
+          scale = 1 - (1 - now) * 0.2;
+          //2. bring next_fs from the right(50%)
+          left = (now * 50)+"%";
+          //3. increase opacity of next_fs to 1 as it moves in
+          opacity = 1 - now;
+          current_fs.css({
+            'transform': 'scale('+scale+')',
+            'position': 'absolute'
+          });
+          next_fs.css({'left': left, 'opacity': opacity});
+        }, 
+        duration: 800, 
+        complete: function(){
+          current_fs.hide();
+          animating = false;
+        }, 
+        //this comes from the custom easing plugin
+        easing: 'easeInOutBack'
+      });
+    });
+
+  </script>
+</template>
+
+<template name="myProfile">
+  <div id="content" class="clearfix ">
+    <div class="clearfix wrapper">
+    <header id="page-title">
+        <div class="row">
+            <div class="col-xs-9">
+                <h1 class="title">Edit Profile</h1>
+                <h2 class="subtitle">Update by section and personal merch here</h2>
+            </div>
+
+            <div class="col-xs-3">
+                <a onclick="resetNewProjCache()" id="resetNewProjCacheBtn" class="button krown-box right" style="{{#unless cachedNewProject}}display: none;{{/unless}}">RESET</a>
+            </div>
+        </div>
+    </header>
+      <div class="krown-tabs responsive-on clearfix">
+        <ul class="titles clearfix" id="settings_menu">
+            <li class="opened">
+                <h5>BASIC INFO</h5></li>
+            <li class="">
+                <h5>PORTFOLIO</h5></li>
+            <li class="">
+                <h5>BIO</h5></li>
+            <li id="not1" class="">
+                <h5>SOCIAL MEDIA</h5></li>
+            <li class="">
+                <h5>INTERESTS</h5></li>
+
+            <li class="">
+                <h5>LIST RESOURCES</h5></li>
+            <li class="">
+                <h5>MANAGE MERCH</h5></li>
+            <li id="realnot" class="">
+                <h5>REAL-TIME NOTIFICATIONS</h5>
+            </li>
+
+            <div class="tabs-select"><span class="tabs-select-cover" style="display: inline-block; position: relative; top: 0px; left: 0px; z-index: 0; vertical-align: middle; text-align: left; width: 198px;">
+              <select style="opagomaincity: 0; visibility: visible; position: absolute; top: 0px; left: 0px; display: inline; z-index: 1;">
+                <option>BASIC INFO</option>
+                <option>PORTFOLIO</option>
+                <option>BIO</option>
+                <option>SOCIAL MEDIA</option>
+                <option>INTERESTS</option>
+
+                <option>LIST RESOURCES</option>
+                <option>MANAGE MERCH</option>
+                <option>REAL-TIME NOTIFICATIONS</option>
+
+              </select>
+              <span class="tabs-select-inner" style="display: block; white-space: nowrap;">SELECT</span></span>
+            </div>
+        </ul>
+        <div class="contents clearfix" style="width: 100%;">
+
+            <div id="edit" style="display: none;" class="krown-column-row">
+                <div class="col-xs-12 project-header">
+
+                    <h3 class="comments_title" style="text-align:left;margin-top:20px;"> BASIC INFO</h3>
+                    <hr />
+                    <p>Select your roles:</p>
+                    <section title=".roundedTwo"> 
+                      <div class="roundedTwo">
+                        <input type="checkbox" value="producer" id="iamproducer" class="user_roles" name="check11" checked="{{#if producer}}checked{{/if}}" />
+                        <label for="iamproducer"></label>
+                      </div>
+                      <!-- end .roundedTwo -->
+                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am a Producer</label>
+                    </section>
+                    <br>
+                    <section title=".roundedTwo">
+                      <!-- .roundedTwo -->
+                      <div class="roundedTwo">
+                        <input type="checkbox" value="roles" id="iamactor" class="user_roles" name="check11" checked="{{#if actor}}checked{{/if}}" />
+                        <label for="iamactor"></label>
+                      </div>
+                      <!-- end .roundedTwo -->
+                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I want to apply for Cast or Crew positions</label>
+                    </section>
+                    <br>
+                    <section title=".roundedTwo">
+                      <!-- .roundedTwo -->
+                      <div class="roundedTwo">
+                        <input type="checkbox" value="assets" id="iamassets" class="user_roles" name="check11" checked="{{#if assets}}checked{{/if}}" />
+                        <label for="iamassets"></label>
+                      </div>
+                      <!-- end .roundedTwo -->
+                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I have Assets / Resources available for leasing</label>
+                    </section>
+                    <br>
+                    <section title=".roundedTwo">
+                      <!-- .roundedTwo -->
+                      <div class="roundedTwo">
+                        <input type="checkbox" value="view" id="iamviewer" class="user_roles" name="check11" checked="{{#if viewer}}checked{{/if}}" />
+                        <label for="iamviewer"></label>
+                      </div>
+                      <!-- end .roundedTwo -->
+                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I want to view and support Projects</label>
+                    </section>
+                    <br>
+                    <div class="col-xs-12 t20">
+                        <label for="firstname">First Name</label>
+                        <input  class="input-sm" type="text" name="firstname" id="first_name" value="" placeholder="{{ first_name }}" />
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="lastname">Last Name</label>
+                        <input  class="input-sm" type="text" name="lastname" id="last_name" value="" placeholder="{{ last_name }}" />
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="lastname">Website</label>
+                        <input  class="input-sm" type="text" name="website" id="website" value="" placeholder="{{ website }}" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="portfolio" style="display: none;" class="krown-column-row">
+              <div class="col-xs-12 project-header">
+                <h3 class="comments_title" style="text-align:left;margin-top:20px;"> Reels &amp; Demos</h3>
+                <hr />
+                <p class="mini">Enter the URL of your works and they will display as a carousel on your profile. <strong>YouTube or Vimeo</strong> links for videos and valid URLs only please. For help <a id="vidurl" href="#!">select here <i class="fa fa-help"></i></a>. </p>
+                <div class="row" style="width:  100%;">
+                    <div class="col-xs-6">
+                        <input type="text" name="reel-name" id="reel-name" value="" placeholder="name or identifier" />
+                    </div>
+                    <div class="col-xs-6">
+                        <input type="text" name="reel-url" id="reel-url" value="" placeholder="image or video URL" />
+                    </div>
+                </div>
+                <br>
+                <button id="add-reel" class="btn btn-lg button disabled krown-id-grid special w100 h46">Add URL</button>
+                <br>
+                <br>
+                <div class="table-responsive" id="reel-table-toggle" >
+                    <table class="bidgetform tabbed-pane-main-col-wrapper table table-sm">
+                        <tbody id="reel-table">
+                          {{#each reels}}
+                            <tr class="krown-pricing-title reel-val">
+                                <td>
+                                  <div class="krown-column-container">
+                                    <small>{{name}}</small><br>
+                                    {{url}}
+                                  </div>
+                                  <div class="krown-pie">
+                                    <button val="reel" class="right deleteRow button special small">X</button>
+                                  </div>
+                                </td>
+                            </tr>
+                          {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+
+            <div id="bio" style="display: none;" class="krown-column-row">
+              <div class="col-xs-12 project-header">
+              <h3 class="comments_title" style="text-align:left;margin-top:20px;"> Biography</h3>
+              <hr />
+              <section class="krown-box light-2 clearfix">
+                <div class="row form-horizontal has-warning h4">
+                  <div id="summernote"></div>
+                  <div id="inner_summer" style="display:none">{{bio}}</div>
+                </div>
+              </section>
+              </div>
+            </div>
+
+            <div id="social" style="display: none;" class="krown-column-row">
+              <div class="col-xs-12 project-header">
+              <h3 class="comments_title" style="text-align:left;margin-top:20px;"> Social Media Links</h3>
+              <hr />
+              <div class="row" style="width:  100%;">
+                  <div class="col-sm-12">
+                      <input type="text" name="title" id="social-title" value="" placeholder="Name" />
+                  </div>
+                  <div class="col-sm-12" style="padding-bottom: 10px;">
+                      <input type="email" name="subtitle" id="social-url" value="" placeholder="URL or username" />
+                  </div>
+              </div>
+              <br>
+              <button id="add-social" class="btn btn-lg button disabled krown-id-grid special w100 h46">Add URL</button>
+              <br>
+              <br>
+              <div class="table-responsive" id="social-table-toggle" style="display:none">
+                  <table class="table table-sm">
+                      <thead>
+                        <tr>
+                            <th>Link Title</th>
+                            <th>URL or username</th>
+                            <th>DELETE</th>
+                        </tr>
+                      </thead>
+                      <tbody id="social-table"></tbody>
+                  </table>
+              </div>
+              </div>
+            </div>
+
+            <div id="interests" style="display: none;" class="krown-column-row">
+              <div class="col-xs-12 project-header">
+                <h3 class="comments_title" style="text-align:left;margin-top:20px;"> Specialties &amp; Interests</h3>
+                <hr />
+                <section class="krown-box light-2 clearfix t20">
+                    <div class="row form-horizontal has-warning h4">
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Producer" name="Producer">
+                        <label for="checkbox-Producer">Producer</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Director" name="Director">
+                        <label for="checkbox-Director">Director</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Writer" name="Writer">
+                        <label for="checkbox-Writer">Writer</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Actor" name="Actor">
+                        <label for="checkbox-Actor">Actor</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Video" name="Video">
+                        <label for="checkbox-Video">Video</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Audio" name="Audio">
+                        <label for="checkbox-Audio">Audio</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-SFX" name="SFX">
+                        <label for="checkbox-SFX">SFX</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Editor" name="Editor">
+                        <label for="checkbox-Editor">Editor</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Cinematography" name="Cinematography">
+                        <label for="checkbox-Cinematography">Cinematography</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Dancer" name="Dancer">
+                        <label for="checkbox-Dancer">Dancer</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Model" name="Model">
+                        <label for="checkbox-Model">Model</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Musician" name="Musician">
+                        <label for="checkbox-Musician">Musician</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Wardrobe" name="Wardrobe">
+                        <label for="checkbox-Wardrobe">Wardrobe</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Hair" name="Hair">
+                        <label for="checkbox-Hair">Hair</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Makeup" name="Makeup">
+                        <label for="checkbox-Makeup">Makeup</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Set-Design" name="Set-Design">
+                        <label for="checkbox-Set-Design">Set-Design</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Construction" name="Construction">
+                        <label for="checkbox-Construction">Construction</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Lighting" name="Lighting">
+                        <label for="checkbox-Lighting">Lighting</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Support" name="Support">
+                        <label for="checkbox-Support">Support</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Viewer" name="Viewer">
+                        <label for="checkbox-Viewer">Viewer</label>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-6 col-md-4 checkbox">
+                        <input class="user-role" type="checkbox" id="checkbox-Other" name="Other">
+                        <label for="checkbox-Other">Other</label>
+                      </div>
+
+
+                    </div>
+                </section>
+              </div>
+            </div>
+
+            <div id="assets" style="display: none;">
+                  <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;"> LIST YOUR ASSETS FOR LEASE</h3>
+                  <hr />
+
+                  <p><small>Create or View Assets:</small></p>
+                  <ol class="breadcrumb">
+                    <li><a href="#!" class="button bg-aqua fs-title res_show_opt bold" val="lease1">New Resource</a></li>
+                    <li><a href="#!" class="button bg-lime fs-title res_show_opt" val="lease2">View &amp; Edit</a></li>
+                    <!-- <li><a href="#!" class="res_show_opt" val="lease3">Lease History</a></li> -->
+                  </ol>
+                  <p>&nbsp;</p>
+
+
+                  <div class="res_opt_set krown-column-container" id="lease1">
+                    <form id="reset_res_add">
+                      <div class="row w100">
+                        <div class="krown-alert">
+                          <label for="category">Select Category</label>
+                          <select class="form-control" name="category" id="needs-category">
+                            <option value="">- Category -</option>
+                            <option value="Equipment">Equipment</option>
+                            <option value="Service">Service</option>
+                            <option value="Location">Location</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Legal">Legal</option>
+                            <option value="Sales">Sales / Marketing</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row w100">
+                        <div class="col-xs-6">
+                            <label for="needs-description">name of this item</label>
+                            <input type="text" name="title" id="needs-title" placeholder="Name" />
+                        </div>
+
+                        <div class="col-xs-6">
+                            <label for="needs-description">postal code of this item</label>
+                            <input type="text" name="title" id="needs-location" value="" placeholder="Postal Code" />
+                        </div>
+                      
+                        <div class="col-sm-12">
+                            <label for="needs-description">describe your item</label>
+                            <input type="text" name="title" id="needs-description" value="" placeholder="Description" />
+                        </div>
+
+                        <div class="col-sm-12 b20">
+                            <label for="needs-description">define pricing (in US Dollars)</label>
+                        </div>
+
+                        <div class="col-sm-9">
+                            <input type="number" min="0" name="title" id="needs-offer-fixed" value="" placeholder="enter fixed price" />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <p class="b5"><small><strong>Fixed Price</strong></small></p>
+                            <p class="f200"><small>leave empty if not offered</small></p>
+                        </div>
+
+                        <div class="col-sm-9">
+                            <input type="number" min="0" name="title" id="needs-offer-hour" value="" placeholder="enter hourly price" />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <p class="b5"><small>Price per <strong>hour</strong></small></p>
+                            <p class="f200"><small>leave empty if not offered</small></p>
+                        </div>
+
+                        <div class="col-sm-9">
+                            <input type="number" min="0" name="title" id="needs-offer-day" value="" placeholder="enter daily price" />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <p class="b5"><small>Price per <strong>day</strong></small></p>
+                            <p class="f200"><small>leave empty if not offered</small></p>
+                        </div>
+
+                        <div class="col-sm-9">
+                            <input type="number" min="0" name="title" id="needs-offer-week" value="" placeholder="enter weekly price" />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <p class="b5"><small>Price per <strong>week</strong></small></p>
+                            <p class="f200"><small>leave empty if not offered</small></p>
+                        </div>
+
+
+                        <div class="b40 krown-alert">
+                          <div class="col-xs-12 b20">
+                              <label for="needs-description">define offer options</label>
+                          </div>
+                          <div class="col-xs-12 col-md-6">
+
+                            <div class="row">
+                              <div class="col-xs-8 checkbox">
+                                <input class="need-payopt" type="checkbox" id="checkbox-need-none" value="none" name="needpayopts" checked>
+                                <label for="checkbox-need-none" val="none">None</label>
+                                <p class="needs-p"><small>handle negotiations offline</small></p>
+                              </div>
+
+                              <div class="col-xs-12 col-sm-8 checkbox">
+                                <input class="need-payopt" type="checkbox" id="checkbox-need-full" name="needpayopts" value="full" checked>
+                                <label for="checkbox-need-full" val="full">Pay in Full</label>
+                                <p class="needs-p"><small>full amount in escrow</small></p>
+                              </div>
+
+                              <div class="col-xs-12 col-sm-8 checkbox">
+                                <input class="need-payopt" type="checkbox" id="checkbox-need-deposit" name="needpayopts" value="deposit">
+                                <label for="checkbox-need-deposit" val="deposit"><span id="percent_deposit_val">10</span><span id="percent_deposit_sign">%</span> Deposit</label>
+                                <p class="needs-p"><small>deposit in escrow</small></p>
+                              </div>
+
+                              <div class="col-xs-6 checkbox b20 t20 percent_deposit" style="display:none">
+                                <input class="user-role b20" type="number" min="0" max="100" id="input-percent-need" value="10" name="needpayopts_b">
+                                <label for="input-percent-need"><i>change deposit percent here</i></label>
+                              </div>
+
+                              <div class="col-xs-6 checkbox b20 t20 percent_deposit" style="display:none">
+                                <input class="user-role b20" type="number" min="0" id="input-fixed-need" placeholder="input overrides percent fee" name="needpayopts_b">
+                                <label for="input-fixed-need"><i>enter fixed price of deposit</i></label>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-xs-12 b20">
+                                  <label for="needs-description">general availability (check all that apply)</label>
+                              </div>
+                              <div class="col-xs-8 checkbox">
+                                <input class="need-sched" type="checkbox" id="checkbox-need-sched-any" value="any" name="needschedopts" checked>
+                                <label for="checkbox-need-sched-any">Available Anytime</label>
+                              </div>
+                              <div class="col-xs-8 checkbox">
+                                <input class="need-sched" type="checkbox" id="checkbox-need-sched-any-weekdays" value="any-weekdays" name="needschedopts">
+                                <label for="checkbox-need-sched-any-weekdays">Available Anytime (M - F)</label>
+                              </div>
+                              <div class="col-xs-8 checkbox">
+                                <input class="need-sched" type="checkbox" id="checkbox-need-sched-am" value="am" name="needschedopts">
+                                <label for="checkbox-need-sched-am">Available Mornings (M - F)</label>
+                              </div>
+                              <div class="col-xs-8 checkbox">
+                                <input class="need-sched" type="checkbox" id="checkbox-need-sched-pm" value="pm" name="needschedopts">
+                                <label for="checkbox-need-sched-pm">Available Evenings (M - F)</label>
+                              </div>
+                              <div class="col-xs-8 checkbox">
+                                <input class="need-sched" type="checkbox" id="checkbox-need-sched-any-weekends" value="any-weekends" name="needschedopts">
+                                <label for="checkbox-need-sched-any-weekends">Available Anytime (weekends)</label>
+                              </div>
+                              <div class="col-xs-8 checkbox">
+                                <input class="need-sched" type="checkbox" id="checkbox-need-sched-am-wk" value="am-wk" name="needschedopts">
+                                <label for="checkbox-need-sched-am-wk">Available Mornings (weekends)</label>
+                              </div>
+                              <div class="col-xs-8 checkbox">
+                                <input class="need-sched" type="checkbox" id="checkbox-need-sched-pm-wk" value="pm-wk" name="needschedopts">
+                                <label for="checkbox-need-sched-pm-wk">Available Evenings (weekends)</label>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-xs-12 col-md-6">
+                            <label for="needs-terms">Additional Terms</label>
+                            <textarea id="needs-terms" placeholder="&nbsp;&nbsp;&nbsp;Write any additional details, terms, and conditions here."></textarea>       
+                          </div>
+                        </div>
+                      </div>
+                      <button id="add-needs" class="btn btn-lg button disabled special w100 h46">Add Resource</button>
+                      <br>
+                      <br />
+                      <!-- <div class="table-responsive b40" id="assets-table-toggle" style="display:none">
+                          <table class="table table-sm">
+                              <thead>
+                                  <tr>
+                                      <th>Category</th>
+                                      <th>Name</th>
+                                      <th>Description</th>
+                                      <th class="right">DELETE</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="needs-table"></tbody>
+                          </table>
+                      </div> -->
+                    </form>
+                  </div>
+
+
+                  <div class="res_opt_set span12" style="display:none" id="lease2">
+                    <!-- SHOW RESOURCES IN TABLE, SELECT TO VIEW DETAILS AND EDIT -->
+                    <div class="table-responsive b40" id="assets-table-toggle">
+                        <table class="table table-sm" id="lease-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                              {{#each resources}}
+                              <tr class="cust_resource" val='{{r_foo}}' idx="{{@index}}">
+                                <td>{{category}}</td>
+                                <td>{{name}}</td>
+                                <td>{{description}}</td>
+                                <td><a href=""><i class="fa fa-info"></i></a></td>
+                              </tr>
+                              {{else}}
+                              <tr colspan="3">There are no resources, create one.</tr>
+                              {{/each}}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+
+
+
+                  <div class="res_opt_set span12" style="display:none" id="lease3">
+                    <h5>doo</h5>
+                  </div>
+            </div>
+
+            <div id="personalmerch" style="display: none;">
+                <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;"> YOUR PERSONAL MERCH FOR SALE </h3>
+                <hr>
+                <form id="editProjForm" class="krown-pricing-column">
+                    <div class="krown-column-row clearfix">
+                        <div class="krown-column-container clearfix first last span12 clearfix">
+                            {{#if noUserEmail}}
+                            <a onclick="$('#realnot').click()">YOU MUST CONFIGURE EMAIL NOTIFICATIONS TO ACCESS THIS FEATURE</a>
+                            {{else}}
+                            <div class="accordion large clearfix" id="newProjGiftAccord">
+                                <section>
+                                    <h5 class="expandnewprojecttext">Enter to upload your personal merchandise for sale to the public.</h5>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-md-5">
+                                                <label for="title">name</label>
+                                                <input type="text" name="title" id="gift-title" placeholder="product or service name" />
+                                            </div>
+                                            <div class="col-xs-12 col-md-5">
+                                                <label for="description">description</label>
+                                                <input type="text" name="description" id="gift-description" placeholder="enter description here" />
+                                            </div>
+                                            <div class="col-xs-12 col-md-2">
+                                                <label for="merchtype">select merch type</label>
+                                                <select name="merchtype" id="merchtype" class="form-control">
+                                                    <option selected disabled>- Select -</option>
+                                                    <option value="Apparel">Apparel</option>
+                                                    <option value="Perishable">Perishable</option>
+                                                    <option value="Non-Perishable">Non-Perishable</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="merchtypehidden" hidden>
+
+                                            <div id="apparelsizes" class="col-xs-12 col-sm-5" hidden>
+                                                    <p class="b20"><small><strong>enter size &amp; unit info</strong></small></p>
+                                                    <div class="row merchbottomborder">
+                                                        <div class="col-sm-12 col-md-5">
+                                                            <div class="checkbox">
+                                                              <input class="apparelsize" type="text" val="XS" value="XS" id="XSs" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-7">
+                                                            <input ctx="size" class="merch_quantity input-sm" id="XS" type="number" min="0" placeholder="quantity">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row merchbottomborder">
+                                                        <div class="col-sm-12 col-md-5">
+                                                            <div class="checkbox">
+                                                              <input class="apparelsize" type="text" value="S" val="S" id="Ss" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-7">
+                                                            <input ctx="size" class="merch_quantity input-sm" id="S" type="number" min="0" placeholder="quantity">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row merchbottomborder">
+                                                        <div class="col-sm-12 col-md-5">
+                                                            <div class="checkbox">
+                                                              <input class="apparelsize" type="text" value="M" val="M" id="Ms" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-7">
+                                                            <input ctx="size" class="merch_quantity input-sm" id="M" type="number" min="0" placeholder="quantity">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row merchbottomborder">
+                                                        <div class="col-sm-12 col-md-5">
+                                                            <div class="checkbox">
+                                                              <input class="apparelsize" type="text" value="L" val="L" id="Ls" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-7">
+                                                            <input ctx="size" class="merch_quantity input-sm" id="L" type="number" min="0" placeholder="quantity">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row merchbottomborder">
+                                                        <div class="col-sm-12 col-md-5">
+                                                            <div class="checkbox">
+                                                              <input class="apparelsize" type="text" value="XL" val="XL" id="XLs" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-7">
+                                                            <input ctx="size" class="merch_quantity input-sm" id="XL" type="number" min="0" placeholder="quantity">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row merchbottomborder">
+                                                        <div class="col-sm-12 col-md-5">
+                                                            <div class="checkbox">
+                                                              <input class="apparelsize" type="text" value="XXL" val="XXL" id="XXLs" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-7">
+                                                            <input ctx="size" class="merch_quantity input-sm" id="XXL" type="number" min="0" placeholder="quantity">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <div class="col-xs-12 col-sm-5" id="perishabledetails" hidden>
+                                                <textarea name="merch_handling" id="merch_handling" placeholder="" rows="6"></textarea>
+                                                <input id="oneoff" type="number" min="0" placeholder="number of units">
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-7">
+                                                <textarea name="merch_disclaimer" id="merch_disclaimer" placeholder="Return Policy and Disclaimers" rows="6"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <!-- <div class="col-xs-4">
+                                                <label for="quantity">quantity</label>
+                                                <input type="text" name="quantity" id="gift-quantity" placeholder="" />
+                                            </div> -->
+                                            <div class="col-xs-7">
+                                                <label for="msrp">price</label>
+                                                <input type="text" name="msrp" id="gift-msrp" placeholder="enter merch price here" />
+                                            </div>
+                                            <div class="col-xs-5" style="margin-top:  25px;">
+                                                <label for="file-upload" class="custom-file-upload margin_bottom20" id="file_gift">
+                                                    <i class="fa fa-cloud-upload"></i> Upload Image
+                                                </label>
+                                                <input class="noshow-file-upload" id="gift_file" type="file"/>
+                                                <div id="hidden_gift_name" class="hidden-filename"><i class="fa fa-check"></i>&nbsp;<span id="gift_file_name"></span></div>
+                                            </div>
+                                        </div>
+                                        <button id="add-gift" val="casttabletoggle" class="btn button disabled special w100 t60" style="font-size:1.3rem">Add Personal Merch</button>
+                                        <br>
+                                        <br />
+                                        <div class="table-responsive" style="display:none" id="merchtabletoggle">
+                                            <table class="table">
+                                                <thead>
+                                                  <tr>
+                                                      <th>Name</th>
+                                                      <th>Type</th>
+                                                      <th>Description</th>
+                                                      <th>Info</th>
+                                                      <th>Price</th>
+                                                      <th>DELETE</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody id="gift-table">
+
+                                                  {{#each gifts}}
+
+                                                      <tr class="gift-val">
+                                                          <td>{{name}}</td>
+                                                          <td>{{type}}</td>
+                                                          <td>{{description}}</td>
+                                                          <td>
+                                                            <strong><small>DATA:</small></strong>&nbsp;{{secondaryData}}<br><strong><small>DISCLAIMER:</small></strong>&nbsp;{{disclaimer}}
+                                                          </td>
+                                                          <td>{{msrp}}</td>
+                                                          <td><button class="removeGift button special" val="gift">X</button></td>
+                                                        </tr>
+
+                                                  {{/each}}
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <!-- <div class="col-sm-12 t20" id="personal_merch_save" style="display:none">
+                              <button class="btn btn-lg btn-block btn-success submit save_settings" type="submit">SAVE CHANGES</button>
+                            </div> -->
+                            {{/if}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="notifications" style="display: none;">
+
+                <div class="project-header">
+                  <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Configure Email &amp; Phone Notifications</h3>
+                  <hr />
+                </div>
+                <div class="project-content">
+                  <p>Configuring notifications is needed to sell merch and some other money related transactions.</p>
+                  <hr class="margin_bottom40">
+                  <div class="row" style="width:100%">
+                    <div class="col-xs-3">
+                      <span style="position:relative;top:-10px">Email</span>
+                    </div>
+                    <div class="col-xs-6">
+                      <input type="text" name="email_notify" id="email_notify" value="{{emailValue}}" placeholder="enter email" />
+                    </div>
+                    <div class="col-xs-3">
+                      <p id="email_verified" style="position:relative;top:-10px;text-align:center;margin-bottom:0px!important">{{ emailConfigStatus }}</p>
+                      {{#if emailConfig}}
+                        <a id="remove_email_notify" class="btn btn-sm btn-danger margin_bottom40" style="display: inherit;">DELETE</a>
+                      {{/if}}
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                      {{#if emailReverify}}   
+                        <a id="resend_email_notify" class="btn btn-block btn-warning margin_bottom40">Resend Email Verification</a>    
+                      {{/if}}
+                    </div>
+                  </div>
+
+
+                  <div class="row" style="width:100%">
+                    <div class="col-xs-3">
+                      <span style="position:relative;top:-10px">Phone</span>
+                    </div>
+                    <div class="col-xs-6">
+                      <input type="text" name="phone_notify" id="phone_notify" value="{{phoneValue}}" placeholder="enter phone" />
+                    </div>
+                    <div class="col-xs-3">
+                      <p id="phone_verified" style="position:relative;top:-10px;text-align:center;margin-bottom:0px!important">{{ phoneConfigStatus }}
+                      </p>
+                      {{#if phoneConfig}}
+                        <a id="remove_phone_notify" class="btn btn-sm btn-danger margin_bottom40" style="display: inherit;">DELETE</a>
+                      {{/if}}
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                      {{#if phoneReverify}}
+                        <a id="resend_phone_notify" class="btn btn-block btn-warning margin_bottom40">Resend Phone Verification</a>    
+                      {{/if}}
+                    </div>
+                  </div>
+                  <div class="row" style="width:100%">
+                    <div class="col-xs-12">
+                      <button class="btn btn-lg btn-block btn-info submit" type="submit" id="set-notifications">Update Notification Settings</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+          <div class="container-fluid t20" style="padding-left: 0px!important">
+            <button class="btn btn-lg btn-block btn-success submit save_settings" type="submit">SAVE CHANGES</button>
+          </div>
+      
+          {{init}}
+      </div>
+    <script type="text/javascript" src="/js/scripts.min.js"></script>
+    </div>
+  </div>
+</template>

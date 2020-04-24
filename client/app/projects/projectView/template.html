@@ -1,0 +1,785 @@
+<template name="applicantsHelper">
+  <tr>
+    <td style="display:flex"><p class="align-center_min" style="display:block"><img src="{{ user.avatar }}" class="img-responsive img-thumbnail" style="max-height:50px;max-width:50px">&nbsp;&nbsp;{{user.name}}</p><a style="width:100%;max-height:40px;top:15px;position:relative;" href="/profile/{{ user.id }}" class="btn btn-mini btn-default">PROFILE</a></td>
+
+    <td><a style="width:100%;top:15px;position:relative;" href="/message/project/{{ currentSlug }}/{{ user.id }}" val="{{thisString}}" class="btn btn-mini btn-primary {{#unless poke}}initiateNegotiate{{/unless}}">{{typeofRequest}}</a></td>
+  </tr>
+</template>
+
+<template name="projectView">
+  <div id="content" class="clearfix ">
+    <div class="clearfix wrapper">
+        <header id="page-title" style="padding-top: 0px;">
+            <h1 class="title">{{project.title}}</h1>
+            {{#if currentUser}}
+            {{#unless isOwner}}
+            <button type="button" id="thumbsup" class="{{thumbsupactive}}">
+              <i class="fa fa-thumbs-up"></i>
+              Like
+            </button>
+            {{else}}
+            <button type="button" id="thumbsup" style="background:transparent;box-shadow:none;" disabled>
+              <i class="fa fa-thumbs-up"></i>
+              {{numLikes}} Likes
+            </button>
+            {{/unless}}
+            {{/if}}
+            <h2 class="subtitle">{{project.logline}}</h2>
+        </header>
+        {{#if isAllowed}}
+
+            <a id="access_board_convenience" href="/boards/{{project.bid}}/{{project.slug}}" class="btn-lg krown-button w100" style="color: #333!important;background-color: #fff!important;border: 0.5px solid #333!important;max-width: 830px;"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;ACCESS COLLAB BOARD</a>
+
+        {{/if}}
+        <div class="normal-content ">
+            <div id="project-container" class="krown-tabs responsive-on clearfix">
+                <ul class="titles clearfix">
+                  {{#if isOwner}}
+                      <li class="opened">
+                          <h5>Campaign</h5></li>
+                      <li class="goto_proj_updates">
+                          <h5>Updates</h5></li>
+                      <li class="goto_proj_comments">
+                          <h5>Comments</h5></li>
+                      <li class="goto_proj_community">
+                          <h5>Community</h5></li>
+                      <li class="goto_proj_manage">
+                          <h5>Manage</h5></li>
+                      <div class="tabs-select">
+                        <span class="tabs-select-cover" style="display: inline-block; position: relative; top: 0px; left: 0px; z-index: 0; vertical-align: middle; text-align: left; width: 198px;">
+                          <select style="opacity: 0; visibility: visible; position: absolute; top: 0px; left: 0px; display: inline; z-index: 1;">
+                            <option class="">Campaign</option>
+                            <option class="goto_proj_updates">Updates</option>
+                            <option class="goto_proj_comments">Comments</option>
+                            <option class="goto_proj_community">Community</option>
+                            <option class="goto_proj_manage">Manage</option>
+                            <option class="gotoedit">Edit</option>
+                          </select>
+                          <span class="tabs-select-inner" style="display: block; white-space: nowrap;">Campaign</span>
+                        </span> 
+                      </div>
+                  {{else}}
+                      <li class="opened">
+                          <h5>Campaign</h5></li>
+                      <li class="">
+                          <h5>Updates</h5></li>
+                      <li class="">
+                          <h5>Comments</h5></li>
+                      <li class="">
+                          <h5>Community</h5></li>
+                      <div class="tabs-select">
+                        <span class="tabs-select-cover" style="display: inline-block; position: relative; top: 0px; left: 0px; z-index: 0; vertical-align: middle; text-align: left; width: 198px;">
+                          <select style="opacity: 0; visibility: visible; position: absolute; top: 0px; left: 0px; display: inline; z-index: 1;">
+                            <option>Campaign</option>
+                            <option>Updates</option>
+                            <option>Comments</option>
+                            <option>Community</option>
+                          </select>
+                          <span class="tabs-select-inner" style="display: block; white-space: nowrap;">Campaign</span>
+                        </span> 
+                      </div>
+                  {{/if}}     
+                </ul>
+
+                {{#if isOwner}}
+                <p>&nbsp;</p>
+                <a href="javascript:void(0)" class="btn col-sm-12 gotoedit tabs-select"></a>
+                <p>&nbsp;</p>
+                {{/if}}
+
+                <div class="contents clearfix">
+                    <div id="description" style="display: block;">
+                        <div class="col-xs-12 col-sm-8">
+                          <div class="project-content">
+
+                            {{#if project.videoExplainer}}
+                            <div class="video-container">
+                                <div class="fluid-width-video-wrapper" style="padding-top: 56.2278%;">
+                                    <iframe src="{{project.videoExplainer}}" frameborder="0" title="{{project.title}}" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+                                </div>
+                            </div>
+                            {{else}}
+                            <div class="mini">
+                                <ul class="slides">
+
+                                    <li class="slide"><img src="{{project.banner}}" width="845" height="573" alt=""></li>
+                                </ul>
+                            </div>
+                            {{/if}}
+                          </div>
+                          <div class="project-content">
+                              <aside class="share-buttons clearfix">
+                                  <p>Share this project</p>
+                                  <div class="holder clearfix">
+                                      {{> shareit shareData}}
+                                  </div>
+                              </aside>
+                              <div id="formatted_desc">{{formattedDescription}}</div>
+                              <p>&nbsp;</p>
+                              <div class="krown-accordion accordion large clearfix">
+                                {{#if project.creatorsInfo}}
+                                    <section>
+                                        <h5>ABOUT THE CREATORS</h5>
+                                        <div>
+                                            <p>{{project.creatorsInfo}}</p>
+                                        </div>
+                                    </section>
+                                {{/if}}
+
+
+                                {{#if project.historyInfo}}
+                                    <section>
+                                        <h5>PROJECT HISTORY</h5>
+                                        <div>
+                                            <p>{{project.historyInfo}}</p>
+                                        </div>
+                                    </section>
+                                {{/if}}
+
+
+                                {{#if project.plansInfo}}
+                                    <section>
+                                        <h5>PROJECT PLANS</h5>
+                                        <div>
+                                            <p>{{project.plansInfo}}</p>
+                                        </div>
+                                    </section>
+                                {{/if}}
+
+
+                                {{#if project.needsInfo}}
+                                    <section>
+                                        <h5>EXPLANATION OF NEEDS</h5>
+                                        <div>
+                                            <p>{{project.needsInfo}}</p>
+                                        </div>
+                                    </section>
+                                {{/if}}
+
+                                {{#if project.significanceInfo}}
+                                    <section>
+                                        <h5>SIGNIFICANCE OF WORK</h5>
+                                        <div>
+                                            <p>{{project.significanceInfo}}</p>
+                                        </div>
+                                    </section>
+                                {{/if}}
+                              </div>
+                          </div>
+                        </div>
+
+                        <aside id="project-sidebar" class="col-xs-12 col-sm-4">
+                            {{#unless isOwner}}
+                            <div class="id-widget-wrap nofloat">
+                                <div class="id-widget id-full">
+                                    <div class="id-product-infobox">
+                                        <div class="panel clearfix" style="padding-top:10px!important;padding-bottom:10px!important;">
+                                            <div class="product-wrapper clearfix">
+                                                <div class="clearing"></div>
+                                                <div class="rholder">
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> ${{projectBudgetIfExists}}&nbsp;<span style=" font-size: 13px;line-height: 13px;color: #949494;margin: 0;">{{showNeeded}}</span></div>
+                                                        <div class="id-product-funding">{{projectFundedIfExists}}</div>
+                                                    </div>
+                                                    <p>&nbsp;</p>
+                                                    <div class="rpdata btn-group btn-group-justified" role="group" aria-label="Justified button group"> 
+
+                                                      {{#if iApplied}}
+                                                        <!-- show what role i applied -->
+                                                        <p><small>you've applied for:</small></p>
+                                                        {{#if thingsIApplied.crew}}
+                                                        <p><strong>{{thingsIApplied}} crew positions</strong></p>
+                                                        {{/if}}
+
+                                                        {{#if thingsIApplied.cast}}
+                                                        <p><strong>{{thingsIApplied}} cast positions</strong></p>
+                                                        {{/if}}
+                                                      {{/if}}
+
+                                                      {{#unless isArchived}}
+                                                        {{#if anyRolesNoAuth}}
+                                                            <a href="#" id="join-roles" class="btn btn-default" role="button">APPLY</a> 
+                                                            <a href="#" id="offer-donation" class="btn btn-default" role="button">DONATE&nbsp;</a> 
+                                                        {{else}}
+                                                          <a href="#" id="offer-donation" class="btn btn-default" role="button">DONATE&nbsp;</a> 
+                                                        {{/if}}
+                                                      {{/unless}}
+                                                      <p>&nbsp;</p>
+                                                      {{#if anyShares}}
+                                                        <div class="rpdata">
+                                                          <div class="id-progress-raised"> {{anyShares}}<span style=" font-size: 13px;line-height: 13px;color: #949494;margin: 0;">&nbsp;shares</span></div>
+                                                          <div class="margin_bottom20">${{mpps}}<span style=" font-size: 13px;line-height: 13px;color: #949494;margin: 0;"> per share</span></div>
+                                                        </div>
+                                                        {{#if currentUser}}
+                                                          <a href="#" id="buy-shares" class="btn btn-default" role="button">PURCHASE&nbsp;</a> 
+                                                          {{else}}
+                                                          <small>Login to purchase interests of this campaign's future earnings, which you can own forever!</small>
+                                                        {{/if}}
+                                                      {{/if}}
+                                                    </div>
+                                                    
+                                                    <p>&nbsp;</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="left small" style="top: -13px;display: inline-flex;position: relative;">
+                                              <p>{{castLN}} cast roles</p>
+                                              <p>{{crewLN}} crew roles</p>
+                                              <p>{{needLN}} assets requested</p>
+                                            </div>
+                                            
+                                            <div class="id-product-proposed-end" style="margin-left:10px;margin-top:5px!important;">Created
+                                                <div class="id-widget-date">
+                                                    <div class="id-widget-month">{{project.createdAt}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-container" style="display: block;">
+                                            </div>
+                                        </div>
+
+                                        <!-- end product-wrapper -->
+
+                                        <div id="project-p-author" class="panel clearfix">
+
+                                            <div >
+                                                <img alt="" src="{{project.ownerAvatar}}" class="btn-block" height="65" width="65" style="padding-bottom: 13px;"> 
+                                            </div>
+
+                                            <div >
+
+                                                <span style="margin-bottom: 0.1px;">Project by</span>
+
+                                                <h6>{{project.ownerName}}</h6>
+
+                                                <ul class="author-meta">
+
+                                                    <li><a href="/profile/{{project.ownerId}}">View Profile</a></li>
+
+                                                </ul>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="id-widget-wrap nofloat">
+                                          <div class="id-widget id-full">
+                                              <div class="id-product-infobox">
+                                                <span class="btn btn-default" id="reportthis"><i class="glyphicon glyphicon-flag"></i> REPORT THIS CONTENT</span>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <!-- end product levels -->
+                                    </div>
+                                    <!-- end product-infobox -->                       
+                                </div>
+                                <!-- end id-widget -->
+                            </div>
+                            <!--if show author -->
+                            {{else}}
+
+<!-- 
+goto_proj_updates
+goto_proj_comments
+goto_proj_community
+goto_proj_manage 
+-->
+                            <div class="id-widget-wrap nofloat">
+                                <div class="id-widget id-full">
+                                    <div class="id-product-infobox">
+                                        <div class="panel clearfix" style="padding-top:10px!important">
+                                            <div class="product-wrapper clearfix">
+                                                <div class="clearing"></div>
+                                                <div class="rholder">
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised">${{fundedNumber}}</div>
+                                                        <div class="id-product-funding"> <a href="#" class=" goto_manage">backers</a></div>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{numUpdates}}</div>
+                                                        <div class="id-product-funding"> <a href="#" class=" goto_updates">updates</a></div>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{numComments}}</div>
+                                                        <div class="id-product-funding"> <a href="#" class=" goto_comments">comments</a></div>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{numBackers}}</div>
+                                                        <div class="id-product-funding"> <a href="#" class=" goto_community">backers</a></div>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{numCast}}</div>
+                                                        <div class="id-product-funding"> <a href="#" class=" goto_edit_roles">cast positions</a></div>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{numCrew}}</div>
+                                                        <div class="id-product-funding"> <a href="#" class=" goto_edit_roles">crew positions</a></div>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{numNeeds}}</div>
+                                                        <div class="id-product-funding"> <a href="#" class=" goto_edit_roles">assets needed</a></div>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{numGifts}}</div>
+                                                        <div class="id-product-funding"> <a href="#" class=" goto_edit_merch">merchandise</a></div>
+                                                  </div>
+                                                  <!-- <p>&nbsp;</p>
+                                                  <p>&nbsp;</p>
+                                                  <h4>TOKENS</h4>
+                                                  <p><small>eligible for assignment</small></p>
+                                                  {{#if hasEquity}}
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{this.project.totalShares}}</div>
+                                                        <div class="id-product-funding">total public</div>
+                                                        <p><small>eligible for public auction</small></p>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{soldShares}}</div>
+                                                        <div class="id-product-funding">public sold</div>
+                                                  </div>
+                                                  {{/if}}
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{privateShares}}</div>
+                                                        <div class="id-product-funding">total private</div>
+                                                  </div>
+                                                  <p>&nbsp;</p>
+                                                  <div class="rpdata">
+                                                        <div class="id-progress-raised"> {{availableShares}}</div>
+                                                        <div class="id-product-funding">private reserve</div>
+                                                  </div> -->
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end product-infobox -->                       
+                                </div>
+                                <!-- end id-widget -->
+                            </div>
+                            {{/unless}}
+                            <div class="poweredbyID"><span><a href="https://opensourcehollywood.org" title="Crowdfunding and Crowdsourcing by Open Source Hollywood">Powered By Open Source Hollywood</a></span></div>
+                        </aside>
+
+
+                        {{#unless isOwner}}
+                          {{#if hasGifts}}
+                          <div class="container-fluid col-xs-12 t20 projviewsexn">
+                              <h2>Merchandise</h2>
+                              <div class="row flex-row flex-nowrap">
+                                  {{#each gifts}}
+
+                                    <div class="col-xs-3">
+                                      <div class="well mh300">
+                                        <div class="thumbnail">
+                                          <img src="{{this.url}}">
+                                          <div class="caption">
+                                            <p><small>({{type}})</small></p>
+                                            <h6>{{name}}</h6>
+                                            <p>{{description}}</p>
+                                            <p><a class="c-related__a button special w100 t20 purchase_gift">${{msrp}}</a></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {{else}}
+
+                                    <p class="t20 lead">None</p>
+
+                                  {{/each}}
+                                
+                              </div>
+                          </div>
+                          {{/if}}
+                          {{#if currentUser}}
+                            {{#if hasNeeds}}
+                            <div class="container-fluid col-xs-12 t20 projviewsexn">
+                                <h2>Requested Needs</h2>
+                                <div class="row flex-row flex-nowrap">
+                                    {{#each project.needs}}
+
+                                      <div class="col-xs-3">
+                                        <div class="caption well">
+                                          <h6>{{category}}</h6>
+                                          <p>{{description}}</p>
+                                          <p><a class="c-related__a button special w100 t20 offer_resource">offer this resource</a></p>
+                                        </div>
+                                      </div>
+
+                                      {{else}}
+
+                                      <p class="t20 lead">None</p>
+
+                                    {{/each}}
+                                  
+                                </div>
+                            </div>
+                            {{/if}}
+                          {{/if}}
+                        {{else}}
+
+                        <!-- list backers -->
+                        <!-- list applicants -->
+                        <hr>
+                        {{#if backers}}
+                        <h5>BACKERS</h5>
+                        {{/if}}
+                        {{#each backers}}
+                           <div class="col-lg-3 col-xs-12 col-sm-6 col-md-4">
+
+                              <div class="card hovercard">
+                                  <div class="cardheader">
+
+                                  </div>
+                                  <div class="avatar">
+                                      <img alt="" src="{{avatar}}">
+                                  </div>
+                                  <div class="info">
+                                      <div class="title">
+                                          <a href="/profile/{{ _id }}">{{firstName}} {{lastName}}</a>
+                                      </div>
+                                      {{#each iam}}
+                                        <div class="desc">{{this}}</div>
+                                      {{/each}}
+                                      
+                                  </div>
+                              </div>
+                           </div>
+                        {{/each}}
+                        <hr>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        {{> applicants}}
+
+
+                        {{/unless}}
+                    </div>
+
+                    <div id="updates" class="project-content container" style="display: none;">
+                      <div class="project-header">
+                        <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">
+                          {{#if isOwner}}
+                          Announce Update
+                          {{else}}
+                          Campaign Updates
+                          {{/if}}
+                        </h3>
+                        <hr />
+                      </div>
+                      {{#unless project.updates}}
+                        <h3 id="comments-title" class="b40"><span style="color: #000000;"><strong>There are no updates to show.<br></strong></span></h3>
+                      {{/unless}}
+                      {{#if isOwnerNoMatterWhat}}
+                        <div id="respond" class="comment-respond margin_bottom40">
+                          <form class="comment-form">
+                              <div class="krown-column-container span12 last" style="margin-left:0">
+                                  <label for="update">Your update</label>
+                                  <textarea id="update-box" name="update" rows="8" style="height: 133px;"></textarea>
+                              </div>
+                              <p class="form-submit">
+                                  <input name="submit" type="submit" id="submit-update" class="submit" value="Post Update">
+                              </p>
+                              <p style="display: none;">
+                                  <input type="hidden" >
+                              </p>
+                              <p style="display: none;"></p>
+                          </form>
+                        </div>
+                      {{/if}}
+                      {{#each project.updates}}
+                          <div class="row">
+                            <div class="col-sm-12">
+                                <h3 id="comments-title"><span style="color: #000000;"><strong>Update {{inc @index}}<br></strong></span></h3>
+                            </div>
+                            <p>&nbsp;</p>
+                            <div class="col-sm-9">
+                                <h4>{{this.text}}</h4>
+                            </div>
+                            <div class="col-sm-3">
+                                <p>{{formattedUpdateDate}}</p>
+                            </div>
+                          </div>
+                      {{/each}}
+                    </div>
+
+                    <div id="comments" class="project-content" style="display: none;">
+                      <div class="project-header">
+                        <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Comments ({{numComments}})</h3>
+                        <hr />
+                      </div>
+                        <aside id="comments">
+                            <ol id="comments-list">
+                              {{#each projectComments}}
+                                {{>comment}}
+                              {{/each}}
+                            </ol>
+
+                            {{> commentBox}}
+
+                            
+                            <!-- #respond -->
+
+                        </aside>
+                    </div>
+
+                    <div id="backers" class="project-content" style="display: none;">
+                      <div class="project-header">
+                        <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Community ({{numBackers}})</h3>
+                        <hr />
+                      </div>
+                        <div class="row">
+                            {{#each backers}}
+                               <div class="col-lg-3 col-xs-12 col-sm-6 col-md-4">
+
+                                  <div class="card hovercard">
+                                      <div class="cardheader">
+
+                                      </div>
+                                      <div class="avatar">
+                                          <img alt="" src="{{avatar}}">
+                                      </div>
+                                      <div class="info">
+                                          <div class="title">
+                                              <a href="/profile/{{ _id }}">{{firstName}} {{lastName}}</a>
+                                          </div>
+                                          {{#each iam}}
+                                            <div class="desc">{{this}}</div>
+                                          {{/each}}
+                                          
+                                      </div>
+                                  </div>
+                               </div>
+                            {{else}}
+                            {{#unless isOwner}}<h3 id="comments-title"><a style="color: #000000;" onclick="$('#offer-donation').click();">Donate and be the First Backer!</a></h3>{{/unless}}
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    <div id="manage" class="project-content" style="display: none;">
+                        <div class="project-header">
+                          <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Your Campaign Contracts &amp; Settings</h3>
+                          <hr />
+                        </div>
+                        {{#if isOwner}}
+                          {{> applicants}}
+                        {{/if}}
+                    </div>
+
+                    <div id="edit" class="project-content" style="display: none;">
+                        <div class="project-header">
+                          <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Edit Campaign Details</h3>
+                          <hr />
+                        </div>
+                      {{> editProject}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inner Wrapper End -->
+    </div>
+
+    <!-- Main Wrapper End -->
+  </div>
+  <script type="text/javascript" src="/js/scripts.min.js"></script>
+  <script type="text/javascript">
+    var myInterval;
+    function glowToClick() {
+      try { clearInterval(myInterval); } catch(e) {};
+      myInterval = setInterval(function(){
+          $('.glow-offer').toggleClass('glow');
+      }, 1000);
+    }
+    glowToClick();
+  </script>
+</template>
+
+<template name="applicants">
+  <p><small>Select from applicants, assets, merch, &amp; settings</small></p>
+  <ol class="breadcrumb">
+    <li><a href="#!" class="res_show_resources bold" val="res_Active" id="gores_Active">Overview</a></li>
+    <li><a href="#!" class="res_show_resources" val="res_Applicants" id="gores_Applicants">Role Applicants</a></li>
+    <li><a href="#!" class="res_show_resources" val="res_Resources" id="gores_Resources">Leasing Assets</a></li>
+    <li><a href="#!" class="res_show_resources" val="res_Gifts" id="gores_Gifts">Merch</a></li>
+    <li><a href="#!" class="res_show_resources" val="res_Settings" id="gores_Settings">Settings</a></li>
+  </ol>
+  <p>&nbsp;</p>
+
+  <div class="resources_view_toggle" id="res_Active">
+
+    <!-- active negotiations -->
+    <div class="table-responsive" style="overflow: hidden;">
+      <table class="table">
+
+        <tbody>
+
+          
+          <tr colspan="3"><a class="btn btn-lg" onclick="$('#gores_Applicants').click();">APPLICANTS</a></tr>
+          {{#each applicants}}
+            <tr>
+              <td><p class="align-center">{{user.name}}</p></td>
+              <td><small><strong>{{ thisString }}</strong></small></td>
+              <td class="center"><a style="width:100%" href="/message/project/{{ currentSlug }}/{{ user.id }}" class="btn btn-mini btn-primary">VIEW DETAILS</a></td>
+            </tr>
+            {{else}}
+            <tr>
+              <td colspan="3">No role applicants</td>
+            </tr>
+          {{/each}}
+
+          
+          <tr colspan="3"><a class="btn btn-lg" onclick="$('#gores_Resources').click();">ASSETS</a></tr>
+          {{#each activeOffers}}
+          {{aaa}}
+            <tr>
+              <td><p class="align-center">{{assetsConsolidated.cat}}</p></td>
+              <td><small><strong>{{assetsConsolidated.names}}</strong></small></td>
+              <td class="center"><a href="/message/project/{{ currentSlug }}/{{ _id }}" class="btn btn-mini btn-primary w100">VIEW DETAILS</a></td>
+            </tr>
+            {{else}}
+            <tr>
+              <td colspan="3">No assets offers</td>
+            </tr>
+          {{/each}}
+
+          
+          <tr colspan="3"><a class="btn btn-lg" onclick="$('#gores_Gifts').click();">SOLD GIFTS</a></tr>
+          {{#each purchases}}
+            <tr>
+              <td class="">{{order.gift.name}}</td>
+              <td class="">( x{{order.totalUnits}})</td>
+              <td class="center">${{order.amount}}</td>
+            </tr>
+            {{else}}
+            <tr>
+              <td colspan="3">No sold gifts</td>
+            </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+      <p>&nbsp;</p>
+      <button onclick="$('.gotoedit').click();" class="w100 button bg-teal fs-title">EDIT CAMPAIGN</button>
+    </div>
+  </div>
+
+  <div class="resources_view_toggle nodisplay" id="res_Applicants">
+      <h3 class="extremeboldtext">Applicants</h3>
+      <div class="table-responsive" style="overflow: hidden;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><p class="align-center">Applicant</p></th>
+              <th><p class="align-center">ACCESS CONTRACT</p></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#if hasApplicant}}
+              {{#each applicants}}
+                {{ >applicantsHelper}}
+              {{/each}}
+            {{else}}
+              <tr>
+                <td colspan="6">None Applied</td>
+              </tr>
+            {{/if}}
+          </tbody>
+        </table>
+      </div>
+      <p>&nbsp;</p>
+      <a class="button goto_edit_roles" href="#" >EDIT ROLES</a>
+  </div>
+
+  <div class="resources_view_toggle nodisplay" id="res_Resources">
+      <h3 class="extremeboldtext">Offered Resources</h3>
+      <div class="table-responsive" style="overflow: hidden;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><p class="align-center">Asset</p></th>
+              <th><p class="align-center">Names</p></th>
+              <th><p class="align-center">DETAILS</p></th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            {{#each activeOffers}}
+              <tr>
+                <td><p class="align-center">{{assetsConsolidated.cat}}</p></td>
+                <td><small><strong>{{assetsConsolidated.names}}</strong></small></td>
+                <td class="center">
+                  <a style="width:100%" href="/message/project/{{ currentSlug }}/{{ _id }}" class="btn btn-mini btn-primary">VIEW DETAILS</a>
+                </td>
+              </tr>
+            {{else}}
+            <tr>
+              <td colspan="3">None Offered or Requested</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <a class="button goto_edit_roles">EDIT CAMPAIGN REQUESTS</a>
+  </div>
+
+  <div class="resources_view_toggle nodisplay" id="res_Gifts">
+      <h3 class="extremeboldtext">Sold Gifts</h3>
+
+          <div class="media">
+            <div class="media-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sales Date</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Details</th>
+                    <th>Fulfilled</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each purchases}}
+                    <tr class="fulfill_gift">
+                      <td class="">{{orderDate}}</td>
+                      <td class="">{{order.gift.name}}</td>
+                      <td class="">{{order.totalUnits}}</td>
+                      <td class="center">${{order.amount}}</td>
+                      <td class="center" style="color: cornflowerblue;"><a href="#!"><i class="fa fa-info-circle fa-2x"></i></a></td>
+                      <td class="center">{{#if fulfilled}}<i class="fa fa-check fa-2x"></i>{{else}}<i class="fa fa-ban fa-2x"></i>{{/if}}</td>
+                    </tr>
+
+                  {{/each}}
+
+                  <tr>
+                    <td colspan="4" style="text-align: right;"><b>Total Sales: ${{giftTotals}}</b></td>
+                    <td colspan="2">&nbsp;</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+          <a class="button goto_edit_merch">EDIT CAMPAIGN MERCH</a>
+
+  </div>
+
+  <div class="resources_view_toggle nodisplay" id="res_Settings">
+    <p>&nbsp;</p>
+    {{#if isWidth}}
+        <a id="boardButton" class="btn btn-default btn-lg col-sm-12 major_proj_action_buttons margin_bottom40 alice_back" href="/boards/{{_bid}}/{{_slug}}">Access Board</a>
+        {{/if}}
+        <p>&nbsp;</p>
+        <a id="closeProj" class="btn btn-danger btn-lg col-sm-12 major_proj_action_buttons margin_bottom40" href="#!">DELETE CAMPAIGN</a>
+  </div>
+
+</template>

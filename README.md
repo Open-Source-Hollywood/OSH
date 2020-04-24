@@ -19,6 +19,17 @@ If you have Meteor already installed you can use the `update` option of Meteor:
 
 `meteor update --release 1.3.2.4`
 
+Install dependencies
+
+```
+$ npm install
+$ meteor npm install
+$ # this one acts ephemeral
+$ meteor npm install --save json-pretty-html
+$ # run app
+$ meteor run --settings settings.json
+```
+
 #### Configuration
 
 You will need credentials for:

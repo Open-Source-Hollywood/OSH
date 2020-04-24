@@ -1,0 +1,22 @@
+<template name="changePermissionsPopup">
+    <ul class="pop-over-list">
+        <li>
+            <a class="{{#if isLastAdmin}}disabled{{else}}js-set-admin{{/if}}">
+                {{_ 'admin'}}
+                {{#if isAdmin}}<span class="icon-sm fa fa-check"></span>{{/if}}
+                <span class="sub-name">{{_ 'admin-desc'}}</span>
+            </a>
+        </li>
+        <li>
+            <a class="{{#if isLastAdmin}}disabled{{else}}js-set-normal{{/if}}">
+                {{_ 'normal'}}
+                {{#unless isAdmin}}<span class="icon-sm fa fa-check"></span>{{/unless}}
+                <span class="sub-name">{{_ 'normal-desc'}}</span>
+            </a>
+        </li>
+    </ul>
+    {{#if isLastAdmin}}
+        <hr>
+        <p class="quiet bottom">{{_ 'last-admin-desc'}}</p>
+    {{/if}}
+</template>

@@ -1,0 +1,15 @@
+<template name="membersWidget">
+    <hr>
+    <div class="board-widget board-widget-members clearfix">
+        <div class="board-widget-title">
+            <h3 class="h3b" style="color:#333">{{_ 'members'}}</h3>
+        </div>
+        <div class="board-widget-content">
+            <div class="board-widget-members js-list-board-members clearfix js-list-draggable-board-members">
+                {{# each board.members }}
+                    {{> memberAvatar user=this.userId draggable=false size="small"}}
+                {{/ each }}
+            </div>
+        </div>
+    </div>
+</template>

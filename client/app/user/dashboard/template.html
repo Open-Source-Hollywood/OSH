@@ -1,0 +1,591 @@
+<template name="dashboard">
+  {{was}}
+    <div id="content" class="clearfix ">
+
+    <div class="clearfix wrapper">
+
+        <header id="page-title">
+            <h1 class="title">Dashboard</h1>
+            <h2 class="subtitle">Active projects, negotiations, investments, and merchant center.</h2></header>
+
+        <div class="normal-content ">
+
+            <div id="project-container" class="krown-tabs responsive-on clearfix">
+
+                <ul class="titles clearfix" id="settings_menu">
+                    
+                    <li class="switch_campaigns">
+                        <h5>YOUR ACTIVE PROJECTS</h5></li>
+                    <li class="switch_merchant">
+                        <h5>MERCHANT CENTER</h5></li>
+                    <li class="">
+                        <h5>ACTIVE CONTRACTS</h5></li>
+                    <li>
+                        <h5>MESSAGES</h5></li>
+                    <!-- <li class="switch_subscriptions">
+                        <h5>SUBSCRIPTIONS</h5></li> -->
+                    <!-- <li class="">
+                        <h5>CAMPAIGN HOLDINGS</h5></li> -->
+                    <div class="tabs-select"><span class="tabs-select-cover" style="display: inline-block; position: relative; top: 0px; left: 0px; z-index: 0; vertical-align: middle; text-align: left; width: 198px;">
+                      <select style="opagomaincity: 0; visibility: visible; position: absolute; top: 0px; left: 0px; display: inline; z-index: 1;">
+                        <option class="switch_campaigns">PROJECTS</option>
+                        <option class="switch_merchant">MERCHANT CENTER</option>
+                        <option>ACTIVE CONTRACTS</option>
+                        <!-- <option class="switch_subscriptions">SUBSCRIPTIONS</option> -->
+                        <!-- <option class="">CAMPAIGN HOLDINGS</option> -->
+                      </select>
+                      <span class="tabs-select-inner" style="display: block; white-space: nowrap;">SELECT</span></span>
+                    </div>
+                </ul>
+
+                <div class="contents clearfix" style="width: 100%;">
+
+                    <div id="active" style="display: none;">
+                      <div class="project-header">
+                        <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Your Campaigns</h3>
+                        <hr />
+                      </div>
+                        <!-- <p><small>Select section:</small></p>
+                        <ol class="breadcrumb">
+                          <li><a href="#!" class="button bg-aqua fs-title dash_show_camps" val="view_active_camps">Active</a></li>
+                          <li><a href="#!" class="button bg-red fs-title dash_show_camps" val="view_archived_camps">Archived</a></li>
+                        </ol> -->
+                      <div class="project-content camp_view_opts" id="view_active_camps">
+                        <div class="krown-id-grid default clearfix" style="position: relative;">
+                          {{#each activeCamps}}
+                            {{#if isCreated}}
+                            {{> settingsTab}}
+                            {{else}}
+                            {{> approvedTab}}
+                            {{/if}}
+                          {{else}}
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <h5 id="no_camps_1">NO CAMPAIGNS TO SHOW</h5>
+                          {{/each}}
+                        </div>
+                      </div>
+
+                      <div class="project-content camp_view_opts" id="view_archived_camps" style="display:none">
+                        <p>This is a list of previous campaigns you were involved.</p>
+                        <div class="krown-id-grid default clearfix" style="position: relative;">
+                          {{#each archivedCamps}}
+                            {{> projectTab}}
+                          {{else}}
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <h5 id="no_camps_1">NO CAMPAIGNS TO SHOW</h5>
+                          {{/each}}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="merchant" style="display: none;">
+                      <div class="project-header">
+                        <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Merchant Sales &amp; Transactions</h3>
+                        <hr />
+                      </div>   
+                      <div class="project-content">
+
+                        <p><small>Select section:</small></p>
+                        <ol class="breadcrumb">
+                          <li><a href="#!" id="view_sold_merch" class="button bg-aqua fs-title dash_show_merchant" val="view_tx_merch">Merchandise</a></li>
+                          <li><a href="#!" id="view_lease_data" class="button bg-lime fs-title dash_show_merchant" val="view_tx_lease">Leases</a></li>
+                          <li><a href="#!" id="view_bank_config_data" class="button bg-magenta fs-title dash_show_merchant" val="view_acct_link">Account Link</a></li>
+                          <!-- <li><a href="#!" class="dash_show_merchant" val="view_tx_hx">Transactions</a></li> -->
+                        </ol>
+                        <p>&nbsp;</p>
+                        
+
+                        <div class="krown-column-row clearfix b40 merch_view_opts" id="view_tx_merch" >
+                          {{> soldMerch}}
+                        </div>
+
+                        <div class="krown-column-row clearfix b40 merch_view_opts" id="view_tx_lease" style="display:none">
+                          
+                          <div class="col-xs-12 col-sm-6">
+                            <h4>LEASED ASSETS</h4>
+                            <div class="table-wrapper">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Sales Date</th>
+                                    <th>Name</th>
+                                    <th># Units</th>
+                                    <th>Total</th>
+                                    <th>Details</th>
+                                    <th>Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {{#each assetLeases}}
+                                    <tr class="fulfill_gift">
+                                      <td class="">{{orderDate}}</td>
+                                      <td class="">{{order.gift.name}}</td>
+                                      <td class="">{{order.totalUnits}}</td>
+                                      <td class="center">${{order.amount}}</td>
+                                      <td class="center" style="color: cornflowerblue;"><a href="#!"><i class="fa fa-info-circle fa-2x"></i></a></td>
+                                      <td class="center">{{#if fulfilled}}<i class="fa fa-check fa-2x"></i>{{else}}<i class="fa fa-ban fa-2x"></i>{{/if}}</td>
+                                    </tr>
+                                  {{/each}}
+
+                                  <tr>
+                                    <td colspan="4" style="text-align: right;"><b>Total Amount: ${{leaseTotals}}</b></td>
+                                    <td colspan="2">&nbsp;</td>
+                                  </tr>
+                                  
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          
+                          <div class="col-xs-12 col-sm-6">
+                            <h4>CURRENT OFFERS</h4>
+                            <div class="table-wrapper">
+                              <table class="table">
+                                <tbody>
+
+                                  {{#each currentContracts}}
+
+                                    <tr class="">
+                                      <td class="">{{offerName}}</td>
+                                      <td class="">{{offer.message}}</td>
+                                      <td class="">{{order.totalUnits}}</td>
+                                      <td class="center"><a href="{{contractLink}}" class="btn">ACCESS CONTRACT</a></td>
+                                    </tr>
+
+                                  {{else}}
+                                    <tr><td>There are no current negotiations.</td></tr>
+                                  {{/each}}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          
+                          <div class="col-xs-12">
+                            <a class="button gotosoldmerch" href="#">VIEW SOLD MERCH</a>
+                            <a class="button gotobankconfig" href="#">BANK ACCOUNT CONFIGURATION</a>
+                          </div>
+                        </div>
+
+                        <div class="krown-column-row clearfix b40 merch_view_opts" id="view_acct_link" style="display:none">
+                          {{#if account}}
+                            {{#unless bank}}
+                            <p>Link your bank account to receive transfers from all your incoming funds.</p>
+                              <section>
+                                  <hr />
+                                  <div class="row">
+                                    <div style="width:100%">
+                                      <div class="panel panel-default">
+                                        <div class="panel-body">
+                                          <form>
+                                            <div class="errors"></div>
+                                            <div class="row">
+                                              <div class="col-md-8">
+                                                <div class="form-group">
+                                                  <label>Country</label>
+                                                  <select class="form-control input-lg" id="country" data-stripe="country">
+                                                    <option value="US">United States</option>
+                                                    <option value="AU">Australia</option>
+                                                    <option value="AT">Austria</option>
+                                                    <option value="BE">Belgium</option>
+                                                    <option value="BR">Brazil</option>
+                                                    <option value="CA">Canada</option>
+                                                    <option value="DK">Denmark</option>
+                                                    <option value="FI">Finland</option>
+                                                    <option value="FR">France</option>
+                                                    <option value="DE">Germany</option>
+                                                    <option value="HK">Hong Kong</option>
+                                                    <option value="IE">Ireland</option>
+                                                    <option value="IT">Italy</option>
+                                                    <option value="JP">Japan</option>
+                                                    <option value="LU">Luxembourg</option>
+                                                    <option value="MX">Mexico</option>
+                                                    <option value="NZ">New Zealand</option>
+                                                    <option value="NL">Netherlands</option>
+                                                    <option value="NO">Norway</option>
+                                                    <option value="PT">Portugal</option>
+                                                    <option value="SG">Singapore</option>
+                                                    <option value="ES">Spain</option>
+                                                    <option value="SE">Sweden</option>
+                                                    <option value="CH">Switzerland</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <div class="form-group">
+                                                  <label>Currency</label>
+                                                  <select class="form-control input-lg" id="currency" data-stripe="currency">
+                                                    <option value="usd">USD</option>
+                                                    <option value="aud">AUD</option>
+                                                    <option value="brl">BRL</option>
+                                                    <option value="cad">CAD</option>
+                                                    <option value="eur">EUR</option>
+                                                    <option value="gbp">GBP</option>
+                                                    <option value="hkd">HKD</option>
+                                                    <option value="jpy">JPY</option>
+                                                    <option value="mxn">MXN</option>
+                                                    <option value="nzd">NZD</option>
+                                                    <option value="sgd">SGD</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                <div class="form-group">
+                                                  <label>Full Legal Name</label>
+                                                  <input class="form-control input-lg account_holder_name" id="account_holder_name" type="text" data-stripe="account_holder_name" placeholder="Jane Doe" autocomplete="off">
+                                                </div>
+                                              </div>
+                                              <div class="col-md-6">
+                                                <div class="form-group">
+                                                  <label>Account Type</label>
+                                                  <select class="form-control input-lg account_holder_type" id="account_holder_type" data-stripe="account_holder_type">
+                                                    <option value="individual">Individual</option>
+                                                    <option value="company">Company</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-md-6" id="routing_number_div">
+                                                <div class="form-group">
+                                                  <label id="routing_number_label">Routing Number</label>
+                                                  <input class="form-control input-lg bank_account" id="routing_number" type="tel" size="12" data-stripe="routing_number" placeholder="111000025" autocomplete="off" >
+                                                </div>
+                                              </div>
+                                              <div class="col-md-6">
+                                                <div class="form-group">
+                                                  <label id="account_number_label">Account Number</label>
+                                                  <input class="form-control input-lg bank_account" id="account_number" type="tel" size="20" data-stripe="account_number" placeholder="000123456789" autocomplete="off">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-xs-12">
+                                                <button class="btn btn-lg btn-block btn-success submit" type="submit" id="add_account">LINK ACCOUNT</button>
+                                              </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </section>
+                              {{else}}
+                              <section>
+                                <div class="bs-callout bs-callout-info" id="callout-glyphicons-location"> 
+                                  <h4 style="margin-top: 20px;">Account Transfer Details</h4> 
+                                  <div class="table-responsive">
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th>Bank Name</th>
+                                          <th>Account No.</th>
+                                          <th>Routing No.</th>
+                                          <th>Status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <th>{{bank_name}}</th>
+                                          <th>{{account_no}}</th>
+                                          <th>{{routing_no}}</th>
+                                          <th><i class="glyphicon glyphicon-ok-sign"></i> Good</th>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <p style="margin-top: 20px;">Click <strong>RESET</strong> to reset your transfer settings.</p> 
+                                  <a class="button reset_transfer">RESET TRANSFER SETTINGS</a>
+                                </div>
+                              </section>
+                            {{/unless}}
+                            {{else}}
+                            {{createAccount}}
+                            {{/if}}
+                            <a class="button gotosoldmerch" href="#">VIEW SOLD MERCH</a>
+                            <a class="button gotoleaseview" href="#">VIEW LEASED RESOURCES</a>
+                        </div>
+                        
+                        <div class="krown-column-row clearfix b40 merch_view_opts" id="view_tx_hx" style="display:none">
+                          {{>receipts}}
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div id="pending" style="display: none;">
+                      <div class="project-header">
+                        <h3 id="comments-title00-messages" class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Current &amp; Active Contracts</h3>
+                        <hr />
+                      </div>
+                      <p><small>Select between Active and Completed Contracts:</small></p>
+                      <ol class="breadcrumb">
+                        <li><a href="#!" class="button bg-aqua fs-title dash_show_ks" val="view_pending_ks">Active</a></li>
+                        <li><a href="#!" class="button bg-lime fs-title dash_show_ks" val="view_completed_ks">Completed</a></li>
+                        <li><a href="#!" class="button bg-magenta fs-title dash_show_ks" val="view_messages_ks">Messages</a></li>
+                      </ol>
+                      <p>&nbsp;</p>
+                      <div class="dash_ks project-content" id="view_pending_ks">
+                          {{#each currentContracts}}
+                          <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <p class="panel-title">{{offerName}}</p>
+                              </div>
+                              <div class="panel-body">
+                                    <a href="{{offerLink}}" class="thumbnail">
+                                      <img src="{{offerImg}}" alt="applicant avatar">
+                                    </a>
+                                    <p class="lead f08">
+                                      {{offer.message}}
+                                    </p>
+                              </div>
+                              <div class="panel-footer">
+                                <a href="{{contractLink}}" class="btn">ACCESS CONTRACT</a>
+                              </div>
+                            </div>
+                          </div>
+
+                          {{else}}
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <h5>NO ACTIVE CONTRACTS TO SHOW</h5>
+                          {{/each}}
+                      </div>
+
+                      <div class="dash_ks project-content" id="view_completed_ks" style="display:none">
+
+                          {{#each completedContracts}}
+                            {{#if contractLink}}
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <p class="panel-title">{{offerName}}</p>
+                                  </div>
+                                  <div class="panel-body">
+                                        <a href="{{offerLink}}" class="thumbnail">
+                                          <img src="{{offerImg}}" alt="applicant avatar">
+                                        </a>
+                                        <p class="lead f08">
+                                          {{offer.message}}
+                                        </p>
+                                  </div>
+                                  <div class="panel-footer">
+                                    <a href="{{contractLink}}" class="btn">VIEW CONTRACT</a>
+                                  </div>
+                                </div>
+                              </div>
+                            {{/if}}
+                          {{else}}
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <h5>NO COMPLETED CONTRACTS TO SHOW</h5>
+                          {{/each}}
+                      </div>
+
+                      <div class="dash_ks project-content" id="view_messages_ks" style="display:none">
+                        <ol id="comments-list">
+
+                          {{#each messages}}
+                          <li class="comment clearfix container" style="padding-bottom:60px">
+
+                                <div class="comment-avatar"><img alt="avatar" src="{{this.ownerAvatar}}" srcset="{{this.ownerAvatar}}" class="avatar avatar-65 photo avatar-default" height="65" width="65"></div>
+
+                                <div class="comment-content row">
+
+                                    <div class="comment-meta clearfix col-xs-12 col-sm-9 contents">
+
+                                        <h6 class="comment-title">{{this.ownerName}}</h6>
+                                        <span class="comment-date">{{this.createdAt}}</span>
+                                        <span class="comment-date" style="margin-top:10px;word-break:break-word;width:100px;">campaign:<br>{{this.title}}</span>
+                                        {{textify}}
+
+                                    </div>
+
+                                    <a href="{{contractLink}}" class="button special" style="margin-top:30px;display:table-caption;">ACCESS</a>
+
+                                </div>
+                          </li>
+                          {{else}}
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <h5>NO MESSAGES TO SHOW</h5>
+                          {{/each}}
+                        </ol>
+                      </div>
+                    </div>  
+
+                    <div id="view_messages_ks" style="display:none">
+                      <ol id="comments-list">
+
+                        {{#each messages}}
+                        <li class="comment clearfix container" style="padding-bottom:60px">
+
+                              <div class="comment-avatar"><img alt="avatar" src="{{this.ownerAvatar}}" srcset="{{this.ownerAvatar}}" class="avatar avatar-65 photo avatar-default" height="65" width="65"></div>
+
+                              <div class="comment-content row">
+
+                                  <div class="comment-meta clearfix col-xs-12 col-sm-9 contents">
+
+                                      <h6 class="comment-title">{{this.ownerName}}</h6>
+                                      <span class="comment-date">{{this.createdAt}}</span>
+                                      <span class="comment-date" style="margin-top:10px;word-break:break-word;width:100px;">campaign:<br>{{this.title}}</span>
+                                      {{textify}}
+
+                                  </div>
+
+                                  <a href="{{contractLink}}" class="button special" style="margin-top:30px;display:table-caption;">ACCESS</a>
+
+                              </div>
+                        </li>
+                        {{else}}
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <h5>NO MESSAGES TO SHOW</h5>
+                        {{/each}}
+                      </ol>
+                    </div>                  
+
+                    <!-- <div id="subscriptions" style="display: none;">
+                      <div class="project-header">
+                        <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Your Subscriptions</h3>
+                        <hr />
+                      </div>
+                      <p><small>Select section:</small></p>
+                      <ol class="breadcrumb">
+                        <li><a href="#!" class="button bg-aqua fs-title dash_show_subs" val="show_subscriptions">Subscription</a></li>
+                        <li><a href="#!" class="button bg-lime fs-title dash_show_subs" val="show_subscribers">Subscribers</a></li>
+                      </ol>
+                      <div class="project-content dash_show_subs_el" id="show_subscriptions">
+                        <div class="krown-id-grid default clearfix" style="position: relative;">
+                          
+                            <div class="col-md-12 col-xs-12"> 
+                              <table class="table table-bordered table-striped table-foldersystem">
+                                <tbody>
+                                  {{#each subscriptions}}
+                                  <tr class="{{#if archived}}disabledTR{{/if}}">
+                                    <td class="center"><a href="{{subLink}}"><img class="w72" src="{{subURL}}"></a></td>
+                                    <td class="v-am">{{formatDate}}</td>
+                                    <td class="v-am">{{subFreq}}</td>
+                                    <td class="v-am">{{subDescription}}</td>
+                                    <td class="v-am center">
+                                      
+                                      <div class="popover-markup">
+                                        <a class="btn " data-toggle="popover" data-placement="bottom" href="#" onclick="return false;" style="text-align:center;"><i class="fa {{#if archived}}fa-window-close{{else}}fa-ellipsis-v showSubDetail{{/if}}"></i></a>
+                                        <div class="head hide"><span style="color: {{#if archived}}#ea5959;{{else}}#59ea6d{{/if}}">{{#if archived}}Canceled{{else}}Active{{/if}}</span></div>
+                                        {{#unless archived}}
+                                          <div class="content hide">
+                                            To cancel this subscription, please select the button below:
+                                            <hr/>
+                                            <button type="submit" class="btn btn-danger btn-block delSub" val="{{stringify}}">Cancel Subscription</button>
+                                          </div>
+                                        {{/unless}}
+                                      </div>
+
+                                    </td>
+                                  </tr>
+                                  {{else}}
+                                  <tr><td colspan="4">There are no subscriptions for display.</td></tr>
+                                  {{/each}}
+                                </tbody>
+                              </table>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="project-content nodisplay dash_show_subs_el" id="show_subscribers">
+                            <div class="col-md-12 col-xs-12"> 
+                              <table class="table table-bordered table-striped table-foldersystem">
+                                <tbody>
+                                  {{#each subscribers}}
+                                  <tr class="{{#if archived}}disabledTR{{/if}}">
+                                    <td class="center"><a href="/profilesubscriber.id"><img class="w72" src="{{subscriber.avatar}}"></a></td>
+                                    <td class="v-am">{{formatDate}}</td>
+                                    <td class="v-am">${{amount}}, {{subFreq}}</td>
+                                  </tr>
+                                  {{else}}
+                                  <tr><td colspan="4">There are no subscribers for display.</td></tr>
+                                  {{/each}}
+                                </tbody>
+                              </table>
+                            </div>
+                      </div>
+                    </div> -->
+
+                    <!-- <div id="equity" style="display: none;">
+                      <div class="project-header">
+                        <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Your Portfolio of Campaign Holdings</h3>
+                        <hr />
+                      </div>   
+                      <div class="project-content">
+                        <p>This list contains finished campaigns where you own a portion of ownership or distribution interests.</p>
+                        <div class="krown-id-grid default clearfix" style="position: relative;">
+                          {{#each equityCamps}}
+                            {{> equityTab}}
+                          {{else}}
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <h5 id="no_camps_0">NO CAMPAIGNS TO SHOW</h5>
+                          {{/each}}
+                        </div>
+                      </div>
+                    </div> -->
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Inner Wrapper End -->
+    </div>
+
+    <!-- Main Wrapper End -->
+    
+  </div>
+  <script type="text/javascript" src="/js/scripts.min.js"></script>
+</template>
+
+<template name="soldMerch">
+
+    <h4>SOLD MERCHANDISE</h4>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Sales Date</th>
+            <th>Channel</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Details</th>
+            <th>Fulfilled</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each giftPurchases}}
+            <tr class="fulfill_gift">
+              <td class="">{{orderDate}}</td>
+              <td class="">{{orderChannel}}</td>
+              <td class="">{{order.gift.name}}</td>
+              <td class="">{{order.totalUnits}}</td>
+              <td class="center">${{order.amount}}</td>
+              <td class="center" style="color: cornflowerblue;"><a href="#!"><i class="fa fa-info-circle fa-2x"></i></a></td>
+              <td class="center">{{#if fulfilled}}<i class="fa fa-check fa-2x"></i>{{else}}<i class="fa fa-ban fa-2x"></i>{{/if}}</td>
+            </tr>
+
+          {{/each}}
+
+          <tr>
+            <td colspan="6"><b>${{giftTotals}}</b></td>
+            <td class="center">&nbsp;</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <p>&nbsp;</p>
+    <p><small>To edit campaign merch, please visit EDIT section of your campaign.</small></p>
+    <a class="bg-yellow button" href="/settings" onlick="setTimeout(function(){simulateClick(document.getElementsByClassName('switch_personal')[0]) }, 987)">EDIT PERSONAL MERCH</a>
+    <a class="bg-lime button gotoleaseview" href="#">VIEW LEASED ASSETS</a>
+    <a class="bg-purple button gotobankconfig" href="#">BANK ACCOUNT CONFIGURATION</a>
+</template>

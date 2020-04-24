@@ -1,0 +1,272 @@
+<template name="projectTabs">
+    <div id="content" class="clearfix layout-right-sidebar">
+
+        <div class="clearfix wrapper container">
+
+
+            <header id="page-title">
+                <h1 class="title">Discover</h1>
+                <h2 class="subtitle" style="float:left">These are projects you can join or support</h2>
+                <a style="float:right;text-decoration: none;" href="/create" class="create animated pulse subtitle">CREATE YOUR OWN CAMPAIGN!</a>
+            </header>
+
+            {{#if counts30}}
+            <nav aria-label="...">
+              <ul class="pager">
+                <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span>&nbsp;Prev</a></li>
+                <li class="next"><a href="#">Next&nbsp;<span aria-hidden="true">&rarr;</span></a></li>
+              </ul>
+            </nav>
+            {{/if}}
+
+            <div class="sidebar-content no-boxed">
+
+                <div class="krown-id-grid default clearfix" id="allproj_intro">
+                    {{#each projects}}
+
+                        {{> projectTab}}
+                        
+                    {{else}}
+                        <h3 class="subtitle" style="margin-top: 40px;top: 20px;position: relative;">No Campaigns for display 😞</h3>
+                    {{/each}}
+                    
+                    
+                </div>
+
+            </div>
+
+            <aside id="sidebar">
+                {{#if counts30}}
+                    <div class="sidebar-item">
+                        <div class="w-title">Search Campaigns</div>
+                        <div class="w-content">
+                            <form action="projects.html">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="categories"><strong>Categories</strong></label>
+                                        <select id="categories_select" class="form-control arrow-down" sb="60839008">
+                                            <option>Select Category</option>
+                                            <option>Feature</option>
+                                            <option>Indie</option>
+                                            <option>Series</option>
+                                            <option>Sketch</option>
+                                            <option>Animations</option>
+                                            <option>Theater</option>
+                                            <option>Ensemble</option>
+                                            <option>Performance</option>
+                                            <option>Music Video</option>
+                                            <option>Podcast</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city"><strong>Search by Postal Code</strong></label>
+                                        <input type="text" class="form-control" id="postal_code" placeholder="Zip Code">
+                                    </div>
+                                    <div class="krown-accordion accordion large clearfix">
+                                        <label><strong>Search by Genre</strong></label>
+                                        <section id="mixedgenres" class="subtype_genres" style="display:none">
+                                            <h5>Mixed Media Genres</h5>
+                                            <div>
+                                              <div class="rpdata">
+                                                  <select id="mmg" class="form-control">
+                                                    <option>Select Genre</option><option val="Drama">Drama</option><option val="Comedy">Comedy</option><option val="Documentary">Documentary</option><option val="Educational">Educational</option><option val="Game Show">Game Show</option><option val="Musical">Musical</option><option val="Reality">Reality</option><option val="News">News</option><option val="Sports">Sports</option><option val="Variety">Variety</option><option val="Kids">Kids</option><option val="Cooking">Cooking</option><option val="Other">Other</option>
+                                                  </select>
+                                              </div>
+                                            </div>
+                                        </section>
+
+                                        <section id="audiogenres" class="subtype_genres" style="display:none">
+                                            <h5>Audio Genres</h5>
+                                            <div>
+                                              <div id="aug" class="rpdata">
+                                                  <select class="form-control">
+                                                    <option>Select Genre</option><option val="Folk">Folk</option><option val="Classical">Classical</option><option val="Contemporary">Contemporary</option><option val="Soul">Soul</option><option val="Jazz">Jazz</option><option val="Rock">Rock</option><option val="Metal">Metal</option><option val="Pop">Pop</option><option val="Hip Hop">Hip Hop</option><option val="EDM">EDM</option><option val="Other">Other</option>
+                                                  </select>
+                                              </div>
+                                            </div>
+                                        </section>
+
+                                        <section id="performancegenres" class="subtype_genres" style="display:none">
+                                            <h5>Performance Genres</h5>
+                                            <div>
+                                              <div id="tpg" class="rpdata">
+                                                  <select class="form-control">
+                                                    <option>Select Genre</option><option val="Ballet">Ballet</option><option val="Opera">Opera</option><option val="Dance">Dance</option><option val="Theater">Theater</option><option val="Other">Other</option>
+                                                  </select>
+                                              </div>
+                                            </div>
+                                        </section>
+
+                                        <section id="podcastgenres" class="subtype_genres" style="display:none">
+                                            <h5>Podcast Genres</h5>
+                                            <div>
+                                              <div class="rpdata">
+                                                  <select id="prg" class="form-control">
+                                                    <option>Select Genre</option><option val="Comedy">Comedy</option><option val="Culture">Culture</option><option val="Politics">Politics</option><option val="Arts">Arts</option><option val="Technology">Technology</option><option val="Other">Other</option>
+                                                  </select>
+                                              </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <p>&nbsp;</p>
+                                    <p>&nbsp;</p>
+                                    <div class="form-group">
+                                        {{#unless needsReset}}
+                                        <input type="submit" class="account-form form-control" id="query_filter" value="APPLY FILTER">
+                                        {{else}}
+                                        <input type="submit" class="account-form form-control" id="clear_query_filter" value="CLEAR FILTER">
+                                        {{/unless}}
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                {{else}}
+                    <section id="text-9" class="widget widget_text clearfix">
+                        <h4 class="widget-title">About</h4>
+                        <div class="textwidget">Campaigns are made by independent producers worldwide. Select one to view the details, including how to donate and apply for roles. Once there are enough campaigns, this message will be replaced by search filters.</div>
+                    </section>
+                {{/if}}
+
+            </aside>
+            <!-- Inner Wrapper End -->
+        </div>
+        <script type="text/javascript" src="/js/scripts.min.js"></script>
+        <!-- Main Wrapper End -->
+  </div>
+</template>
+
+
+<template name="projectTab">
+    <article class="krown-id-item">
+
+        <a class="fancybox-thumb" href="/projects/{{slug}}/{{ownerId}}">
+            <figure class="img"><img src="{{banner}}" width="255" height="173" alt="{{formattedTitle}}" style="height:190px!important"></figure><span></span>
+        </a>
+        <!-- <div class="fundstatus board-canvas empty">{{ projectDonated }}</div> -->
+        <div class="container">
+
+            <a href="/projects/{{slug}}/{{ownerId}}"><h3 class="title">{{formattedTitle}}</h3></a>
+
+            <div class="cats">{{category}}, {{genre}}</div>
+
+            <section class="content">{{defaultQ}}</section>
+
+            <aside class="meta">
+
+                <ul>
+                    <li><a href="#!" class="view_roles_conv"><span>{{applicantLN}}</span> roles</a></li>
+                    <li><a href="/profile/{{ownerId}}"><span>{{ownerName}}</span></a></li>
+                </ul>
+
+            </aside>
+
+        </div>
+
+    </article>
+</template>
+
+<template name="equityTab">
+    <article class="krown-id-item">
+
+        <figure class="img"><img src="{{banner}}" width="255" height="173" alt="{{formattedTitle}}" style="height:190px!important"></figure><span></span>
+        <div class="fundstatus board-canvas empty">{{ projectDonated }}</div>
+        <div class="container">
+
+            <h3 class="title">{{formattedTitle}}</h3>
+
+            <div class="cats">{{category}}, {{genre}}</div>
+
+            <section class="content">{{defaultQ}}</section>
+
+            <aside class="meta">
+
+                <div class="rpdata btn-group btn-group-vertical" role="group" aria-label="Justified button group"> 
+                  <a href="/projects/{{slug}}/{{ownerId}}" id="offer-donation" class="btn btn-default" role="button">EQUITY STATS</a> 
+                </div>
+
+            </aside>
+
+        </div>
+
+    </article>
+</template>
+
+<template name="settingsTab">
+    <article class="krown-id-item">
+        <a class="fancybox-thumb" href="/projects/{{slug}}/{{ownerId}}">
+            <figure class="img"><img src="{{banner}}" width="255" height="173" alt="{{formattedTitle}}" style="height:190px!important"></figure><span></span>
+        </a>
+        <div class="fundstatus board-canvas empty">{{ projectDonated }}</div>
+        <div class="">
+            <div class="col s6"> 
+              <a href="/edit/projects/{{slug}}/{{ownerId}}" class="button bg-teal w100 editcampconv" role="button"><i class="fa fa-edit"></i>&nbsp;&nbsp;ADMINISTRATION</a> 
+            </div>
+            <div class="col s6"> 
+              <a href="/boards/{{bid}}/{{slug}}" class="button bg-green w100" role="button"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;COLLAB BOARD</a> 
+            </div>
+        </div>
+        <div class="container">
+
+            <h3 class="title">{{formattedTitle}}</h3>
+
+            <div class="cats">{{category}}, {{genre}}</div>
+
+            <section class="content">{{defaultQ}}</section>
+
+        </div>
+
+    </article>
+</template>
+
+<template name="approvedTab">
+    <article class="krown-id-item">
+
+         <a class="fancybox-thumb" href="/projects/{{slug}}/{{ownerId}}">
+            <figure class="img"><img src="{{banner}}" width="255" height="173" alt="{{formattedTitle}}" style="height:190px!important"></figure><span></span>
+        </a>
+        <!-- <div class="fundstatus board-canvas empty">{{ projectDonated }}</div> -->
+        <div class="">
+            <div class=""> 
+                <a href="/boards/{{bid}}/{{slug}}" id="join-roles" class="button bg-red fs-title w100" role="button"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;PROJECT BOARD</a> 
+            </div>
+        </div>
+        <div class="container">
+
+            <h3 class="title">{{formattedTitle}}</h3>
+
+            <div class="cats">{{category}}, {{genre}}</div>
+
+            <section class="content">{{defaultQ}}</section>
+
+        </div>
+
+    </article>
+</template>
+
+<template name="projTab">
+    <article class="krown-id-item">
+
+        <a class="fancybox-thumb" href="/projects/{{slug}}/{{ownerId}}">
+            <figure class="img"><img src="{{banner}}" width="255" height="173" alt="{{formattedTitle}}" style="height:190px!important"></figure><span></span></a>
+        <div class="container">
+
+            <h3 class="title">{{formattedTitle}}</h3>
+
+            <div class="cats">{{category}}, {{genre}}</div>
+
+            <section class="content">{{defaultQ}}</section>
+
+            <aside class="meta">
+                <ul>
+                    <li><span>{{applicantLN}}</span> roles</li>
+                    <li><a href="/profile/{{ownerId}}"><span>{{ownerName}}</span></a></li>
+                </ul>
+
+            </aside>
+
+        </div>
+
+    </article>
+</template>

@@ -1,0 +1,18 @@
+<template name="usortBar">
+
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="sortBar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Sort by <b><span id="sortChoice">All</span></b>
+      <span class="caret"></span>
+    </button>
+    <ul id="sort-menu" class="dropdown-menu" aria-labelledby="sortBar">
+      <li><a id="all" href="#">All</a></li>
+      <li><a id="viewer" href="#">Viewer</a></li>
+      <li><a id="writer" href="#">Writer</a></li>
+      <li ><a id="actor" href="#">Actor</a></li>
+      <li ><a id="director" href="#">Director</a></li>
+      <li ><a id="producer" href="#">Producer</a></li>
+      <li ><a id="cinematographer" href="#">Cinematographer</a></li>
+    </ul>
+  </div>
+</template>

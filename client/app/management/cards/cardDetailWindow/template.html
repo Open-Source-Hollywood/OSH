@@ -1,0 +1,100 @@
+<template name="cardDetailWindow">
+    
+        <div class="card-detail-window clearfix">
+            {{ #if card.archived }}
+                <div class="window-archive-banner js-archive-banner">
+                    <span class="icon-lg fa fa-archive window-archive-banner-icon"></span>
+                    <p class="window-archive-banner-text">{{_ "card-archived"}}</p>
+                </div>
+            {{ /if }}
+            <div class="window-header clearfix">
+                <span class="window-header-icon icon-lg fa fa-calendar-o"></span>
+                <div class="window-title card-detail-title non-empty inline {{# if currentUser.isBoardMember }}editable{{/ if }}">
+                    <h2 class="h2b window-title-text current hide-on-edit js-card-title">{{ card.title }}</h2>
+                    <div class="edit edit-heavy">
+                        <form id="WindowTitleEdit">
+                            <textarea type="text" class="field single-line" id="title">{{ card.title }}</textarea>
+                            <div class="edit-controls clearfix">
+                                <input type="submit" class="primary confirm js-title-save-edit" value="{{_ 'save'}}">
+                                <a href="#" class="icon-lg fa fa-times dark-hover cancel js-cancel-edit"></a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="quiet hide-on-edit window-header-inline-content js-current-list">
+                        <p class="inline-block bottom">
+                            {{_ 'in-list'}}
+                            <a href="#" class="{{# if currentUser.isBoardMember }}js-open-move-from-header{{else}}disabled{{/ if }}"><strong>{{ card.list.title }}</strong></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="window-main-col clearfix">
+                <div class="card-detail-data gutter clearfix">
+                    <div class="card-detail-item card-detail-item-block clear clearfix editable" style="display: table;margin-top: 20px;">
+                        {{# if card.members }}
+                            <div class="card-detail-item card-detail-item-members clearfix js-card-detail-members">
+                                <h3 class="card-detail-item-header h3b">{{_ 'members'}}</h3>
+                                <div class="js-card-detail-members-list clearfix">
+                                    {{# each card.members }}
+                                        {{> membersThumbnail userId=this size="small" cardId=../card._id }}
+                                    {{/ each }}
+                                    <a class="card-detail-item-add-button dark-hover js-details-edit-members">
+                                        <span class="icon-sm fa fa-plus"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        {{/ if }}
+                        {{# if card.labels }}
+                            <div class="card-detail-item card-detail-item-labels clearfix js-card-detail-labels">
+                                <h3 class="card-detail-item-header h3b">{{_ 'labels'}}</h3>
+                                <div class="js-card-detail-labels-list clearfix editable-labels js-edit-label">
+                                    {{# each card.labels }}
+                                        <span class="card-label card-label-{{color}}" title="{{name}}">{{ name }}</span>
+                                    {{/ each }}
+                                    <a class="card-detail-item-add-button dark-hover js-details-edit-labels">
+                                        <span class="icon-sm fa fa-plus"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        {{/ if }}
+                        <div class="card-detail-item card-detail-item-block clear clearfix editable" attr="desc">
+                            {{# if card.description }}
+                                <h3 class="card-detail-item-header js-show-with-desc h3b">{{_ 'description'}}</h3>
+                                {{# if currentUser.isBoardMember }}
+                                    <a href="#" class="card-detail-item-header-edit hide-on-edit js-show-with-desc js-edit-desc">{{_ 'edit'}}</a>
+                                {{/ if }}
+                                <div class="current markeddown hide-on-edit js-card-desc js-show-with-desc">
+                                  {{#viewer}}{{ card.description }}{{/viewer}}
+                                </div>
+                            {{ else }}
+                                {{# if currentUser.isBoardMember }}
+                                    <p class="bottom">
+                                        <a href="#" class="hide-on-edit quiet-button w-img js-edit-desc js-hide-with-desc">
+                                            <span class="icon-sm fa fa-align-left"></span>
+                                            {{_ 'edit-description'}}
+                                        </a>
+                                    </p>
+                                {{/ if }}
+                            {{/ if }}
+                            <div class="card-detail-edit edit">
+                                <form id="WindowDescEdit">
+                                    <textarea class="field single-line2" placeholder="enter description ..." id="desc" tabindex="1">{{ card.description }}</textarea>
+                                    <div class="edit-controls clearfix">
+                                        <input type="submit" class="primary confirm js-title-save-edit" value="{{_ 'save'}}">
+                                        <a href="#" class="icon-lg fa fa-times dark-hover cancel js-cancel-edit"></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{# if card.attachments.count }}
+                    {{ > WindowAttachmentsModule card=card }}
+                {{/ if}}
+                {{ > WindowActivityModule card=card }}
+            </div>
+            {{# if currentUser.isBoardAdmin }}
+                {{ > WindowSidebarModule card=card }}
+            {{/if}}
+        </div>  
+</template>

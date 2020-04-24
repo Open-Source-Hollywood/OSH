@@ -1,0 +1,42 @@
+<template name="userTabs">
+    <div class="container">
+        <hr>
+        <div class="col-sm-12">
+
+           <div class="btn-toolbar" role="toolbar" aria-label="...">
+
+              <div class="btn-group" role="group" aria-label="...">
+                {{> usortBar}}
+              </div>
+
+              {{#if counts30}}
+              <div class="btn-group pull-right" role="group" aria-label="...">
+                {{>pager}}
+              </div>
+              {{/if}}
+           </div>
+
+          <br>
+        </div>
+    </div>
+
+    <div class="container-fluid b40"> 
+        <center> 
+            <div> 
+                {{#each users}}
+                <div class="contain col-sm-6 col-md-2"> 
+                    <a href="/profile/{{ this._id }}">
+                      <figure class="snip1376">
+                        <img class="list-card-placeholder manual-shortcut-list" src="{{ this.avatar }}" style="background: transparent;" />
+                        <figcaption class="left">
+                            <h4>{{ formattedName }}</h4>
+                        </figcaption>
+                    </figure>
+                    </a>
+                </div>
+                {{/each}}
+            </div> 
+        </center> 
+    </div>
+
+</template>

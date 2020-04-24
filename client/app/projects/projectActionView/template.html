@@ -1,0 +1,20 @@
+<template name="actionBar">
+  <div class="actionBar" style="
+    position: absolute;
+    right: 10px;
+">
+    <ul>
+      <center>
+        {{#if currentUser}}
+        <li style="list-style: none;" class="actions"><a id="upvote" href="#"><i class="fa fa-chevron-up"></i></a></li>
+        <li style="list-style: none;" class="actions"><span class="badge" style="font-size: 20px;background: transparent;">{{count}}</span></li>
+        <li style="list-style: none;" class="actions"><a id="downvote" href="#"><i class="fa fa-chevron-down"></i></a></li>
+        {{else}}
+        <li style="list-style: none;" class="actions"><a><i class="fa fa-chevron-up" title="You must be signed in to upvote"></i></a></li>
+        <li style="list-style: none;" class="actions"><span class="badge" style="font-size: 20px;background: transparent;">{{count}}</span></li>
+        <li style="list-style: none;" class="actions"><a><i class="fa fa-chevron-down" title="You must be signed in to downvote"></i></a></li>
+        {{/if}}
+      </center>
+    </ul>
+  </div>
+</template>

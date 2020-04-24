@@ -1,0 +1,24 @@
+<template name="boardChangePermissionPopup">
+    <ul class="pop-over-list">
+        <li>
+            <a class="js-select light-hover" name="private">
+                <span class="icon-sm fa fa-lock vis-icon"></span>
+                {{_ 'private'}}
+                {{# if check 'private' }}
+                    <span class="icon-sm fa fa-check"></span>
+                {{/if}}
+                <span class="sub-name">{{_ 'private-desc'}}</span>
+            </a>
+        </li>
+        <li>
+            <a class="js-select light-hover" name="public">
+                <span class="icon-sm fa fa-globe vis-icon"></span>
+                {{_ 'public'}}
+                {{# if check 'public' }}
+                    <span class="icon-sm fa fa-check"></span>
+                {{/if}}
+                <span class="sub-name">{{_ 'public-desc'}}</span>
+            </a>
+        </li>
+    </ul>
+</template>

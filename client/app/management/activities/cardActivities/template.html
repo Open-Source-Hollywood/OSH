@@ -1,0 +1,71 @@
+<template name="cardActivities">
+        <div class="js-list-actions" style="display: grid;">
+            {{# each card.comments }}
+                <div class="phenom phenom-action clearfix phenom-comment" >
+                    {{> userAvatar user=user size="small" class="creator js-show-mem-menu" }}
+                    <form>
+                        <div class="phenom-desc">
+                            {{ > memberName user=user }}
+                            <div class="action-comment markeddown">
+                                <div class="current-comment">
+                                  {{#viewer}}{{ text }}{{/viewer}}
+                                </div>
+                                <textarea class="js-text" tabindex="1">{{ text }}</textarea>
+                            </div>
+                        </div>
+                        <div class="edit-controls clearfix">
+                            <input type="submit" class="primary confirm js-save-edit" value="{{_ 'save'}}" tabindex="2">
+                        </div>
+                    </form>
+                    <p class="phenom-meta quiet">
+                        <span class="date js-hide-on-sending">{{ moment createdAt }}</span>
+                        {{# if currentUser }}
+                            <span class="js-hide-on-sending">
+                                - <a href="#" class="js-edit-action">{{_ "edit"}}</a>
+                                - <a href="#" class="js-confirm-delete-action">{{_ "delete"}}</a>
+                            </span>
+                        {{/ if }}
+                    </p>
+                </div>
+            {{/each}}
+
+            {{# each card.activities }}
+                <div class="phenom phenom-action clearfix phenom-other">
+                    {{> userAvatar user=user size="extra-small" class="creator js-show-mem-menu" }}
+                    {{ > memberName user=user }}
+                    {{# if isTrue activityType 'createCard' }}
+                        {{_ 'activity-added' cardLabel list.title}}.
+                    {{ /if }}
+                    {{# if isTrue activityType 'joinMember' }}
+                        {{# if isTrue currentUser._id member._id }}
+                            {{_ 'activity-joined' cardLabel}}.
+                        {{ else }}
+                            {{{_ 'activity-added' cardLabel memberLink}}}.
+                        {{/if}}
+                    {{/if}}
+                    {{# if isTrue activityType 'unjoinMember' }}
+                        {{# if isTrue currentUser._id member._id }}
+                            {{_ 'activity-unjoined' cardLabel}}.
+                        {{ else }}
+                            {{{_ 'activity-removed' cardLabel memberLink}}}.
+                        {{/if}}
+                    {{ /if }}
+                    {{# if isTrue activityType 'archivedCard' }}
+                        {{_ 'activity-archived' cardLabel}}.
+                    {{ /if }}
+                    {{# if isTrue activityType 'restoredCard' }}
+                        {{_ 'activity-sent' cardLabel boardLabel}}.
+                    {{/ if }}
+                    {{# if isTrue activityType 'moveCard' }}
+                        {{_ 'activity-moved' cardLabel oldList.title list.title}}.
+                    {{/ if }}
+                    {{# if isTrue activityType 'addAttachment' }}
+                        {{{_ 'activity-attached' attachmentLink cardLabel}}}.
+                        {{# if attachment.isImage }}
+                            <img src="{{ attachment.url }}" class="attachment-image-preview">
+                        {{/if}}
+                    {{/ if}}
+                </div>
+            {{/each}}
+        </div>
+</template>

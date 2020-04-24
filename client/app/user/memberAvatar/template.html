@@ -1,0 +1,10 @@
+<template name="memberAvatar">
+    <div class="member {{size}} {{ class }} {{# if draggable }}js-member{{else}}js-member-on-card-menu{{/ if}}"
+         title="{{ name }} ({{ username }})">
+        <div class="avatar avatar-{{size}} avatar-hide-image">
+            <img class="avatar-image" src="{{ thumbnailUrl }}"/>
+        </div>
+        <!-- <span class="member-status {{# if status}}active{{/if}}"></span> -->
+        <span class="member-type {{ memberType }}"></span>
+    </div>
+</template>

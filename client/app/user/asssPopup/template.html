@@ -1,0 +1,22 @@
+<template name="asssPopup">
+    <br><br>
+    {{#if noAsss}}
+    <h3 style="color:#333">There are no assets</h3>
+    {{else}}
+    <div class="board-member-menu">
+        {{#each asss}}
+            <div class="list-group">
+                <a style="color:#333" class="list-group-item list-card-details clearfix show active" href="{{ this.card }}">
+                    View Asset
+                </a>
+              {{#each this.val}}
+                <li class="list-group-item" style="color:#333">
+                    <span style="color:#333" class="asset_popup_mime label label-info label-pill pull-xs-right">{{this.type}}</span>
+                    {{this.name}}
+              </li>
+              {{/each}}
+            </div>
+        {{/each}}
+    </div>
+    {{/if}}
+</template>

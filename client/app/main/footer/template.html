@@ -1,0 +1,69 @@
+<template name="footer">
+      <!-- Footer #1 Wrapper Start -->
+    <footer id="footer1" class="footer clearfix">
+
+        <div class="krown-column-row wrapper clearfix">
+
+            <div class="krown-column-container span3">
+                <!--<section id="nav_menu-2" class="widget widget_nav_menu clearfix">
+                    <h4 class="widget-title">Campaign</h4>
+                    <div class="menu-footer-menu-2-container">
+                        <ul id="menu-footer-menu-2">
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#">Start Your Campaign</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#">Pricing Campaign</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#">Campaign Support</a></li>
+                        </ul>
+                    </div>
+                </section> -->
+                <section id="nav_menu-3" class="widget widget_nav_menu clearfix">
+                    <h4 class="widget-title">About Us</h4>
+                    <div class="menu-footer-menu-1-container">
+                        <ul id="menu-footer-menu-1">
+                            <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/blog">Blog</a></li> -->
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about-us">About Us</a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/contact">Contact</a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/join">Join Our Team</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <div class="krown-column-container span3 clearfix">
+            </div>
+
+            <div class="krown-column-container span3 clearfix">
+                <section id="nav_menu-4" class="widget widget_nav_menu clearfix">
+                    <h4 class="widget-title">Help</h4>
+                    <div class="menu-footer-menu-3-container">
+                        <ul id="menu-footer-menu-3">
+                            <!-- <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/faq">FAQ</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/rules">Our Rules</a></li> -->
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/contact">Support</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/terms">Terms of Use</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/privacy">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            {{#unless currentUser}}
+            <div class="krown-column-container span3">
+                <section id="text-10" class="widget widget_text clearfix">
+                    <h4 class="widget-title">Subscribe to Campaigns</h4>
+                    <div class="textwidget">
+                        <form class="widget_wysija" id="form-wysija-2">
+                            <p class="wysija-paragraph">
+                                <input id="email" type="text" value="" placeholder="enter your email" title="enter your email" class="wysija-input">
+                            </p>
+                            <input id="subscribe" type="submit" class="wysija-submit wysija-submit-field" value="GO"> Subscribe to be notified of the latest information and campaigns to back.
+                        </form>
+                    </div>
+                </section>
+            </div>
+            {{/unless}}
+
+        </div>
+
+    </footer>
+
+    <!-- Footer #1 Wrapper End -->
+</template>

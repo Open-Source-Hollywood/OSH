@@ -1,0 +1,13 @@
+<template name="userPopup">
+    <div class="board-member-menu">
+        <div class="mini-profile-info">
+            {{> userAvatar user=user}}
+            <div class="info">
+                <h3 class="bottom" style="margin-right: 40px;">
+                    <a class="js-profile" href="/profile/{{ user.profile._id }}">{{ user.profile.name }}</a>
+                </h3>
+                <p class="quiet bottom">@{{ user.profile.username }}</p>
+            </div>
+        </div>
+    </div>
+</template>

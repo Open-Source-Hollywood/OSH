@@ -1,0 +1,128 @@
+main
+	header
+	splash
+	staticlayout
+	boardslayour
+	search
+	loading
+	loadingNonBoard
+	notFound
+	popup
+	editor
+	viewer
+	signin
+	blog
+		create
+		list
+		blog
+	markdown
+	footer
+	nav
+	terms
+	privacy
+	utils
+
+
+management
+	activities
+		activities
+		cardActivities
+	cards
+		cards
+		cardModal
+		cardMemberPopup
+		cardMembersPopup
+		cardMorePopup
+		cardLabelsPopup
+		cardAttachmentsPopup
+		dueDatePopup
+		formLabel
+		createLabelPopup
+		editLabelPopup
+		deleteLabelPopup
+		cardDeletePopup
+		attachmentDeletePopup
+		addCardForm
+		cardDetailWindow
+		membersThumbnail
+		WindowActivityModule
+		WindowAttachmentsModule
+		WindowDueDateModule
+		WindowSidebarModule
+	boards
+		board
+		boardChangePermissionPopup
+	widgets
+		homeWidget
+		menuWidget
+		membersWidget
+		activityWidget
+		applicantsPopup
+		boardWidgets
+		memberPopup
+		filterWidget
+		backgroundWidget
+		removeMemberPopup
+		addMemberPopup
+		changePermissionsPopup
+		calendarViewPopup
+
+
+communications
+	textOnly
+	textAvatar
+	commentBox
+	messageBox
+	comment
+
+
+
+negotiations
+	applicants
+	rejection
+	receipts
+
+
+
+projects
+	projectActionView
+	projectThumbnailCenter
+	editProject
+	projectMessage
+	projectVideo
+	projectView
+	newProject
+	projectSortBar
+	projectsSimilar
+	project
+	projectTabs
+
+
+
+user
+	dashboard
+	templates
+	userTabs
+	memberHeader
+	statsPopup
+	calPopup
+	tasksPopup
+	asssPopup
+	minePopup
+	memberMenuPopup
+	setLanguagePopup
+	userPopup
+	memberName
+	userAvatar
+	memberAvatar
+	applicantAvatar
+
+misc
+	modal
+	pager
+
+
+events
+	create
+	list
+

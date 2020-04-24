@@ -1,0 +1,55 @@
+<template name="main_receipts">
+  {{foo}}
+  <div id="content" class="clearfix ">
+    <div class="clearfix wrapper">
+
+        <header id="page-title">
+            <h1 class="title">Your Payment Transactions</h1>
+            <h2 class="subtitle">List of your receipts.</h2></header>
+
+        <div class="normal-content ">
+
+          <div class="krown-column-row clearfix">
+             <div class="krown-column-container clearfix first span12 clearfix">
+                {{#unless ln}}
+                  <h5>You have no transactions.</h5>
+                {{else}}
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {{#each receipts}}
+                      <tr>
+                        <td>{{formatDate}}</td>
+                        <td>{{formatTitle}}</td>
+                        <td>${{formatAmount}}</td>
+                        <td>{{formatStatus}}</td>
+                        <td><a href="{{formatLink}}">{{formatLinkTitle}}</a></td>
+                      </tr>
+                    {{else}}
+                      <tr>
+                        <td colspan="4">None</td>
+                      </tr>
+                    {{/each}}
+                    </tbody>             
+                  </table>
+                </div>
+                {{/unless}}
+             </div>
+           </div>
+        </div>
+        <!-- Inner Wrapper End -->
+    </div>
+
+    <!-- Main Wrapper End -->
+  </div>
+  <script type="text/javascript" src="/js/scripts.min.js"></script>
+</template>

@@ -1,0 +1,14 @@
+<template name="setLanguagePopup">
+    <ul class="pop-over-list">
+        {{#each languages}}
+            <li class="{{# if isCurrentLanguage}}active{{/if}}">
+                <a class="js-set-language">
+                    {{name}}
+                    {{# if isCurrentLanguage}}
+                        <span class="icon-sm fa fa-check"></span>
+                    {{/if}}
+                </a>
+            </li>
+        {{/each}}
+    </ul>
+</template>

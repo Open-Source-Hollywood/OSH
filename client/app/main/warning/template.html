@@ -1,0 +1,14 @@
+<template name="warning">
+    {{# if session 'warning' }}
+        <div class="header-banner header-banner-warning">
+            <p class="bottom">
+                <span class="inline-block">{{ warning.desc }}</span>
+                <span class="inline-block">
+                    <a class="button primary" href="{{ pathFor route='Signup' }}" style="margin: 0 4px;">
+                        {{_ 'warning-signup'}}
+                    </a>
+                </span>
+            </p>
+        </div>
+    {{/if}}
+</template>

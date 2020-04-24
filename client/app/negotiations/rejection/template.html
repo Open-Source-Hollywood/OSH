@@ -1,0 +1,42 @@
+<template name="comms">
+<div id="page-wrapper">
+  <div id="main" class="wrapper style1">
+      <div class="container">
+          <header class="major">
+              <h2><i class="glyphicon glyphicon-volume-up"></i>&nbsp;&nbsp;Notifications</h2>
+              <p>Important updates to your campaigns, click to respond.</p>
+          </header>
+          <section>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>(purpose)</th>
+                    <th><p class="align-center">from</p></th>
+                    <th><p class="align-center">message</p></th>
+                    <th><p class="align-center">campaign</p></th>
+                    <th><p class="align-center"><i class="glyphicon glyphicon-envelope"></i></p></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {{#each comms}}
+                  <tr>
+                    <td style="vertical-align: middle;"><small>({{purpose}})</small></td>
+                    <td style="vertical-align: middle;"><p class="align-center">{{name}}<br><img class="attachment-image-preview m40" src="{{avatar}}"></p></td>
+                    <td style="vertical-align: middle;"><p class="align-center">{{message}}</p></td>
+                    <td style="vertical-align: middle;"><p class="align-center">{{title}}<br>{{created}}</p></td>
+                    <td><a href="/message/project/{{ slug }}/{{ user }}" class="button go">GO</a></td>
+                  </tr>
+                {{else}}
+                  <tr>
+                    <td colspan="4">None</td>
+                  </tr>
+                {{/each}}
+                </tbody>             
+              </table>
+            </div>
+          </section>
+      </div>
+  </div>
+</div>
+</template>

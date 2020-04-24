@@ -1,0 +1,19 @@
+<template name="cardLabelsPopup">
+    <div>
+        {{! <input id="labelSearch" name="search" class="js-autofocus js-label-search" placeholder="Search labels…" value="" type="text"> }}
+        <ul class="edit-labels-pop-over js-labels-list">
+            {{# each card.board.labels }}
+                <li>
+                    <a href="#" class="card-label-edit-button icon-sm fa fa-pencil js-edit-label"></a>
+                    <span class="card-label card-label-selectable card-label-{{color}} js-select-label {{# if isLabelSelected ../card._id }}active{{/ if }}">
+                        {{name}}
+                        {{# if currentUser.isBoardAdmin }}
+                            <span class="card-label-selectable-icon icon-sm fa fa-check light"></span>
+                        {{/ if }}
+                    </span>
+                </li>
+            {{/ each}}
+        </ul>
+        <a class="quiet-button full js-add-label">{{_ 'label-create'}}</a>
+    </div>
+</template>

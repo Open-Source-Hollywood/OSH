@@ -1,0 +1,64 @@
+<template name="project">
+
+  <div class="col-xs-12">
+    <div class="crowdfund animated fadeIn">
+      <div class="videowrapper" style="padding: 0">
+        <div style="padding:5px">
+          {{#if currentUser}}
+          <a title={{title}} href="/projects/{{slug}}/{{ownerId}}">
+            {{> projectVideo}}
+          </a>
+          {{else}}
+          <a title={{title}}>
+            {{> projectVideo}}
+          </a>
+          {{/if}}
+        </div>
+        <div class="caption">
+          {{#if currentUser}}
+          <h2><a href="/projects/{{slug}}/{{ownerId}}">{{title}}</a></h2>
+          <p>by <a href="/profile/{{ownerId}}">{{ownerName}}</a></p>
+          {{else}}
+          <h2>{{title}}</h2>
+          {{/if}}
+          <p>{{logline}}</p>
+        </div>
+        <div class="modal-footer" style="text-align: left">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{perCent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{perCent}}%;">
+              <span class="sr-only">{{perCent}}% remaining</span>
+            </div>
+          </div>
+<!--           <div class="row tags">
+            {{ #each genres }}
+            <span>{{ this }}</span>
+            {{ /each }}
+          </div> -->
+          <div class="row">
+            <div class="col-md-12"><b>{{duration}}</b><br/><small>DAYS LEFT</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+
+  <script>
+
+  $('.crowdfund').hover(
+    function(){
+      $(this).stop().animate(
+        {marginTop: '-5'}, 100, 'linear'   
+        );//end animate
+     },//end function
+     function(){
+      $(this).stop().animate(
+        {marginTop: '0'}, 100, 'linear'
+        );//end animate
+    }//end function
+);//end hover
+  </script>
+</template>

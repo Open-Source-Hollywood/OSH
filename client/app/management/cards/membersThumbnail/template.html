@@ -1,0 +1,8 @@
+<template name="membersThumbnail">
+    <div class="member {{size}} {{ class }} {{# if draggable }}js-member{{else}}js-member-on-card-menu{{/ if}}"
+         title="{{ user.firstName }} {{ user.lastName }}">
+        <div class="avatar avatar-{{size}} avatar-hide-image">
+            <img class="avatar-image" src="{{ user.avatar }}"/>
+        </div>
+    </div>
+</template>

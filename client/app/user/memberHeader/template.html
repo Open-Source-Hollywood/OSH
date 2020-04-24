@@ -1,0 +1,28 @@
+<template name="memberHeader">
+    <div class="col-xs-6">
+        <!-- <a id="stats" class="header-btn header-member moveupmember">
+            <span class="header-btn-text js-member-name">{{_ 'stats'}}</span>
+        </a>
+        <a id="cal" class="header-btn header-member moveupmember">
+            <span class="header-btn-text js-member-name">{{_ 'calendar'}}</span>
+        </a>
+        <a id="tasks" class="header-btn header-member moveupmember">
+            <span class="header-btn-text js-member-name">{{_ 'tasks'}}</span>
+        </a>
+        <a id="asss" class="header-btn header-member moveupmember">
+            <span class="header-btn-text js-member-name">{{_ 'assets'}}</span>
+        </a>
+        <a id="mine" class="header-btn header-member moveupmember">
+            <span class="header-btn-text js-member-name">{{_ 'mine'}}</span>
+        </a> -->
+    </div>
+    <div class="header-user">
+        <a class="header-btn header-member js-open-header-member-menu" href="#">
+            {{> userAvatar user=currentUser size="small" }}
+            <span class="header-btn-text js-member-name">{{_ 'settings'}}</span>
+        </a>
+        <a id="exit" class="header-btn header-member">
+            <span class="header-btn-text js-member-name">exit</span>
+        </a>
+    </div>
+</template>

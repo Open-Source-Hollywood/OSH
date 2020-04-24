@@ -1,0 +1,32 @@
+<template name="menuWidget">
+    <div class="board-widget board-widget-nav clearfix{{#unless session 'menuWidgetIsOpen'}} collapsed{{/unless}}">
+        <h3 class="h3b dark-hover toggle-widget-nav js-toggle-widget-nav">{{_ 'menu'}}
+            <span class="icon-sm fa fa-chevron-circle-down toggle-menu-icon"></span>
+        </h3>
+        <ul class="nav-list">
+            <hr style="margin-top: 0;">
+            <li>
+                <a href="#" class="nav-list-item js-open-card-filter">
+                    <span class="icon-sm fa fa-filter icon-type"></span>
+                    {{_ 'filter-cards'}}
+                </a>
+            </li>
+            <!--{{#if currentUser.isBoardAdmin}}
+                <hr>
+                <li>
+                    <a class="nav-list-item nav-list-sub-item board-settings-background js-change-background">
+                        <span class="board-settings-background-preview" style="background-color:{{backgroundColor}}"></span>
+                        {{_ 'change-background'}}…
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a class="nav-list-item js-change-calendarView">
+                        <span class="icon-sm fa fa-calendar icon-type"></span>
+                        {{_ 'calendar_view'}}
+                    </a>
+                </li>
+            {{/if}}-->
+        </ul>
+    </div>
+</template>

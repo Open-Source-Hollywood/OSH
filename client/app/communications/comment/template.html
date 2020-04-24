@@ -1,0 +1,14 @@
+<template name="comment">
+  <li class="comment clearfix">
+      <div class="comment-avatar custom-shape hexagon-small"><img alt="" src="{{ownerAvatar}}" class="avatar avatar-65 photo" height="65" width="65"></div>
+      <div class="comment-content">
+          <div class="comment-meta clearfix">
+              <h6 class="comment-title"><a href="/profile/{{ownerId}}">{{ownerName}}</a></h6>
+              <span class="comment-date">{{createdAt}}</span>
+          </div>
+          <div class="comment-text">
+              {{#markdown}}{{text}}{{/markdown}}
+          </div>
+      </div>
+  </li>
+</template>

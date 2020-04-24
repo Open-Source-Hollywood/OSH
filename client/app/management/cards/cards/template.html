@@ -1,0 +1,44 @@
+<template name="cards">
+    <div class="list-cards cards fancy-scrollbar clearfix js-list-cards js-sortable ui-sortable">
+        {{# each cards }}
+            <div class="list-card card js-member-droppable">
+                <a class="list-card-details clearfix show" href="{{ absoluteUrl }}">
+                    <div class="list-card-labels js-card-labels">
+                        {{# each labels }}
+                            <span class="card-label card-label-{{color}}" title="{{name}}">&nbsp;</span>
+                        {{/ each}}
+                    </div>
+                    <div class="list-card-title clear js-card-name">{{ title }}</div>
+                    <div class="badges">
+                        {{# if comments.count }}
+                            <div title="{{_ 'card-comments-title' comments.count }}" class="badge">
+                                <span class="badge-icon icon-sm fa fa-comment-o"></span>
+                                <span class="badge-text">{{ comments.count }}</span>
+                            </div>
+                        {{/if}}
+                        {{# if description }}
+                            <div title="{{ description }}" class="badge badge-state-image-only">
+                                <span class="badge-icon icon-sm fa fa-align-left"></span>
+                            </div>
+                        {{/if}}
+                        {{# if attachments.count }}
+                            <div class="badge">
+                                <span class="badge-icon icon-sm fa fa-paperclip"></span>
+                                <span class="badge-text">{{ attachments.count }}</span>
+                            </div>
+                        {{/if}}
+                    </div>
+                    <div class="list-card-members js-list-card-members">
+                        {{# each members }}
+                            {{> membersThumbnail userId=this size="small" cardId=../_id }}
+                        {{/each}}
+                    </div>
+                </a>
+            </div>
+        {{/each}}
+        {{ > addCardForm }}
+    </div>
+    {{# if currentUser.isBoardMember }}
+        <a class="open-card-composer js-open-card-composer" href="#">{{_ 'add-card'}}</a>
+    {{/ if }}
+</template>

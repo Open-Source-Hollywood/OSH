@@ -1,0 +1,13 @@
+<template name="commBox">
+	<br>
+	<div class="panel panel-default col-xs-12">
+		<div class="panel-heading">
+			Write a message
+			<p class='pull-right'><span class="text-muted">Markdown Supported</span>&nbsp;<a href='/markdown' target="_blank"><span class='glyphicon glyphicon-info-sign'></span></a></p>
+		</div>
+		<div class="panel-body">
+			<textarea type="text" id="{{uuid}}" placeholder="What do you think?" style="width:100%;"></textarea><br>
+			<button type="submit" class="btn btn-primary pull-right submit-message-dash">Message</button>
+		</div>
+	</div>
+</template>

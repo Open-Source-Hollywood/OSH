@@ -1,0 +1,67 @@
+<template name="filterWidget">
+    <h1 class="h1b">By Label(s)</h1>
+    <ul class="pop-over-label-list checkable">
+        {{#each board.labels}}
+            <li class="item matches-filter">
+                <a class="name js-toggle-label-filter">
+                    <span class="card-label card-label-{{color}}"></span>
+                    <span class="full-name">
+                        {{#if name}}
+                            {{name}}
+                        {{else}}
+                            <span class="quiet">{{_ "label-default" color}}</span>
+                        {{/if}}
+                    </span>
+                    {{#if Filter.labelIds.isSelected _id}}
+                        <span class="icon-sm fa fa-check"></span>
+                    {{/if}}
+                </a>
+            </li>
+        {{/each}}
+    </ul>
+    <hr/>
+    <h1 class="h1b">By Member(s)</h1>
+    <ul class="pop-over-member-list checkable">
+        {{#each board.members}}
+            {{#with getUser userId}}
+                <li class="item js-member-item {{#if Filter.members.isSelected _id}}active{{/if}}">
+                    <a href="#" class="name js-toogle-member-filter">
+                        {{> userAvatar user=this size="small" }}
+                        <span class="full-name">
+                            {{ firstName }} {{ lastName }}
+                            (<span class="username">{{ services.auth0.nickname }}</span>)
+                        </span>
+                        {{#if Filter.members.isSelected _id}}
+                            <span class="icon-sm fa fa-check checked-icon"></span>
+                        {{/if}}
+                    </a>
+                 </li>
+            {{/with}}
+        {{/each}}
+    </ul>
+    <hr/>
+    <!-- <h1 class="h1b">By Due Date(s)</h1>
+    <ul class="pop-over-member-list checkable">
+        {{#each foo}}
+            <li class="item js-member-item {{#if Filter.dueDates.isSelected _id}}active{{/if}}">
+                <a href="#" class="name js-toogle-dueDate-filter">
+                    <span class="full-due-date">
+                        {{ this.formattedDate }}
+                    </span>
+                    {{#if Filter.dueDates.isSelected _id}}
+                        <span class="icon-sm fa fa-check checked-icon"></span>
+                    {{/if}}
+                </a>
+            </li>
+        {{/each}}
+    </ul> -->
+    
+    <hr>
+    <ul class="pop-over-list inset normal-weight">
+        <li>
+            <a class="js-clear-all {{#unless Filter.isActive}}disabled{{/unless}}" style="padding-left: 40px;">
+                {{_ 'filter-clear'}}
+            </a>
+        </li>
+    </ul>
+</template>

@@ -1,0 +1,8 @@
+<template name="createLabelPopup">
+    <form class="create-label">
+        {{#with color=defaultColor}}
+            {{> formLabel}}
+        {{/with}}
+        <input type="submit" class="primary wide left" value="{{_ 'create'}}">
+    </form>
+</template>

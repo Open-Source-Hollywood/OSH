@@ -1,0 +1,24 @@
+<template name="cardMemberPopup">
+    <div class="board-member-menu">
+        <div class="mini-profile-info">
+            <div class="member {{size}} {{ class }} {{# if draggable }}js-member{{else}}js-member-on-card-menu{{/ if}}"
+                 title="{{ user.firstName }} {{ user.lastName }}">
+                <div class="avatar avatar-{{size}} avatar-hide-image">
+                    <img class="avatar-image" src="{{ user.avatar }}"/>
+                </div>
+            </div>
+            <div class="info">
+                <h3 class="bottom h3b" style="margin-right: 40px;">
+                    <a class="js-profile" href="{{ pathFor route='Profile'}}">{{ user.firstName }} {{ user.lastName }}</a>
+                </h3>
+            </div>
+        </div>
+        {{# if currentUser.isBoardMember }}
+            {{# if this.userId}}
+            <ul class="pop-over-list">
+                <li><a class="js-remove-member">{{_ 'remove-member-from-card'}}</a></li>
+            </ul>
+            {{/if}}
+        {{/ if }}
+    </div>
+</template>

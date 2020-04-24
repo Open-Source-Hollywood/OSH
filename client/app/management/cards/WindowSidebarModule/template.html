@@ -1,0 +1,44 @@
+<template name="WindowSidebarModule">
+    <div class="window-sidebar" style="position: relative;">
+        <div class="window-module clearfix">
+            <h3 class="h3b">{{_ 'add'}}</h3>
+            <div class="clearfix" style="display: grid;justify-items: left;">
+                <a href="#" class="button-link js-change-card-members" title="{{_ 'members-title'}}" style="margin-bottom: 10px;">
+                    <span class="fa fa-user"></span> {{_ 'members'}}
+                </a>
+                <a href="#" class="button-link js-edit-labels" title="{{_ 'labels-title'}}" style="margin-bottom: 10px;">
+                    <span class="fa fa-tags"></span> {{_ 'labels'}}
+                </a>
+                <a href="#" class="button-link js-attach" title="{{_ 'attachment-title'}}" style="margin-bottom: 10px;">
+                    <span class="fa fa-paperclip"></span> {{_ 'attachment'}}
+                </a>
+                <!-- <a href="#" class="button-link js-due-date" title="{{_ 'due-date-title'}}">
+                    <span class="fa fa-calendar"></span> {{_ 'due_date'}}
+                </a> -->
+            </div>
+        </div>
+        <div class="window-module other-actions clearfix">
+            <h3 class="h3b">{{_ 'actions'}}</h3>
+            <div class="clearfix">
+                <hr>
+                {{ #if card.archived }}
+                    <a href="#" class="button-link js-unarchive-card" title="{{_ 'send-to-board-title'}}">
+                        <span class="fa fa-recycle"></span> {{_ 'send-to-board'}}
+                    </a>
+                    <a href="#" class="button-link negate js-delete-card" title="{{_ 'delete-title'}}">
+                        <span class="fa fa-trash-o"></span> {{_ 'delete'}}
+                    </a>
+                {{ else }}
+                    <a href="#" class="button-link js-archive-card" title="{{_ 'archive-title'}}">
+                        <span class="fa fa-archive"></span> {{_ 'archive'}}
+                    </a>
+                {{ /if }}
+            </div>
+        </div>
+        <!-- <div class="window-module clearfix">
+            <p class="quiet bottom">
+                <a href="#" class="quiet-button js-more-menu" title="{{_ 'share-and-more-title'}}">{{_ 'share-and-more'}}</a>
+            </p>
+        </div> -->
+    </div>
+</template>

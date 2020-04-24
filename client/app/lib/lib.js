@@ -7,5 +7,16 @@ Meteor.startup(function(){
 		document.addEventListener('keypress', function(e) {
 		  if (e.keyCode == 27) lock.hide();
 		}, false);
+
  	});
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  Session.set('connectReady', false);
+});
+
+window.addEventListener("unload", function() {
+  Session.set('connectReady', false);
+});
+
+Session.set('foo', 123);

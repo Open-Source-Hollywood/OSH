@@ -1,0 +1,18 @@
+<template name="commentBox">
+  <div id="respond" >
+    {{#if currentUser}}
+      <h4 id="reply-title" class="comment-reply-title">Write a comment</h4>
+      <form class="comment-form">
+          <div class="krown-column-container span12 last" style="margin-left:0">
+              <label for="comment">Your Comment</label>
+              <textarea id="comment-box" name="comment" rows="8"></textarea>
+          </div>
+          <p class="form-submit">
+              <input name="submit" type="submit" id="submit-comment" class="submit" value="Post Comment">
+          </p>
+      </form>
+    {{else}}
+      <h4 id="reply-title" class="comment-reply-title">Sign-in to comment</h4>
+    {{/if}}
+  </div>
+</template>

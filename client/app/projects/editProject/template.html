@@ -1,0 +1,680 @@
+<template name="editProject">
+    {{#if currentUser}}
+    {{init}}
+    <div id="thisCurrentProject" style="display:none" val="{{thisProjectString}}"></div>
+    <div id="page-wrapper">
+        <!-- Main -->
+        <div class="krown-accordion accordion large clearfix">
+            <div class="krown-column-container clearfix first last span12 clearfix">
+                <div class="krown-tabs clearfix">
+                    <p><small>Select section to edit</small></p>
+                    <ol class="breadcrumb">
+                        <li><a href="#!" class="camp_show_resources button bg-teal fs-title" val="camp_Basic">Basic Info</a></li>
+                        <li><a href="#!" class="camp_show_resources button bg-lime fs-title" val="camp_Story">Story</a></li>
+                        <li><a href="#!" id="editmyprojroles" class="camp_show_resources button bg-orange fs-title" val="camp_Resources">Roles &amp; Assets</a></li>
+                        <li><a href="#!" id="editmyprojmerch" class="camp_show_resources button bg-fuschia fs-title" val="camp_Merch">Merch</a></li>
+                        <li><a class="button bg-aqua fs-title" href="/contracts">VIEW APPLICANTS</a></li>
+                    </ol>
+                    <p>&nbsp;</p>
+                    <div class="camp_resources_toggle krown-alert krown-single-image" id="camp_Basic">
+                        <h3 class="extremeboldtext">Edit Project Info</h3>
+                        <form id="editProjBasic">
+                            <div class="row">
+                                <div id="hiddenbudget" class="row" hidden>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="budget">budget goal&nbsp;<a href="#!" id="budgetform"><i class="fa fa-question-circle"></i></a></label>
+                                        <input type="number" name="budget" id="budget" disabled />
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="starting">starting budget</label>
+                                        <input type="number" name="starting" id="starting" disabled />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input style="width: 80%!important;left: 10%!important;position:relative;border: 2px solid black!important;background: white!important;color:black!important;" type="submit" name="showbudget" id="showbudget" value="update budget data" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                  <label for="phase">What Phase is this Campaign?</label>
+                                  <select name="phase" id="phase" class="form-control">
+                                        <option>- Select Phase -</option>
+                                        <option value="Concept">Concept</option>
+                                        <option value="Pre-Production">Pre-Production</option>
+                                        <option value="Production">Production</option>
+                                        <option value="Post-Production">Post-Production</option>
+                                  </select>
+                                </div>
+
+                                <div class="form-group">
+                                  <label for="category">Select Category&nbsp;<strong><small>( required for categorization )</small></strong></label>
+                                  <select name="category" id="category" class="form-control">
+                                        <option>- Campaign Format -</option>
+                                        <option value="Feature">Feature</option>
+                                        <option value="Short">Short</option>
+                                        <option value="Series">Series</option>
+                                        <option value="Animation">Animation</option>
+                                        <option value="Live Performance">Live Performance</option>
+                                        <option value="Writing">Writing</option>
+                                        <option value="Art &amp; Illustrations">Art &amp; Illustrations</option>
+                                        <option value="Podcast">Podcast</option>
+                                        <option value="Other">Other</option>
+                                  </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-group" id="hidden_genre" hidden>
+                                      <label for="genre">Select Genre</label>
+                                      <select name="genre" id="genre" class="form-control">
+                                      </select>
+                                    </div>
+                                </div>        
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="title">title</label>
+                                    <input type="text" name="title" id="title" placeholder="your great title here" />
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="logline">logline</label>
+                                    <input type="text" name="logline" id="logline" placeholder="couple sentences summarizing your campaign" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="location">location&nbsp;<small><strong>( required for location matching )</strong></small></label>
+                                    <input type="text" name="location" id="location" placeholder="campaign location zip code (e.g. 91204)" />
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="website">website</label>
+                                    <input type="text" name="website" id="website" placeholder="ex. https://link.com/id" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 margin_bottom40">
+                                    <label for="banner image">banner image (720x490 for best resolution)</label>
+                                    <label for="banner_file" class="custom-file-upload">
+                                        <i class="fa fa-cloud-upload"></i> Upload Image
+                                    </label>
+                                    <input class="noshow-file-upload" id="banner_file" type="file"/>
+                                    <br>
+                                    <div id="hidden_banner_name" class="hidden-filename" style="display:none"><i class="fa fa-check"></i>&nbsp;<span id="banner_file_name">This is the name of the file uploaded</span></div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="website">video link (YouTube or Vimeo)&nbsp;<a href="#!" id="vidurl"><i class="fa fa-question-circle"></i></a></label>
+                                    <input type="text" name="video_explainer" id="video_explainer" placeholder="enter URL link" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="prodorg">production company</label>
+                                    <input type="text" name="prodorg" id="prodorg" placeholder="name of legal entity, if applies" />
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="authorlist">original author(s)</label>
+                                    <input type="text" name="authorlist" id="authorlist" placeholder="optional credits to original author(s)" />
+                                </div>
+                            </div>
+
+                            <div class="krown-column-row clearfix t40">
+
+                                <label>description</label>
+                                <div>
+                                    <small>You can copy / paste from formatted HTML to keep your custom styling.</small>
+                                    <div id="summernote"></div>
+                                    <div id="inner_summer" style="display:none"></div>
+                                </div>
+                            </div>
+
+                            <!-- SOCIAL MEDIA -->
+                            <div class="krown-column-row clearfix">
+                                <div class="">
+                                    <h3 class="extremeboldtext">Add Your Links</h3>
+                                    <div class="accordion large clearfix" id="newproj_social_accord">
+                                        <section>
+                                            <h5 class="expandnewprojecttext">Enter the name of your link and the URL</h5>
+                                            <form id="newSocialForm">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-6">
+                                                        <input type="text" name="title" id="social-title" placeholder="Name" />
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-6">
+                                                        <input type="email" name="subtitle" id="social-url" placeholder="URL or username" />
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <button id="add-social" class="btn btn-lg button disabled special krown-button">Add Link</button>
+                                                <br>
+                                                <br>
+                                                <div class="table-responsive" id="display_link_data" style="display:none">
+                                                    <table class="table">
+                                                        <thead>
+                                                          <tr>
+                                                              <th>Link Title</th>
+                                                              <th>URL or username</th>
+                                                              <th>DELETE</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody id="social-table">
+                                                            {{#each projSocial}}
+                                                                <tr class="social-val">
+                                                                    <td>{{name}}</td>
+                                                                    <td>{{address}}</td>
+                                                                    <td><button class="deleteRow button special">X</button></td>
+                                                                </tr>
+                                                            {{/each}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </form>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="display: none;" class="camp_resources_toggle krown-alert krown-single-image" id="camp_Story">
+                        <form class="newProjForm">
+                            <!-- STORY -->
+                            <div class="krown-column-row clearfix">
+                                <h3 class="extremeboldtext">Additional Information</h3>
+                                <div class="row">
+                                    <h4>About the creators</h4>
+                                    <div class="col-sm-12">
+                                        <textarea name="creators_info" id="creators_info" placeholder="" rows="6"></textarea>
+                                    </div>
+                                    <h4>Project history</h4>
+                                    <div class="col-sm-12">
+                                        <textarea name="history_info" id="history_info" placeholder="" rows="6"></textarea>
+                                    </div>
+                                    <h4>Project plans</h4>
+                                    <div class="col-sm-12">
+                                        <textarea name="plans_info" id="plans_info" placeholder="" rows="6"></textarea>
+                                    </div>
+                                    <h4>Explanation of needs</h4>
+                                    <div class="col-sm-12">
+                                        <textarea name="needs_info" id="needs_info" placeholder="" rows="6"></textarea>
+                                    </div>
+                                    <h4>Significance of work</h4>
+                                    <div class="col-sm-12">
+                                        <textarea name="significance_info" id="significance_info" placeholder="" rows="6"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="display: none;" class="camp_resources_toggle krown-alert krown-single-image multicampsxn" id="camp_Resources">
+                        
+                        <div class="row">
+                            <p><small>Select area to edit:</small></p>
+                            <ol class="breadcrumb">
+                              <li><a href="#!" class="bread_show_resources bold" val="crew" aux="Add Crew Positions">Crew</a></li>
+                              <li><a href="#!" class="bread_show_resources" val="cast" aux="Add Cast Positions">Cast</a></li>
+                              <li><a href="#!" class="bread_show_resources" val="needs" aux="Request Resources &amp; Support Positions">Other Needs</a></li>
+                            </ol>
+
+                            <h3 class="extremeboldtext header_res_opts" id="show_options_crew2">Add Crew Positions</h3>
+                            <form class="newProjForm">
+                                <!-- RESOURCES -->
+                                <div class="krown-column-row clearfix show_resources_toggle" id="show_options_crew">
+                                    <div class="table-responsive" style="display:none" id="crewtabletoggle">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Crew Title</th>
+                                                    <th>Description</th>
+                                                    <th>Audition Specs</th>
+                                                    <th>DELETE</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="crew-table">
+
+                                                {{#each projCrew}}
+                                                    <tr class="crew-val">
+                                                        <td>{{title}}</td>
+                                                        <td>
+                                                            {{description}}<br>
+                                                            <small>eligible for:</small>
+                                                            {{#if roleStar}}
+                                                                &nbsp;<i class="glyphicon glyphicon-star"></i>
+                                                            {{/if}}
+
+                                                            {{#if roleTime}}
+                                                                &nbsp;<i class="glyphicon glyphicon-time"></i>
+                                                            {{/if}}
+
+                                                            {{#if roleDollar}}
+                                                                &nbsp;<i class="glyphicon glyphicon-usd"></i>
+                                                            {{/if}}
+                                                        </td>
+                                                        <td>{{audition}}</td>
+                                                        <td><button class="deleteRow button special" ctx="crew" val='{{self}}'>X</button></td>
+                                                    </tr>
+                                                {{/each}}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="accordion large clearfix" id="newProjCrewAccord">
+                                        <section>
+                                            <form id="newCrewForm">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-4">
+                                                        <label><small>role title</small></label>
+                                                        <input type="text" name="title" id="crew-title" placeholder="Title" />
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-8">
+                                                        <label><small>role description</small></label>
+                                                        <input type="text" name="title" id="crew-description" placeholder="Description" />
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <label><small>role audition details</small></label>
+                                                        <input type="text" name="crew-audition" id="crew-audition" placeholder="Audition Specifications" />
+                                                        <label style="position: relative;top: -30px;font-size: 0.6rem;">give instructions such as emailing you or uploading URL for auditioning this role</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class=" row t20">
+                                                    <ul class="list-card-details list-card-title" style="border-top: 1px solid;width: 350px;">
+                                                        <li><label><small>Would you pay for this position?</small></label></li>
+                                                        <li><label><small>Would you accept payment for this position?</small></label></li>
+                                                        <li><label><small>Would you accept free performance for this position?</small></label></li>
+                                                    </ul>
+                                                    <p><small>these offer options will be presented to candidates</small></p>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-sm-12 col-md-4  b20" >
+                                                            <div class="row" id="crew_oshx">
+                                                                <input id="crew_pay" type="checkbox" name="crew_consideration" class="crew_consideration" value="pay" checked />
+                                                                <label for="crew_pay">Paid Position <i class="glyphicon glyphicon-star"></i>:<br><small><strong>this role is listed for paid hire</strong></small></label>
+                                                            </div>
+
+                                                            <div id="crew_pay_amounth" class="row">
+                                                                <input id="oshchx_crew" class="t40 mb0" type="number" min="0" max="9999" placeholder="enter max amount here" name="crew_pay_amount"/>
+                                                                <label><small>max pay for this role</small></label>
+                                                            </div>
+                                                            
+                                                        </div>
+
+
+                                                        <div class="col-sm-12 col-md-4 b20">
+                                                            <input id="crew_time" type="checkbox" name="crew_consideration" class="crew_consideration" value="time" checked />
+                                                            <label for="crew_time">Experiential <i class="glyphicon glyphicon-time"></i>:<br><small><strong>would accept free performance for this role</strong></small></label>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-4 b20">
+                                                            <input id="crew_escrow" type="checkbox" name="crew_consideration" class="crew_consideration" value="escrow" checked />
+                                                            <label for="crew_escrow">Escrow Position <i class="glyphicon glyphicon-usd"></i>:<br><small><strong>would accept donation for this role</strong></small></label>
+                                                        </div>            
+                                                </div>
+
+
+
+                                                <button id="add-crew" val="crewtabletoggle" class="btn button disabled special krown-button t60" style="font-size:1.3rem">Add Crew Position</button>
+                                                <div class="t20">
+                                                    <p style="color:green" class="addingstatus nodisplay"><small>added! please remember to save changes at the bottom</small></p>
+                                                </div>
+
+                                            </form>
+                                        </section>
+                                    </div>
+                                </div>
+
+                                <div class="krown-column-row clearfix show_resources_toggle" id="show_options_cast" style="display:none">
+                                    <div class="table-responsive" style="display:none" id="casttabletoggle">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Role</th>
+                                                    <th>Description</th>
+                                                    <th>Audition Specs</th>
+                                                    <th>DELETE</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="cast-table">
+
+                                                {{#each projCast}}
+                                                    <tr class="crew-val">
+                                                        <td>{{title}}</td>
+                                                        <td>
+                                                            {{description}}<br>
+                                                            <small>eligible for:</small>
+                                                            {{#if roleStar}}
+                                                                &nbsp;<i class="glyphicon glyphicon-star"></i>
+                                                            {{/if}}
+
+                                                            {{#if roleTime}}
+                                                                &nbsp;<i class="glyphicon glyphicon-time"></i>
+                                                            {{/if}}
+
+                                                            {{#if roleDollar}}
+                                                                &nbsp;<i class="glyphicon glyphicon-usd"></i>
+                                                            {{/if}}
+                                                        </td>
+                                                        <td>{{audition}}</td>
+                                                        <td><button class="deleteRow button special" ctx="crew" val='{{self}}'>X</button></td>
+                                                    </tr>
+                                                {{/each}}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="accordion large clearfix" id="newProjCastAccord">
+                                        <section>
+                                            <form id="newCastForm">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-4">
+                                                        <label for="cast-title"><small>role title</small></label>
+                                                        <input type="text" name="cast-title" id="cast-title" placeholder="Role" />
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-8">
+                                                        <label for="cast-description"><small>role description</small></label>
+                                                        <input type="text" name="cast-description" id="cast-description" placeholder="Description" />
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <label for="cast-audition"><small>role audition details</small></label>
+                                                        <input type="text" name="cast-audition" id="cast-audition" placeholder="Audition Specifications" />
+                                                        <label style="position: relative;top: -30px;font-size: 0.6rem;">give instructions such as emailing you or uploading URL for auditioning this role</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class=" row t20">
+                                                    <ul class="list-card-details list-card-title" style="border-top: 1px solid;width: 350px;">
+                                                        <li><label><small>Would you pay for this position?</small></label></li>
+                                                        <li><label><small>Would you accept payment for this position?</small></label></li>
+                                                        <li><label><small>Would you accept free performance for this position?</small></label></li>
+                                                    </ul>
+                                                    <p><small>these offer options will be presented to candidates</small></p>
+                                                </div>
+                                                <div class="row">
+
+                                                        <div class="col-sm-12 col-md-4 b20" >
+                                                            <div class="row" id="cast_oshx">
+                                                                <input id="cast_pay" type="checkbox" name="cast_consideration" class="cast_consideration" value="pay" checked />
+                                                                <label for="cast_pay">Paid Position <i class="glyphicon glyphicon-star"></i>:<br><small><strong>this role is listed for paid hire</strong></small></label>
+                                                            </div>
+
+                                                            <div id="cast_pay_amounth" class="row">
+                                                                <input id="oshchx_cast" class="t40 mb0" type="number" min="0" max="9999" placeholder="enter max amount here" name="cast_pay_amount"/>
+                                                                <label><small>max pay for this role</small></label>
+                                                            </div>
+                                                            
+                                                        </div>
+
+
+                                                        <div class="col-sm-12 col-md-4 b20">
+                                                            <input id="cast_time" type="checkbox" name="cast_consideration" class="cast_consideration" value="time" checked />
+                                                            <label for="cast_time">Experiential <i class="glyphicon glyphicon-time"></i>:<br><small><strong>You will accept offers for time donations for this role.</strong></small></label>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-4 b20">
+                                                            <input id="cast_escrow" type="checkbox" name="cast_consideration" class="cast_consideration" value="escrow" checked />
+                                                            <label for="cast_escrow">Escrow Position <i class="glyphicon glyphicon-usd"></i>:<br><small><strong>You will receive money only if you accept the offer for the role.</strong></small></label>
+                                                        </div>            
+                                                </div>
+
+
+                                                <button id="add-cast" val="casttabletoggle" class="btn button disabled special krown-button t60" style="font-size:1.3rem">Add Cast Position</button>
+                                                <!-- <div class="t20">
+                                                    <p style="color:green" class="addingstatus nodisplay"><small>added! please remember to save changes at the bottom</small></p>
+                                                </div> -->
+
+                                            </form>
+                                        </section>
+                                    </div>
+                                </div>
+
+                                <div class="krown-column-row clearfix show_resources_toggle" id="show_options_needs" style="display:none">
+                                    <div class="">
+                                        <div class="accordion large clearfix"  id="newProjNeedsAccord">
+                                            <div class="table-responsive" style="display:none" id="needstabletoggle">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Category</th>
+                                                            <th>Description</th>
+                                                            <th>DELETE</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="needs-table">
+                                                        
+                                                        {{#each projNeeds}}
+                                                            <tr class="needs-val">
+                                                                <td>{{category}}</td>
+                                                                <td>{{description}}</td>
+                                                                <td><button class="deleteRow button special">X</button></td>
+                                                            </tr>
+                                                        {{/each}}
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <section>
+                                                <form id="newNeedsForm">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-4">
+                                                            <div class="form-group">
+                                                                <label><small>select type of resource</small></label>
+                                                                <select name="category" id="needs-category" class="form-control">
+                                                                  <option>- Type -</option>
+                                                                  <option value="Equipment">Equipment</option>
+                                                                  <option value="Service">Service</option>
+                                                                  <option value="Location">Location</option>
+                                                                  <option value="Construction">Construction</option>
+                                                                  <option value="Legal">Legal</option>
+                                                                  <option value="Sales">Sales / Marketing</option>
+                                                                  <option value="Models">Models</option>
+                                                                  <option value="Dancers">Dancers</option>
+                                                                  <option value="Musicians">Musicians</option>
+                                                                  <option value="Wardrobe">Wardrobe</option>
+                                                                  <option value="Hair">Hair</option>
+                                                                  <option value="Makeup">Makeup</option>
+                                                                  <option value="Lighting">Lighting</option>
+                                                                  <option value="Miscellaneous">Miscellaneous</option>
+                                                                </select>
+                                                              </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-8">
+                                                            <label><small>description of resource</small></label>
+                                                            <input type="text" name="title" id="needs-description" placeholder="Description" />
+                                                        </div>
+                                                    </div>
+                                                    <button id="add-needs" val="casttabletoggle" class="btn button disabled special krown-button t60" style="font-size:1.3rem">Add Requested Resource</button>
+                                                    <!-- <div class="t20">
+                                                        <p style="color:green" class="addingstatus nodisplay"><small>added! please remember to save changes at the bottom</small></p>
+                                                    </div> -->
+                                                </form>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div style="display: none;" class="camp_resources_toggle krown-alert krown-single-image" id="camp_Merch">
+                            <h3 class="extremeboldtext">Edit Campaign Merch</h3>
+
+                            <form id="newProjFormMerch" class="newProjForm">
+                                <div class="krown-column-row clearfix">
+                                    <div class="krown-column-container clearfix first last span12 clearfix">
+                                        {{#if noUserEmail}}
+                                        <h5>YOU MUST CONFIGURE EMAIL NOTIFICATIONS TO ACCESS THIS FEATURE</h5>
+                                        {{else}}
+                                        <div class="table-responsive" style="display:none" id="merchtabletoggle">
+                                            <table class="table">
+                                                <thead>
+                                                  <tr>
+                                                      <th>Name</th>
+                                                      <th>Type</th>
+                                                      <th>Description</th>
+                                                      <th>Info</th>
+                                                      <th>Price</th>
+                                                      <th>DELETE</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody id="gift-table"></tbody>
+                                            </table>
+                                        </div>
+                                        <div class="accordion large clearfix" id="newProjGiftAccord">
+                                            <section>
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-5">
+                                                            <label for="title">name</label>
+                                                            <input type="text" name="title" id="gift-title" placeholder="product or service name" />
+                                                        </div>
+                                                        <div class="col-xs-12 col-md-5">
+                                                            <label for="description">description</label>
+                                                            <input type="text" name="description" id="gift-description" placeholder="enter description here" />
+                                                        </div>
+                                                        <div class="col-xs-12 col-md-2">
+                                                            <label for="merchtype">select merch type</label>
+                                                            <select name="merchtype" id="merchtype" class="form-control">
+                                                                <option selected disabled>- Select -</option>
+                                                                <option value="Apparel">Apparel</option>
+                                                                <option value="Perishable">Perishable</option>
+                                                                <option value="Non-Perishable">Non-Perishable</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" id="merchtypehidden" hidden>
+
+                                                        <div id="apparelsizes" class="col-xs-12 col-sm-5" hidden>
+                                                                <p class="b20"><small><strong>enter size &amp; unit info</strong></small></p>
+                                                                <div class="row merchbottomborder">
+                                                                    <div class="col-sm-12 col-md-5">
+                                                                        <div class="checkbox">
+                                                                          <input class="apparelsize" type="text" val="XS" value="XS" id="XSs" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-7">
+                                                                        <input ctx="size" class="merch_quantity input-sm" id="XS" type="number" min="0" placeholder="quantity">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row merchbottomborder">
+                                                                    <div class="col-sm-12 col-md-5">
+                                                                        <div class="checkbox">
+                                                                          <input class="apparelsize" type="text" value="S" val="S" id="Ss" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-7">
+                                                                        <input ctx="size" class="merch_quantity input-sm" id="S" type="number" min="0" placeholder="quantity">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row merchbottomborder">
+                                                                    <div class="col-sm-12 col-md-5">
+                                                                        <div class="checkbox">
+                                                                          <input class="apparelsize" type="text" value="M" val="M" id="Ms" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-7">
+                                                                        <input ctx="size" class="merch_quantity input-sm" id="M" type="number" min="0" placeholder="quantity">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row merchbottomborder">
+                                                                    <div class="col-sm-12 col-md-5">
+                                                                        <div class="checkbox">
+                                                                          <input class="apparelsize" type="text" value="L" val="L" id="Ls" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-7">
+                                                                        <input ctx="size" class="merch_quantity input-sm" id="L" type="number" min="0" placeholder="quantity">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row merchbottomborder">
+                                                                    <div class="col-sm-12 col-md-5">
+                                                                        <div class="checkbox">
+                                                                          <input class="apparelsize" type="text" value="XL" val="XL" id="XLs" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-7">
+                                                                        <input ctx="size" class="merch_quantity input-sm" id="XL" type="number" min="0" placeholder="quantity">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row merchbottomborder">
+                                                                    <div class="col-sm-12 col-md-5">
+                                                                        <div class="checkbox">
+                                                                          <input class="apparelsize" type="text" value="XXL" val="XXL" id="XXLs" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-7">
+                                                                        <input ctx="size" class="merch_quantity input-sm" id="XXL" type="number" min="0" placeholder="quantity">
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-5" id="perishabledetails" hidden>
+                                                            <textarea name="merch_handling" id="merch_handling" placeholder="" rows="6"></textarea>
+                                                            <input id="oneoff" type="number" min="0" placeholder="number of units">
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-7">
+                                                            <textarea name="merch_disclaimer" id="merch_disclaimer" placeholder="Return Policy and Disclaimers" rows="6"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <!-- <div class="col-xs-4">
+                                                            <label for="quantity">quantity</label>
+                                                            <input type="text" name="quantity" id="gift-quantity" placeholder="" />
+                                                        </div> -->
+                                                        <div class="col-xs-7">
+                                                            <label for="msrp">price</label>
+                                                            <input type="text" name="msrp" id="gift-msrp" placeholder="enter merch price here" />
+                                                        </div>
+                                                        <div class="col-xs-5" style="margin-top:  25px;">
+                                                            <label for="file-upload" class="custom-file-upload margin_bottom20" id="file_gift">
+                                                                <i class="fa fa-cloud-upload"></i> Upload Image
+                                                            </label>
+                                                            <input class="noshow-file-upload" id="gift_file" type="file"/>
+                                                            <div id="hidden_gift_name" class="hidden-filename"><i class="fa fa-check"></i>&nbsp;<span id="gift_file_name"></span></div>
+                                                        </div>
+                                                    </div>
+                                                    <button id="add-gift" val="casttabletoggle" class="btn button disabled special w100 t60" style="font-size:1.3rem">Add Campaign Merch</button>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+                    <a class="button fs-title" id="update_campaign" href="#">UPDATE PROJECT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{/if}}
+
+</template>
+
+
+<template name="editProjectMaster">
+    <div id="content" class="clearfix ">
+        <div class="clearfix wrapper">
+            <header id="page-title">
+                <div class="row">
+                    <div class="col-xs-9">
+                        <h1 class="title">Edit Campaign</h1>
+                        <h2 class="subtitle">Remember to save for changes to take effect</h2>
+                    </div>
+
+                    <div class="col-xs-3">
+                        <a onclick="resetNewProjCache()" id="resetNewProjCacheBtn" class="button krown-box right" style="{{#unless cachedNewProject}}display: none;{{/unless}}">RESET</a>
+                    </div>
+                </div>
+            </header>
+            <div class="normal-content ">
+                <div id="project-container" class="krown-tabs responsive-on clearfix">
+                    {{ > editProject }}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,7 @@
+<template name="removeMemberPopup">
+    <p>{{_ 'remove-member-pop'
+            name=user.profile.name
+            username=user.profile.username
+            boardTitle=board.title}}</p>
+    <input type="submit" class="js-confirm negate full" value="{{_ 'remove-member'}}">
+</template>

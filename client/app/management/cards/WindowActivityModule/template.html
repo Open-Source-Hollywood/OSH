@@ -1,0 +1,20 @@
+<template name="WindowActivityModule">
+    <div class="window-module">
+        <div class="window-module-title window-module-title-no-divider">
+            <span class="window-module-title-icon icon-lg fa fa-comments-o"></span>
+            <h3 class="h3b">{{ _ 'activity'}}</h3>
+        </div>
+        {{# if currentUser.isBoardMember }}
+            <div class="new-comment js-new-comment">
+                {{> userAvatar user=currentUser size="small" class="member-no-menu" }}
+                <form id="CommentForm">
+                    {{#editor class="new-comment-input js-new-comment-input"}}{{/editor}}
+                    <div class="add-controls clearfix">
+                        <input type="submit" class="primary confirm clear js-add-comment" value="{{_ 'comment'}}" tabindex="2">
+                    </div>
+                </form>
+            </div>
+        {{/ if }}
+        {{ > cardActivities }}
+    </div>
+</template>

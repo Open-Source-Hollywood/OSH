@@ -1,0 +1,25 @@
+<template name="applicantsContracts">
+
+  <!-- active negotiations -->
+  <div class="table-responsive" style="overflow: hidden;">
+    <table class="table">
+
+      <tbody>
+
+
+
+        {{#each offers}}
+          <tr>
+            <td><p class="align-center">{{offerName}}</p></td>
+            <td><p class="align-center">{{offer.message}}</p></td>
+            <td class="center"><a style="width:100%" href="{{contractLink}}" class="btn btn-mini btn-primary">VIEW DETAILS</a></td>
+          </tr>
+
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+
+
+</template>

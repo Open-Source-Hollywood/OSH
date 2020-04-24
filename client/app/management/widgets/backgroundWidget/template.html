@@ -1,0 +1,13 @@
+<template name="backgroundWidget">
+    <div class="board-widgets-content-wrapper fancy-scrollbar">
+        <div class="board-widgets-content">
+            <div class="board-backgrounds-list clearfix">
+                {{#each backgroundColors}}
+                    <div class="board-background-select js-select-background">
+                        <span class="background-box " style="background-color: {{this}}; "></span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>

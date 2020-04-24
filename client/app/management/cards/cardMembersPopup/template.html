@@ -1,0 +1,20 @@
+<template name="cardMembersPopup">
+    <div>
+        {{! <input class="js-search-mem js-autofocus" placeholder="Search members…" type="text"> }}
+        <ul class="pop-over-member-list checkable js-mem-list">
+            {{# each card.board.members }}
+                <li class="item js-member-item {{#if isCardMember}}active{{/if}}">
+                    <a href="#" class="name js-select-member">
+                        {{> userAvatar user=user size="small" }}
+                        <span class="full-name">
+                            {{ user.firstName }} {{ user.lastName }}
+                        </span>
+                        {{#if isCardMember}}
+                            <span class="icon-sm fa fa-check checked-icon"></span>
+                        {{/if}}
+                    </a>
+                 </li>
+            {{/ each}}
+        </ul>
+    </div>
+</template>

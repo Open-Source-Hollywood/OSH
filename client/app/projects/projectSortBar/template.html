@@ -1,0 +1,18 @@
+<template name="sortBar">
+
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="sortBar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Sort by <b><span id="sortChoice" style="color: #333;">Hot</span></b>
+      <span class="caret"></span>
+    </button>
+    <ul id="sort-menu" class="dropdown-menu" aria-labelledby="sortBar">
+      <li><a id="hot" href="#">Hot</a></li>
+      <li><a id="top" href="#">Top</a></li>
+      <li><a id="newest" href="#">Newest</a></li>
+      <li ><a id="alphabetical" href="#">A-Z</a></li>
+<!--       <li ><a id="film" href="#">Film Projects</a></li>
+      <li ><a id="music" href="#">Music Projects</a></li>
+      <li ><a id="books" href="#">Writing Projects</a></li> -->
+    </ul>
+  </div>
+</template>

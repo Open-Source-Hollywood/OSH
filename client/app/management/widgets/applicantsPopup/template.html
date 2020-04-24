@@ -1,0 +1,18 @@
+<template name="applicantsPopup">
+    <div class="board-widgets-content-wrapper fancy-scrollbar">
+        <div class="board-widgets-content">
+            <h3 class="h3b" style="color:#333">{{_ 'applicants'}}</h3>
+            <hr>
+            <div class="board-backgrounds-list clearfix">
+                {{#if areApplicants}}
+                    {{# each applicants}}
+                        {{> applicantAvatar user=this draggable=false size="large"}}
+                    {{/ each}}
+                {{else}}
+                    <h3 class="h3b" style="color:#333">There are no applicants</h3>
+                {{/if}}
+            </div>
+
+        </div>
+    </div>
+</template>

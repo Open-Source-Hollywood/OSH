@@ -1,0 +1,25 @@
+<template name="board">
+    {{onboarded}}
+    {{# if this }}
+        <div id="page-wrapper" class="board-wrapper {{# unless session 'sidebarIsOpen' }}disabled-all-widgets{{/ unless }}" style="background: transparent;">
+            <div class="board-header clearfix js-board-header">
+                <p class="board-header-btn board-header-btn-name">
+                    <span class="alignright board-header-btn-text" style="font-size:2em"> {{ title }} </span>
+                </p>
+                <div class="board-header-btns right">
+                    {{#if Filter.isActive}}
+                        <a class="board-header-btn board-header-btn-filter-indicator js-filter-cards-indicator" title="{{_ 'filter-on-desc'}}">
+                            <span class="board-header-btn-icon icon-sm fa fa-filter"></span><span class="board-header-btn-text underline">{{_ 'filter-on'}}</span>
+                            <span class="board-header-btn-icon-close icon-sm fa fa-times js-filter-card-clear" title="{{_ 'filter-clear'}}"></span>
+                        </a>
+                    {{/if}}
+                </div>
+            </div>
+            {{ > boardWidgets board=this }}
+            {{ > lists board=this }}
+            {{ > yield "modal" }}
+        </div>
+    {{ else }}
+        {{ > message label='board-not-found' color='white'}}
+    {{/if}}
+</template>

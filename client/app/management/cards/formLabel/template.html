@@ -1,0 +1,12 @@
+<template name="formLabel">
+    <div class="colors clearfix">
+        <label for="labelName">{{_ 'name'}}</label>
+        <input id="labelName" type="text" name="name" class="js-autofocus js-label-name" value='{{ name }}'>
+        <label>{{_ "select-color"}}</label>
+        {{# each labels }}
+            <span class="card-label card-label--selectable card-label-{{ color }} palette-color js-palette-color">
+            <span class="card-label-color-select-icon icon-sm fa fa-check light js-palette-select {{#unless isTrue color ../color}}hide{{/unless}}"></span>
+            </span>
+        {{/each}}
+    </div>
+</template>

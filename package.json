@@ -12,6 +12,7 @@
     "aws-sdk": "^2.7.27",
     "base64-img": "^1.0.3",
     "fiber": "^1.0.4",
+    "json-pretty-html": "^1.1.6",
     "meteor-node-stubs": "^0.2.3",
     "request": "^2.1.1",
     "stripe": "^5.6.0",

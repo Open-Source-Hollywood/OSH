@@ -1,0 +1,11 @@
+<template name="cardMorePopup">
+    <p class="quiet bottom">
+        <span class="clearfix">
+            <span>{{_ 'link-card'}}</span>
+            <span class="icon-sm fa {{#if card.board.isPublic}}fa-globe{{else}}fa-lock{{/if}}"></span>
+            <input class="js-url js-autoselect inline-input" type="text" readonly="readonly" value="{{ card.rootUrl }}">
+        </span>
+        {{_ 'added'}} <span class="date" title="{{ card.createdAt }}">{{ moment card.createdAt 'LLL' }}</span> -
+        <a class="js-delete" href="#" title="{{_ 'card-delete-notice'}}">{{_ 'delete'}}</a>
+    </p>
+</template>

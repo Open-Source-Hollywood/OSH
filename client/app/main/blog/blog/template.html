@@ -1,0 +1,40 @@
+<template name="blog">
+  <div id="content" class="clearfix layout-right-sidebar">
+    <div class="clearfix wrapper">
+        <header id="page-title">
+            <h1 class="title">{{title}}</h1>
+            <h2 class="subtitle"><aside class="post-meta">
+          <ul>
+            <li class="date">{{moment}}</li>
+            <!-- <li class="comments"><a href="http://backer-demo.krownthemes.com/pictures/first-ultra-awesome-post/#comments">Comments 4</a></li> -->
+          </ul>
+        </aside></h2></header>
+        <div>
+            <article id="post-619" class="article clearfix post-619 post type-post status-publish format-standard has-post-thumbnail hentry category-pictures tag-image tag-landscape tag-words-2">
+                <figure class="post-image">
+                    <img src="{{image}}" width="845" height="453" alt="{{title}}" class="center-block"> 
+                </figure>
+                <div class="post-body clearfix">
+                    <!-- <section class="post-content clearfix"> -->
+                        <aside class="share-buttons clearfix">
+                            <p>Share this article</p>
+                            <div class="holder clearfix">
+                                {{> shareit shareData}}
+                            </div>
+                        </aside>
+                        <div class="krown-column-row clearfix">
+                            <div id="htmlText" class="krown-column-container clearfix first last span12 clearfix">
+                              {{_htmlText}}
+                            </div>
+                        </div>
+                        <span class="tags">Tagged with: {{tags}}</span>
+                    <!-- </section> -->
+                </div>
+            </article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+    <!-- Main Wrapper End -->
+  </div>
+</template>
