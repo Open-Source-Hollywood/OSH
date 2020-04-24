@@ -39,6 +39,7 @@ Template.editProject.events({
   },
   'change #category': function() {
     var cat = $('#category').val();
+    var selectOptionsGenre = getSelectedGenresOptions()
     var meta = selectOptionsGenre.meta[cat];
     if (meta) {
       var opts = selectOptionsGenre[meta];
@@ -55,20 +56,23 @@ Template.editProject.events({
     }
   },
   'change #banner_file': function (e, template) {
-      if (e.currentTarget.files && e.currentTarget.files[0]) {
-        osettings.banner = {};
-        
-        var files = e.target.files;
-        osettings.banner = osettings.banner||{}
-        osettings.banner.file = files[0];
+    if (e.currentTarget.files && e.currentTarget.files[0]) {
+      var osettings = getOSettings()
+      osettings.banner = {};
+      
+      var files = e.target.files;
+      osettings.banner = osettings.banner||{}
+      osettings.banner.file = files[0];
 
-        if (osettings.banner.file.type.indexOf("image")==-1) {
-          vex.dialog.alert('Invalid File, you can only upload a static image for your profile picture');
-          return;
-        };
+      if (osettings.banner.file.type.indexOf("image")==-1) {
+        vex.dialog.alert('Invalid File, you can only upload a static image for your profile picture');
+        return;
+      };
 
-        return setNewProjectBanner(osettings.banner.file);
-      }
+      setOSettings(osettings)
+
+      return setNewProjectBanner(osettings.banner.file);
+    }
   },
   'click #showbudget': function(e) {
     e.preventDefault();
@@ -83,6 +87,7 @@ Template.editProject.events({
   },
   'change #gift_file': function (e, template) {
       if (e.currentTarget.files && e.currentTarget.files[0]) {
+        var osettings = getOSettings()
         osettings.giftImage = {};
         var reader = new FileReader();
         var files = e.target.files;
@@ -93,6 +98,8 @@ Template.editProject.events({
         };
         reader.onload = function(readerEvt) {
             osettings.giftImage.data = readerEvt.target.result;
+            setOSettings(osettings)
+
             /** set file.name to span of inner el */
             $('#gift_file_name').text(file.name);
             $('#hidden_gift_name').show();
@@ -240,7 +247,7 @@ Template.editProject.events({
   },
   'click #add-gift': function(e) {
     e.preventDefault();
-
+    var osettings = getOSettings()
     $('#merchtabletoggle').show()
     var o = {};
     o.name = $('#gift-title').val(), o.description = $('#gift-description').val(), o.msrp = parseFloat($('#gift-msrp').val());
@@ -275,6 +282,7 @@ Template.editProject.events({
     o.disclaimer = $('#merch_disclaimer').val();
     osettings.giftImage = {};
     gifts.push(o);
+    setOSettings(osettings)
     // console.log(gifts)
     appendCampaignMerchTable(o);
     

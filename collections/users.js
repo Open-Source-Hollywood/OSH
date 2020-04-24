@@ -53,7 +53,7 @@ Users.before.insert(function (userId, doc) {
       doc.firstName = doc.services && doc.services.auth0 && doc.services.auth0.given_name || '';
       doc.lastName = doc.services && doc.services.auth0 && doc.services.auth0.family_name || '';
       doc.avatar = 'https://s3-us-west-2.amazonaws.com/producehour/avatar.png';
-      doc.influenceScore = 1000;
+      doc.influenceScore = 500;
       doc.rating = 5;
       doc.didSetProfile = false;
       doc.privacy = false;    

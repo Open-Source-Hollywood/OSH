@@ -1,0 +1,129 @@
+<template name="config">
+  <div id="content" class="clearfix ">
+    <div class="clearfix wrapper">
+
+        <header id="page-title">
+            <h1 class="title">Welcome to Open Source Hollywood!</h1>
+            <h2 class="subtitle">Please make your basic configurations here to continue.</h2></header>
+
+        <div class="normal-content ">
+
+            <div class="krown-tabs responsive-on clearfix">
+                <div class="contents clearfix" style="width: 100%;">
+
+                    <!-- MultiStep Form -->
+                    <div class="row" id="config_form">
+                        <div class="col-md-6 col-md-offset-3">
+                            <form id="msform">
+                                <!-- progressbar -->
+                                <!-- <ul id="progressbar">
+                                    <li class="active">Roles</li>
+                                    <li>Your Info</li>
+                                </ul> -->
+                                <!-- fieldsets -->
+                                <!-- <fieldset>
+                                    <h2 class="fs-title">Choose Your Roles</h2>
+                                    <h3 class="fs-subtitle">You can update this in your settings anytime after.</h3>
+                                    <section title=".roundedTwo">
+                                      <div class="roundedTwo">
+                                        <input type="checkbox" value="producer" id="roundedTwo1" class="user_roles" name="check11" checked />
+                                        <label for="roundedTwo1"></label>
+                                      </div>
+                                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am a Producer</label>
+                                    </section>
+                                    <br>
+                                    <section title=".roundedTwo">
+                                      <div class="roundedTwo">
+                                        <input type="checkbox" value="roles" id="roundedTwo2" class="user_roles" name="check22" checked />
+                                        <label for="roundedTwo2"></label>
+                                      </div>
+                                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I want to apply for Cast or Crew positions</label>
+                                    </section>
+                                    <br>
+                                      <section title=".roundedTwo">
+                                      <div class="roundedTwo">
+                                        <input type="checkbox" value="view" id="roundedTwo3" class="user_roles" name="check33" checked />
+                                        <label for="roundedTwo3"></label>
+                                      </div>
+                                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I want to View and Support projects</label>
+                                    </section>
+                                    <br>
+                                    <input type="button" name="next" class="next action-button" value="Next"/>
+                                </fieldset> -->
+                                <fieldset>
+                                    <h2 class="fs-title">Agree to Terms and Conditions</h2>
+
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="" checked>Please review the <a href="/terms" target="_blank">terms on this page</a> and submit the button to continue.</label>
+                                    </div>
+
+
+                                    {{#if needsEmail}}
+                                    <h3 class="fs-subtitle">Enter your email.</h3>
+                                    <input type="text" name="email" placeholder="Email"/>
+                                    {{/if}}
+
+                                    <!-- <input type="text" name="phone" placeholder="Phone"/> -->
+                                    <input id="submit" type="submit" name="submit" class="submit action-button" value="I Agree"/>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.MultiStep Form -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Inner Wrapper End -->
+    </div>
+
+    <!-- Main Wrapper End -->
+  </div>
+  <script type="text/javascript" src="/js/scripts.min.js"></script>
+  <script type="text/javascript">
+
+    //jQuery time
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
+
+    $(".next").click(function(){
+      if(animating) return false;
+      animating = true;
+      
+      current_fs = $(this).parent();
+      next_fs = $(this).parent().next();
+      
+      //activate next step on progressbar using the index of next_fs
+      $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+      
+      //show the next fieldset
+      next_fs.show(); 
+      //hide the current fieldset with style
+      current_fs.animate({opacity: 0}, {
+        step: function(now, mx) {
+          //as the opacity of current_fs reduces to 0 - stored in "now"
+          //1. scale current_fs down to 80%
+          scale = 1 - (1 - now) * 0.2;
+          //2. bring next_fs from the right(50%)
+          left = (now * 50)+"%";
+          //3. increase opacity of next_fs to 1 as it moves in
+          opacity = 1 - now;
+          current_fs.css({
+            'transform': 'scale('+scale+')',
+            'position': 'absolute'
+          });
+          next_fs.css({'left': left, 'opacity': opacity});
+        }, 
+        duration: 800, 
+        complete: function(){
+          current_fs.hide();
+          animating = false;
+        }, 
+        //this comes from the custom easing plugin
+        easing: 'easeInOutBack'
+      });
+    });
+
+  </script>
+</template>

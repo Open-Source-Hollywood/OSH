@@ -24,7 +24,10 @@ Template.projectView.events({
   'click .goto_community': function() {
     simulateClick(document.getElementsByClassName('goto_proj_community')[0])
   },
-
+  'click .goto_edit_campaign': function() {
+    var path = `/edit/projects/${this.slug}/${this.ownerId}`;
+    Router.go(path);
+  },
   'click .goto_manage': function() {
     $('#access_board_convenience').click()
   },

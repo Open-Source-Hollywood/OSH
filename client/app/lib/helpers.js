@@ -1,5 +1,20 @@
+const StripePublicKey = 'pk_test_imJVPoEtdZBiWYKJCeMZMt5A';
+
 var donationObject = {}, currentSlug, currentTitle, currentProject, me, was;
-const StripePublicKey = 'pk_test_Dgvlv9PBf6RuZJMPkqCp00wg';
+var currUID, currAvatar, currName, assetMultiDialogOpen = false, v2DialogOpen = false
+var gifts = [], resources = [], reels = [], social = [];
+var didNotifyAboutAddedMerch = false
+var didNotifyAboutAddedResource = false
+var osettings = {giftImage: {}, avatar: {}};
+
+resetEnv = function() {
+  donationObject = {}
+  gifts = [], resources = [], reels = [], social = []
+  didNotifyAboutAddedMerch = false
+  didNotifyAboutAddedResource = false
+  osettings = {giftImage: {}, avatar: {}}
+  var assetMultiDialogOpen = false, v2DialogOpen = false
+}
 
 makeStripeCharge = function (options) {
   StripeCheckout.open({
@@ -26,6 +41,42 @@ makeStripeCharge = function (options) {
 
 initVex = function () {
 
+}
+
+vexScore = function (usr) {
+  vex.dialog.alert({
+    message: 'What is a score?',
+    input: [
+      '<div> ',
+        '<form> ',
+          '<div class="checkbox">',
+            '<label style="display: grid;">',
+              '<input type="checkbox" value="" name="t1" id="t1">',
+              'Think of it like money.',
+            '</label>',
+          '</div>',
+          '<div class="checkbox">',
+            '<label style="display: grid;">',
+              '<input type="checkbox" value="" name="t2" id="t2">',
+              'Your work (engagements and projects) earn you points.',
+            '</label>',
+          '</div>',
+          '<div class="checkbox">',
+            '<label style="display: grid;">',
+              '<input type="checkbox" value="" name="t3" id="t3">',
+              'Work in. Work out.',
+            '</label>',
+          '</div>',
+          '<div class="checkbox">',
+            '<label style="display: grid;">',
+              '<input type="checkbox" value="" name="t4" id="t4">',
+              'You work, and we help (with connections, tools, and cloud storage).',
+            '</label>',
+          '</div>',
+        '</form>',
+      '</div>',
+    ].join('')
+  })
 }
 
 innerVexApply = function (options, cb) {
@@ -330,4 +381,218 @@ negotiationHelper = function (key) {
     return negotiatedRole[key];
   };
   return false;
+}
+
+videoURLValidation = function (url) {
+  var vimeo = /^https:\/\/vimeo.com\/[\d]{8,}$/;
+  var youtube = /^https:\/\/youtu.be\/[A-z0-9]{9,}$/;
+  if (!vimeo.test(url)&&!youtube.test(url)) return url;
+  if (url.indexOf('vimeo')>-1) {
+    var patternMatch = /^https:\/\/vimeo.com\/([\d]{8,}$)/;
+    var videoID = url.match(patternMatch)[1];
+    return 'https://player.vimeo.com/video/' + videoID + '?autoplay=0&loop=1&autopause=0';
+  } else {
+    var patternMatch = /^https:\/\/youtu.be\/([A-z0-9]{9,}$)/;
+    var videoID = url.match(patternMatch)[1];
+    return 'https://www.youtube.com/embed/' + videoID;
+  }
+}
+
+appendPersonalMerchTable = function (o) {
+  if (!didNotifyAboutAddedMerch) {
+    didNotifyAboutAddedMerch = true
+    $('body').position().top += 100
+  };
+
+  gifts.push(o)
+  Session.set('gifts', gifts)
+  saveSettings();
+
+  $('.deleteRow').off()
+  $('.deleteRow').on('click', deleteRow);
+  $('#merchtabletoggle').show()
+
+  vex.dialog.alert('your personal merchandise was added')
+};
+
+appendSocialToTable = function (o, set) {
+  social.push(o)
+  Session.set('social', social);
+  $('#social-table-toggle').show()
+  $('#social-table').append('<tr class="social-val"><td>'+o.name+'</td><td>'+o.address+'</td><td><button val="social" class="deleteRow button small special">X</button></td></tr>');
+  $('.deleteRow').off()
+  $('.deleteRow').on('click', deleteRow);
+  $('#social-title').val(''), $('#social-url').val('');
+}
+
+appendMediaURLtoTable = function (o, set) {
+  if (!o.url) return;
+  reels.push(o)
+  $('#reel-table-toggle').show()
+  $('#reel-table').append([
+      '<tr class="krown-pricing-title reel-val">',
+        '<td><div class="krown-column-container">',
+          o.name?'<small>'+o.name+'</small><br>':'',
+          o.url,
+          '</div><div class="krown-pie">',
+          '<button val="reel" class="right deleteRow button special small">X</button>',
+        '</div></td>',
+      '</tr>'
+    ].join(''));
+  $('.deleteRow').off()
+  $('.deleteRow').on('click', deleteRow);
+  $('#reel-name').val('');
+  $('#reel-url').val('');
+}
+
+deleteRow = function (e) {
+  e.preventDefault();
+  var ctx = $(e.target).attr('val')
+  if (ctx) {
+    try {
+
+      if (ctx==='resource') {
+        resources.splice(idx, 1);
+      };
+
+      if (ctx==='reel') {
+        reels.splice(idx, 1);
+      };
+
+      if (ctx==='social') {
+        social.splice(idx, 1);
+      };
+    } catch(e) {}
+  };
+
+  $(e.target).closest('tr').remove();
+}
+
+removeGift = function (e) {
+  e.preventDefault();
+  var idx = $($(this).closest('tr')).index();
+  gifts.splice(idx, 1);
+  $(this).closest('tr').remove();
+}
+
+isURL = function (str) {
+  var pattern = new RegExp('^(https?):\\/\\/[^ "]+$','i');
+  return pattern.test(str);
+}
+
+guid = function () {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
+
+phoneVerifyVexCB = function (data) {
+  // vex.closeAll();
+    if (data) {
+      $('osh_loader').show();
+        Meteor.call('verifyPhonePIN', data.pin, function(err, msg) {
+          $('osh_loader').hide();
+          vex.dialog.alert(msg);
+        });
+    }
+}
+
+phoneVerifyVex = function () {
+  vex.dialog.open({
+      message: 'VERIFY PHONE NUMBER',
+      input: [
+          '<input type="text" value="Enter 4 digit PIN to verify:" readonly/>',
+          '<input name="pin" type="number" placeholder="XXXX" required />'
+      ].join(''),
+      buttons: [
+          $.extend({}, vex.dialog.buttons.YES, { text: 'PROCEED' }),
+          $.extend({}, vex.dialog.buttons.NO, { text: 'Cancel' })
+      ],
+      callback: function (data) {
+        return phoneVerifyVexCB(data);
+      }
+  });
+}
+
+saveSettings = function (o) {
+  /**
+    firstname
+    lastname
+    bio
+    category -- primaryRole
+    user-role -- checkboxes //array
+    needs-val  == table //array
+    social-val  == table //array
+    reel-val  == table //array
+
+  */
+
+  o = o || {};
+  o.firstName = $('#first_name').val();
+  o.lastName = $('#last_name').val();
+  var descriptionText = $('#summernote').summernote('code').replace(/(<script.*?<\/script>)/g, '');
+    var plainText = $("#summernote").summernote('code')
+        .replace(/<\/p>/gi, " ")
+        .replace(/<br\/?>/gi, " ")
+        .replace(/<\/?[^>]+(>|$)/g, "")
+        .replace(/&nbsp;|<br>/g, " ")
+        .trim();
+  if (plainText&&plainText.indexOf('https://en.wikipedia.org/wiki/Template:Biography')===-1) {
+    o.bio = descriptionText;
+    o.bio_plaintext = plainText;
+  } else {
+    o.bio = '';
+  };
+  o.primaryRole = $('#category').find(":selected").text();
+  if (o.primaryRole.toLowerCase().indexOf('primary')>-1) delete o['primaryRole'];
+  o.iam = [];
+  o.assets = resources||[];
+  o.social = social||[];
+  o.reels = reels||[];
+  o.gifts = gifts||[];
+
+  o.avatar = osettings.avatar;
+  if ($('#website').val().trim()&&$('#website').val()!=='enter http://www.your.site') o.website = $('#website').val();
+
+  var userRoles = $('.user-role');
+  userRoles.each(function(idx, el) {
+    if ($(el).prop('checked')) o.iam.push($(el).attr('name'));
+  });
+
+  o.iamRoles= $('.user_roles:checked').map(function(){return $(this).val()}).get()
+
+  console.log(o)
+
+  // console.log('upgradeProfile with')
+  // console.log(o)
+  Meteor.call('upgradeProfile', o);
+}
+
+appendResourceToTable = function (o) {
+  if (!didNotifyAboutAddedResource) {
+    didNotifyAboutAddedResource = true
+    $('body').position().top += 100
+  };
+
+  $('#assets-table-toggle').show()
+  $('#needs-table').append([
+    '<tr class="needs-val">',
+      '<td>'+(o.category||'N/A')+'</td>',
+      '<td>'+(o.name||'N/A')+'</td>',
+      '<td>'+(o.description||'N/A')+'</td>',
+      '<td><button val="resource" class="deleteRow button special small right">X</button></td>',
+    '</tr>'].join(''));
+  $('.deleteRow').off()
+  $('.deleteRow').on('click', deleteRow);
+  $("#needs-category").val($("#needs-category option:first").val()), $('#needs-description').val('');
+
+  resources.push(o)
+  Session.set('resources', resources)
+  saveSettings();
+
+  vex.dialog.alert('resource added')
 }

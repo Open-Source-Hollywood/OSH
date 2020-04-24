@@ -9,6 +9,12 @@
 <template name="projectView">
   <div id="content" class="clearfix ">
     <div class="clearfix wrapper">
+        {{#if isAllowed}}
+
+            <a id="access_board_convenience" href="/boards/{{project.bid}}/{{project.slug}}" class="btn-lg krown-button w100" style="color: #333!important;background-color: #fff!important;border: 0.5px solid #333!important;max-width: 830px;"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;COLLABORATION BOARD</a>
+            <p>&nbsp;</p>
+
+        {{/if}}
         <header id="page-title" style="padding-top: 0px;">
             <h1 class="title">{{project.title}}</h1>
             {{#if currentUser}}
@@ -26,11 +32,7 @@
             {{/if}}
             <h2 class="subtitle">{{project.logline}}</h2>
         </header>
-        {{#if isAllowed}}
 
-            <a id="access_board_convenience" href="/boards/{{project.bid}}/{{project.slug}}" class="btn-lg krown-button w100" style="color: #333!important;background-color: #fff!important;border: 0.5px solid #333!important;max-width: 830px;"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;ACCESS COLLAB BOARD</a>
-
-        {{/if}}
         <div class="normal-content ">
             <div id="project-container" class="krown-tabs responsive-on clearfix">
                 <ul class="titles clearfix">
@@ -58,6 +60,7 @@
                           <span class="tabs-select-inner" style="display: block; white-space: nowrap;">Campaign</span>
                         </span> 
                       </div>
+                      <p>&nbsp;</p>
                   {{else}}
                       <li class="opened">
                           <h5>Campaign</h5></li>
@@ -86,6 +89,94 @@
                 <a href="javascript:void(0)" class="btn col-sm-12 gotoedit tabs-select"></a>
                 <p>&nbsp;</p>
                 {{/if}}
+
+                {{#unless isOwner}}
+                  {{#if hasGifts}}
+                  <div class="container-fluid col-xs-12 t20 projviewsexn">
+                      <h2>Merchandise</h2>
+                      <div class="row flex-row flex-nowrap">
+                          {{#each gifts}}
+
+                            <div class="col-xs-3">
+                              <div class="well mh300">
+                                <div class="thumbnail">
+                                  <img src="{{this.url}}">
+                                  <div class="caption">
+                                    <p><small>({{type}})</small></p>
+                                    <h6>{{name}}</h6>
+                                    <p>{{description}}</p>
+                                    <p><a class="c-related__a button special w100 t20 purchase_gift">${{msrp}}</a></p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {{else}}
+
+                            <p class="t20 lead">None</p>
+
+                          {{/each}}
+                        
+                      </div>
+                  </div>
+                  {{/if}}
+                  {{#if currentUser}}
+                    {{#if hasNeeds}}
+                    <div class="container-fluid col-xs-12 t20 projviewsexn">
+                        <h2>Requested Needs</h2>
+                        <div class="row flex-row flex-nowrap">
+                            {{#each project.needs}}
+
+                              <div class="col-xs-3">
+                                <div class="caption well">
+                                  <h6>{{category}}</h6>
+                                  <p>{{description}}</p>
+                                  <p><a class="c-related__a button special w100 t20 offer_resource">offer this resource</a></p>
+                                </div>
+                              </div>
+
+                              {{else}}
+
+                              <p class="t20 lead">None</p>
+
+                            {{/each}}
+                          
+                        </div>
+                    </div>
+                    {{/if}}
+                  {{/if}}
+                {{else}}
+
+                  <!-- list backers -->
+                  <!-- list applicants -->
+                  {{#if backers}}
+                  <h5>BACKERS</h5>
+                  {{/if}}
+                  {{#each backers}}
+                     <div class="col-lg-3 col-xs-12 col-sm-6 col-md-4">
+
+                        <div class="card hovercard">
+                            <div class="cardheader">
+
+                            </div>
+                            <div class="avatar">
+                                <img alt="" src="{{avatar}}">
+                            </div>
+                            <div class="info">
+                                <div class="title">
+                                    <a href="/profile/{{ _id }}">{{firstName}} {{lastName}}</a>
+                                </div>
+                                {{#each iam}}
+                                  <div class="desc">{{this}}</div>
+                                {{/each}}
+                                
+                            </div>
+                        </div>
+                     </div>
+                  {{/each}}
+                  <p>&nbsp;</p>
+                  {{> applicants}}
+                {{/unless}}
 
                 <div class="contents clearfix">
                     <div id="description" style="display: block;">
@@ -277,12 +368,6 @@
                             <!--if show author -->
                             {{else}}
 
-<!-- 
-goto_proj_updates
-goto_proj_comments
-goto_proj_community
-goto_proj_manage 
--->
                             <div class="id-widget-wrap nofloat">
                                 <div class="id-widget id-full">
                                     <div class="id-product-infobox">
@@ -367,100 +452,6 @@ goto_proj_manage
                             {{/unless}}
                             <div class="poweredbyID"><span><a href="https://opensourcehollywood.org" title="Crowdfunding and Crowdsourcing by Open Source Hollywood">Powered By Open Source Hollywood</a></span></div>
                         </aside>
-
-
-                        {{#unless isOwner}}
-                          {{#if hasGifts}}
-                          <div class="container-fluid col-xs-12 t20 projviewsexn">
-                              <h2>Merchandise</h2>
-                              <div class="row flex-row flex-nowrap">
-                                  {{#each gifts}}
-
-                                    <div class="col-xs-3">
-                                      <div class="well mh300">
-                                        <div class="thumbnail">
-                                          <img src="{{this.url}}">
-                                          <div class="caption">
-                                            <p><small>({{type}})</small></p>
-                                            <h6>{{name}}</h6>
-                                            <p>{{description}}</p>
-                                            <p><a class="c-related__a button special w100 t20 purchase_gift">${{msrp}}</a></p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    {{else}}
-
-                                    <p class="t20 lead">None</p>
-
-                                  {{/each}}
-                                
-                              </div>
-                          </div>
-                          {{/if}}
-                          {{#if currentUser}}
-                            {{#if hasNeeds}}
-                            <div class="container-fluid col-xs-12 t20 projviewsexn">
-                                <h2>Requested Needs</h2>
-                                <div class="row flex-row flex-nowrap">
-                                    {{#each project.needs}}
-
-                                      <div class="col-xs-3">
-                                        <div class="caption well">
-                                          <h6>{{category}}</h6>
-                                          <p>{{description}}</p>
-                                          <p><a class="c-related__a button special w100 t20 offer_resource">offer this resource</a></p>
-                                        </div>
-                                      </div>
-
-                                      {{else}}
-
-                                      <p class="t20 lead">None</p>
-
-                                    {{/each}}
-                                  
-                                </div>
-                            </div>
-                            {{/if}}
-                          {{/if}}
-                        {{else}}
-
-                        <!-- list backers -->
-                        <!-- list applicants -->
-                        <hr>
-                        {{#if backers}}
-                        <h5>BACKERS</h5>
-                        {{/if}}
-                        {{#each backers}}
-                           <div class="col-lg-3 col-xs-12 col-sm-6 col-md-4">
-
-                              <div class="card hovercard">
-                                  <div class="cardheader">
-
-                                  </div>
-                                  <div class="avatar">
-                                      <img alt="" src="{{avatar}}">
-                                  </div>
-                                  <div class="info">
-                                      <div class="title">
-                                          <a href="/profile/{{ _id }}">{{firstName}} {{lastName}}</a>
-                                      </div>
-                                      {{#each iam}}
-                                        <div class="desc">{{this}}</div>
-                                      {{/each}}
-                                      
-                                  </div>
-                              </div>
-                           </div>
-                        {{/each}}
-                        <hr>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                        {{> applicants}}
-
-
-                        {{/unless}}
                     </div>
 
                     <div id="updates" class="project-content container" style="display: none;">
@@ -666,8 +657,8 @@ goto_proj_manage
 
         </tbody>
       </table>
-      <p>&nbsp;</p>
-      <button onclick="$('.gotoedit').click();" class="w100 button bg-teal fs-title">EDIT CAMPAIGN</button>
+      <!-- <p>&nbsp;</p> -->
+      <!-- <button id="goto_edit_campaign" class="w100 button bg-teal fs-title">EDIT CAMPAIGN</button> -->
     </div>
   </div>
 

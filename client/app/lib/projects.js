@@ -41,17 +41,36 @@ var selectOptionsGenre = {
   }
 }
 
+resetProjectVars = function() {
+  donationObject = {}
+  gifts = []
+  osettings = {}
+  positions = {}
+}
+
+getOSettings = function() {
+  return osettings
+}
+
+setOSettings = function(o) {
+  osettings = o
+}
+
+getSelectedGenresOptions = function() {
+  return selectOptionsGenre
+}
+
 summernoteRender = function() {
-  gifts = [];
-  osettings = {};
-  osettings.banner = {};
-  osettings.giftImage = {};
-  positions = {};
+  gifts = []
+  osettings = {}
+  osettings.banner = {}
+  osettings.giftImage = {}
+  positions = {}
   setTimeout(function() {
-    var script = document.createElement('script');
-    script.src = "/js/scripts.min.js";
-    document.head.appendChild(script);
-  }, 233);
+    var script = document.createElement('script')
+    script.src = "/js/scripts.min.js"
+    document.head.appendChild(script)
+  }, 233)
   $('#summernote').summernote({
     toolbar: [
       // [groupName, [list of button]]

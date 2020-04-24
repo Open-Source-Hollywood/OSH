@@ -75,19 +75,7 @@ function appendMediaURLtoTable(o, set) {
 	if (!o.url) return;
 	reels.push(o)
 	Session.set('reels', reels);
-	$('#reel-table-toggle').show()
-	$('#reel-table').append([
-	  	'<tr class="krown-pricing-title reel-val">',
-	  		'<td><div class="krown-column-container">',
-	  			o.name?'<small>'+o.name+'</small><br>':'',
-	  			o.url,
-	  			'</div><div class="krown-pie">',
-	  			'<button val="reel" class="right deleteRow button special small">X</button>',
-	  		'</div></td>',
-	  	'</tr>'
-	  ].join(''));
-	$('.deleteRow').off()
-	$('.deleteRow').on('click', deleteRow);
+	$('.deleteRow').off().on('click', deleteRow);
 	$('#reel-name').val('');
 	$('#reel-url').val('');
 }
@@ -181,7 +169,7 @@ function saveSettings(o) {
 		reel-val  == table //array
 
 	*/
-
+	var osettings = getOSettings()
 	o = o || {};
 	o.firstName = $('#first_name').val();
 	o.lastName = $('#last_name').val();
@@ -215,7 +203,7 @@ function saveSettings(o) {
 	});
 
 	o.iamRoles= $('.user_roles:checked').map(function(){return $(this).val()}).get()
-
+	setOSettings(osettings)
 	// console.log('upgradeProfile with')
 	// console.log(o)
 	Meteor.call('upgradeProfile', o);
@@ -321,6 +309,7 @@ Template.myProfile.events({
 	},
 	'change #gift_file': function (e, template) {
 		if (e.currentTarget.files && e.currentTarget.files[0]) {
+			var osettings = getOSettings()
 			osettings.giftImage = {};
 			var reader = new FileReader();
 			var files = e.target.files;
@@ -331,6 +320,7 @@ Template.myProfile.events({
 			};
 			reader.onload = function(readerEvt) {
 			    osettings.giftImage.data = readerEvt.target.result;
+			    setOSettings(osettings)
 			    $('#merch_thumbnail').attr('src', osettings.giftImage.data);
 			    $('#merch_thumbnail').show();
 			    $('#gift_file_name').text(file.name)
@@ -345,6 +335,7 @@ Template.myProfile.events({
 	},
 	'change #avatar_file': function (e, template) {
 	    if (e.currentTarget.files && e.currentTarget.files[0]) {
+			var osettings = getOSettings()
 	    	osettings.avatar = {};
 	    	var reader = new FileReader();
 	    	var files = e.target.files;
@@ -355,6 +346,7 @@ Template.myProfile.events({
 		    };
 		    reader.onload = function(readerEvt) {
 	            osettings.avatar.data = readerEvt.target.result;
+	            setOSettings(osettings)
 	            $('#image_avatar').attr('src', readerEvt.target.result);
 		        var _url = "url(" + readerEvt.target.result + ")";
 		        $('.logo').css("background-image", _url);
@@ -408,11 +400,18 @@ Template.myProfile.events({
       }, true)
     },
     'click #add-reel': function(e) { 
-      e.preventDefault();
-      appendMediaURLtoTable({
-      	name: $('#reel-name').val().trim(),
-      	url: videoURLValidation($('#reel-url').val().trim())
-      }, true)
+		e.preventDefault();
+		var o = {
+			name: $('#reel-name').val().trim(),
+			url: videoURLValidation($('#reel-url').val().trim())
+		}
+		reels.push(o)
+		Session.set('reels', reels);
+		setTimeout(function() {
+			$('.deleteRow').off().on('click', deleteRow);
+		}, 622)
+		$('#reel-name').val('');
+		$('#reel-url').val('');
     },
     'click #vidurl': function(e) {
     	e.preventDefault();
@@ -449,6 +448,7 @@ Template.myProfile.events({
 	'click #add-gift': function(e) {
 	    e.preventDefault();
 	    var o = {};
+	    var osettings = getOSettings()
 	    o.name = $('#gift-title').val(), o.description = $('#gift-description').val(), o.msrp = parseFloat($('#gift-msrp').val());
 	    if (!o.name || Number.isFinite(o.msrp) === false || o.msrp < 1) return alert('please correct the name or price information to continue');
 	    if (!osettings.giftImage.data) o.url = 'https://s3-us-west-2.amazonaws.com/producehour/placeholder_gift.jpg';
@@ -480,6 +480,7 @@ Template.myProfile.events({
 	    };
 	    o.disclaimer = $('#merch_disclaimer').val();
 	    osettings.giftImage = {};
+		setOSettings(osettings)
 	    
 	    for (var key in o.quantity) {
 	    	var _i = parseInt(o.quantity[key])
@@ -805,10 +806,6 @@ Template.myProfile.helpers({
 		} catch(e) {}
 		return false
 	},
-	producer: function() {
-		var user = Meteor.user()
-		return user.iamRoles&&user.iamRoles.indexOf('producer')>-1||false
-	},
 	actor: function() {
 		var user = Meteor.user()
 		return user.iamRoles&&user.iamRoles.indexOf('roles')>-1||false
@@ -816,85 +813,6 @@ Template.myProfile.helpers({
 	assets: function() {
 		var user = Meteor.user()
 		return user.iamRoles&&user.iamRoles.indexOf('assets')>-1||false
-	},
-	viewer: function() {
-		var user = Meteor.user()
-		return user.iamRoles&&user.iamRoles.indexOf('view')>-1||false
-	},
-	noUserEmail: function() {
-	  if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.email&&Meteor.user().notification_preferences.email.verification) {
-	    return false
-	  };
-
-	  if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.phone&&Meteor.user().notification_preferences.phone.verification) {
-	    return false
-	  };
-
-	  return true
-	},
-	r_foo: function() {
-		return JSON.stringify(this).replace(/"/g, '\"')
-	},
-	gifts: function() {
-		return Session.get('gifts')
-	},
-	resources: function() {
-		return Session.get('resources');
-	},
-	init: function() {
-		Session.set('resources', resources)
-		Session.set('gifts', gifts)
-		Meteor.call('createBankingAccount');
-		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('producer')>-1) $('#roundedTwo1').prop('checked', true)
-		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('roles')>-1) $('#roundedTwo2').prop('checked', true)
-		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('view')>-1) $('#roundedTwo3').prop('checked', true)
-	},
-	giftPurchases: function() {
-		return Meteor.user().giftPurchases||[]
-	},
-	purchaseAMT: function() {
-		return this.token.receipt.amount/100
-	},
-	purchaseStatus: function() {
-		return this.status||'unfulfilled'
-	},
-	hasEmail: function() {
-		return Meteor.user().email!==null
-	},
-	hasGifts: function() {
-		return Meteor.user().gifts&&Meteor.user().gifts.length
-	},
-	userGifts: function() {
-		return Meteor.user().gifts||[]
-	},
-	createAccount: function() {
-		Meteor.call('createBankingAccount');
-	},
-	equityCamps: function() {
-		/** 
-			if my id is in list of equity holders:
-				id:
-				details: {
-					value: percent equity
-					date assigned:
-					considerationType: author | patron | cast | crew | resource
-					considerationValue: amount | role | resource -- details
-				}
-		*/
-		var _id = Meteor.user()._id;
-		return Projects.find({
-			$or: [
-				{
-					$and: [
-			          { archived: true },
-			          { ownerId: _id }
-			        ]
-				},
-				{
-					"equity.id": _id
-				}
-			]
-	    });
 	},
 	activeCamps: function() {
 		var _id = Meteor.user()._id;
@@ -922,28 +840,15 @@ Template.myProfile.helpers({
 
 	    return x.concat(y);
 	},
-	isCreated: function() {
-		if (this.scope==='created') return true;
-		return false;
-	},
-	bio: function() {
-		return Meteor.user().bio || 'describe yourself and your experiences'
-	},
-	first_name: function() {
-		return Meteor.user().firstName || 'First name';
-	},
-	last_name: function() {
-		return Meteor.user().lastName || 'Last name';
-	},
-	website: function() {
-		return Meteor.user().website || 'enter http://www.your.site'
-	},
-	avatar: function() {
-		return Meteor.user().avatar;
-	},
 	account: function() {
 		if (Meteor.user().account) return true;
 		return false;
+	},
+	account_no: function() {
+		return '********'+Meteor.user().bank.last4;
+	},
+	avatar: function() {
+		return Meteor.user().avatar;
 	},
 	bank: function() {
 		return Meteor.user()&&Meteor.user().bank||false;
@@ -951,11 +856,11 @@ Template.myProfile.helpers({
 	bank_name: function() {
 		return Meteor.user().bank.bank_name;
 	},
-	account_no: function() {
-		return '********'+Meteor.user().bank.last4;
+	bio: function() {
+		return Meteor.user().bio || 'describe yourself and your experiences'
 	},
-	routing_no: function() {
-		return Meteor.user().bank.routing_number;
+	createAccount: function() {
+		Meteor.call('createBankingAccount');
 	},
 	emailConfig: function() {
 		var configs = Meteor.user().notification_preferences  || {};
@@ -982,6 +887,79 @@ Template.myProfile.helpers({
 		if (_email.verification) return 'verified';
 		return 'not verified';
 	},
+	equityCamps: function() {
+		/** 
+			if my id is in list of equity holders:
+				id:
+				details: {
+					value: percent equity
+					date assigned:
+					considerationType: author | patron | cast | crew | resource
+					considerationValue: amount | role | resource -- details
+				}
+		*/
+		var _id = Meteor.user()._id;
+		return Projects.find({
+			$or: [
+				{
+					$and: [
+			          { archived: true },
+			          { ownerId: _id }
+			        ]
+				},
+				{
+					"equity.id": _id
+				}
+			]
+	    });
+	},
+	first_name: function() {
+		return Meteor.user().firstName || 'First name';
+	},
+	giftPurchases: function() {
+		return Meteor.user().giftPurchases||[]
+	},
+	gifts: function() {
+		return Session.get('gifts')
+	},
+	hasEmail: function() {
+		return Meteor.user().email!==null
+	},
+	hasGifts: function() {
+		return Meteor.user().gifts&&Meteor.user().gifts.length
+	},
+	init: function() {
+		Session.set('resources', resources)
+		Session.set('gifts', gifts)
+		Meteor.call('createBankingAccount');
+		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('producer')>-1) $('#roundedTwo1').prop('checked', true)
+		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('roles')>-1) $('#roundedTwo2').prop('checked', true)
+		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('view')>-1) $('#roundedTwo3').prop('checked', true)
+	},
+	isCreated: function() {
+		if (this.scope==='created') return true;
+		return false;
+	},
+	last_name: function() {
+		return Meteor.user().lastName || 'Last name';
+	},
+	noUserEmail: function() {
+	  if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.email&&Meteor.user().notification_preferences.email.verification) {
+	    return false
+	  };
+
+	  if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.phone&&Meteor.user().notification_preferences.phone.verification) {
+	    return false
+	  };
+
+	  return true
+	},
+	purchaseAMT: function() {
+		return this.token.receipt.amount/100
+	},
+	purchaseStatus: function() {
+		return this.status||'unfulfilled'
+	},
 	phoneConfig: function() {
 		var configs = Meteor.user().notification_preferences  || {};
 		var _phone = configs.phone || {};
@@ -1006,6 +984,10 @@ Template.myProfile.helpers({
 		var _phone = configs.phone || {};
 		if (_phone.verification) return 'verified';
 		return 'not verified';
+	},
+	producer: function() {
+		var user = Meteor.user()
+		return user.iamRoles&&user.iamRoles.indexOf('producer')>-1||false
 	},
 	messages: function() {
 		/** 
@@ -1054,12 +1036,35 @@ Template.myProfile.helpers({
 
 		return returnArr;
 	},
+	r_foo: function() {
+		return JSON.stringify(this).replace(/"/g, '\"')
+	},
+	reels: function() {
+		return Session.get('reels');
+	},
+	resources: function() {
+		return Session.get('resources');
+	},
+	routing_no: function() {
+		return Meteor.user().bank.routing_number;
+	},
 	textify: function() {
 		if (this.ownerName==='Open Source Hollywood'&&this.ownerId===Meteor.user()._id) {
 			return '';
 		};
 		return this.text;
+	},
+	userGifts: function() {
+		return Meteor.user().gifts||[]
+	},
+	viewer: function() {
+		var user = Meteor.user()
+		return user.iamRoles&&user.iamRoles.indexOf('view')>-1||false
+	},
+	website: function() {
+		return Meteor.user().website || 'enter http://www.your.site'
 	}
+
 });
 
 Template.myProfile.rendered = function () {
@@ -1082,6 +1087,9 @@ Template.myProfile.rendered = function () {
 
 	reels = u.reels||[]
 	Session.set('reels', reels);
+  	setTimeout(function() {
+  		$('.deleteRow').off().on('click', deleteRow);
+  	}, 1597);
 
 
 	if ($(window).width()<580) {

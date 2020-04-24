@@ -1,3 +1,48 @@
+Router.route('/config', {
+  name: 'Config',
+  template: 'config',
+  layoutTemplate: 'StaticLayout',
+  waitOn: function() {
+    localStorage.removeItem('redirectURL');
+    return [
+      Meteor.subscribe('getMe'), 
+      // Meteor.subscribe('connectUser')
+    ];
+  },
+  onBeforeAction: function() {
+    $('meta[name=description]').remove();
+    document.title = 'Configure Account';
+    this.next();
+  },
+  onAfterAction: function() {
+    var user = Meteor.user()
+    if (!user) Router.go('Home');
+    try { if (user.iamRoles&&user.iamRoles.length) Router.go('Home'); } catch(e) {}
+  }
+})
+
+Router.route('/profile', {
+  name: 'MyProfile',
+  template: 'myProfile',
+  layoutTemplate: 'StaticLayout',
+  waitOn: function() {
+    if (!Meteor.user()) {
+      Router.go('Home');
+      window.location.assign('/');
+      return
+    }
+    return [
+      Meteor.subscribe('getMe'), 
+      // Meteor.subscribe('connectUser')
+    ];
+  },
+  onBeforeAction: function() {
+    $('meta[name=description]').remove();
+    document.title = 'My Profile';
+    this.next();
+  }
+})
+
 Router.route('/profile/:_id', {
   name: 'Profile',
   template: 'profile',

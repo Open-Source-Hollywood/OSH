@@ -202,7 +202,7 @@ Template.newProject.events({
     localStorage.setItem('projectnew', JSON.stringify(o));
     vex.dialog.alert('progress saved for this session');
     // poll input every 30 seconds
-    clearInterval(autoSaveNewProjInterval);
+    try { clearInterval(autoSaveNewProjInterval); } catch(e) {}
     autoSaveNewProjInterval = setInterval(function(){ 
       var o = returnProjectCreateDetails();
       if (!o) return;
@@ -225,7 +225,7 @@ Template.newProject.events({
         localStorage.removeItem('projectnew')
         localStorage.removeItem('projectnew_banner')
         $('#resetNewProjCacheBtn').hide()
-        clearInterval(autoSaveNewProjInterval);
+        try { clearInterval(autoSaveNewProjInterval); } catch(e) {}
         setTimeout(function() {
           Router.go('Home');
         }, 4181);
@@ -249,6 +249,7 @@ Template.newProject.events({
   },
   'change #category': function() {
     var cat = $('#category').val();
+    var selectOptionsGenre = getSelectedGenresOptions()
     var meta = selectOptionsGenre.meta[cat];
     if (meta) {
       var opts = selectOptionsGenre[meta];

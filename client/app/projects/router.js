@@ -124,6 +124,7 @@ __projects__ = function(name) {
 }
 
 Router.route('/', __projects__('Projects'));
+
 Router.route('/discover', __projects__('Discovery'));
 
 Router.route('/event', {
@@ -520,45 +521,5 @@ Router.route('/transaction/:uid', {
       receipts: [receipt],
       messages: messages
     }
-  }
-})
-
-Router.route('/config', {
-  name: 'Config',
-  template: 'config',
-  layoutTemplate: 'StaticLayout',
-  waitOn: function() {
-    localStorage.removeItem('redirectURL');
-    return [
-      Meteor.subscribe('getMe'), 
-      // Meteor.subscribe('connectUser')
-    ];
-  },
-  onBeforeAction: function() {
-    $('meta[name=description]').remove();
-    document.title = 'Configure Account';
-    this.next();
-  },
-  onAfterAction: function() {
-    var user = Meteor.user()
-    if (!user) Router.go('Home');
-    try { if (user.iamRoles&&user.iamRoles.length) Router.go('Home'); } catch(e) {}
-  }
-})
-
-Router.route('/profile', {
-  name: 'MyProfile',
-  template: 'myProfile',
-  layoutTemplate: 'StaticLayout',
-  waitOn: function() {
-    return [
-      Meteor.subscribe('getMe'), 
-      // Meteor.subscribe('connectUser')
-    ];
-  },
-  onBeforeAction: function() {
-    $('meta[name=description]').remove();
-    document.title = 'My Profile';
-    this.next();
   }
 })

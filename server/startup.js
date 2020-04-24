@@ -4,6 +4,7 @@ var Secrets = require('../secrets').auth0
 Meteor.startup(function () {
 	connectHandler.use(function (req, res, next) {
 		res.setHeader('access-control-allow-origin', '*');
+		res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
 		return next();
 	});
 

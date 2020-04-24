@@ -1,4 +1,7 @@
-Template.newProject.onRendered(summernoteRender);
+Template.newProject.onRendered(function() {
+  summernoteRender()
+  resetEnv()
+});
 
 
 Template.newProject.helpers({
