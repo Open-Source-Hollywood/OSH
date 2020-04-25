@@ -9,7 +9,6 @@ var consideration_icons = {
   escrow: '<i class="glyphicon glyphicon-usd"></i>',
   time: '<i class="glyphicon glyphicon-time"></i>'
 }
-var autoSaveNewProjInterval = null;
 
 var selectOptionsGenre = {
   meta: {
@@ -54,6 +53,22 @@ getOSettings = function() {
 
 setOSettings = function(o) {
   osettings = o
+}
+
+getPositions = function() {
+  return positions
+}
+
+setPositions = function(p) {
+  positions = p
+}
+
+getGifts = function() {
+  return gift
+}
+
+setGifts = function(g) {
+  gift = g
 }
 
 getSelectedGenresOptions = function() {

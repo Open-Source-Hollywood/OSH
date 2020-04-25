@@ -9,7 +9,7 @@ Template.memberPopup.events({
         var board = Boards.findOne(currentBoardId);
         Popup.close();
         if (board.createdBy === this.user) {
-            bootbox.alert('project creator cannot be removed');
+            vex.alert('project creator cannot be removed');
             return;
         }
         Boards.update(currentBoardId, {$pull: {members: {'_id': this.userId}}});

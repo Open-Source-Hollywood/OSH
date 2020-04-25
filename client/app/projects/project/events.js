@@ -4,7 +4,7 @@ Template.project.events({
     Router.go(path);
   },
   "click .delete": function () {
-    if (bootbox.confirm("Are you sure you want to delete this?", function(r) {
+    if (vex.confirm("Are you sure you want to delete this?", function(r) {
       if (!r || r === false) return;
       Meteor.call("deleteProject", this._id);
     }));

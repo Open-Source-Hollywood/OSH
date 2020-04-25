@@ -69,6 +69,7 @@ isServer(function() {
     });
 
     Attachments.files.after.remove(function(userId, doc) {
+        if (!userId) userId = Meteor.user()._id
         Activities.remove({
             attachmentId: doc._id
         });

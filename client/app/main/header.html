@@ -49,9 +49,13 @@
         
         function checkVex() {
             setTimeout(function(){
-                if (vex) {
-                    configVex()
-                } else {
+                try {
+                    if (vex) {
+                        configVex()
+                    } else {
+                        checkVex()
+                    }
+                } catch(e) {
                     checkVex()
                 }
             }, 1248);

@@ -1,23 +1,12 @@
-Template.settings.onRendered(function() {
-    setTimeout(function() { 
-    	$('#gotoemailpref').removeClass('animated'); 
-    }, 2499);
-})
-
-Template.settings.rendered = function () {
+Template.myProfile.rendered = function () {
 	gifts = [], resources = [], reels = [], social = [];
 	// console.log(new Array(1000).join('# '))
 	var u = Meteor.user()
 	// console.log(JSON.stringify(u, null, 4))
 
-	var iamRoles = u.iamRoles
-	if (iamRoles.indexOf('producer')>-1) $('#iamproducer').prop('checked', true)
-	if (iamRoles.indexOf('roles')>-1) $('#iamroles').prop('checked', true)	
-	if (iamRoles.indexOf('view')>-1) $('#iamviewer').prop('checked', true)
-
 	resources = u.assets||[]
 	Session.set('resources', resources);
-	
+
 	gifts = u.gifts||[]
 	Session.set('gifts', gifts);
 	if (gifts.length) $('#merchtabletoggle').show();
@@ -28,6 +17,10 @@ Template.settings.rendered = function () {
 
 	reels = u.reels||[]
 	Session.set('reels', reels);
+  	setTimeout(function() {
+  		$('.deleteRow').off().on('click', deleteRow);
+  	}, 1597);
+
 
 	if ($(window).width()<580) {
 	  	setTimeout(function() {
@@ -60,10 +53,9 @@ Template.settings.rendered = function () {
 		var elId = '#checkbox-' + el;
 		$(elId).prop("checked", true);
 	});
-
+  
 	var wbs = u.website && u.website.length > 0 ? u.website : 'enter http://www.your.site';
 	$('#website').attr('placeholder', wbs);
 
 	initSummernote(function(){})
-
 };

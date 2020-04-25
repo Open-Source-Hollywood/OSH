@@ -1,9 +1,3 @@
-Template.newProject.onRendered(function() {
-  summernoteRenderFromSave()
-  resetEnv()
-});
-
-
 Template.newProject.helpers({
   noUserEmail: function() {
     if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.email&&Meteor.user().notification_preferences.email.verification) {

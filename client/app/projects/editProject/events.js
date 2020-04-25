@@ -123,6 +123,7 @@ Template.editProject.events({
         pay_offer = $('#oshchx_crew').val()||0,
         status = 'needed';
     $('#oshchx_crew').val('')
+    var positions = getPositions()
     positions.crew = positions.crew || []
     var o = {
       title: title,
@@ -134,6 +135,7 @@ Template.editProject.events({
     
     if (!consideration.length) return vex.dialog.alert('You must select at least one consideration / offer type for this role.');
     positions.crew.push(o)
+    setPositions(positions)
     Session.set('crew', positions.crew)
     $('#newCrewForm')[0].reset()
     $('#update_campaign').click()
@@ -164,11 +166,13 @@ Template.editProject.events({
       consideration: consideration,
       pay_offer: pay_offer
     }
+    var positions = getPositions()
     positions.cast = positions.cast || []
     
     if (!consideration.length) return vex.dialog.alert('You must select at least one consideration / offer type for this role.');
 
     positions.cast.push(o)
+    setPositions(positions)
     Session.set('cast', positions.cast)
 
     $('.deleteRow').off();
@@ -188,16 +192,14 @@ Template.editProject.events({
     e.preventDefault();
     statusShowAddedResource()
     $('#needstabletoggle').show()
-
+    var positions = getPositions()
     positions.needs = positions.needs||[]
     positions.needs.push({
       category: $('#needs-category').val(),
       description: $('#needs-description').val()
     })
-
+    setPositions(positions)
     $('.deleteRow').off().on('click', deleteRow);
-
-    
 
     Session.set('needs', positions.needs)
 
@@ -215,11 +217,13 @@ Template.editProject.events({
   'click #add-social': function(e) {
     e.preventDefault();
     $('#display_link_data').show()
+    var positions = getPositions()
     positions.social = positions.social || []
     positions.social.push({
       name: $('#social-title').val(),
       address: $('#social-url').val()
     })
+    setPositions(positions)
     Session.set('social', positions.social)
     $('#newSocialForm')[0].reset()
     // $('#update_campaign').click()
@@ -281,7 +285,9 @@ Template.editProject.events({
     };
     o.disclaimer = $('#merch_disclaimer').val();
     osettings.giftImage = {};
+    var gifts = getGifts()
     gifts.push(o);
+    setGifts(gifts)
     setOSettings(osettings)
     // console.log(gifts)
     appendCampaignMerchTable(o);

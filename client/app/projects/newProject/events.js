@@ -50,7 +50,7 @@ Template.newProject.events({
   'click #showrevsharing': function(e) {
     e.preventDefault();
     /** sign agreement form and show fields */
-        vex.dialog.open({
+    vex.dialog.open({
       message: 'REVENUE SHARING CONFIGURATION',
       input: [
         '<div class="" style="overflow: auto;">',
@@ -227,10 +227,13 @@ Template.newProject.events({
   },
   'change #banner_file': function (e, template) {
       if (e.currentTarget.files && e.currentTarget.files[0]) {
+        var osettings = getOSettings()
         osettings.banner = {};
         
         var files = e.target.files;
         osettings.banner.file = files[0];
+
+        setOSettings(osettings)
 
         if (osettings.banner.file.type.indexOf("image")==-1) {
           vex.dialog.alert('Invalid File, you can only upload a static image for your profile picture');
@@ -262,6 +265,7 @@ Template.newProject.events({
   },
   'change #gift_file': function (e, template) {
       if (e.currentTarget.files && e.currentTarget.files[0]) {
+        var osettings = getOSettings()
         osettings.giftImage = {};
         var reader = new FileReader();
         var files = e.target.files;
@@ -272,6 +276,7 @@ Template.newProject.events({
         };
         reader.onload = function(readerEvt) {
             osettings.giftImage.data = readerEvt.target.result;
+            setOSettings(osettings)
             /** set file.name to span of inner el */
             $('#gift_file_name').text(file.name);
             $('#hidden_gift_name').show();
@@ -285,6 +290,7 @@ Template.newProject.events({
   'input #cast-title': function() { $('#add-cast').removeClass('btn'), $('#add-cast').removeClass('disabled') },
   'input #social-title': function() { $('#add-social').removeClass('btn'), $('#add-social').removeClass('disabled') },
   'click #add-crew': function(e) {
+    var positions = getPositions()
     e.preventDefault();
     $('#crewtabletoggle').show()
     var title = $('#crew-title').val(), 
@@ -303,6 +309,7 @@ Template.newProject.events({
       pay_offer: pay_offer
     }
     positions.crew.push(o)
+    setPositions(positions)
     if (!consideration.length) return vex.dialog.alert('You must select at least one consideration / offer type for this role.');
     var payIcons = consideration.map(function(c) { return consideration_icons[c] })
     if (title && description && status) $('#crew-table').append('<tr class="crew-val"><td>'+title+'</td><td>'+description+'<br><small>eligible for:&nbsp;</small>'+payIcons.join(' ')+'</td><td>'+audition+'</td><td><button class="deleteRow button special" ctx="crew" val=\''+JSON.stringify(o)+'\'>X</button></td></tr>');
@@ -330,8 +337,10 @@ Template.newProject.events({
       consideration: consideration,
       pay_offer: pay_offer
     }
+    var positions = getPositions()
     positions.cast = positions.cast || []
     positions.cast.push(o)
+    setPositions(positions)
     if (!consideration.length) return vex.dialog.alert('You must select at least one consideration / offer type for this role.');
     var payIcons = consideration.map(function(c) { return consideration_icons[c] })
     if (title && description && status) $('#cast-table').append('<tr class="cast-val"><td>'+title+'</td><td>'+description+'<br><small>eligible for:&nbsp;</small>'+payIcons.join(' ')+'</td><td>'+audition+'</td><td><button class="deleteRow button special" ctx="cast" val=\''+JSON.stringify(o)+'\'>X</button></td></tr>');
@@ -344,6 +353,7 @@ Template.newProject.events({
   },
   'click #add-needs': function(e) {
     e.preventDefault();
+    var positions = getPositions()
     positions.needs = positions.needs || []
     var o = {
       category: $('#needs-category').val(),
@@ -351,6 +361,7 @@ Template.newProject.events({
     }
     if (!o.category) return;
     positions.needs.push(o)
+    setPositions(positions)
     $('#needstabletoggle').show()
     $('#needs-table').append('<tr class="needs-val"><td>'+o.category+'</td><td>'+o.description+'</td><td><button class="deleteRow button special">X</button></td></tr>');
     $('.deleteRow').off();
@@ -387,6 +398,7 @@ Template.newProject.events({
     e.preventDefault();
 
     var o = {};
+    var osettings = getOSettings()
     o.name = $('#gift-title').val(), o.description = $('#gift-description').val(), o.msrp = parseFloat($('#gift-msrp').val());
     if (!o.name || Number.isFinite(o.msrp) === false || o.msrp < 1) return alert('please correct the name or price information to continue');
     if (!osettings.giftImage.data) o.url = 'https://s3-us-west-2.amazonaws.com/producehour/placeholder_gift.jpg';
@@ -418,7 +430,7 @@ Template.newProject.events({
     };
     o.disclaimer = $('#merch_disclaimer').val();
     osettings.giftImage = {};
-
+    setOSettings(osettings)
 
     for (var key in o.quantity) {
       var _i = parseInt(o.quantity[key])
@@ -430,9 +442,9 @@ Template.newProject.events({
     if (!Object.keys(o.quantity).length)
       return vex.dialog.alert('there is no valid quantity for sale, please correct and try again')
 
-
-
+    var gifts = getGifts()
     gifts.push(o);
+    setGifts(gifts)
     // console.log(gifts)
     appendCampaignMerchTable(o);
     $('#newProjFormMerch')[0].reset()

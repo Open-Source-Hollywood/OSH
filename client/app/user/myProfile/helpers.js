@@ -1,15 +1,11 @@
-Template.settings.helpers({
+Template.myProfile.helpers({
 	artist: function() {
 		try {
-		  if (Meteor.user().iamRoles.indexOf('producer')>-1||Meteor.user().iamRoles.indexOf('roles')>-1) {
+		  if (Meteor.user().iamRoles.indexOf('producer')>-1||Meteor.user().iamRoles.indexOf('roles')>-1||Meteor.user().iamRoles.indexOf('assets')>-1) {
 		    return true
 		  };
 		} catch(e) {}
 		return false
-	},
-	producer: function() {
-		var user = Meteor.user()
-		return user.iamRoles&&user.iamRoles.indexOf('producer')>-1||false
 	},
 	actor: function() {
 		var user = Meteor.user()
@@ -18,83 +14,6 @@ Template.settings.helpers({
 	assets: function() {
 		var user = Meteor.user()
 		return user.iamRoles&&user.iamRoles.indexOf('assets')>-1||false
-	},
-	viewer: function() {
-		var user = Meteor.user()
-		return user.iamRoles&&user.iamRoles.indexOf('view')>-1||false
-	},
-	noUserEmail: function() {
-	  if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.email&&Meteor.user().notification_preferences.email.verification) {
-	    return false
-	  };
-
-	  if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.phone&&Meteor.user().notification_preferences.phone.verification) {
-	    return false
-	  };
-
-	  return true
-	},
-	r_foo: function() {
-		return JSON.stringify(this).replace(/"/g, '\"')
-	},
-	gifts: function() {
-		return Session.get('gifts')
-	},
-	resources: function() {
-		return Session.get('resources');
-	},
-	init: function() {
-		Meteor.call('createBankingAccount');
-		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('producer')>-1) $('#roundedTwo1').prop('checked', true)
-		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('roles')>-1) $('#roundedTwo2').prop('checked', true)
-		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('view')>-1) $('#roundedTwo3').prop('checked', true)
-	},
-	giftPurchases: function() {
-		return Meteor.user().giftPurchases||[]
-	},
-	purchaseAMT: function() {
-		return this.token.receipt.amount/100
-	},
-	purchaseStatus: function() {
-		return this.status||'unfulfilled'
-	},
-	hasEmail: function() {
-		return Meteor.user().email!==null
-	},
-	hasGifts: function() {
-		return Meteor.user().gifts&&Meteor.user().gifts.length
-	},
-	userGifts: function() {
-		return Meteor.user().gifts||[]
-	},
-	createAccount: function() {
-		Meteor.call('createBankingAccount');
-	},
-	equityCamps: function() {
-		/** 
-			if my id is in list of equity holders:
-				id:
-				details: {
-					value: percent equity
-					date assigned:
-					considerationType: author | patron | cast | crew | resource
-					considerationValue: amount | role | resource -- details
-				}
-		*/
-		var _id = Meteor.user()._id;
-		return Projects.find({
-			$or: [
-				{
-					$and: [
-			          { archived: true },
-			          { ownerId: _id }
-			        ]
-				},
-				{
-					"equity.id": _id
-				}
-			]
-	    });
 	},
 	activeCamps: function() {
 		var _id = Meteor.user()._id;
@@ -122,28 +41,15 @@ Template.settings.helpers({
 
 	    return x.concat(y);
 	},
-	isCreated: function() {
-		if (this.scope==='created') return true;
-		return false;
-	},
-	bio: function() {
-		return Meteor.user().bio || 'describe yourself and your experiences'
-	},
-	first_name: function() {
-		return Meteor.user().firstName || 'First name';
-	},
-	last_name: function() {
-		return Meteor.user().lastName || 'Last name';
-	},
-	website: function() {
-		return Meteor.user().website || 'enter http://www.your.site'
-	},
-	avatar: function() {
-		return Meteor.user().avatar;
-	},
 	account: function() {
 		if (Meteor.user().account) return true;
 		return false;
+	},
+	account_no: function() {
+		return '********'+Meteor.user().bank.last4;
+	},
+	avatar: function() {
+		return Meteor.user().avatar;
 	},
 	bank: function() {
 		return Meteor.user()&&Meteor.user().bank||false;
@@ -151,11 +57,11 @@ Template.settings.helpers({
 	bank_name: function() {
 		return Meteor.user().bank.bank_name;
 	},
-	account_no: function() {
-		return '********'+Meteor.user().bank.last4;
+	bio: function() {
+		return Meteor.user().bio || 'describe yourself and your experiences'
 	},
-	routing_no: function() {
-		return Meteor.user().bank.routing_number;
+	createAccount: function() {
+		Meteor.call('createBankingAccount');
 	},
 	emailConfig: function() {
 		var configs = Meteor.user().notification_preferences  || {};
@@ -182,6 +88,77 @@ Template.settings.helpers({
 		if (_email.verification) return 'verified';
 		return 'not verified';
 	},
+	equityCamps: function() {
+		/** 
+			if my id is in list of equity holders:
+				id:
+				details: {
+					value: percent equity
+					date assigned:
+					considerationType: author | patron | cast | crew | resource
+					considerationValue: amount | role | resource -- details
+				}
+		*/
+		var _id = Meteor.user()._id;
+		return Projects.find({
+			$or: [
+				{
+					$and: [
+			          { archived: true },
+			          { ownerId: _id }
+			        ]
+				},
+				{
+					"equity.id": _id
+				}
+			]
+	    });
+	},
+	first_name: function() {
+		return Meteor.user().firstName || 'First name';
+	},
+	giftPurchases: function() {
+		return Meteor.user().giftPurchases||[]
+	},
+	gifts: function() {
+		return Session.get('gifts')
+	},
+	hasEmail: function() {
+		return Meteor.user().email!==null
+	},
+	hasGifts: function() {
+		return Meteor.user().gifts&&Meteor.user().gifts.length
+	},
+	init: function() {
+		Meteor.call('createBankingAccount');
+		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('producer')>-1) $('#roundedTwo1').prop('checked', true)
+		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('roles')>-1) $('#roundedTwo2').prop('checked', true)
+		if (Meteor.user().iamRoles&&Meteor.user().iamRoles.indexOf('view')>-1) $('#roundedTwo3').prop('checked', true)
+	},
+	isCreated: function() {
+		if (this.scope==='created') return true;
+		return false;
+	},
+	last_name: function() {
+		return Meteor.user().lastName || 'Last name';
+	},
+	noUserEmail: function() {
+	  if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.email&&Meteor.user().notification_preferences.email.verification) {
+	    return false
+	  };
+
+	  if (Meteor.user()&&Meteor.user().notification_preferences&&Meteor.user().notification_preferences.phone&&Meteor.user().notification_preferences.phone.verification) {
+	    return false
+	  };
+
+	  return true
+	},
+	purchaseAMT: function() {
+		return this.token.receipt.amount/100
+	},
+	purchaseStatus: function() {
+		return this.status||'unfulfilled'
+	},
 	phoneConfig: function() {
 		var configs = Meteor.user().notification_preferences  || {};
 		var _phone = configs.phone || {};
@@ -206,6 +183,10 @@ Template.settings.helpers({
 		var _phone = configs.phone || {};
 		if (_phone.verification) return 'verified';
 		return 'not verified';
+	},
+	producer: function() {
+		var user = Meteor.user()
+		return user.iamRoles&&user.iamRoles.indexOf('producer')>-1||false
 	},
 	messages: function() {
 		/** 
@@ -254,10 +235,33 @@ Template.settings.helpers({
 
 		return returnArr;
 	},
+	r_foo: function() {
+		return JSON.stringify(this).replace(/"/g, '\"')
+	},
+	reels: function() {
+		return Session.get('reels');
+	},
+	resources: function() {
+		return Session.get('resources');
+	},
+	routing_no: function() {
+		return Meteor.user().bank.routing_number;
+	},
 	textify: function() {
 		if (this.ownerName==='Open Source Hollywood'&&this.ownerId===Meteor.user()._id) {
 			return '';
 		};
 		return this.text;
+	},
+	userGifts: function() {
+		return Meteor.user().gifts||[]
+	},
+	viewer: function() {
+		var user = Meteor.user()
+		return user.iamRoles&&user.iamRoles.indexOf('view')>-1||false
+	},
+	website: function() {
+		return Meteor.user().website || 'enter http://www.your.site'
 	}
+
 });

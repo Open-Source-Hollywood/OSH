@@ -1,3 +1,3 @@
 Template.newProject.onRendered(function() {
-	resetProjectVars()
+	resetEnv()
 })
