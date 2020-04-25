@@ -200,14 +200,7 @@ Template.newProject.events({
     var o = returnProjectCreateDetails();
     if (!o) return;
     localStorage.setItem('projectnew', JSON.stringify(o));
-    vex.dialog.alert('progress saved for this session');
-    // poll input every 30 seconds
-    try { clearInterval(autoSaveNewProjInterval); } catch(e) {}
-    autoSaveNewProjInterval = setInterval(function(){ 
-      var o = returnProjectCreateDetails();
-      if (!o) return;
-      localStorage.setItem('projectnew', JSON.stringify(o));
-    }, 30000);
+    vex.dialog.alert('Ok');
   },
   'click #create_campaign': function(e) {
     e.preventDefault();

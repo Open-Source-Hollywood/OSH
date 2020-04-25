@@ -61,240 +61,184 @@ getSelectedGenresOptions = function() {
 }
 
 summernoteRenderFromSave = function() {
-  console.log(1)
+  console.log('summernoteRenderFromSave')
   gifts = []
   osettings = {}
   osettings.banner = {}
   osettings.giftImage = {}
   positions = {}
-  setTimeout(function() {
-    var script = document.createElement('script')
-    script.src = "/js/scripts.min.js"
-    document.head.appendChild(script)
-  }, 233)
-  $('#summernote').summernote({
-    toolbar: [
-      // [groupName, [list of button]]
-      ['style', ['clear', 'fontname', 'strikethrough', 'superscript', 'subscript', 'fontsize', 'color']],
-      ['para', ['paragraph', 'style']],
-      ['misc', ['undo', 'redo']],
-      ['insert', ['picture', 'video', 'table', 'hr']]
-    ],
-    height: 300,
-    minHeight: null,
-    maxHeight: null,
-    focus: false,
-    tooltip: false,
-    callbacks: {
-      onInit: function() {
-        $('.note-editable').html('<p>Enter your campaign description here. Do not include details that are sensitive. The information here will be displayed publicly.</p>');
-        $('.note-toolbar').css('z-index', '0');
-        $('.note-editable').off()
-        $('.note-editable').on('click', function() {
-          if ($('.note-editable').html().indexOf('your campaign description here.')>-1) $('.note-editable').html('');
-        })
-      }
-    }
-  });
+  initSummernote(function() {
+      try {
+        var newProject = JSON.parse(localStorage.getItem('projectnew'));
+        if (!newProject) {
+          $('#resetNewProjCacheBtn').hide()
+          return
+        };
+        if (newProject.videoExplainer) $('#video_explainer').val(newProject.videoExplainer);
+        if (newProject.category) $("#category option[value='"+newProject.category+"']").prop('selected', true).trigger('change');
+        if (newProject.zip) $('#location').val(newProject.zip);
+        if (newProject.title&&newProject.title!=='untitled') $('#title').val(newProject.title);
+        if (newProject.logline&&newProject.logline!=='eligible for support') $('#logline').val(newProject.logline);
+        if (newProject.genre) $("#genre option[value='"+newProject.genre+"']").prop('selected', true);
+        if (newProject.website) $('#website').val(newProject.website);
+        if (newProject.production_company) $('#prodorg').val(newProject.production_company);
+        if (newProject.description) {
+          $('#summernote').summernote('reset')
+          $('#summernote').summernote('pasteHTML', newProject.description);
+        }
+        if (newProject.gifts&&newProject.gifts.length) {
+          gifts = newProject.gifts;
+          newProject.gifts.forEach(function(g) {
+            appendCampaignMerchTable(g);
+          });
+        };
+        if (newProject._banner||newProject.banner) {
+          (function() {
+            var filename = newProject.bannerFileName;
+            if (!filename||filename===null||filename.toLowerCase()==='this is the name of the file uploaded') return;
+            $('#banner_file_name').text(filename);
+            $('#hidden_banner_name').show();
+          }())
+        };
 
-  console.log(new Array(100).join('1 '))
-  
-  try {
-    var newProject = JSON.parse(localStorage.getItem('projectnew'));
-    console.log(newProject)
-    console.log(this)
-    console.log('newProject')
-    if (!newProject||!autoSaveNewProjInterval) {
-      $('#resetNewProjCacheBtn').hide()
-      return
-    };
-    console.log(new Array(100).join(' 2'))
-    console.log(newProject)
-    if (newProject.videoExplainer) $('#video_explainer').val(newProject.videoExplainer);
-    if (newProject.category) $("#category option[value='"+newProject.category+"']").prop('selected', true).trigger('change');
-    if (newProject.zip) $('#location').val(newProject.zip);
-    if (newProject.title&&newProject.title!=='untitled') $('#title').val(newProject.title);
-    if (newProject.logline&&newProject.logline!=='eligible for support') $('#logline').val(newProject.logline);
-    if (newProject.genre) $("#genre option[value='"+newProject.genre+"']").prop('selected', true);
-    if (newProject.website) $('#website').val(newProject.website);
-    if (newProject.production_company) $('#prodorg').val(newProject.production_company);
-    if (newProject.gifts&&newProject.gifts.length) {
-      gifts = newProject.gifts;
-      newProject.gifts.forEach(function(g) {
-        appendCampaignMerchTable(g);
-      });
-    };
-    if (newProject._banner||newProject.banner) {
-      (function() {
-        var filename = newProject.bannerFileName;
-        if (!filename||filename===null||filename.toLowerCase()==='this is the name of the file uploaded') return;
-        $('#banner_file_name').text(filename);
-        $('#hidden_banner_name').show();
-      }())
-    };
+        if (newProject.author_list) $('#authorlist').val(newProject.author_list);
+        if (newProject.description) $('#summernote').summernote('code', newProject.description);
+        if (newProject.creatorsInfo) $('#creators_info').val(newProject.creatorsInfo);
+        if (newProject.historyInfo) $('#history_info').val(newProject.historyInfo);
+        if (newProject.plansInfo) $('#plans_info').val(newProject.plansInfo);
+        if (newProject.needsInfo) $('#needs_info').val(newProject.needsInfo);
+        if (newProject.significanceInfo) $('#significance_info').val(newProject.significanceInfo);
+        osettings.rawbudget = newProject.rawbudget||null;
+        if (newProject.crew&&newProject.crew.length) {
+          newProject.crew.forEach(function(c) {
+            $('#crew-table').append('<tr class="crew-val"><td>'+c.title+'</td><td>'+c.description+'</td><td>'+c.audition+'</td><td><button class="deleteRow button special">X</button></td></tr>');
+          });
+          $('#newProjCrewAccord').removeClass('krown-accordion');
+          $('#crewtabletoggle').show()
+        };
 
-    console.log(new Array(100).join('3 '))
-    if (newProject.author_list) $('#authorlist').val(newProject.author_list);
-    if (newProject.description) $('#summernote').summernote('code', newProject.description);
-    if (newProject.creatorsInfo) $('#creators_info').val(newProject.creatorsInfo);
-    if (newProject.historyInfo) $('#history_info').val(newProject.historyInfo);
-    if (newProject.plansInfo) $('#plans_info').val(newProject.plansInfo);
-    if (newProject.needsInfo) $('#needs_info').val(newProject.needsInfo);
-    if (newProject.significanceInfo) $('#significance_info').val(newProject.significanceInfo);
-    osettings.rawbudget = newProject.rawbudget||null;
-    if (newProject.crew&&newProject.crew.length) {
-      newProject.crew.forEach(function(c) {
-        $('#crew-table').append('<tr class="crew-val"><td>'+c.title+'</td><td>'+c.description+'</td><td>'+c.audition+'</td><td><button class="deleteRow button special">X</button></td></tr>');
-      });
-      $('#newProjCrewAccord').removeClass('krown-accordion');
-      $('#crewtabletoggle').show()
-    };
+        if (newProject.cast&&newProject.cast.length) {
+          newProject.cast.forEach(function(c) {
+            $('#cast-table').append('<tr class="cast-val"><td>'+c.title+'</td><td>'+c.description+'</td><td>'+c.audition+'</td><td><button class="deleteRow button special">X</button></td></tr>');
+          });
+          $('#newProjCastAccord').removeClass('krown-accordion');
+          $('#casttabletoggle').show()
+        };
 
-    if (newProject.cast&&newProject.cast.length) {
-      newProject.cast.forEach(function(c) {
-        $('#cast-table').append('<tr class="cast-val"><td>'+c.title+'</td><td>'+c.description+'</td><td>'+c.audition+'</td><td><button class="deleteRow button special">X</button></td></tr>');
-      });
-      $('#newProjCastAccord').removeClass('krown-accordion');
-      $('#casttabletoggle').show()
-    };
+        if (newProject.needs&&newProject.needs.length) {
+          newProject.needs.forEach(function(n) {
+            $('#needs-table').append('<tr class="needs-val"><td>'+n.category+'</td><td>'+n.description+'</td><td><button class="deleteRow button special">X</button></td></tr>');
+          });
+          $('#newProjNeedsAccord').removeClass('krown-accordion');
+          $('#needstabletoggle').show()
+        };
 
-    if (newProject.needs&&newProject.needs.length) {
-      newProject.needs.forEach(function(n) {
-        $('#needs-table').append('<tr class="needs-val"><td>'+n.category+'</td><td>'+n.description+'</td><td><button class="deleteRow button special">X</button></td></tr>');
-      });
-      $('#newProjNeedsAccord').removeClass('krown-accordion');
-      $('#needstabletoggle').show()
-    };
+        if (newProject.social&&newProject.social.length) {
+          newProject.social.forEach(function(s) {
+            $('#social-table').append('<tr class="social-val"><td>'+s.name+'</td><td>'+s.address+'</td><td><button class="deleteRow button special">X</button></td></tr>');
+          });
+          $('#newproj_social_accord').removeClass('krown-accordion');
+          $('#display_link_data').show()
+        };
 
-    if (newProject.social&&newProject.social.length) {
-      newProject.social.forEach(function(s) {
-        $('#social-table').append('<tr class="social-val"><td>'+s.name+'</td><td>'+s.address+'</td><td><button class="deleteRow button special">X</button></td></tr>');
-      });
-      $('#newproj_social_accord').removeClass('krown-accordion');
-      $('#display_link_data').show()
-    };
+        if (newProject._gifts&&newProject._gifts.length) {
+          newProject._gifts.forEach(function(g) {
+            appendCampaignMerchTable(g);
+          });
+          $('#newProjGiftAccord').removeClass('krown-accordion');
+        };
 
-    if (newProject._gifts&&newProject._gifts.length) {
-      newProject._gifts.forEach(function(g) {
-        appendCampaignMerchTable(g);
-      });
-      $('#newProjGiftAccord').removeClass('krown-accordion');
-    };
+        /**
+          1) test
+          2) add budget
+          3) add equity info
+         */
 
-    /**
-      1) test
-      2) add budget
-      3) add equity info
-     */
+        
+        $('.deleteRow').off();
+        $('.deleteRow').on('click', deleteRow);
 
-    
-    $('.deleteRow').off();
-    $('.deleteRow').on('click', deleteRow);
-
-
-    console.log(new Array(100).join('# '))
-    console.log('finish onRendered')
-
-  } catch(e) { } 
+      } catch(e) {
+        console.log(e)
+      } 
+  })
 }
 
 summernoteRenderFromProj = function(currentProject) {
+  if (!currentProject) return
   $('.deleteRow').on('click', deleteRow);
   positions = {};
-  setTimeout(function() {
-    var script = document.createElement('script');
-    script.src = "/js/scripts.min.js";
-    document.head.appendChild(script);
-  }, 987);
-  $('#summernote').summernote({
-    toolbar: [
-      // [groupName, [list of button]]
-      ['style', ['clear', 'fontname', 'strikethrough', 'superscript', 'subscript', 'fontsize', 'color']],
-      ['para', ['paragraph', 'style']],
-      ['height', ['height']],
-      ['misc', ['undo', 'redo']],
-      ['insert', ['picture', 'video', 'table', 'hr']]
-    ],
-    height: 300,
-    minHeight: null,
-    maxHeight: null,
-    focus: false,
-    tooltip: false,
-    callbacks: {
-      onInit: function() {
-        $('.note-editable').html('<p><span class="large">Enter your campaign description here.</span><br>You can copy / paste text from another source here or use the menu above to format text and insert images from a valid URL.</p><p>&nbsp;</p>');
-        $('.note-toolbar').css('z-index', '0');
-        $('.note-editable').off()
-        $('.note-editable').on('click', function() {
-          if ($('.note-editable').html().indexOf('your campaign description here.')>-1) $('.note-editable').html('');
-        })
+  initSummernote(function() {
+    try {
+      if (currentProject.videoExplainer) $('#video_explainer').val(currentProject.videoExplainer);
+      if (currentProject.category) $("#category option[value='"+currentProject.category+"']").prop('selected', true).trigger('change');
+      if (currentProject.zip) $('#location').val(currentProject.zip);
+      if (currentProject.title&&currentProject.title!=='untitled') $('#title').val(currentProject.title);
+      if (currentProject.logline&&currentProject.logline!=='eligible for support') $('#logline').val(currentProject.logline);
+      if (currentProject.genre) $("#genre option[value='"+currentProject.genre+"']").prop('selected', true);
+      if (currentProject.phase) $('#phase').val(currentProject.phase);
+      if (currentProject.website) $('#website').val(currentProject.website);
+      if (currentProject.production_company) $('#prodorg').val(currentProject.production_company);
+      if (currentProject.description) {
+        $('#summernote').summernote('reset')
+        $('#summernote').summernote('pasteHTML', currentProject.description)
       }
+      if (currentProject.gifts&&currentProject.gifts.length) {
+        gifts = currentProject.gifts;
+        currentProject.gifts.forEach(function(g) {
+          appendCampaignMerchTable(g);
+        });
+        $('#merchtabletoggle').show()
+      };
+      osettings.rawbudget = currentProject.rawbudget||null;
+      if (currentProject._banner||currentProject.banner) {
+        (function() {
+          var filename = currentProject&&currentProject.bannerFileName||null;
+          if (!filename||filename===null||filename.toLowerCase()==='this is the name of the file uploaded') return;
+          $('#banner_file_name').text(filename);
+          $('#hidden_banner_name').show();
+        }())
+      };
+      if (currentProject.author_list) $('#authorlist').val(currentProject.author_list);
+      if (currentProject.description) $('#summernote').summernote('code', currentProject.description);
+      if (currentProject.creatorsInfo) $('#creators_info').val(currentProject.creatorsInfo);
+      if (currentProject.historyInfo) $('#history_info').val(currentProject.historyInfo);
+      if (currentProject.plansInfo) $('#plans_info').val(currentProject.plansInfo);
+      if (currentProject.needsInfo) $('#needs_info').val(currentProject.needsInfo);
+      if (currentProject.significanceInfo) $('#significance_info').val(currentProject.significanceInfo);
+
+      positions.crew = currentProject.crew||[]
+      Session.set('crew', positions.crew)
+      if (positions.crew.length) $('#crewtabletoggle').show();
+
+      positions.cast = currentProject.cast||[]
+      Session.set('cast', positions.cast)
+      if (positions.cast.length) $('#casttabletoggle').show();
+
+      positions.needs = currentProject.needs||[]
+      Session.set('needs', positions.needs)
+      
+      if (positions.needs.length) $('#needstabletoggle').show();
+
+      positions.social = currentProject.social||[]
+      Session.set('social', positions.social)
+      if (positions.social.length) $('#display_link_data').show()
+
+      /**
+        1) test
+        2) add budget
+        3) add equity info
+       */
+
+      
+      $('.deleteRow').off();
+      $('.deleteRow').on('click', deleteRow);
+
+    } catch (e) {
+      console.log(e)
     }
-  });
-  try {
-    if (currentProject.videoExplainer) $('#video_explainer').val(currentProject.videoExplainer);
-    if (currentProject.category) $("#category option[value='"+currentProject.category+"']").prop('selected', true).trigger('change');
-    if (currentProject.zip) $('#location').val(currentProject.zip);
-    if (currentProject.title&&currentProject.title!=='untitled') $('#title').val(currentProject.title);
-    if (currentProject.logline&&currentProject.logline!=='eligible for support') $('#logline').val(currentProject.logline);
-    if (currentProject.genre) $("#genre option[value='"+currentProject.genre+"']").prop('selected', true);
-    if (currentProject.phase) $('#phase').val(currentProject.phase);
-    if (currentProject.website) $('#website').val(currentProject.website);
-    if (currentProject.production_company) $('#prodorg').val(currentProject.production_company);
-    if (currentProject.gifts&&currentProject.gifts.length) {
-      gifts = currentProject.gifts;
-      currentProject.gifts.forEach(function(g) {
-        appendCampaignMerchTable(g);
-      });
-      $('#merchtabletoggle').show()
-    };
-    osettings.rawbudget = currentProject.rawbudget||null;
-    if (currentProject._banner||currentProject.banner) {
-      (function() {
-        var filename = newProject&&currentProject.bannerFileName||null;
-        if (!filename||filename===null||filename.toLowerCase()==='this is the name of the file uploaded') return;
-        $('#banner_file_name').text(filename);
-        $('#hidden_banner_name').show();
-      }())
-    };
-    if (currentProject.author_list) $('#authorlist').val(currentProject.author_list);
-    if (currentProject.description) $('#summernote').summernote('code', currentProject.description);
-    if (currentProject.creatorsInfo) $('#creators_info').val(currentProject.creatorsInfo);
-    if (currentProject.historyInfo) $('#history_info').val(currentProject.historyInfo);
-    if (currentProject.plansInfo) $('#plans_info').val(currentProject.plansInfo);
-    if (currentProject.needsInfo) $('#needs_info').val(currentProject.needsInfo);
-    if (currentProject.significanceInfo) $('#significance_info').val(currentProject.significanceInfo);
 
-    positions.crew = currentProject.crew||[]
-    Session.set('crew', positions.crew)
-    if (positions.crew.length) $('#crewtabletoggle').show();
-
-    positions.cast = currentProject.cast||[]
-    Session.set('cast', positions.cast)
-    if (positions.cast.length) $('#casttabletoggle').show();
-
-    positions.needs = currentProject.needs||[]
-    Session.set('needs', positions.needs)
-    
-    if (positions.needs.length) $('#needstabletoggle').show();
-
-    positions.social = currentProject.social||[]
-    Session.set('social', positions.social)
-    // console.log(positions.social)
-    if (positions.social.length) $('#display_link_data').show()
-
-
-    /**
-      1) test
-      2) add budget
-      3) add equity info
-     */
-
-    
-    $('.deleteRow').off();
-    $('.deleteRow').on('click', deleteRow);
-
-  } catch (e) {}
+    })
 }
 
 appendCampaignMerchTable = function (o) {
@@ -384,15 +328,15 @@ returnProjectCreateDetails = function (o) {
   delete osettings['rawbudget']
 
   try {
-    var descriptionText = $('#summernote').summernote('code').replace(/(<script.*?<\/script>)/g, '');
-    var plainText = descriptionText
+    var descriptionHTML = $('#summernote').summernote('code').replace(/(<script.*?<\/script>)/g, '');
+    var plainText = descriptionHTML
       .replace(/&nbsp;|<br>/g, "\n")
       .replace(/<\/p>/gi, " ")
       .replace(/<\/?[^>]+(>|$)/g, "")
       .trim();
 
     if (plainText && plainText.indexOf('your campaign description here.')===-1) {
-      o.description = descriptionText;
+      o.description = descriptionHTML;
       o.descriptionText = plainText;
     } else {
       o.description = '';
@@ -408,7 +352,7 @@ returnProjectCreateDetails = function (o) {
   o.needsInfo = $('#needs_info').val();
   o.significanceInfo = $('#significance_info').val();
   
-  if (osettings.banner.data) {
+  if (osettings.banner&&osettings.banner.data) {
     o._banner = osettings.banner.data;
     o.bannerFileName = osettings.banner.file.name
   }
@@ -452,6 +396,7 @@ returnProjectCreateDetails = function (o) {
     localStorage.removeItem('revshare');
   };
 
+  console.log(o)
   delete o['showDialog'];
   return o;
 }

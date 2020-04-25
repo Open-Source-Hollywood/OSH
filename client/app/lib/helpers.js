@@ -43,6 +43,42 @@ initVex = function () {
 
 }
 
+initSummernote = function (callback) {
+  console.log('init summernote')
+  setTimeout(function() {
+    var script = document.createElement('script');
+    script.src = "/js/scripts.min.js";
+    document.head.appendChild(script);
+    $('#summernote').summernote({
+      toolbar: [
+        // [groupName, [list of button]]
+        ['style', ['clear', 'fontname', 'strikethrough', 'superscript', 'subscript', 'fontsize', 'color']],
+        ['para', ['paragraph', 'style']],
+        ['height', ['height']],
+        ['misc', ['undo', 'redo']],
+        ['insert', ['picture', 'video', 'table', 'hr']]
+      ],
+      height: 300,
+      minHeight: null,
+      maxHeight: null,
+      focus: false,
+      tooltip: false,
+      callbacks: {
+        onInit: function() {
+          $('.note-editable').html('<p><span class="large">Enter your campaign description here.</span><br>You can copy / paste text from another source here or use the menu above to format text and insert images from a valid URL.</p><p>&nbsp;</p>');
+          $('.note-toolbar').css('z-index', '0');
+          $('.note-editable').off()
+          $('.note-editable').on('click', function() {
+            if ($('.note-editable').html().indexOf('your campaign description here.')>-1) $('.note-editable').html('');
+          })
+        }
+      }
+    });
+    console.log('finished init summernote')
+    callback()
+  }, 987);
+}
+
 vexScore = function (usr) {
   vex.dialog.alert({
     message: 'What is a score?',
