@@ -12,6 +12,7 @@
 #### Dependencies
 
 - Meteor 1.3.2.4
+- NodeJS 0.10
 
 see https://github.com/meteor/meteor/issues/4526
 

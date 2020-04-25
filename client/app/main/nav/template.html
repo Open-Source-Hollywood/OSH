@@ -1,7 +1,7 @@
 <template name="nav">
   
 <nav class="navbar navbar-default navbar-fixed-top">
-      {{#unless isUser}}
+      {{#unless currentUser}}
         <a style="position: fixed;" href="https://github.com/Open-Source-Hollywood/OSH" target="__blank"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_red_aa0000.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
       {{/unless}}
       <div class="container">
