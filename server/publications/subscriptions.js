@@ -1,4 +1,5 @@
 Meteor.publish('mySubscriptions', function() {
+    if (!this.userId) return this.ready();
     check(this.userId, String)
     return Subscriptions.find({ owner: this.userId })
 });

@@ -25,7 +25,7 @@ Template.projectView.events({
     simulateClick(document.getElementsByClassName('goto_proj_community')[0])
   },
   'click .goto_edit_campaign': function() {
-    var path = `/edit/projects/${this.slug}/${this.ownerId}`;
+    var path = ['/edit/projects/', this.slug, '/', this.ownerId].join('');
     Router.go(path);
   },
   'click .goto_manage': function() {

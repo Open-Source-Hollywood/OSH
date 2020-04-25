@@ -29,7 +29,6 @@ idmontie:migrations
 cfs:standard-packages
 cfs:gridfs
 auth0:lock
-standard-minifier-js
 chart:chart
 random
 reactive-var

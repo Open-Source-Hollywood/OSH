@@ -8,43 +8,46 @@ Meteor.publish('projectsList', function() {
 
 Meteor.publish('activeProjects', function() {
   // Ensure that the user is connected
-    check(this.userId, String);
-    return Projects.find({
-        $and: [
-          {archived: false},
-          {$or: [
-            {ownerId: this.userId},
-            {usersApproved: {$elemMatch: {id: this.userId}}}
-          ]}
-        ]
-    });
+  if (!this.userId) return this.ready();
+  check(this.userId, String);
+  return Projects.find({
+      $and: [
+        {archived: false},
+        {$or: [
+          {ownerId: this.userId},
+          {usersApproved: {$elemMatch: {id: this.userId}}}
+        ]}
+      ]
+  });
 });
 
 Meteor.publish('archivedProjects', function() {
+  if (!this.userId) return this.ready();
   // Ensure that the user is connected
-    check(this.userId, String);
-    return Projects.find({
-        $and: [
-          {archived: true},
-          {$or: [
-            {ownerId: this.userId},
-            {usersApproved: {$elemMatch: {id: this.userId}}}
-          ]}
-        ]
-    });
+  check(this.userId, String);
+  return Projects.find({
+      $and: [
+        {archived: true},
+        {$or: [
+          {ownerId: this.userId},
+          {usersApproved: {$elemMatch: {id: this.userId}}}
+        ]}
+      ]
+  });
 });
 
 Meteor.publish('projectsWithSomething', function() {
+  if (!this.userId) return this.ready();
   // Ensure that the user is connected
-    check(this.userId, String);
-    return Projects.find({
-        ownerId: this.userId,
-        $or: [
-          { soldGifts: { $exists: true, $ne: [] }},
-          { castApplicants: { $exists: true, $ne: [] }},
-          { crewApplicants: { $exists: true, $ne: [] }}
-        ]
-    });
+  check(this.userId, String);
+  return Projects.find({
+      ownerId: this.userId,
+      $or: [
+        { soldGifts: { $exists: true, $ne: [] }},
+        { castApplicants: { $exists: true, $ne: [] }},
+        { crewApplicants: { $exists: true, $ne: [] }}
+      ]
+  });
 });
 
 Meteor.publish('receiptsHistory', function() {

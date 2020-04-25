@@ -1,4 +1,5 @@
 Meteor.publish('myOffers', function() {
+    if (!this.userId) return this.ready();
     check(this.userId, String);
     return Offers.find({
         offeror: this.userId
@@ -6,6 +7,7 @@ Meteor.publish('myOffers', function() {
 });
 
 Meteor.publish('myCurrentOffers', function() {
+    if (!this.userId) return this.ready();
     check(this.userId, String);
     return Offers.find({
         $or:[
@@ -21,6 +23,7 @@ Meteor.publish('myCurrentOffers', function() {
 });
 
 Meteor.publish('myCompletedOffers', function() {
+    if (!this.userId) return this.ready();
     check(this.userId, String);
     return Offers.find({
         $or:[

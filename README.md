@@ -246,3 +246,11 @@ $ exec node bundle/main.js --settings settings.json >> logfile.log
 
 * AUTHOR ACCEPTS AGREEMENT 
 > author makes final acceptance during negotiations
+
+
+#### ISSUES
+
+* This version of Uglify cannot parse ES6, it will throw you syntax errors on build. Requires post-processing on JS with Babel.
+
+As a workaround, disable minification
+`$ meteor remove standard-minifier-js`
