@@ -251,7 +251,11 @@ $ exec node bundle/main.js --settings settings.json >> logfile.log
 
 #### ISSUES
 
-* This version of Uglify cannot parse ES6, it will throw you syntax errors on build. Requires post-processing on JS with Babel.
+* This version of Uglify cannot parse ES6, it will throw you syntax errors on build. Requires post-processing on JS with Babel
 
 As a workaround, disable minification
 `$ meteor remove standard-minifier-js`
+
+
+* There's too much "do everything" JS in client across domains that need to be converted to `Session.set|get` + Meteor's templating
+

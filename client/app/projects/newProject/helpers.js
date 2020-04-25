@@ -1,5 +1,5 @@
 Template.newProject.onRendered(function() {
-  summernoteRender()
+  summernoteRenderFromSave()
   resetEnv()
 });
 

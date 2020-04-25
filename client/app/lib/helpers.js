@@ -565,8 +565,6 @@ saveSettings = function (o) {
 
   o.iamRoles= $('.user_roles:checked').map(function(){return $(this).val()}).get()
 
-  console.log(o)
-
   // console.log('upgradeProfile with')
   // console.log(o)
   Meteor.call('upgradeProfile', o);

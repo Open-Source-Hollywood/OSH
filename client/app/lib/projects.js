@@ -60,7 +60,8 @@ getSelectedGenresOptions = function() {
   return selectOptionsGenre
 }
 
-summernoteRender = function() {
+summernoteRenderFromSave = function() {
+  console.log(1)
   gifts = []
   osettings = {}
   osettings.banner = {}
@@ -96,15 +97,19 @@ summernoteRender = function() {
     }
   });
 
-  // console.log(new Array(100).join('1 '))
+  console.log(new Array(100).join('1 '))
   
   try {
     var newProject = JSON.parse(localStorage.getItem('projectnew'));
+    console.log(newProject)
+    console.log(this)
+    console.log('newProject')
     if (!newProject||!autoSaveNewProjInterval) {
       $('#resetNewProjCacheBtn').hide()
       return
     };
-    // console.log(new Array(100).join(' 2'))
+    console.log(new Array(100).join(' 2'))
+    console.log(newProject)
     if (newProject.videoExplainer) $('#video_explainer').val(newProject.videoExplainer);
     if (newProject.category) $("#category option[value='"+newProject.category+"']").prop('selected', true).trigger('change');
     if (newProject.zip) $('#location').val(newProject.zip);
@@ -128,7 +133,7 @@ summernoteRender = function() {
       }())
     };
 
-    // console.log(new Array(100).join('3 '))
+    console.log(new Array(100).join('3 '))
     if (newProject.author_list) $('#authorlist').val(newProject.author_list);
     if (newProject.description) $('#summernote').summernote('code', newProject.description);
     if (newProject.creatorsInfo) $('#creators_info').val(newProject.creatorsInfo);
@@ -187,10 +192,109 @@ summernoteRender = function() {
     $('.deleteRow').on('click', deleteRow);
 
 
-    // console.log(new Array(100).join('# '))
-    // console.log('finish onRendered')
+    console.log(new Array(100).join('# '))
+    console.log('finish onRendered')
 
   } catch(e) { } 
+}
+
+summernoteRenderFromProj = function(currentProject) {
+  $('.deleteRow').on('click', deleteRow);
+  positions = {};
+  setTimeout(function() {
+    var script = document.createElement('script');
+    script.src = "/js/scripts.min.js";
+    document.head.appendChild(script);
+  }, 987);
+  $('#summernote').summernote({
+    toolbar: [
+      // [groupName, [list of button]]
+      ['style', ['clear', 'fontname', 'strikethrough', 'superscript', 'subscript', 'fontsize', 'color']],
+      ['para', ['paragraph', 'style']],
+      ['height', ['height']],
+      ['misc', ['undo', 'redo']],
+      ['insert', ['picture', 'video', 'table', 'hr']]
+    ],
+    height: 300,
+    minHeight: null,
+    maxHeight: null,
+    focus: false,
+    tooltip: false,
+    callbacks: {
+      onInit: function() {
+        $('.note-editable').html('<p><span class="large">Enter your campaign description here.</span><br>You can copy / paste text from another source here or use the menu above to format text and insert images from a valid URL.</p><p>&nbsp;</p>');
+        $('.note-toolbar').css('z-index', '0');
+        $('.note-editable').off()
+        $('.note-editable').on('click', function() {
+          if ($('.note-editable').html().indexOf('your campaign description here.')>-1) $('.note-editable').html('');
+        })
+      }
+    }
+  });
+  try {
+    if (currentProject.videoExplainer) $('#video_explainer').val(currentProject.videoExplainer);
+    if (currentProject.category) $("#category option[value='"+currentProject.category+"']").prop('selected', true).trigger('change');
+    if (currentProject.zip) $('#location').val(currentProject.zip);
+    if (currentProject.title&&currentProject.title!=='untitled') $('#title').val(currentProject.title);
+    if (currentProject.logline&&currentProject.logline!=='eligible for support') $('#logline').val(currentProject.logline);
+    if (currentProject.genre) $("#genre option[value='"+currentProject.genre+"']").prop('selected', true);
+    if (currentProject.phase) $('#phase').val(currentProject.phase);
+    if (currentProject.website) $('#website').val(currentProject.website);
+    if (currentProject.production_company) $('#prodorg').val(currentProject.production_company);
+    if (currentProject.gifts&&currentProject.gifts.length) {
+      gifts = currentProject.gifts;
+      currentProject.gifts.forEach(function(g) {
+        appendCampaignMerchTable(g);
+      });
+      $('#merchtabletoggle').show()
+    };
+    osettings.rawbudget = currentProject.rawbudget||null;
+    if (currentProject._banner||currentProject.banner) {
+      (function() {
+        var filename = newProject&&currentProject.bannerFileName||null;
+        if (!filename||filename===null||filename.toLowerCase()==='this is the name of the file uploaded') return;
+        $('#banner_file_name').text(filename);
+        $('#hidden_banner_name').show();
+      }())
+    };
+    if (currentProject.author_list) $('#authorlist').val(currentProject.author_list);
+    if (currentProject.description) $('#summernote').summernote('code', currentProject.description);
+    if (currentProject.creatorsInfo) $('#creators_info').val(currentProject.creatorsInfo);
+    if (currentProject.historyInfo) $('#history_info').val(currentProject.historyInfo);
+    if (currentProject.plansInfo) $('#plans_info').val(currentProject.plansInfo);
+    if (currentProject.needsInfo) $('#needs_info').val(currentProject.needsInfo);
+    if (currentProject.significanceInfo) $('#significance_info').val(currentProject.significanceInfo);
+
+    positions.crew = currentProject.crew||[]
+    Session.set('crew', positions.crew)
+    if (positions.crew.length) $('#crewtabletoggle').show();
+
+    positions.cast = currentProject.cast||[]
+    Session.set('cast', positions.cast)
+    if (positions.cast.length) $('#casttabletoggle').show();
+
+    positions.needs = currentProject.needs||[]
+    Session.set('needs', positions.needs)
+    
+    if (positions.needs.length) $('#needstabletoggle').show();
+
+    positions.social = currentProject.social||[]
+    Session.set('social', positions.social)
+    // console.log(positions.social)
+    if (positions.social.length) $('#display_link_data').show()
+
+
+    /**
+      1) test
+      2) add budget
+      3) add equity info
+     */
+
+    
+    $('.deleteRow').off();
+    $('.deleteRow').on('click', deleteRow);
+
+  } catch (e) {}
 }
 
 appendCampaignMerchTable = function (o) {

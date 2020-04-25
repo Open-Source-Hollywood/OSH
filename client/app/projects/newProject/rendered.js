@@ -1,3 +1,3 @@
-Template.editProject.onRendered(function() {
+Template.newProject.onRendered(function() {
 	resetProjectVars()
 })

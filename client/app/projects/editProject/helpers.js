@@ -48,5 +48,3 @@ Template.editProject.helpers({
     return JSON.stringify(this.project)
   }
 });
-
-Template.editProject.onRendered(summernoteRender);
