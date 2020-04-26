@@ -103,7 +103,7 @@ Router.route('/join', function(){
     $('head').append( '<meta name="description" content="Join our team.">' );
 });
 
-Router.route('/hollywood', {
+Router.route('/', {
   name: 'Home',
   template: 'splashPage',
   layoutTemplate: 'StaticLayout',
@@ -140,7 +140,6 @@ Router.route('/hollywood', {
     };
   }
 });
-
 
 Router.route('/contracts', {
   name: 'Receipts',

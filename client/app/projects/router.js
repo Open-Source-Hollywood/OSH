@@ -123,7 +123,7 @@ __projects__ = function(name) {
   }
 }
 
-Router.route('/', __projects__('Projects'));
+// Router.route('/', __projects__('Projects'));
 
 Router.route('/discover', __projects__('Discovery'));
 
