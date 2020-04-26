@@ -10,6 +10,10 @@ var consideration_icons = {
   time: '<i class="glyphicon glyphicon-time"></i>'
 }
 
+getConsiderationIcons = function() {
+  return consideration_icons
+}
+
 var selectOptionsGenre = {
   meta: {
     Feature: 'mixed',
@@ -350,7 +354,7 @@ returnProjectCreateDetails = function (o) {
       .replace(/<\/?[^>]+(>|$)/g, "")
       .trim();
 
-    if (plainText && plainText.indexOf('your campaign description here.')===-1) {
+    if (plainText && plainText.indexOf('format your text here')===-1) {
       o.description = descriptionHTML;
       o.descriptionText = plainText;
     } else {
@@ -366,12 +370,14 @@ returnProjectCreateDetails = function (o) {
   o.plansInfo = $('#plans_info').val();
   o.needsInfo = $('#needs_info').val();
   o.significanceInfo = $('#significance_info').val();
+
   
   if (osettings.banner&&osettings.banner.data) {
     o._banner = osettings.banner.data;
     o.bannerFileName = osettings.banner.file.name
+  } else {
+    o.banner = 'https://s3-us-west-2.amazonaws.com/producehour/placeholder_banner.jpg';
   }
-  else o.banner = 'https://s3-us-west-2.amazonaws.com/producehour/placeholder_banner.jpg';
   
   var crew = $('.crew-val'); 
   o.crew = positions.crew||[];
@@ -411,7 +417,6 @@ returnProjectCreateDetails = function (o) {
     localStorage.removeItem('revshare');
   };
 
-  console.log(o)
   delete o['showDialog'];
   return o;
 }

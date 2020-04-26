@@ -8,7 +8,10 @@ Attachments = new FS.Collection("attachments", {
 
 Attachments.allow({
     insert: function(userId, doc) {
-        return allowIsBoardMember(userId, Boards.findOne(doc.boardId));
+        // TODO: GridFS error post-refact "cfs_power-queue.js:494 Error: "Queue" failed [403]"
+        if (userId)
+            return allowIsBoardMember(userId, Boards.findOne(doc.boardId));
+        return true
     },
     update: function(userId, doc) {
         return allowIsBoardMember(userId, Boards.findOne(doc.boardId));

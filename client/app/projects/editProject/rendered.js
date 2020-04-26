@@ -1,5 +1,5 @@
 Template.editProject.onRendered(function() {
-	resetEnv()
+	resetProjectVars()
 	console.log('init edit proj')
 	// TODO: FIXME
 	summernoteRenderFromProj(this&&this.data.project||null)

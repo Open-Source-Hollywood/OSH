@@ -50,11 +50,11 @@ initSummernote = function (callback) {
       tooltip: false,
       callbacks: {
         onInit: function() {
-          $('.note-editable').html('<p><span class="large">Enter your campaign description here.</span><br>You can copy / paste text from another source here or use the menu above to format text and insert images from a valid URL.</p><p>&nbsp;</p>');
+          $('.note-editable').html('<p><span class="large">Enter and format your text here.</span><br>You can copy / paste text from another source here or use the menu above to format text and insert images from a valid URL.</p><p>&nbsp;</p>');
           $('.note-toolbar').css('z-index', '0');
           $('.note-editable').off()
           $('.note-editable').on('click', function() {
-            if ($('.note-editable').html().indexOf('your campaign description here.')>-1) $('.note-editable').html('');
+            if ($('.note-editable').html().indexOf('format your text here')>-1) $('.note-editable').html('');
           })
         }
       }

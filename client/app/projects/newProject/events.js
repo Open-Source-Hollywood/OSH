@@ -1,3 +1,5 @@
+var consideration_icons = getConsiderationIcons()
+
 Template.newProject.events({
   'click .gotosxn': function(e) {
     var val = $(e.target).attr('val')

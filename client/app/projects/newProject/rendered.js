@@ -1,3 +1,4 @@
 Template.newProject.onRendered(function() {
-	resetEnv()
+	resetProjectVars()
+	summernoteRenderFromSave()
 })

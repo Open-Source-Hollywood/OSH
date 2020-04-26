@@ -18,17 +18,17 @@
         <header id="page-title" style="padding-top: 0px;">
             <h1 class="title">{{project.title}}</h1>
             {{#if currentUser}}
-            {{#unless isOwner}}
-            <button type="button" id="thumbsup" class="{{thumbsupactive}}">
-              <i class="fa fa-thumbs-up"></i>
-              Like
-            </button>
-            {{else}}
-            <button type="button" id="thumbsup" style="background:transparent;box-shadow:none;" disabled>
-              <i class="fa fa-thumbs-up"></i>
-              {{numLikes}} Likes
-            </button>
-            {{/unless}}
+              {{#unless isOwner}}
+                <button type="button" id="thumbsup" class="{{thumbsupactive}}">
+                  <i class="fa fa-thumbs-up"></i>
+                  Like
+                </button>
+              {{else}}
+                <button type="button" id="thumbsup" style="background:transparent;box-shadow:none;" disabled>
+                  <i class="fa fa-thumbs-up"></i>
+                  {{numLikes}} Likes
+                </button>
+              {{/unless}}
             {{/if}}
             <h2 class="subtitle">{{project.logline}}</h2>
         </header>
@@ -84,54 +84,24 @@
                   {{/if}}     
                 </ul>
 
-                {{#if isOwner}}
-                <p>&nbsp;</p>
-                <a href="javascript:void(0)" class="btn col-sm-12 gotoedit tabs-select"></a>
-                <p>&nbsp;</p>
-                {{/if}}
-
                 {{#unless isOwner}}
                   {{#if hasGifts}}
-                  <div class="container-fluid col-xs-12 t20 projviewsexn">
-                      <h2>Merchandise</h2>
-                      <div class="row flex-row flex-nowrap">
-                          {{#each gifts}}
-
-                            <div class="col-xs-3">
-                              <div class="well mh300">
-                                <div class="thumbnail">
-                                  <img src="{{this.url}}">
-                                  <div class="caption">
-                                    <p><small>({{type}})</small></p>
-                                    <h6>{{name}}</h6>
-                                    <p>{{description}}</p>
-                                    <p><a class="c-related__a button special w100 t20 purchase_gift">${{msrp}}</a></p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {{else}}
-
-                            <p class="t20 lead">None</p>
-
-                          {{/each}}
-                        
-                      </div>
-                  </div>
-                  {{/if}}
-                  {{#if currentUser}}
-                    {{#if hasNeeds}}
                     <div class="container-fluid col-xs-12 t20 projviewsexn">
-                        <h2>Requested Needs</h2>
+                        <h2>Merchandise</h2>
                         <div class="row flex-row flex-nowrap">
-                            {{#each project.needs}}
+                            {{#each gifts}}
 
                               <div class="col-xs-3">
-                                <div class="caption well">
-                                  <h6>{{category}}</h6>
-                                  <p>{{description}}</p>
-                                  <p><a class="c-related__a button special w100 t20 offer_resource">offer this resource</a></p>
+                                <div class="well mh300">
+                                  <div class="thumbnail">
+                                    <img src="{{this.url}}">
+                                    <div class="caption">
+                                      <p><small>({{type}})</small></p>
+                                      <h6>{{name}}</h6>
+                                      <p>{{description}}</p>
+                                      <p><a class="c-related__a button special w100 t20 purchase_gift">${{msrp}}</a></p>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
 
@@ -143,39 +113,32 @@
                           
                         </div>
                     </div>
+                  {{/if}}
+                  {{#if currentUser}}
+                    {{#if hasNeeds}}
+                      <div class="container-fluid col-xs-12 t20 projviewsexn">
+                          <h2>Requested Needs</h2>
+                          <div class="row flex-row flex-nowrap">
+                              {{#each project.needs}}
+
+                                <div class="col-xs-3">
+                                  <div class="caption well">
+                                    <h6>{{category}}</h6>
+                                    <p>{{description}}</p>
+                                    <p><a class="c-related__a button special w100 t20 offer_resource">offer this resource</a></p>
+                                  </div>
+                                </div>
+
+                                {{else}}
+
+                                <p class="t20 lead">None</p>
+
+                              {{/each}}
+                            
+                          </div>
+                      </div>
                     {{/if}}
                   {{/if}}
-                {{else}}
-
-                  <!-- list backers -->
-                  <!-- list applicants -->
-                  {{#if backers}}
-                  <h5>BACKERS</h5>
-                  {{/if}}
-                  {{#each backers}}
-                     <div class="col-lg-3 col-xs-12 col-sm-6 col-md-4">
-
-                        <div class="card hovercard">
-                            <div class="cardheader">
-
-                            </div>
-                            <div class="avatar">
-                                <img alt="" src="{{avatar}}">
-                            </div>
-                            <div class="info">
-                                <div class="title">
-                                    <a href="/profile/{{ _id }}">{{firstName}} {{lastName}}</a>
-                                </div>
-                                {{#each iam}}
-                                  <div class="desc">{{this}}</div>
-                                {{/each}}
-                                
-                            </div>
-                        </div>
-                     </div>
-                  {{/each}}
-                  <p>&nbsp;</p>
-                  {{> applicants}}
                 {{/unless}}
 
                 <div class="contents clearfix">
@@ -556,21 +519,41 @@
 
                     <div id="manage" class="project-content" style="display: none;">
                         <div class="project-header">
-                          <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Your Campaign Contracts &amp; Settings</h3>
+                          <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Manage Campaign</h3>
                           <hr />
                         </div>
-                        {{#if isOwner}}
                           {{> applicants}}
-                        {{/if}}
+
+                          {{#if backers}}
+                          <h5>BACKERS</h5>
+                          {{/if}}
+                          {{#each backers}}
+                             <div class="col-lg-3 col-xs-12 col-sm-6 col-md-4">
+
+                                <div class="card hovercard">
+                                    <div class="cardheader">
+
+                                    </div>
+                                    <div class="avatar">
+                                        <img alt="" src="{{avatar}}">
+                                    </div>
+                                    <div class="info">
+                                        <div class="title">
+                                            <a href="/profile/{{ _id }}">{{firstName}} {{lastName}}</a>
+                                        </div>
+                                        {{#each iam}}
+                                          <div class="desc">{{this}}</div>
+                                        {{/each}}
+                                        
+                                    </div>
+                                </div>
+                             </div>
+                          {{/each}}
+                          <p>&nbsp;</p>
+                          <a href="javascript:void(0)" class="btn col-sm-12 gotoedit tabs-select">EDIT CAMPAIGN</a>
+
                     </div>
 
-                    <div id="edit" class="project-content" style="display: none;">
-                        <div class="project-header">
-                          <h3 class="comments_title" style="text-align:left;margin-left:20px;margin-top:20px;">Edit Campaign Details</h3>
-                          <hr />
-                        </div>
-                      {{> editProject}}
-                    </div>
                 </div>
             </div>
         </div>
