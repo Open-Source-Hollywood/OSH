@@ -141,6 +141,7 @@ saveSettings = function (o) {
 		reel-val  == table //array
 
 	*/
+	console.log('saveSettings')
 	var osettings = getOSettings()
 	o = o || {};
 	o.firstName = $('#first_name').val();
@@ -152,7 +153,7 @@ saveSettings = function (o) {
         .replace(/<\/?[^>]+(>|$)/g, "")
         .replace(/&nbsp;|<br>/g, " ")
         .trim();
-	if (plainText&&plainText.indexOf('https://en.wikipedia.org/wiki/Template:Biography')===-1) {
+	if (plainText&&plainText.indexOf('use the menu above')===-1) {
 		o.bio = descriptionText;
 		o.bio_plaintext = plainText;
 	} else {

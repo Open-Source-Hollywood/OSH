@@ -57,5 +57,10 @@ Template.myProfile.rendered = function () {
 	var wbs = u.website && u.website.length > 0 ? u.website : 'enter http://www.your.site';
 	$('#website').attr('placeholder', wbs);
 
-	initSummernote(function(){})
+	initSummernote(function(){
+      if (u.bio) {
+        $('#summernote').summernote('reset')
+        $('#summernote').summernote('pasteHTML', u.bio)
+      }
+	})
 };
